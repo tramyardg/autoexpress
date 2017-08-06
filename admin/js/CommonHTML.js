@@ -1,11 +1,13 @@
 /**
  * Created by RAYMARTHINKPAD on 2017-08-04.
  */
-var cHTML = new CommonHTML();
-var Sidebar = (function () {
+var cHTML = new CommonTemplate();
+var CommonHTML = (function () {
     // regular variables and jquery variables here
     var sidebarMenuItemSel = {};
     var pageWrapperSel = {};
+    var bodyElem = {};
+    var mainWrapperSel = {};
 
     return {
 
@@ -18,12 +20,16 @@ var Sidebar = (function () {
             // initialize regular variables and jquery variables from the top
             sidebarMenuItemSel = $(".templatemo-sidebar-menu li");
             pageWrapperSel = $(".template-page-wrapper");
+            mainWrapperSel = $("#main-wrapper");
+            bodyElem = $('body');
 
             // call the event driven functions here
-            this.bindSidebar();
+            this.bindHTMLfn();
         },
-        bindSidebar: function () {
-            pageWrapperSel.prepend(cHTML.sideBarFn());
+        bindHTMLfn: function () {
+            mainWrapperSel.prepend(cHTML.navBarHeaderElem());
+            pageWrapperSel.prepend(cHTML.sideBarElement());
+            pageWrapperSel.last().append(cHTML.footerElement());
         }
 
     }; // end return

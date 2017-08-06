@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	
 
-	Sidebar.init();
+	CommonHTML.init();
 	sidebarActive();
 	
 });
