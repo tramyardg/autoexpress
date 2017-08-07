@@ -2,6 +2,7 @@
  * Created by RAYMARTHINKPAD on 2017-08-04.
  */
 var cHTML = new CommonTemplate();
+// not use in login and register page
 var CommonHTML = (function () {
     // regular variables and jquery variables here
     var sidebarMenuItemSel = {};

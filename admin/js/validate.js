@@ -1,5 +1,14 @@
 /**
  * Created by RAYMARTHINKPAD on 2017-08-05.
+ * All self-running validate function here.
+ * Usage example:
+ *  in form tag use
+ *  onSubmit='RegisterValidate.validateForm()';
+ */
+
+/**
+ * Returns true if all is good okay.
+ * @type {{validateForm}}
  */
 var RegisterValidate = (function () {
     var fields = {
@@ -30,12 +39,17 @@ var RegisterValidate = (function () {
                 fields.confirmPassword.selector.parent().parent().parent().addClass('has-warning');
                 return false;
             }
+
             return true;
         }
     }; // end return
 })();
 
 
+/**
+ * Returns true if all fields are good (filled with correct value)
+ * @type {{validateForm}}
+ */
 var LoginValidate = (function () {
     var fields = {
         username: {selector: null},
