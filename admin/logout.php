@@ -2,11 +2,11 @@
 
 <html>
 <body>
-<p>Redirecting... Please wait.</p>
+<p>Signing out... Please wait.</p>
 <?php
 if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] == 1) {
     session_destroy();
-    header('refresh: 3; url=sign-in.php');
+    header('refresh: 1; url=sign-in.php');
 } else {
 
 }

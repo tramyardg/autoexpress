@@ -36,18 +36,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open%20Sans:300,400,700">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/templatemo_main.css">
+    <link rel="stylesheet" href="css/templatemo_main.min.css">
 </head>
 <body>
 <div id="main-wrapper">
-    <div class="navbar navbar-inverse" role="navigation">
-        <div class="navbar-header">
-            <div class="logo"><h1>Dashboard - Admin</h1></div>
-        </div>
-    </div>
+
     <div class="template-page-wrapper splash">
 
 
@@ -109,8 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </div>
 
-<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="js/Util.js"></script>
-<script type="text/javascript" src="js/validate.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/common/CommonTemplate.js"></script>
+<script src="js/commonhtml.js"></script>
+<script src="js/validate.min.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
