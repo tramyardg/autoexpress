@@ -1,3 +1,26 @@
+<?php
+require_once '../Db.php';
+require_once 'model/Query.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $result = null;
+
+    $q = new Query();
+    $username = $q->stringValue($_POST['username']);
+    $email = $q->stringValue($_POST['email']);
+    $password = $q->stringValue($_POST['password']);
+
+    if($q->insertAdmin($username, $email, $password)) {
+        $result = 'You are one of the admin now!';
+    } else {
+        $result = 'There must be an error. Please try again later.';
+    }
+
+
+
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +44,22 @@
         </div>
     </div>
     <div class="template-page-wrapper splash2">
-        <p class="error-box" style="text-align: center;"></p>
-        <form action="model/forms/register.php" method="post" onsubmit="return RegisterValidate.validateForm();" name="register-form" id="register-form" class="form-horizontal templatemo-signin-form" role="form" >
+       
+		
+		<?php if(!empty($result)) { ?>
+		<div class="templatemo-signin-form">
+			<div class="col-md-12">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8" style="width: 100%;">
+					<div class="alert alert-success text-center">Success!</div>
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+		</div>
+		<?php } ?>
+		
+        <form action="" method="post" onsubmit="return RegisterValidate.validateForm();" name="register-form" id="register-form" class="form-horizontal templatemo-signin-form" role="form" >
+        <!--<form action="./model/forms/register.php" method="post" name="register-form" id="register-form" class="form-horizontal templatemo-signin-form" role="form" >-->
             <div class="form-group">
                 <div class="col-md-12">
                     <label for="username" class="col-sm-2 control-label">Username</label>
@@ -73,6 +110,5 @@
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/common/Util.js"></script>
 <script type="text/javascript" src="js/validate.js"></script>
-
 </body>
 </html>

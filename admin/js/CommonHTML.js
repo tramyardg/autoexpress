@@ -9,6 +9,7 @@ var CommonHTML = (function () {
     var pageWrapperSel = {};
     var bodyElem = {};
     var mainWrapperSel = {};
+    var confirmModalLogoutSel = {};
 
     return {
 
@@ -23,6 +24,7 @@ var CommonHTML = (function () {
             pageWrapperSel = $(".template-page-wrapper");
             mainWrapperSel = $("#main-wrapper");
             bodyElem = $('body');
+            confirmModalLogoutSel = {};
 
             // call the event driven functions here
             this.bindHTMLfn();
@@ -31,6 +33,7 @@ var CommonHTML = (function () {
             mainWrapperSel.prepend(cHTML.navBarHeaderElem());
             pageWrapperSel.prepend(cHTML.sideBarElement());
             pageWrapperSel.last().append(cHTML.footerElement());
+            pageWrapperSel.append(cHTML.confirmModalLogout());
         }
 
     }; // end return

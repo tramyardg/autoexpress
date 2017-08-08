@@ -8,9 +8,9 @@ function CommonTemplate() {
             '      <ul class="templatemo-sidebar-menu">  ' +
             '         <li><a href="index.html"><i class="fa fa-home"></i>Dashboard</a></li>  ' +
             '         <li><a href="inventory.html"><i class="fa fa-car"></i><span class="badge pull-right">NEW</span>Manage Inventory</a></li>  ' +
-            '         <li><a href="admin.html"><i class="fa fa-user-circle"></i><span class="badge pull-right">NEW</span>Manage User Admin</a></li>  ' +
+            '         <li><a href="admin.php"><i class="fa fa-user-circle"></i><span class="badge pull-right">NEW</span>Manage User Admin</a></li>  ' +
             '         <li><a href="preferences.html"><i class="fa fa-cog"></i>Preferences</a></li>  ' +
-            '         <li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>  ' +
+            '         <li><a href="#" data-toggle="modal" data-target="#confirmModalLogout"><i class="fa fa-sign-out"></i>Sign Out</a></li>  ' +
             '      </ul>  ' +
             '  </div>  ';
     };
@@ -37,4 +37,23 @@ function CommonTemplate() {
             '           </div>  ' +
             '      </div>  ';
     };
+
+    this.confirmModalLogout = function () {
+        return '<div class="modal fade" id="confirmModalLogout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  '  +
+            '                aria-hidden="true">  '  +
+            '               <div class="modal-dialog">  '  +
+            '                   <div class="modal-content">  '  +
+            '                       <div class="modal-header text-center-important no-border">  '  +
+            '                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span  '  +
+            '                                   class="sr-only">Close</span></button>  '  +
+            '                           <h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>  '  +
+            '                       </div>  '  +
+            '                       <div class="modal-footer text-center-important no-border" >  '  +
+            '                           <a href="sign-in.php" class="btn btn-primary">Yes</a>  '  +
+            '                           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>  '  +
+            '                       </div>  '  +
+            '                   </div>  '  +
+            '               </div>  '  +
+            '          </div>  ' ;
+    }
 }

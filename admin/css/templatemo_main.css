@@ -317,3 +317,18 @@ h1 {
     background-attachment: fixed;
     color: #fff;
 }
+
+.message-box {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 90%;
+    text-align: center;
+}
+
+.text-center-important {
+    text-align: center !important;
+}
+
+.no-border {
+    border: 0 !important;
+}
