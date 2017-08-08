@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="js/common/Util.js"></script>
+<script type="text/javascript" src="js/Util.js"></script>
 <script type="text/javascript" src="js/validate.js"></script>
 </body>
 </html>

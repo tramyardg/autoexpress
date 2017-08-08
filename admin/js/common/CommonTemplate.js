@@ -49,7 +49,7 @@ function CommonTemplate() {
             '                           <h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>  '  +
             '                       </div>  '  +
             '                       <div class="modal-footer text-center-important no-border" >  '  +
-            '                           <a href="sign-in.php" class="btn btn-primary">Yes</a>  '  +
+            '                           <a href="logout.php" class="btn btn-primary">Yes</a>  '  +
             '                           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>  '  +
             '                       </div>  '  +
             '                   </div>  '  +
