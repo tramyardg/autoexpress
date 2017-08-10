@@ -19,7 +19,6 @@ class Query
             . " password,\n"
             . " email)\n"
             . "VALUES($username, $password, $email)";
-        echo $sql;
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt;

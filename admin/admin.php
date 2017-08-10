@@ -28,7 +28,7 @@ if(!isset($_SESSION['authenticated'])) {
         <div class="templatemo-content-wrapper">
             <div class="templatemo-content">
                 <ol class="breadcrumb">
-                    <li><a href="index.html">Admin Panel</a></li>
+                    <li><a href="dashboard.php">Admin Panel</a></li>
                     <li class="active">Manage Admins</li>
                 </ol>
                 <h1>Manage Users</h1>

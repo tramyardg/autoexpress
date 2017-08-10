@@ -48,16 +48,24 @@ var CommonHTML = (function () {
                 mainWrapperSel.prepend(cHTML.navBarHeaderElem());       // header
                 mainWrapperSel.last().append(cHTML.footerElement());    // footer
             };
-            console.log('hello');
             console.log(util.getFilename());
             switch(util.getFilename()) {
-                case "admin.php":
+                case util.pageName[0]: // dashboard
                     commonElement();
                     break;
-                case "register.php":
+                case util.pageName[1]:
+                    commonElement();
+                    break;
+                case util.pageName[2]:
+                    commonElement();
+                    break;
+                case util.pageName[3]:
+                    commonElement();
+                    break;
+                case util.pageName[4]: // sign-in
                     headerAndFooterElem();
                     break;
-                case "sign-in.php":
+                case util.pageName[5]: // register
                     headerAndFooterElem();
                     break;
                 default:

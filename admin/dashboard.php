@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['authenticated'])) {
+    header('Location: sign-in.php');
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,10 +60,11 @@
 
     </div>
 </div>
+
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/common/CommonTemplate.js"></script>
 <script src="js/util.js"></script>
+<script src="js/common/CommonTemplate.js"></script>
 <script src="js/commonhtml.js"></script>
 <script src="js/app.js"></script>
 

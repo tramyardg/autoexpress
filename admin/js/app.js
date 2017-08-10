@@ -8,16 +8,16 @@ $(document).ready(function () {
 
 var util = new CommonUtil();
 function sidebarActive() {
+    // goes by order of sidebar item
     var urlFileNameWithExt = util.getFilename();
-    var urlFileName = urlFileNameWithExt.substr(0, urlFileNameWithExt.indexOf("."));
     var $sidebarMenuItem = $(".templatemo-sidebar-menu li");
-    if(urlFileName === "index") {
+    if(urlFileNameWithExt === util.pageName[0]) {
         $sidebarMenuItem.eq(0).addClass('active');
-    } else if(urlFileName === "inventory"){
+    } else if(urlFileNameWithExt === util.pageName[1]){
         $sidebarMenuItem.eq(1).addClass('active');
-    } else if(urlFileName === "admin"){
+    } else if(urlFileNameWithExt === util.pageName[2]){
         $sidebarMenuItem.eq(2).addClass('active');
-    } else if(urlFileName === "preferences"){
+    } else if(urlFileNameWithExt === util.pageName[3]){
         $sidebarMenuItem.eq(3).addClass('active');
 	}
 }

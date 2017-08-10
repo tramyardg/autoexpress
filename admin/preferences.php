@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['authenticated'])) {
+    header('Location: sign-in.php');
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +27,7 @@
         <div class="templatemo-content-wrapper">
             <div class="templatemo-content">
                 <ol class="breadcrumb">
-                    <li><a href="index.html">Admin Panel</a></li>
+                    <li><a href="dashboard.php">Admin Panel</a></li>
                     <li class="active">Preferences</li>
                 </ol>
                 <h1>Preferences</h1>

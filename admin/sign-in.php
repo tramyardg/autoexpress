@@ -38,14 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/templatemo_main.min.css">
+    <link rel="stylesheet" href="css/templatemo_main.css">
 </head>
 <body>
 <div id="main-wrapper">
 
-    <div class="template-page-wrapper splash">
 
-
+    <div class="template-page-wrapper splash"  >
         <?php if(isset($exists) && $exists != 1) { ?>
         <div class="templatemo-signin-form">
             <div class="col-md-12">
@@ -65,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-sm-8" style="width: 100%;">
                     <div class="alert alert-info text-center">
                         <?php echo 'Loading, please wait.';
-                        header( "refresh:1; url=admin.php" );
+                        header( "refresh:1; url=dashboard.php" );
                         ?>
                     </div>
                 </div>

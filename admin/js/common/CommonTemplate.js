@@ -6,10 +6,10 @@ function CommonTemplate() {
     this.sideBarElement = function () {
         return '   <div class="navbar-collapse collapse templatemo-sidebar">  ' +
             '      <ul class="templatemo-sidebar-menu">  ' +
-            '         <li><a href="index.html"><i class="fa fa-home"></i>Dashboard</a></li>  ' +
-            '         <li><a href="inventory.html"><i class="fa fa-car"></i><span class="badge pull-right">NEW</span>Manage Inventory</a></li>  ' +
+            '         <li><a href="dashboard.php"><i class="fa fa-home"></i>Dashboard</a></li>  ' +
+            '         <li><a href="inventory.php"><i class="fa fa-car"></i><span class="badge pull-right">NEW</span>Manage Inventory</a></li>  ' +
             '         <li><a href="admin.php"><i class="fa fa-user-circle"></i><span class="badge pull-right">NEW</span>Manage User Admin</a></li>  ' +
-            '         <li><a href="preferences.html"><i class="fa fa-cog"></i>Preferences</a></li>  ' +
+            '         <li><a href="preferences.php"><i class="fa fa-cog"></i>Preferences</a></li>  ' +
             '         <li><a href="#" data-toggle="modal" data-target="#confirmModalLogout"><i class="fa fa-sign-out"></i>Sign Out</a></li>  ' +
             '      </ul>  ' +
             '  </div>  ';
