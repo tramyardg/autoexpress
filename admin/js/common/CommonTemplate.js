@@ -3,6 +3,10 @@
  */
 function CommonTemplate() {
 
+    this.pageTitle = function (pageTitle) {
+        return '<title>'+pageTitle+'</title>'
+    };
+
     this.sideBarElement = function () {
         return '   <div class="navbar-collapse collapse templatemo-sidebar">  ' +
             '      <ul class="templatemo-sidebar-menu">  ' +

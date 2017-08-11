@@ -11,13 +11,13 @@ function CommonUtil() {
 
     // only main page here, no sub page
     this.pageName = [
-        "dashboard.php", // 0
-        "inventory.php", // 1
-        "admin.php",
-        "preferences.php",
-        "sign-in.php",
-        "register.php",
-        "logout.php"
+        {name: "dashboard.php", title:"Admin - Dashboard"},
+        {name: "inventory.php", title:"Manage Vehicles"},
+        {name: "admin.php", title:"Manage user admin"},
+        {name: "preferences.php", title:"Account settings"},
+        {name: "sign-in.php", title: "Admin login"},
+        {name: "register.php", title: "Admin registration"},
+        {name: "logout.php", title: "Signing out..."}
     ];
 
 }
