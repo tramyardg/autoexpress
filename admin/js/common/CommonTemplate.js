@@ -4,16 +4,16 @@
 function CommonTemplate() {
 
     this.pageTitle = function (pageTitle) {
-        return '<title>'+pageTitle+'</title>'
+      return '<title>'+pageTitle+'</title>'
     };
 
-    this.sideBarElement = function () {
+    this.sideBarElement = function (username) {
         return '   <div class="navbar-collapse collapse templatemo-sidebar">  ' +
             '      <ul class="templatemo-sidebar-menu">  ' +
-            '         <li><a href="dashboard.php"><i class="fa fa-home"></i>Dashboard</a></li>  ' +
-            '         <li><a href="inventory.php"><i class="fa fa-car"></i><span class="badge pull-right">NEW</span>Manage Inventory</a></li>  ' +
-            '         <li><a href="admin.php"><i class="fa fa-user-circle"></i><span class="badge pull-right">NEW</span>Manage User Admin</a></li>  ' +
-            '         <li><a href="preferences.php"><i class="fa fa-cog"></i>Preferences</a></li>  ' +
+            '         <li><a href="dashboard.php?username='+username+'"><i class="fa fa-home"></i>Dashboard</a></li>  ' +
+            '         <li><a href="inventory.php?username='+username+'"><i class="fa fa-car"></i><span class="badge pull-right">NEW</span>Manage Inventory</a></li>  ' +
+            '         <li><a href="admin.php?username='+username+'"><i class="fa fa-user-circle"></i><span class="badge pull-right">NEW</span>Manage User Admin</a></li>  ' +
+            '         <li><a href="preferences.php?username='+username+'"><i class="fa fa-cog"></i>Preferences</a></li>  ' +
             '         <li><a href="#" data-toggle="modal" data-target="#confirmModalLogout"><i class="fa fa-sign-out"></i>Sign Out</a></li>  ' +
             '      </ul>  ' +
             '  </div>  ';
@@ -29,17 +29,16 @@ function CommonTemplate() {
 
 
     this.navBarHeaderElem = function () {
-        return '   <div class="navbar navbar-inverse" role="navigation">  ' +
-            '           <div class="navbar-header">  ' +
-            '               <div class="logo"><h1>Dashboard - Admin</h1></div>  ' +
-            '               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">  ' +
-            '                   <span class="sr-only">Toggle navigation</span>  ' +
-            '                   <span class="icon-bar"></span>  ' +
-            '                   <span class="icon-bar"></span>  ' +
-            '                   <span class="icon-bar"></span>  ' +
-            '               </button>  ' +
-            '           </div>  ' +
-            '      </div>  ';
+        return  '   <div class="navbar navbar-inverse" role="navigation">  '  +
+            '       <div class="pull-right" style="position: relative; top: 10px; right: 10px;  '  +
+            '   "><p></p></div>  '  +
+            '       <div class="navbar-header">  '  +
+            '           <div class="logo"><h1>Dashboard - Admin</h1></div>  '  +
+            '           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span  '  +
+            '                       class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span  '  +
+            '                       class="icon-bar"></span> <span class="icon-bar"></span></button>  '  +
+            '       </div>  '  +
+            '  </div>  ' ;
     };
 
     this.confirmModalLogout = function () {

@@ -332,3 +332,12 @@ h1 {
 .no-border {
     border: 0 !important;
 }
+
+.error-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.error-template h1, h2 {
+    color: #ffffff;
+}

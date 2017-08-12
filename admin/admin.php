@@ -3,6 +3,9 @@ session_start();
 if(!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 }
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,9 +17,10 @@ if(!isset($_SESSION['authenticated'])) {
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/templatemo_main.min.css">
+
 </head>
 <body>
 <div id="main-wrapper">
@@ -30,194 +34,136 @@ if(!isset($_SESSION['authenticated'])) {
                     <li><a href="dashboard.php">Admin Panel</a></li>
                     <li class="active">Manage Admins</li>
                 </ol>
-                <h1>Manage Users</h1>
-                <p>Here goes tables and users.</p>
+                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php if (isset($_SESSION['adminUsername'])) {echo $_SESSION['adminUsername'];} ?>">
+                <h1>Manage Administrators</h1>
 
                 <div class="row margin-bottom-30">
                     <div class="col-md-12">
                         <ul class="nav nav-pills">
-                            <li class="active"><a href="#">New Users <span class="badge">42</span></a></li>
-
-
+                            <li class="active"><a href="#">Admins total <span class="badge">4</span></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="btn-group pull-right" id="templatemo_sort_btn">
-                            <button type="button" class="btn btn-default">Sort by</button>
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">First Name</a></li>
-                                <li><a href="#">Last Name</a></li>
-                                <li><a href="#">Username</a></li>
-                            </ul>
-                        </div>
                         <div class="table-responsive">
-                            <h4 class="margin-bottom-15">New Users Table</h4>
                             <table class="table table-striped table-hover table-bordered">
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
                                     <th>Username</th>
+                                    <th>Password</th>
                                     <th>Email</th>
                                     <th>Edit</th>
-                                    <th>Action</th>
+                                    <th>Privilege(s)</th>
                                     <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>John</td>
-                                    <td>Smith</td>
-                                    <td>@js</td>
-                                    <td>a@company.com</td>
+                                    <td>grandmaster</td>
+                                    <td>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                               placeholder="Password" value="asddsassdasdds" readonly>
+                                    </td>
+                                    <td>leo@gmail.com</td>
                                     <td><a href="#" class="btn btn-default">Edit</a></td>
                                     <td>
-                                        <!-- Split button -->
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-info">Action</button>
-                                            <button type="button" class="btn btn-info dropdown-toggle"
-                                                    data-toggle="dropdown">
-                                                <span class="caret"></span>
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Bootstrap</a></li>
-                                                <li><a href="#">Font Awesome</a></li>
-                                                <li><a href="#">jQuery</a></li>
-                                            </ul>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" checked disabled>Add vehicles</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" checked disabled>Update
+                                                vehicles</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" checked disabled>Delete
+                                                vehicles</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" checked disabled>Manage other admins</label>
                                         </div>
                                     </td>
                                     <td><a href="#" class="btn btn-link">Delete</a></td>
                                 </tr>
-                                <tr class="success">
+                                <tr>
                                     <td>2</td>
-                                    <td>Bill</td>
-                                    <td>Digital</td>
-                                    <td>@bd</td>
-                                    <td>bd@company.com</td>
+                                    <td>leo</td>
+                                    <td>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                               placeholder="Password" value="leoleo" readonly>
+                                    </td>
+                                    <td>rdg514@gmail.com</td>
                                     <td><a href="#" class="btn btn-default">Edit</a></td>
                                     <td>
-                                        <!-- Split button -->
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-info">Action</button>
-                                            <button type="button" class="btn btn-info dropdown-toggle"
-                                                    data-toggle="dropdown">
-                                                <span class="caret"></span>
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Bootstrap</a></li>
-                                                <li><a href="#">Font Awesome</a></li>
-                                                <li><a href="#">jQuery</a></li>
-                                            </ul>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" checked disabled>Add vehicles</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" disabled>Update
+                                                vehicles</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" checked disabled>Delete
+                                                vehicles</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" disabled>Manage other admins</label>
                                         </div>
                                     </td>
                                     <td><a href="#" class="btn btn-link">Delete</a></td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td>Marry</td>
-                                    <td>James</td>
-                                    <td>@mj</td>
-                                    <td>mj@company.com</td>
+                                    <td>editor</td>
+                                    <td>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                               placeholder="Password" value="kevinlove" readonly>
+                                    </td>
+                                    <td>editor@hotmail.com</td>
                                     <td><a href="#" class="btn btn-default">Edit</a></td>
                                     <td>
-                                        <!-- Split button -->
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-info">Action</button>
-                                            <button type="button" class="btn btn-info dropdown-toggle"
-                                                    data-toggle="dropdown">
-                                                <span class="caret"></span>
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Bootstrap</a></li>
-                                                <li><a href="#">Font Awesome</a></li>
-                                                <li><a href="#">jQuery</a></li>
-                                            </ul>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" disabled>Add vehicles</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" checked disabled>Update
+                                                vehicles</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" disabled>Delete
+                                                vehicles</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" disabled>Manage other admins</label>
                                         </div>
                                     </td>
                                     <td><a href="#" class="btn btn-link">Delete</a></td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td>Carry</td>
-                                    <td>Land</td>
-                                    <td>@cl</td>
-                                    <td>cl@company.com</td>
-                                    <td><a href="#" class="btn btn-default">Edit</a></td>
+                                    <td>deletor</td>
                                     <td>
-                                        <!-- Split button -->
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-info">Action</button>
-                                            <button type="button" class="btn btn-info dropdown-toggle"
-                                                    data-toggle="dropdown">
-                                                <span class="caret"></span>
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Bootstrap</a></li>
-                                                <li><a href="#">Font Awesome</a></li>
-                                                <li><a href="#">jQuery</a></li>
-                                            </ul>
-                                        </div>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                               placeholder="Password" value="kevinlove" readonly>
                                     </td>
-                                    <td><a href="#" class="btn btn-link">Delete</a></td>
-                                </tr>
-                                <tr class="success">
-                                    <td>5</td>
-                                    <td>New</td>
-                                    <td>Caroline</td>
-                                    <td>@nc</td>
-                                    <td>nc@company.com</td>
+                                    <td>deletor@hotmail.com</td>
                                     <td><a href="#" class="btn btn-default">Edit</a></td>
                                     <td>
-                                        <!-- Split button -->
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-info">Action</button>
-                                            <button type="button" class="btn btn-info dropdown-toggle"
-                                                    data-toggle="dropdown">
-                                                <span class="caret"></span>
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Bootstrap</a></li>
-                                                <li><a href="#">Font Awesome</a></li>
-                                                <li><a href="#">jQuery</a></li>
-                                            </ul>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" disabled>Add vehicles</label>
                                         </div>
-                                    </td>
-                                    <td><a href="#" class="btn btn-link">Delete</a></td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>6</td>
-                                    <td>Martin</td>
-                                    <td>East</td>
-                                    <td>@me</td>
-                                    <td>me@company.com</td>
-                                    <td><a href="#" class="btn btn-default">Edit</a></td>
-                                    <td>
-                                        <!-- Split button -->
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-info">Action</button>
-                                            <button type="button" class="btn btn-info dropdown-toggle"
-                                                    data-toggle="dropdown">
-                                                <span class="caret"></span>
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Bootstrap</a></li>
-                                                <li><a href="#">Font Awesome</a></li>
-                                                <li><a href="#">jQuery</a></li>
-                                            </ul>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" disabled>Update
+                                                vehicles</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" checked disabled>Delete
+                                                vehicles</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" disabled>Manage other admins</label>
                                         </div>
                                     </td>
                                     <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -226,15 +172,6 @@ if(!isset($_SESSION['authenticated'])) {
                             </table>
                         </div>
 
-                        <ul class="pagination pull-right">
-                            <li class="disabled"><a href="#">«</a></li>
-                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -242,13 +179,12 @@ if(!isset($_SESSION['authenticated'])) {
     </div>
 </div>
 
-<script src="js/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/util.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
-<script src="js/commonhtml.js"></script>
+<script src="js/util.js"></script>
+<script src="js/common-html.js"></script>
 <script src="js/app.js"></script>
-
 
 </body>
 </html>

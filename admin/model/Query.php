@@ -81,19 +81,4 @@ class Query
         return Query::stringValue(password_hash($pass, PASSWORD_BCRYPT, $options));
     }
 
-//    function isEmailMatchPassword($email, $pass) {
-//        $cond = 0;
-//        $fu_user = CommonUtil::fitnessUserData($email);
-//        $fp_user = CommonUtil::fitnessProviderData($email);
-//
-//        foreach ($fp_user as $fp) {
-//            if ($email === $fp->email && password_verify($pass, $fp->password)) {
-//                $cond = 1;
-//                break;
-//            }
-//        }
-//
-//        return $cond;
-//    }
-
 }

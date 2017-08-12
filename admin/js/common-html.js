@@ -14,6 +14,7 @@ var CommonHTML = (function () {
     var fnCommonElement = {},
         fnHeaderAndFooterElem = {},
         fnPageTitle = {};
+    var adminUsernameSel = {};
 
 
     return {
@@ -29,12 +30,14 @@ var CommonHTML = (function () {
             sidebarMenuItemSel = $(".templatemo-sidebar-menu li");
             pageWrapperSel = $(".template-page-wrapper");
             mainWrapperSel = $("#main-wrapper");
+            adminUsernameSel = $('#admin-username');
 
             bodyElem = $('body');
             confirmModalLogoutSel = {};
             fnCommonElement = null;
             fnHeaderAndFooterElem = null;
             fnPageTitle = null;
+
 
             // call the event driven functions here
             this.bindHTMLfn();
@@ -52,12 +55,11 @@ var CommonHTML = (function () {
 
             fnPageTitle();
 
-
             fnCommonElement = function () {
-                mainWrapperSel.prepend(cHTML.navBarHeaderElem());       // header
-                pageWrapperSel.prepend(cHTML.sideBarElement());         // sidebar
-                pageWrapperSel.last().append(cHTML.footerElement());    // footer
-                pageWrapperSel.append(cHTML.confirmModalLogout());      // confirm logout
+                mainWrapperSel.prepend(cHTML.navBarHeaderElem());                         // header
+                pageWrapperSel.prepend(cHTML.sideBarElement(adminUsernameSel.val()));         // sidebar
+                pageWrapperSel.last().append(cHTML.footerElement());                      // footer
+                pageWrapperSel.append(cHTML.confirmModalLogout());                        // confirm logout
             };
 
             // for sign-in and register
