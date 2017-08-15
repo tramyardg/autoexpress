@@ -1,22 +1,23 @@
 <?php
 session_start();
-require_once 'model/Query.php';
-require_once 'model/entity/Admin.php';
+require_once 'server/AdminQuery.php';
+require_once 'server/entity/Admin.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     $exists = null;
-    $q = new Query();
-    $username = $q->stringValue($_POST['username']);
-    $password = $q->stringValue($_POST['password']);
+    $util = new Utility();
+
+    $username = $util->stringValue($_POST['username']);
+    $password = $util->stringValue($_POST['password']);
 
     $new_admin = new Admin($username, $password);
 
-    $q = new Query();
+    $q = new AdminQuery();
     // returns true if admin exists, otherwise return false
-    $exists = !empty($q->selectIfAdminExists($new_admin)) ? $exists = true : $exists = false;
+    $exists = !empty($q->selectAdminByUsernamePassword($new_admin)) ? $exists = true : $exists = false;
 
     // very important lines do not remove
     if($exists == 1) {
@@ -55,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8" style="width: 100%;">
                     <div class="alert alert-warning text-center">
-                        <?php echo 'There is no admin with this username.'; ?>
+                        <?php echo 'Username or password is not correct.'; ?>
                     </div>
                 </div>
                 <div class="col-sm-2"></div>

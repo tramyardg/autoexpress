@@ -1,8 +1,19 @@
 <?php
 session_start();
+require_once 'server/Utility.php';
+require_once 'server/AdminQuery.php';
+require_once 'server/entity/Admin.php';
+
 if(!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
+} else {
+    $util = new Utility();
+    $usernameStr = $util->stringValue($_REQUEST['username']);
+
+    $q = new AdminQuery();
+    $q->redirectNotAdmin($usernameStr);
 }
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -6,10 +6,11 @@
  * Date: 2017-08-07
  * Time: 2:18 AM
  */
+require_once 'Utility.php';
 require_once '../Db.php';
-include 'model/entity/Admin.php';
+include 'server/entity/Admin.php';
 
-class Query
+class AdminQuery
 {
     function insertAdmin($username, $email, $password) {
         $db = Db::getInstance();
@@ -29,7 +30,7 @@ class Query
      * @param $admin
      * @return string
      */
-    function selectIfAdminExists(&$admin){
+    function selectAdminByUsernamePassword(&$admin){
         $new_admin = new Admin($admin->getUsername(), $admin->getPassword());
         $username = $new_admin->getUsername();
         $password = $new_admin->getPassword();
@@ -67,18 +68,24 @@ class Query
             . " `username` = $username";
         $query = $db->prepare($sql);
         $query->execute();
-        return Query::stringValue($query->fetchColumn(0));
+
+        $util = new Utility();
+        return $util->stringValue($query->fetchColumn(0));
     }
 
-    function stringValue($str) {
-        return "'" . $str . "'";
+    function isUsernameTaken($usernameStr) {
+        $exists = null;
+        if(strlen(AdminQuery::selectAdminByUsername($usernameStr)) > 4 ) {
+            $exists = "true";
+        } else {
+            $exists = "false";
+        }
+        return $exists;
     }
 
-    function hashedPassword($pass) {
-        $options = [
-            'cost' => 12 // the default cost is 10
-        ];
-        return Query::stringValue(password_hash($pass, PASSWORD_BCRYPT, $options));
+    function redirectNotAdmin($usernameStr) {
+        if(AdminQuery::isUsernameTaken($usernameStr) == "false") {
+            header( "Location:not-found.php" );
+        }
     }
-
 }

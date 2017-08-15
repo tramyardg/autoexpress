@@ -1,21 +1,28 @@
 <?php
+require_once 'server/Utility.php';
 require_once '../Db.php';
-require_once 'model/Query.php';
+require_once 'server/AdminQuery.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = null;
 
-    $q = new Query();
-    $username = $q->stringValue($_POST['username']);
-    $email = $q->stringValue($_POST['email']);
-    $password = $q->stringValue($_POST['password']);
+    $util = new Utility();
+    $username = $util->stringValue($_POST['username']);
+    $email = $util->stringValue($_POST['email']);
+    $password = $util->stringValue($_POST['password']);
 
-    if($q->insertAdmin($username, $email, $password)) {
-        $result = 'You are one of the admin now!';
+    $q = new AdminQuery();
+
+    $msgTaken = null;
+    if($q->isUsernameTaken($username) == "true") {
+        $msgTaken = 'This username is already taken.';
     } else {
-        $result = 'There must be an error. Please try again later.';
+        if($q->insertAdmin($username, $email, $password)) {
+            $result = 'You are one of the admin now!';
+        } else {
+            $result = 'There must be an error. Please try again later.';
+        }
     }
-
 
 
 }
@@ -53,6 +60,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			</div>
 		</div>
 		<?php } ?>
+
+        <?php if(!empty($msgTaken)) { ?>
+            <div class="templatemo-signin-form">
+                <div class="col-md-12">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8" style="width: 100%;">
+                        <div class="alert alert-warning text-center"><?php echo $msgTaken; ?></div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+        <?php } ?>
 		
         <form action="" method="post" onsubmit="return RegisterValidate.validateForm();" name="register-form" id="register-form" class="form-horizontal templatemo-signin-form" role="form" >
         <!--<form action="./model/forms/register.php" method="post" name="register-form" id="register-form" class="form-horizontal templatemo-signin-form" role="form" >-->
@@ -77,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-md-12">
                     <label for="password" class="col-sm-2 control-label">Password</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <input type="password" minlength="5" maxlength="10" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                 </div>
             </div>
@@ -86,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-md-12">
                     <label for="password" class="col-sm-2 control-label">Confirm Password</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Confirm Password">
+                        <input type="password" minlength="5" maxlength="10" class="form-control" id="password_confirm" name="password_confirm" placeholder="Confirm Password">
                     </div>
                 </div>
             </div>
