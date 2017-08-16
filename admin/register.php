@@ -1,15 +1,13 @@
 <?php
-require_once 'server/Utility.php';
 require_once '../Db.php';
 require_once 'server/AdminQuery.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = null;
 
-    $util = new Utility();
-    $username = $util->stringValue($_POST['username']);
-    $email = $util->stringValue($_POST['email']);
-    $password = $util->stringValue($_POST['password']);
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
     $q = new AdminQuery();
 
@@ -17,10 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if($q->isUsernameTaken($username) == "true") {
         $msgTaken = 'This username is already taken.';
     } else {
-        if($q->insertAdmin($username, $email, $password)) {
-            $result = 'You are one of the admin now!';
-        } else {
-            $result = 'There must be an error. Please try again later.';
+        if(!empty($username) && !empty($email) && !empty($password)) {
+            if($q->insertAdmin($username, $email, $password)) {
+                $result = 'You are one of the admin now!';
+            } else {
+                $result = 'There must be an error. Please try again later.';
+            }
         }
     }
 

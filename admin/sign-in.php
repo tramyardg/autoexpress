@@ -1,26 +1,42 @@
 <?php
 session_start();
 require_once 'server/AdminQuery.php';
-require_once 'server/entity/Admin.php';
+require_once 'server/class/Admin2.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-
     $exists = null;
     $util = new Utility();
 
-    $username = $util->stringValue($_POST['username']);
-    $password = $util->stringValue($_POST['password']);
-
-    $new_admin = new Admin($username, $password);
-
     $q = new AdminQuery();
-    // returns true if admin exists, otherwise return false
-    $exists = !empty($q->selectAdminByUsernamePassword($new_admin)) ? $exists = true : $exists = false;
+    if(!empty($_POST['username']) && !empty($_POST['password'])) {
+        $password = $_POST['password'];
+
+        // both username and password combination must be correct
+        $results = $q->selectAllAdminInfo($_POST['username']); // checks username
+
+        // check password if match
+        $admin_obj = array();
+        foreach ($results as $result) {
+            $admin_obj[] = new Admin2($result);
+        }
+
+
+        if(!empty($results)) {
+            if($admin_obj[0]->getPassword() == $password) {
+                $exists = '1'; // all good
+            } else {
+                $exists = '2'; // incorrect password
+            }
+        } else {
+            $exists = '3';     // username not exists
+        }
+
+    }
 
     // very important lines do not remove
-    if($exists == 1) {
+    if($exists == '1') {
         $_SESSION['authenticated'] = 1;
         $_SESSION['adminUsername'] = $_POST['username'];
     }
@@ -50,19 +66,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     <div class="template-page-wrapper splash"  >
-        <?php if(isset($exists) && $exists != 1) { ?>
+        <?php if(isset($exists) && $exists == '3') { ?>
         <div class="templatemo-signin-form">
             <div class="col-md-12">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8" style="width: 100%;">
                     <div class="alert alert-warning text-center">
-                        <?php echo 'Username or password is not correct.'; ?>
+                        <?php echo 'This user does not exists.'; ?>
                     </div>
                 </div>
                 <div class="col-sm-2"></div>
             </div>
         </div>
-        <?php } else if(isset($exists) && $exists == 1) { ?>
+        <?php } else if(isset($exists) && $exists == '2') { ?>
+        <div class="templatemo-signin-form">
+            <div class="col-md-12">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8" style="width: 100%;">
+                    <div class="alert alert-warning text-center">
+                        <?php echo 'Password is not correct.'; ?>
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+        <?php } else if(isset($exists) && $exists == '1') { ?>
         <div class="templatemo-signin-form">
             <div class="col-md-12">
                 <div class="col-sm-2"></div>

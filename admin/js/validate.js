@@ -60,3 +60,5 @@ var LoginValidate = (function () {
         }
     }; // end return
 })();
+
+//validate in preference page admin module for password

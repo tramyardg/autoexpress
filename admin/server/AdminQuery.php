@@ -6,76 +6,52 @@
  * Date: 2017-08-07
  * Time: 2:18 AM
  */
-require_once 'Utility.php';
+require_once 'class/Utility.php';
 require_once '../Db.php';
-include 'server/entity/Admin.php';
+require_once 'class/Admin2.php';
 
 class AdminQuery
 {
     function insertAdmin($username, $email, $password) {
+        $util = new Utility();
+        $_username = $util->stringValue($username);
+        $_email = $util->stringValue($email);
+        $_password = $util->stringValue($password);
+
         $db = Db::getInstance();
         $sql = "INSERT\n"
             . "INTO\n"
             . " administrator(username,\n"
             . " password,\n"
             . " email)\n"
-            . "VALUES($username, $password, $email)";
+            . "VALUES($_username, $_password, $_email)";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt;
     }
 
-    /**
-     * true if returns at least one result
-     * @param $admin
-     * @return string
-     */
-    function selectAdminByUsernamePassword(&$admin){
-        $new_admin = new Admin($admin->getUsername(), $admin->getPassword());
-        $username = $new_admin->getUsername();
-        $password = $new_admin->getPassword();
+    function selectAllAdminInfo($username) {
+        $util = new Utility();
+        $username_ = $util->stringValue($username);
 
+        $db = new DbQueryResult();
 
-        $db = Db::getInstance();
-        // this ensures both username and password combination exist
         $sql = "SELECT\n"
-            . " `email` \n"
-            . "FROM\n"
-            . " administrator\n"
-            . "WHERE\n"
-            . " username = $username AND password = $password";
-
-        $query = $db->prepare($sql);
-        $query->execute();
-
-        return !empty($query->fetchColumn(0));
-
-    }
-
-    /**
-     * Returns the hashed password
-     * from database.
-     * @param $username
-     * @return string
-     */
-    function selectAdminByUsername($username) {
-        $db = Db::getInstance();
-        $sql = "SELECT\n"
-            . " `password`\n"
+            . " *\n"
             . "FROM\n"
             . " `administrator`\n"
             . "WHERE\n"
-            . " `username` = $username";
-        $query = $db->prepare($sql);
-        $query->execute();
+            . " username = $username_";
 
-        $util = new Utility();
-        return $util->stringValue($query->fetchColumn(0));
+        return $db->query($sql);
+
     }
 
+
+    // reuse existing sql
     function isUsernameTaken($usernameStr) {
         $exists = null;
-        if(strlen(AdminQuery::selectAdminByUsername($usernameStr)) > 4 ) {
+        if((AdminQuery::selectAllAdminInfo($usernameStr))) {
             $exists = "true";
         } else {
             $exists = "false";
@@ -83,7 +59,7 @@ class AdminQuery
         return $exists;
     }
 
-    function redirectNotAdmin($usernameStr) {
+    function redirectNotFound($usernameStr) {
         if(AdminQuery::isUsernameTaken($usernameStr) == "false") {
             header( "Location:not-found.php" );
         }

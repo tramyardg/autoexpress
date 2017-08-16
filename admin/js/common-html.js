@@ -21,7 +21,7 @@ var CommonHTML = (function () {
 
         /**
          * All the elements required before an
-         * event occured must be in the init function.
+         * event occurred must be in the init function.
          */
         init: function () {
 
@@ -44,6 +44,7 @@ var CommonHTML = (function () {
         },
         bindHTMLfn: function () {
 
+
             // sets page title dynamically
             fnPageTitle = function () {
                 for(var i = 0; i < util.pageName.length; i++) {
@@ -51,19 +52,19 @@ var CommonHTML = (function () {
                         headSel.append(cHTML.pageTitle(util.pageName[i].title));
                     }
                 }
+
             };
 
             fnPageTitle();
 
-            fnCommonElement = function () {
-                mainWrapperSel.prepend(cHTML.navBarHeaderElem());                         // header
-                pageWrapperSel.prepend(cHTML.sideBarElement(adminUsernameSel.val()));         // sidebar
+            fnCommonElement = function () {                                            // contents
+                mainWrapperSel.prepend(cHTML.navBarHeaderElem(adminUsernameSel.val()));                         // header
+                pageWrapperSel.prepend(cHTML.sideBarElement(adminUsernameSel.val()));     // sidebar
                 pageWrapperSel.last().append(cHTML.footerElement());                      // footer
                 pageWrapperSel.append(cHTML.confirmModalLogout());                        // confirm logout
             };
 
-            // for sign-in and register
-            fnHeaderAndFooterElem = function () {
+            fnHeaderAndFooterElem = function () {                   // contents
                 mainWrapperSel.prepend(cHTML.navBarHeaderElem());       // header
                 mainWrapperSel.last().append(cHTML.footerElement());    // footer
             };

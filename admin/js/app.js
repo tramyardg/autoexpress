@@ -20,6 +20,3 @@ function sidebarActive() {
         $sidebarMenuItem.eq(3).addClass('active');
     }
 }
-
-// check if admin username exists
-// other page not found redirection

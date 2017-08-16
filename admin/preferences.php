@@ -1,17 +1,30 @@
 <?php
 session_start();
-require_once 'server/Utility.php';
 require_once 'server/AdminQuery.php';
-require_once 'server/entity/Admin.php';
+require_once 'server/class/Admin2.php';
 
 if(!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 } else {
-    $util = new Utility();
-    $usernameStr = $util->stringValue($_REQUEST['username']);
-
     $q = new AdminQuery();
-    $q->redirectNotAdmin($usernameStr);
+    if (!empty($_REQUEST['username'])){
+        $usernameStr = $_REQUEST['username'];
+        $q->redirectNotFound($usernameStr);
+    }
+
+    // Reuse existing query
+    $results = $q->selectAllAdminInfo($_SESSION['adminUsername']);
+
+    // check for results
+    if (!$results) {
+        return $results;
+    } else {
+        $admin_obj = array();
+        foreach ($results as $result) {
+            $admin_obj[] = new Admin2($result);
+        }
+    }
+
 }
 
 
@@ -43,36 +56,26 @@ if(!isset($_SESSION['authenticated'])) {
                     <li><a href="dashboard.php">Admin Panel</a></li>
                     <li class="active">Preferences</li>
                 </ol>
-                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php if (isset($_SESSION['adminUsername'])) {echo $_SESSION['adminUsername'];} ?>">
+                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php echo $admin_obj[0]->getUsername(); ?>">
                 <h1>Preferences</h1>
-                <p class="margin-bottom-15">Here goes another form and form controls.</p>
+                <p class="margin-bottom-15">Update account information.</p>
                 <div class="row">
                     <div class="col-md-12">
                         <form role="form" id="templatemo-preferences-form">
                             <div class="row">
                                 <div class="col-md-6 margin-bottom-15">
-                                    <label for="firstName" class="control-label">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" value="John">
-                                </div>
-                                <div class="col-md-6 margin-bottom-15">
-                                    <label for="lastName" class="control-label">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" value="Henry">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 margin-bottom-15">
                                     <label>Username</label>
-                                    <p class="form-control-static" id="username">@admin</p>
+                                    <p class="form-control-static" id="username"><?php echo $admin_obj[0]->getUsername(); ?></p>
                                 </div>
                                 <div class="col-md-6 margin-bottom-15">
                                     <label>Email address</label>
-                                    <p class="form-control-static" id="email">admin@company.com</p>
+                                    <p class="form-control-static" id="email"><?php echo $admin_obj[0]->getEmail(); ?></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 margin-bottom-15">
                                     <label for="currentPassword">Current Password</label>
-                                    <input type="password" class="form-control" id="currentPassword" value="********"
+                                    <input type="password" class="form-control" id="currentPassword" value="<?php echo $admin_obj[0]->getPassword(); ?>"
                                            disabled="">
                                 </div>
                                 <div class="col-md-6 margin-bottom-15">
@@ -83,12 +86,12 @@ if(!isset($_SESSION['authenticated'])) {
                                 <div class="col-md-6 margin-bottom-15">
                                     <label for="password_1">New Password</label>
                                     <input type="password" class="form-control" id="password_1"
-                                           placeholder="New Password">
+                                           placeholder="New Password" maxlength="10" minlength="5">
                                 </div>
                                 <div class="col-md-6 margin-bottom-15">
                                     <label for="password_2">Confirm New Password</label>
                                     <input type="password" class="form-control" id="password_2"
-                                           placeholder="Confirm New Password">
+                                           placeholder="Confirm New Password" maxlength="10" minlength="5">
                                 </div>
                             </div>
 

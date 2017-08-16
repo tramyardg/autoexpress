@@ -1,17 +1,29 @@
 <?php
 session_start();
-require_once 'server/Utility.php';
 require_once 'server/AdminQuery.php';
-require_once 'server/entity/Admin.php';
+require_once 'server/class/Admin2.php';
 
 if(!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 } else {
-    $util = new Utility();
-    $usernameStr = $util->stringValue($_REQUEST['username']);
-
     $q = new AdminQuery();
-    $q->redirectNotAdmin($usernameStr);
+    if (!empty($_REQUEST['username'])){
+        $usernameStr = $_REQUEST['username'];
+        $q->redirectNotFound($usernameStr);
+    }
+
+    // Reuse existing query
+    $results = $q->selectAllAdminInfo($_SESSION['adminUsername']);
+
+    // check for results
+    if (!$results) {
+        return $results;
+    } else {
+        $admin_obj = array();
+        foreach ($results as $result) {
+            $admin_obj[] = new Admin2($result);
+        }
+    }
 }
 
 
@@ -44,7 +56,7 @@ if(!isset($_SESSION['authenticated'])) {
                     <li><a href="dashboard.php">Admin Panel</a></li>
                     <li class="active">Manage Inventory</li>
                 </ol>
-                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php if (isset($_SESSION['adminUsername'])) {echo $_SESSION['adminUsername'];} ?>">
+                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php echo $admin_obj[0]->getUsername(); ?>">
                 <h1>Manage Users</h1>
                 <p>Here goes tables and users.</p>
 

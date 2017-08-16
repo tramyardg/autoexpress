@@ -299,7 +299,6 @@ h1 {
         padding-right: 0;
     }
 }
-
 .splash {
     padding: 9em 0 9em;
     background-color: #141d27;
@@ -308,7 +307,6 @@ h1 {
     background-attachment: fixed;
     color: #fff;
 }
-
 .splash2 {
     padding: 9em 0 9em;
     background-color: #141d27;
@@ -317,27 +315,25 @@ h1 {
     background-attachment: fixed;
     color: #fff;
 }
-
 .message-box {
     max-width: 600px;
     margin: 0 auto;
     font-size: 90%;
     text-align: center;
 }
-
 .text-center-important {
     text-align: center !important;
 }
-
 .no-border {
     border: 0 !important;
 }
-
 .error-template {
     padding: 40px 15px;
     text-align: center;
 }
-
 .error-template h1, h2 {
     color: #ffffff;
+}
+.logo {
+    width: 100%;
 }
