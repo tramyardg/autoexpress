@@ -14,7 +14,8 @@ var CommonHTML = (function () {
     var fnCommonElement = {},
         fnHeaderAndFooterElem = {},
         fnPageTitle = {};
-    var adminUsernameSel = {};
+    var adminUsernameSel = {},
+        adminTable = {};
 
 
     return {
@@ -31,6 +32,7 @@ var CommonHTML = (function () {
             pageWrapperSel = $(".template-page-wrapper");
             mainWrapperSel = $("#main-wrapper");
             adminUsernameSel = $('#admin-username');
+            adminTable = $('#admin-table');
 
             bodyElem = $('body');
             confirmModalLogoutSel = {};
@@ -78,6 +80,11 @@ var CommonHTML = (function () {
                     break;
                 case util.pageName[2].name:
                     fnCommonElement();
+                    adminTable.DataTable({
+                        "pageLength": 5,
+                        "lengthChange": false,
+                        searching: false
+                    });
                     break;
                 case util.pageName[3].name:
                     fnCommonElement();
