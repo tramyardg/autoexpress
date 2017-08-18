@@ -2,7 +2,11 @@ $(document).ready(function () {
 
     CommonHTML.init();
     sidebarActive();
-
+    $('#admin-table').DataTable({
+        "pageLength": 5,
+        "lengthChange": false,
+        searching: false
+    });
 });
 
 var util = new CommonUtil();

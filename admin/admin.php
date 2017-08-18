@@ -10,11 +10,12 @@ if(!isset($_SESSION['authenticated'])) {
     if(isset($_REQUEST['username'])) {
         $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
-    $admin_data = $q->adminData($_SESSION['adminUsername']);
+    $admin_data = $q->adminData_byUsername($_SESSION['adminUsername']);
+
+    $all_admin = $q->allAdminData();
+
 
 }
-
-
 
 
 
@@ -32,6 +33,7 @@ if(!isset($_SESSION['authenticated'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/templatemo_main.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 
 </head>
 <body>
@@ -52,134 +54,61 @@ if(!isset($_SESSION['authenticated'])) {
                 <div class="row margin-bottom-30">
                     <div class="col-md-12">
                         <ul class="nav nav-pills">
-                            <li class="active"><a href="#">Admins total <span class="badge">4</span></a></li>
+                            <li class="active"><a href="#">Admins total <span class="badge"><?php echo count($all_admin); ?></span></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover table-bordered">
+                            <table class="table table-striped table-hover table-bordered" id="admin-table">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>ID #</th>
                                     <th>Username</th>
                                     <th>Password</th>
                                     <th>Email</th>
-                                    <th>Edit</th>
                                     <th>Privilege(s)</th>
-                                    <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php for ($i = 0; $i < count($all_admin); $i++) {
+                                        $privilege_array = explode(',', $all_admin[$i]->getPrivilege());
+                                    ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>grandmaster</td>
+                                    <td><?php echo $all_admin[$i]->getAdminId();  ?></td>
+                                    <td><?php echo $all_admin[$i]->getUsername();  ?></td>
                                     <td>
                                         <input type="password" class="form-control" id="password" name="password"
-                                               placeholder="Password" value="asddsassdasdds" readonly>
+                                               placeholder="Password" value="<?php echo $all_admin[$i]->getPassword();  ?>" readonly>
                                     </td>
-                                    <td>leo@gmail.com</td>
-                                    <td><a href="#" class="btn btn-default">Edit</a></td>
+                                    <td><?php echo $all_admin[$i]->getEmail();  ?></td>
                                     <td>
+                                        <?php if (in_array("1", $privilege_array)) { ?>
                                         <div class="checkbox">
                                             <label><input type="checkbox" value="" checked disabled>Add vehicles</label>
                                         </div>
+                                        <?php } ?>
+                                        <?php if (in_array("2", $privilege_array)) { ?>
                                         <div class="checkbox">
                                             <label><input type="checkbox" value="" checked disabled>Update
                                                 vehicles</label>
                                         </div>
+                                        <?php } ?>
+                                        <?php if (in_array("3", $privilege_array)) { ?>
                                         <div class="checkbox">
                                             <label><input type="checkbox" value="" checked disabled>Delete
                                                 vehicles</label>
                                         </div>
+                                        <?php } ?>
+                                        <?php if (in_array("4", $privilege_array)) { ?>
                                         <div class="checkbox">
                                             <label><input type="checkbox" value="" checked disabled>Manage other admins</label>
                                         </div>
+                                        <?php } ?>
                                     </td>
-                                    <td><a href="#" class="btn btn-link">Delete</a></td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>leo</td>
-                                    <td>
-                                        <input type="password" class="form-control" id="password" name="password"
-                                               placeholder="Password" value="leoleo" readonly>
-                                    </td>
-                                    <td>rdg514@gmail.com</td>
-                                    <td><a href="#" class="btn btn-default">Edit</a></td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" checked disabled>Add vehicles</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" disabled>Update
-                                                vehicles</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" checked disabled>Delete
-                                                vehicles</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" disabled>Manage other admins</label>
-                                        </div>
-                                    </td>
-                                    <td><a href="#" class="btn btn-link">Delete</a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>editor</td>
-                                    <td>
-                                        <input type="password" class="form-control" id="password" name="password"
-                                               placeholder="Password" value="kevinlove" readonly>
-                                    </td>
-                                    <td>editor@hotmail.com</td>
-                                    <td><a href="#" class="btn btn-default">Edit</a></td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" disabled>Add vehicles</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" checked disabled>Update
-                                                vehicles</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" disabled>Delete
-                                                vehicles</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" disabled>Manage other admins</label>
-                                        </div>
-                                    </td>
-                                    <td><a href="#" class="btn btn-link">Delete</a></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>deletor</td>
-                                    <td>
-                                        <input type="password" class="form-control" id="password" name="password"
-                                               placeholder="Password" value="kevinlove" readonly>
-                                    </td>
-                                    <td>deletor@hotmail.com</td>
-                                    <td><a href="#" class="btn btn-default">Edit</a></td>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" disabled>Add vehicles</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" disabled>Update
-                                                vehicles</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" checked disabled>Delete
-                                                vehicles</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" disabled>Manage other admins</label>
-                                        </div>
-                                    </td>
-                                    <td><a href="#" class="btn btn-link">Delete</a></td>
-                                </tr>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -192,6 +121,7 @@ if(!isset($_SESSION['authenticated'])) {
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
 <script src="js/common/util.js"></script>

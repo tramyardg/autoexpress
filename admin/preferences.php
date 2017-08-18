@@ -14,7 +14,7 @@ if(!isset($_SESSION['authenticated'])) {
     if(isset($_REQUEST['username'])) {
         $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
-    $admin_data = $q->adminData($_SESSION['adminUsername']);
+    $admin_data = $q->adminData_byUsername($_SESSION['adminUsername']);
 
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {

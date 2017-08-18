@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $password = $_POST['password'];
 
         // both username and password combination must be correct
-        $results = $q->selectAllAdminInfo($_POST['username']); // checks username
+        $results = $q->selectAllAdminInfo_byUsername($_POST['username']); // checks username
 
         // check password if match
         $admin_obj = array();

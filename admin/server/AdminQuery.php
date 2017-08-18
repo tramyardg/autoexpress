@@ -50,7 +50,7 @@ class AdminQuery
         return $stmt;
     }
 
-    function selectAllAdminInfo($username)
+    function selectAllAdminInfo_byUsername($username)
     {
         $util = new Utility();
         $username_ = $util->stringValue($username);
@@ -68,12 +68,23 @@ class AdminQuery
 
     }
 
+    function selectAllAdmin()
+    {
+        $db = new DbQueryResult();
+        $sql = "SELECT\n"
+            . " *\n"
+            . "FROM\n"
+            . " `administrator`";
+
+        return $db->query($sql);
+    }
+
 
     // reuse existing sql
     function isUsernameTaken($usernameStr)
     {
         $exists = null;
-        if ((AdminQuery::selectAllAdminInfo($usernameStr))) {
+        if ((AdminQuery::selectAllAdminInfo_byUsername($usernameStr))) {
             $exists = "true";
         } else {
             $exists = "false";
@@ -95,9 +106,23 @@ class AdminQuery
         }
     }
 
-    function adminData($session_username)
+    function adminData_byUsername($session_username)
     {
-        $results = AdminQuery::selectAllAdminInfo($session_username);
+        $results = AdminQuery::selectAllAdminInfo_byUsername($session_username);
+        $admin_obj = array();
+        if (!$results) {
+            return $results;
+        } else {
+            foreach ($results as $result) {
+                $admin_obj[] = new Admin2($result);
+            }
+        }
+        return $admin_obj;
+    }
+
+    function allAdminData()
+    {
+        $results = AdminQuery::selectAllAdmin();
         $admin_obj = array();
         if (!$results) {
             return $results;

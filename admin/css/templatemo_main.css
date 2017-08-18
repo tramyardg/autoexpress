@@ -337,3 +337,6 @@ h1 {
 .logo {
     width: 100%;
 }
+table.dataTable thead th, table.dataTable thead td {
+
+}

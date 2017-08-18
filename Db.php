@@ -93,6 +93,5 @@ class DbQueryResult
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt;
-//        $stmt->rowCount() . " records UPDATED successfully";
     }
 }
