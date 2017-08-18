@@ -1,5 +1,8 @@
 function CommonUtil() {
-    this.msg = {};
+    this.msg = {
+        pass_not_match: {text: '<span class="util-msg">Password not match.</span>'},
+        empty_form_field: {text: '<span class="util-msg">Empty form field.</span>'}
+    };
 
     this.getFilename = function () {
         var locHref = location.href;

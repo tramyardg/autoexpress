@@ -1,27 +1,29 @@
 <?php
 session_start();
+ini_set('date.timezone', 'America/Toronto');
+$time2 = date('Y-m-d H:i:s', gmdate('U'));
+
 require_once 'server/AdminQuery.php';
+require_once 'server/class/Utility.php';
 require_once 'server/class/Admin2.php';
 
 if(!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 } else {
     $q = new AdminQuery();
-    if (!empty($_REQUEST['username'])){
-        $usernameStr = $_REQUEST['username'];
-        $q->redirectNotFound($usernameStr);
+    if(isset($_REQUEST['username'])) {
+        $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
+    $admin_data = $q->adminData($_SESSION['adminUsername']);
 
-    // Reuse existing query
-    $results = $q->selectAllAdminInfo($_SESSION['adminUsername']);
 
-    // check for results
-    if (!$results) {
-        return $results;
-    } else {
-        $admin_obj = array();
-        foreach ($results as $result) {
-            $admin_obj[] = new Admin2($result);
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if(!empty($_POST['password_1']) && !empty($_POST['password_2'])) {
+            $adminId = $admin_data[0]->getAdminId();
+
+            $q = new AdminQuery();
+            $q->updateAdminPass($_POST['password_1'], $adminId, $time2);
+            header("Location: preferences.php?username=".$admin_data[0]->getUsername().'&updated=true');
         }
     }
 
@@ -50,50 +52,68 @@ if(!isset($_SESSION['authenticated'])) {
 
     <div class="template-page-wrapper">
 
+
         <div class="templatemo-content-wrapper">
             <div class="templatemo-content">
                 <ol class="breadcrumb">
                     <li><a href="dashboard.php">Admin Panel</a></li>
                     <li class="active">Preferences</li>
                 </ol>
-                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php echo $admin_obj[0]->getUsername(); ?>">
+                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php echo $admin_data[0]->getUsername(); ?>">
                 <h1>Preferences</h1>
                 <p class="margin-bottom-15">Update account information.</p>
+                <?php if(isset($_REQUEST['updated']) && $_REQUEST['updated'] == 'true') { ?>
+                    <div class="col-sm-12" style="width: 100%;">
+                        <div class="alert alert-success text-center">
+                            <?php echo'1 records UPDATED successfully'; ?>
+                        </div>
+                    </div>
+                <?php } ?>
                 <div class="row">
                     <div class="col-md-12">
-                        <form role="form" id="templatemo-preferences-form">
+                        <form action="" role="form" id="templatemo-preferences-form" onsubmit="return PasswordMatchValidate.validateForm();" method="post">
                             <div class="row">
-                                <div class="col-md-6 margin-bottom-15">
-                                    <label>Username</label>
-                                    <p class="form-control-static" id="username"><?php echo $admin_obj[0]->getUsername(); ?></p>
+                                <div class="form-group">
+                                    <div class="col-md-6 margin-bottom-15">
+                                        <label>Username</label>
+                                        <p class="form-control-static" id="username"><?php echo $admin_data[0]->getUsername(); ?></p>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 margin-bottom-15">
-                                    <label>Email address</label>
-                                    <p class="form-control-static" id="email"><?php echo $admin_obj[0]->getEmail(); ?></p>
+
+                                <div class="form-group">
+                                    <div class="col-md-6 margin-bottom-15">
+                                        <label>Email address</label>
+                                        <p class="form-control-static" id="email"><?php echo $admin_data[0]->getEmail(); ?></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 margin-bottom-15">
-                                    <label for="currentPassword">Current Password</label>
-                                    <input type="password" class="form-control" id="currentPassword" value="<?php echo $admin_obj[0]->getPassword(); ?>"
-                                           disabled="">
+
+                                <div class="form-group">
+                                    <div class="col-md-6 margin-bottom-15">
+                                        <label for="currentPassword">Current Password</label>
+                                        <input type="password" class="form-control" id="currentPassword" name="currentPassword"
+                                               value="<?php echo $admin_data[0]->getPassword(); ?>" readonly>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 margin-bottom-15">
+
+                                <div class="form-group">
+                                    <div class="col-md-6 margin-bottom-15">
+                                        <label for="password_1">New Password</label>
+                                        <input type="password" class="form-control" id="password_1" name="password_1"
+                                               placeholder="New Password" maxlength="10" minlength="5">
+                                        <label class="util-msg"></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-6 margin-bottom-15">
+                                        <label for="password_2">Confirm New Password</label>
+                                        <input type="password" class="form-control" id="password_2" name="password_2"
+                                               placeholder="Confirm New Password" maxlength="10" minlength="5">
+                                        <label class="util-msg"></label>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6 margin-bottom-15">
-                                    <label for="password_1">New Password</label>
-                                    <input type="password" class="form-control" id="password_1"
-                                           placeholder="New Password" maxlength="10" minlength="5">
-                                </div>
-                                <div class="col-md-6 margin-bottom-15">
-                                    <label for="password_2">Confirm New Password</label>
-                                    <input type="password" class="form-control" id="password_2"
-                                           placeholder="Confirm New Password" maxlength="10" minlength="5">
-                                </div>
-                            </div>
 
 
                             <div class="row templatemo-form-buttons">
@@ -115,9 +135,11 @@ if(!isset($_SESSION['authenticated'])) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
-<script src="js/util.js"></script>
+<script src="js/common/util.js"></script>
 <script src="js/common-html.js"></script>
+<script src="js/validate.js"></script>
 <script src="js/app.js"></script>
+
 
 </body>
 </html>

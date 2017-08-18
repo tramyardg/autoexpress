@@ -14,6 +14,15 @@ class Admin2
     private $_password;
     private $_email;
     private $_privilege;
+    private $_last_update;
+
+    /**
+     * @return mixed
+     */
+    public function getLastUpdate()
+    {
+        return $this->_last_update;
+    }
 
     /**
      * @return mixed|null
@@ -61,6 +70,7 @@ class Admin2
         $this->_password = $result->password;
         $this->_email = $result->email;
         $this->_privilege = $result->privilege;
+        $this->_last_update = $result->last_update;
     }
 
 //    public function __toString(){

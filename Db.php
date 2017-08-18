@@ -87,4 +87,12 @@ class DbQueryResult
         $stmt = null;
         return $results;
     }
+
+    public function query_void($sql) {
+        $db = Db::getInstance();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+//        $stmt->rowCount() . " records UPDATED successfully";
+    }
 }

@@ -7,23 +7,11 @@ if(!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 } else {
     $q = new AdminQuery();
-    if (!empty($_REQUEST['username'])){
-        $usernameStr = $_REQUEST['username'];
-        $q->redirectNotFound($usernameStr);
+    if(isset($_REQUEST['username'])) {
+        $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
+    $admin_data = $q->adminData($_SESSION['adminUsername']);
 
-    // Reuse existing query
-    $results = $q->selectAllAdminInfo($_SESSION['adminUsername']);
-
-    // check for results
-    if (!$results) {
-        return $results;
-    } else {
-        $admin_obj = array();
-        foreach ($results as $result) {
-            $admin_obj[] = new Admin2($result);
-        }
-    }
 }
 
 ?>
@@ -53,7 +41,7 @@ if(!isset($_SESSION['authenticated'])) {
                     <li><a href="#">Dashboard</a></li>
                     <li class="active">Overview</li>
                 </ol>
-                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php echo $admin_obj[0]->getUsername(); ?>">
+                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php echo $admin_data[0]->getUsername(); ?>">
                 <h1>Dashboard</h1>
 
                 <div class="margin-bottom-30">
@@ -71,7 +59,7 @@ if(!isset($_SESSION['authenticated'])) {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/util.js"></script>
+<script src="js/common/util.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
 <script src="js/common-html.js"></script>
 <script src="js/app.js"></script>
