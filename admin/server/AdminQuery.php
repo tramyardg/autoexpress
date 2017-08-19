@@ -120,6 +120,7 @@ class AdminQuery
         return $admin_obj;
     }
 
+    // map sql result to Admin class
     function allAdminData()
     {
         $results = AdminQuery::selectAllAdmin();

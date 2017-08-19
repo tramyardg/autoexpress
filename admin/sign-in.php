@@ -3,6 +3,9 @@ session_start();
 require_once 'server/AdminQuery.php';
 require_once 'server/class/Admin2.php';
 
+if(isset($_SESSION['authenticated'])) {
+	header('Location: dashboard.php');
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

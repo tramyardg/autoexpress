@@ -1,6 +1,11 @@
 <?php
+session_start();
 require_once '../Db.php';
 require_once 'server/AdminQuery.php';
+
+if(isset($_SESSION['authenticated'])) {
+	header('Location: dashboard.php');
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = null;

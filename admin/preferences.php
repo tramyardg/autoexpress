@@ -61,7 +61,7 @@ if(!isset($_SESSION['authenticated'])) {
                 </ol>
                 <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php echo $admin_data[0]->getUsername(); ?>">
                 <h1>Preferences</h1>
-                <p class="margin-bottom-15">Update account information.</p>
+                <p class="margin-bottom-15">Update account information. Last updated <?php echo $admin_data[0]->getLastUpdate() . '.' ?></p>
                 <?php if(isset($_REQUEST['updated']) && $_REQUEST['updated'] == 'true') { ?>
                     <div class="col-sm-12" style="width: 100%;">
                         <div class="alert alert-success text-center">

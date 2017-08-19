@@ -32,4 +32,18 @@ function CommonUtil() {
         {name: "logout.php", title: "Signing out..."}
     ];
 
+    this.addCommaSeparatedDec = function (str) {
+       var strArr = str.split('');
+       var strLen = strArr.length;
+       if(strLen === 5) {
+           strArr.splice(2, 0, ",");
+           return strArr.join("");
+       } else if(strLen === 6) {
+           strArr.splice(3, 0, ",");
+           return strArr.join("");
+       } else {
+           return str;
+       }
+    };
+
 }

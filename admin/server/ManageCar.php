@@ -1,5 +1,8 @@
 <?php
 
+require_once 'class/Utility.php';
+require_once '../Db.php';
+require_once 'class/Vehicle.php';
 /**
  * Created by PhpStorm.
  * User: RAYMARTHINKPAD
@@ -16,6 +19,32 @@
  */
 class ManageCar
 {
+
+    function selectAllVehicle()
+    {
+        $db = new DbQueryResult();
+        $sql = "SELECT\n"
+            . " *\n"
+            . "FROM\n"
+            . " `vehicle`;";
+        return $db->query($sql);
+    }
+
+    // map sql result to Admin class
+    function allVehicleData()
+    {
+        $results = ManageCar::selectAllVehicle();
+        $car_obj = array();
+        if (!$results) {
+            return $results;
+        } else {
+            foreach ($results as $result) {
+                $car_obj[] = new Vehicle($result);
+            }
+        }
+        return $car_obj;
+    }
+
 
 
 }

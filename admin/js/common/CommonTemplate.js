@@ -29,6 +29,10 @@ function CommonTemplate() {
 
 
     this.navBarHeaderElem = function (username) {
+        var _username = '';
+        if(username !== undefined) {
+            _username = username;
+        }
         return  '   <div class="navbar navbar-inverse" role="navigation">  '  +
             '       <div class="pull-right" style="position: relative; top: 10px; right: 10px;  '  +
             '   "><p></p></div>  '  +
@@ -37,7 +41,7 @@ function CommonTemplate() {
             '           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span  '  +
             '                       class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span  '  +
             '                       class="icon-bar"></span> <span class="icon-bar"></span></button>  '  +
-            '           <div class="pull-right username-box"><h4>Hello! <span id="username-box-inner">'+username+'</span></h4></div>  '  +
+            '           <div class="pull-right username-box"><h4>Hello! <span id="username-box-inner">'+_username+'</span></h4></div>  '  +
             '       </div>  '  +
             '  </div>  ' ;
     };

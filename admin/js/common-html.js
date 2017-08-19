@@ -13,9 +13,13 @@ var CommonHTML = (function () {
     var confirmModalLogoutSel = {};
     var fnCommonElement = {},
         fnHeaderAndFooterElem = {},
-        fnPageTitle = {};
+        fnPageTitle = {},
+        fnFindAllCarDecColumnAddComma = {};
     var adminUsernameSel = {},
-        adminTable = {};
+        adminTableSel = {},
+        carTableSel = {},
+        priceColumnSel = {},
+        mileageColumnSel = {};
 
 
     return {
@@ -32,13 +36,17 @@ var CommonHTML = (function () {
             pageWrapperSel = $(".template-page-wrapper");
             mainWrapperSel = $("#main-wrapper");
             adminUsernameSel = $('#admin-username');
-            adminTable = $('#admin-table');
+            adminTableSel = $('#admin-table');
+            carTableSel = $('#vehicle-table');
+            priceColumnSel = $("#vehicle-table > tbody > tr > td:nth-child(5)");
+            mileageColumnSel = $("#vehicle-table > tbody > tr > td:nth-child(7)");
 
             bodyElem = $('body');
             confirmModalLogoutSel = {};
             fnCommonElement = null;
             fnHeaderAndFooterElem = null;
             fnPageTitle = null;
+            fnFindAllCarDecColumnAddComma = null;
 
 
             // call the event driven functions here
@@ -70,6 +78,17 @@ var CommonHTML = (function () {
                 mainWrapperSel.prepend(cHTML.navBarHeaderElem());       // header
                 mainWrapperSel.last().append(cHTML.footerElement());    // footer
             };
+
+
+            fnFindAllCarDecColumnAddComma = function () {
+                var numCars = priceColumnSel.length;
+                for(var i = 0; i < numCars; i++) {
+                    priceColumnSel[i].innerHTML = util.addCommaSeparatedDec(priceColumnSel[i].innerHTML);
+                    mileageColumnSel[i].innerHTML = util.addCommaSeparatedDec(mileageColumnSel[i].innerHTML);
+                }
+
+            };
+
             console.log(util.getFilename());
             switch(util.getFilename()) {
                 case util.pageName[0].name: // dashboard
@@ -77,10 +96,20 @@ var CommonHTML = (function () {
                     break;
                 case util.pageName[1].name:
                     fnCommonElement();
+                    carTableSel.DataTable({
+                        "pageLength": 5,
+                        "lengthChange": false,
+                        searching: false,
+                        "bInfo": false,
+                        "aoColumnDefs": [
+                            { 'bSortable': false, 'aTargets': [8] }
+                        ]
+                    });
+                    fnFindAllCarDecColumnAddComma();
                     break;
                 case util.pageName[2].name:
                     fnCommonElement();
-                    adminTable.DataTable({
+                    adminTableSel.DataTable({
                         "pageLength": 5,
                         "lengthChange": false,
                         searching: false
@@ -98,6 +127,8 @@ var CommonHTML = (function () {
                 default:
 
             }
+
+
 
 
         }

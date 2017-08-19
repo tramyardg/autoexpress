@@ -72,9 +72,4 @@ class Admin2
         $this->_privilege = $result->privilege;
         $this->_last_update = $result->last_update;
     }
-
-//    public function __toString(){
-//        return $this->_username;
-//    }
-
 }
