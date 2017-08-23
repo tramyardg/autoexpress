@@ -1,18 +1,18 @@
 <?php
 session_start();
-require_once 'server/AdminQuery.php';
-require_once 'server/class/Admin2.php';
+require_once 'server/AdminDAO.php';
+require_once 'server/class/Admin.php';
 
 if(!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 } else {
-    $q = new AdminQuery();
+    $q = new AdminDAO();
     if(isset($_REQUEST['username'])) {
         $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
-    $admin_data = $q->adminData_byUsername($_SESSION['adminUsername']);
+    $admin_data = $q->adminDataByUsername($_SESSION['adminUsername']);
 
-    $all_admin = $q->allAdminData();
+    $all_admin = $q->adminData();
 
 
 }
@@ -54,7 +54,7 @@ if(!isset($_SESSION['authenticated'])) {
                 <div class="row margin-bottom-30">
                     <div class="col-md-12">
                         <ul class="nav nav-pills">
-                            <li class="active"><a href="#">Admins total <span class="badge"><?php echo count($all_admin); ?></span></a></li>
+                            <li class="active"><a href="#">Admins total <span class="badge"><?php echo $q->countAllAdmin(); ?></span></a></li>
                         </ul>
                     </div>
                 </div>

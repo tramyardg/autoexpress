@@ -7,7 +7,7 @@
  * Time: 10:11 PM
  */
 //require_once '../../../Db.php';
-class Admin2
+class Admin
 {
     private $_admin_id;
     private $_username;
@@ -17,12 +17,53 @@ class Admin2
     private $_last_update;
 
     /**
-     * @return mixed
+     * @param mixed|null $admin_id
      */
-    public function getLastUpdate()
+    public function setAdminId($admin_id)
     {
-        return $this->_last_update;
+        $this->_admin_id = $admin_id;
     }
+
+    /**
+     * @param mixed|null $username
+     */
+    public function setUsername($username)
+    {
+        $this->_username = $username;
+    }
+
+    /**
+     * @param mixed|null $password
+     */
+    public function setPassword($password)
+    {
+        $this->_password = $password;
+    }
+
+    /**
+     * @param mixed|null $email
+     */
+    public function setEmail($email)
+    {
+        $this->_email = $email;
+    }
+
+    /**
+     * @param mixed|null $privilege
+     */
+    public function setPrivilege($privilege)
+    {
+        $this->_privilege = $privilege;
+    }
+
+    /**
+     * @param mixed|null $last_update
+     */
+    public function setLastUpdate($last_update)
+    {
+        $this->_last_update = $last_update;
+    }
+
 
     /**
      * @return mixed|null
@@ -64,7 +105,18 @@ class Admin2
         return $this->_privilege;
     }
 
-    public function __construct(DbQueryResult $result){
+    /**
+     * @return mixed
+     */
+    public function getLastUpdate()
+    {
+        return $this->_last_update;
+    }
+
+
+
+    public function __construct(DbQueryResult $result)
+    {
         $this->_admin_id = $result->adminId;
         $this->_username = $result->username;
         $this->_password = $result->password;

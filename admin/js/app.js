@@ -2,6 +2,8 @@ $(document).ready(function () {
 
     CommonHTML.init();
     sidebarActive();
+
+
 });
 
 var util = new CommonUtil();

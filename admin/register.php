@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../Db.php';
-require_once 'server/AdminQuery.php';
+require_once 'server/AdminDAO.php';
 
 if(isset($_SESSION['authenticated'])) {
 	header('Location: dashboard.php');
@@ -14,14 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $q = new AdminQuery();
+    $q = new AdminDAO();
 
     $msgTaken = null;
     if($q->isUsernameTaken($username) == "true") {
         $msgTaken = 'This username is already taken.';
     } else {
         if(!empty($username) && !empty($email) && !empty($password)) {
-            if($q->insertAdmin($username, $email, $password)) {
+            if($q->create($username, $email, $password)) {
                 $result = 'You are one of the admin now!';
             } else {
                 $result = 'There must be an error. Please try again later.';

@@ -47,6 +47,15 @@ if(!isset($_SESSION['authenticated'])) {
         table tbody tr td input, select {
             margin: 2px 0 2px 3px;
         }
+        #vehicle-table {
+            width: 80%;
+            text-align: left;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        #add-new-car-btn {
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
@@ -72,6 +81,8 @@ if(!isset($_SESSION['authenticated'])) {
                         </ul>
                     </div>
                 </div>
+
+                <!-- car table -->
                 <div class="row">
                     <div class="col-md-12">
 
@@ -122,8 +133,10 @@ if(!isset($_SESSION['authenticated'])) {
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg">Add new</button>
+                <!-- add new car button -->
+                <button type="button" class="btn btn-success" id="add-new-car-btn" data-toggle="modal" data-target=".bs-example-modal-lg">Add new</button>
 
+                <!-- template for adding, updating -->
                 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -139,7 +152,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                         <tr>
                                                             <td>Make<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <select name="make" id="make" class="" onchange="">
+                                                                <select name="make" id="make" class="" onchange="new CommonUtil().selectCarMake(this);" required>
                                                                     <option selected="selected" value="">Select Make</option>
                                                                     <option value="Acura">Acura</option>
                                                                     <option value="Alfa Romeo">Alfa Romeo</option>
@@ -157,7 +170,6 @@ if(!isset($_SESSION['authenticated'])) {
                                                                     <option value="Ford">Ford</option>
                                                                     <option value="GMC">GMC</option>
                                                                     <option value="Honda">Honda</option>
-                                                                    <option value="Hummer">Hummer</option>
                                                                     <option value="Hyundai">Hyundai</option>
                                                                     <option value="Infiniti">Infiniti</option>
                                                                     <option value="Isuzu">Isuzu</option>
@@ -172,18 +184,20 @@ if(!isset($_SESSION['authenticated'])) {
                                                                     <option value="Maserati">Maserati</option>
                                                                     <option value="Mazda">Mazda</option>
                                                                     <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                                                    <option value="Mini">Mini</option>
                                                                     <option value="Mitsubishi">Mitsubishi</option>
                                                                     <option value="Nissan">Nissan</option>
                                                                     <option value="Pontiac">Pontiac</option>
                                                                     <option value="Porsche">Porsche</option>
+                                                                    <option value="Ram">Ram</option>
                                                                     <option value="Saab">Saab</option>
                                                                     <option value="Saturn">Saturn</option>
                                                                     <option value="Scion">Scion</option>
+                                                                    <option value="Smart">Smart</option>
                                                                     <option value="Subaru">Subaru</option>
                                                                     <option value="Suzuki">Suzuki</option>
                                                                     <option value="Tesla">Tesla</option>
                                                                     <option value="Toyota">Toyota</option>
-                                                                    <option value="Unspecified">Unspecified</option>
                                                                     <option value="Volkswagen">Volkswagen</option>
                                                                     <option value="Volvo">Volvo</option>
                                                                 </select>
@@ -193,46 +207,90 @@ if(!isset($_SESSION['authenticated'])) {
                                                         <tr>
                                                             <td>Year<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="number" name="year" id="year" alt="year" title="year" />
+                                                                <select name="year" id="year" title="year" required >
+                                                                    <option selected="selected" value="">Select year</option>
+                                                                    <option value="2018">2018</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2016">2016</option>
+                                                                    <option value="2015">2015</option>
+                                                                    <option value="2014">2014</option>
+                                                                    <option value="2013">2013</option>
+                                                                    <option value="2012">2012</option>
+                                                                    <option value="2011">2011</option>
+                                                                    <option value="2010">2010</option>
+                                                                    <option value="2009">2009</option>
+                                                                    <option value="2008">2008</option>
+                                                                    <option value="2007">2007</option>
+                                                                    <option value="2006">2006</option>
+                                                                    <option value="2005">2005</option>
+                                                                    <option value="2004">2004</option>
+                                                                    <option value="2003">2003</option>
+                                                                    <option value="2002">2002</option>
+                                                                    <option value="2001">2001</option>
+                                                                    <option value="2000">2000</option>
+                                                                    <option value="1999">1999</option>
+                                                                    <option value="1998">1998</option>
+                                                                    <option value="1997">1997</option>
+                                                                    <option value="1996">1996</option>
+                                                                    <option value="1995">1995</option>
+                                                                    <option value="1994">1994</option>
+                                                                    <option value="1993">1993</option>
+                                                                    <option value="1992">1992</option>
+                                                                    <option value="1991">1991</option>
+                                                                    <option value="1990">1990</option>
+                                                                    <option value="1989">1989</option>
+                                                                    <option value="1988">1988</option>
+                                                                    <option value="1987">1987</option>
+                                                                    <option value="1986">1986</option>
+                                                                    <option value="1985">1985</option>
+                                                                    <option value="1984">1984</option>
+                                                                    <option value="1983">1983</option>
+                                                                    <option value="1982">1982</option>
+                                                                    <option value="1981">1981</option>
+                                                                    <option value="1980">1980</option>
+                                                                </select>
                                                                 <b style="font-size: 10px; color: red;" id="year-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Model<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="text" name="model" id="model" title="model" />
+<!--                                                                <input type="text" name="model" id="model" title="model" required/>-->
+                                                                <select name="model" id="model" title="model" required>
+                                                                    <option selected="selected">Select model</option>
+                                                                </select>
                                                                 <b style="font-size: 10px; color: red;" id="model-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Price<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="number" name="price" id="price" title="price" />
+                                                                <input type="number" name="price" id="price" title="price" required maxlength="7"/>
                                                                 <b style="font-size: 10px; color: red;" id="price-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Mileage(Km)<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="number" name="mileage" id="mileage" title="mileage" />
+                                                                <input type="number" name="mileage" id="mileage" title="mileage" required/>
                                                                 <b style="font-size: 10px;  color: red;" id="mileage-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Transmission<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="radio" name="transmission" id="transmission" value="Automatic" title="transmission"> Automatic
-                                                                <input type="radio" name="transmission" id="transmission" value="Manual" title="transmission"> Manual
+                                                                <input type="radio" name="transmission" id="transmission" value="Automatic" title="transmission" required> Automatic
+                                                                <input type="radio" name="transmission" id="transmission" value="Manual" title="transmission" required> Manual
                                                                 <b style="font-size: 10px; color: red;" id="transmission-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Drivetrain<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="radio" name="drivetrain" id="drivetrain" value="AWD" title="drivetrain"> AWD
-                                                                <input type="radio" name="drivetrain" id="drivetrain" value="FWD" title="drivetrain"> FWD
-                                                                <input type="radio" name="drivetrain" id="drivetrain" value="RWD" title="drivetrain"> RWD
-                                                                <input type="radio" name="drivetrain" id="drivetrain" value="4X4" title="drivetrain"> 4X4
+                                                                <input type="radio" name="drivetrain" id="drivetrain" value="AWD" title="drivetrain" required> AWD
+                                                                <input type="radio" name="drivetrain" id="drivetrain" value="FWD" title="drivetrain" required> FWD
+                                                                <input type="radio" name="drivetrain" id="drivetrain" value="RWD" title="drivetrain" required> RWD
+                                                                <input type="radio" name="drivetrain" id="drivetrain" value="4X4" title="drivetrain" required> 4X4
                                                                 <b style="font-size: 10px; color: red;" id="drivetrain-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
@@ -317,12 +375,12 @@ if(!isset($_SESSION['authenticated'])) {
                                                     <table>
                                                         <tbody>
                                                         <tr>
-                                                            <td>Cylinder</td>
+                                                            <td>Cylinder<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="radio" name="cylinder" id="cylinder" title="cylinder" value="4"> 4
-                                                                <input type="radio" name="cylinder" id="cylinder" title="cylinder" value="6"> V6
-                                                                <input type="radio" name="cylinder" id="cylinder" title="cylinder" value="8"> V8
-                                                                <input type="radio" name="cylinder" id="cylinder" title="cylinder" value="10"> V10
+                                                                <input required type="radio" name="cylinder" id="cylinder" title="cylinder" value="4"> 4
+                                                                <input required type="radio" name="cylinder" id="cylinder" title="cylinder" value="6"> V6
+                                                                <input required type="radio" name="cylinder" id="cylinder" title="cylinder" value="8"> V8
+                                                                <input required type="radio" name="cylinder" id="cylinder" title="cylinder" value="10"> V10
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -367,8 +425,6 @@ if(!isset($_SESSION['authenticated'])) {
                         </div>
                     </div>
                 </div>
-
-
 
             </div>
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once 'server/AdminQuery.php';
-require_once 'server/class/Admin2.php';
+require_once 'server/AdminDAO.php';
+require_once 'server/class/Admin.php';
 
 if(isset($_SESSION['authenticated'])) {
 	header('Location: dashboard.php');
@@ -12,17 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $exists = null;
     $util = new Utility();
 
-    $q = new AdminQuery();
+    $q = new AdminDAO();
     if(!empty($_POST['username']) && !empty($_POST['password'])) {
         $password = $_POST['password'];
 
         // both username and password combination must be correct
-        $results = $q->selectAllAdminInfo_byUsername($_POST['username']); // checks username
+        $results = $q->getAdminByUsername($_POST['username']); // checks username
 
         // check password if match
         $admin_obj = array();
         foreach ($results as $result) {
-            $admin_obj[] = new Admin2($result);
+            $admin_obj[] = new Admin($result);
         }
 
 

@@ -52,31 +52,17 @@ class DbQueryResult
         }
     }
 
-    // most used for select queries, mapping results to a class
+    // mostly used for select queries, mapping results to a class
     public function query($sql)
     {
         $db = Db::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
-        if ($stmt) {
-            if (strpos($sql, 'SELECT') === false) {
-                return true;
-            }
-        } else {
-            if (strpos($sql, 'SELECT') === false) {
-                return false;
-            } else {
-                return null;
-            }
-        }
-
         $results = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
             $result = new DbQueryResult();
-
             foreach ($row as $k => $v) {
                 $result->$k = $v;
             }
@@ -86,6 +72,19 @@ class DbQueryResult
 
         $stmt = null;
         return $results;
+    }
+
+    // used for counting the number of records
+    public function countAll($sql) {
+        $db = Db::getInstance();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        $results = array();
+        while ($row = $stmt->fetchColumn(0)) {
+            $results[] = $row[0];
+        }
+        return $results[0];
     }
 
     public function query_void($sql) {

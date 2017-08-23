@@ -17,10 +17,10 @@ require_once 'class/Vehicle.php';
  * - select all vehicle
  * - advanced search
  */
-class ManageCar
+class CarDAO extends Utility
 {
 
-    function selectAllVehicle()
+    function getAllCars()
     {
         $db = new DbQueryResult();
         $sql = "SELECT\n"
@@ -30,10 +30,9 @@ class ManageCar
         return $db->query($sql);
     }
 
-    // map sql result to Admin class
-    function allVehicleData()
+    function allCarsData()
     {
-        $results = ManageCar::selectAllVehicle();
+        $results = CarDAO::getAllCars();
         $car_obj = array();
         if (!$results) {
             return $results;
@@ -43,6 +42,12 @@ class ManageCar
             }
         }
         return $car_obj;
+    }
+
+    function countAllCars() {
+        $db = new DbQueryResult();
+        $sql = "SELECT COUNT(*) FROM vehicle";
+        return $db->countAll($sql);
     }
 
 
