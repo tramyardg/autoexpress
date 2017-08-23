@@ -1,21 +1,21 @@
 <?php
 session_start();
-require_once 'server/AdminQuery.php';
-require_once 'server/ManageCar.php';
-require_once 'server/class/Admin2.php';
+require_once 'server/AdminDAO.php';
+require_once 'server/CarDAO.php';
+require_once 'server/class/Admin.php';
 
 if(!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 } else {
-    $q = new AdminQuery();
+    $q = new AdminDAO();
     if(isset($_REQUEST['username'])) {
         $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
-    $admin_data = $q->adminData_byUsername($_SESSION['adminUsername']);
+    $admin_data = $q->adminDataByUsername($_SESSION['adminUsername']);
 
-    $v = new ManageCar();
-    $all_cars = $v->allVehicleData();
-    $num_cars = count($all_cars);
+    $v = new CarDAO();
+    $num_cars = $v->countAllCars();
+    $all_cars = $v->allCarsData();
 }
 
 
@@ -45,7 +45,7 @@ if(!isset($_SESSION['authenticated'])) {
         }
         #car-general-info-table tbody tr td input,
         table tbody tr td input, select {
-            margin: 2px 0 2px 0;
+            margin: 2px 0 2px 3px;
         }
     </style>
 </head>

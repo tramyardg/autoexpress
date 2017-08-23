@@ -3,26 +3,26 @@ session_start();
 ini_set('date.timezone', 'America/Toronto');
 $time2 = date('Y-m-d H:i:s', gmdate('U'));
 
-require_once 'server/AdminQuery.php';
+require_once 'server/AdminDAO.php';
 require_once 'server/class/Utility.php';
-require_once 'server/class/Admin2.php';
+require_once 'server/class/Admin.php';
 
 if(!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 } else {
-    $q = new AdminQuery();
+    $q = new AdminDAO();
     if(isset($_REQUEST['username'])) {
         $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
-    $admin_data = $q->adminData_byUsername($_SESSION['adminUsername']);
+    $admin_data = $q->adminDataByUsername($_SESSION['adminUsername']);
 
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(!empty($_POST['password_1']) && !empty($_POST['password_2'])) {
             $adminId = $admin_data[0]->getAdminId();
 
-            $q = new AdminQuery();
-            $q->updateAdminPass($_POST['password_1'], $adminId, $time2);
+            $q = new AdminDAO();
+            $q->update($_POST['password_1'], $adminId, $time2);
             header("Location: preferences.php?username=".$admin_data[0]->getUsername().'&updated=true');
         }
     }
@@ -63,7 +63,7 @@ if(!isset($_SESSION['authenticated'])) {
                 <h1>Preferences</h1>
                 <p class="margin-bottom-15">Update account information. Last updated <?php echo $admin_data[0]->getLastUpdate() . '.' ?></p>
                 <?php if(isset($_REQUEST['updated']) && $_REQUEST['updated'] == 'true') { ?>
-                    <div class="col-sm-12" style="width: 100%;">
+                    <div class="col-sm-12" style="width: 100%; padding: 0;">
                         <div class="alert alert-success text-center">
                             <?php echo'1 records UPDATED successfully'; ?>
                         </div>
