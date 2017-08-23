@@ -340,3 +340,4 @@ h1 {
 table.dataTable thead th, table.dataTable thead td {
 
 }
+#add-car{padding-top: 15px;}.content table {font-size: 12px;}table#car-general-info-table tr:not(:last-child){margin-bottom: 5px;}
