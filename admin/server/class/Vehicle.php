@@ -8,6 +8,40 @@
  */
 class Vehicle
 {
+    /**
+     * Vehicle constructor.
+     * @param $_vehicleId
+     * @param $_make
+     * @param $_yearMade
+     * @param $_model
+     * @param $_price
+     * @param $_mileage
+     * @param $_transmission
+     * @param $_drivetrain
+     * @param $_engineCapacity
+     * @param $_category
+     * @param $_cylinder
+     * @param $_doors
+     * @param $_status
+     * @param $_dateAdded
+     */
+    public function __construct($_vehicleId, $_make, $_yearMade, $_model, $_price, $_mileage, $_transmission, $_drivetrain, $_engineCapacity, $_category, $_cylinder, $_doors, $_status, $_dateAdded)
+    {
+        $this->_vehicleId = $_vehicleId;
+        $this->_make = $_make;
+        $this->_yearMade = $_yearMade;
+        $this->_model = $_model;
+        $this->_price = $_price;
+        $this->_mileage = $_mileage;
+        $this->_transmission = $_transmission;
+        $this->_drivetrain = $_drivetrain;
+        $this->_engineCapacity = $_engineCapacity;
+        $this->_category = $_category;
+        $this->_cylinder = $_cylinder;
+        $this->_doors = $_doors;
+        $this->_status = $_status;
+        $this->_dateAdded = $_dateAdded;
+    }
 
     /**
      * @return mixed
@@ -237,21 +271,21 @@ class Vehicle
         return $this->_yearMade . ' ' . $this->_make . ' ' . $this->_model;
     }
 
-    public function __construct(DbQueryResult $result){
-       $this->_vehicleId = $result->vehicleId;
-       $this->_make = $result->make;
-       $this->_yearMade = $result->yearMade;
-       $this->_model = $result->model;
-       $this->_price = $result->price;
-       $this->_mileage = $result->mileage;
-       $this->_transmission = $result->transmission;
-       $this->_drivetrain = $result->drivetrain;
-       $this->_engineCapacity = $result->engineCapacity;
-       $this->_category = $result->category;
-       $this->_cylinder = $result->cylinder;
-       $this->_doors = $result->doors;
-       $this->_status = $result->status;
-    }
+//    public function __construct(DbQueryResult $result){
+//       $this->_vehicleId = $result->vehicleId;
+//       $this->_make = $result->make;
+//       $this->_yearMade = $result->yearMade;
+//       $this->_model = $result->model;
+//       $this->_price = $result->price;
+//       $this->_mileage = $result->mileage;
+//       $this->_transmission = $result->transmission;
+//       $this->_drivetrain = $result->drivetrain;
+//       $this->_engineCapacity = $result->engineCapacity;
+//       $this->_category = $result->category;
+//       $this->_cylinder = $result->cylinder;
+//       $this->_doors = $result->doors;
+//       $this->_status = $result->status;
+//    }
 
     private $_vehicleId;
     private $_make;

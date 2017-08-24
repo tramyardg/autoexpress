@@ -13,21 +13,54 @@ require_once 'class/Admin.php';
 class AdminDAO extends Utility
 {
 
+    // mostly used for select queries, mapping results to a class
+    function query($sql)
+    {
+        $db = Db::getInstance();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        $admin = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $admin[] = new Admin(
+                $row["adminId"],
+                $row["username"],
+                $row["password"],
+                $row["email"],
+                $row["privilege"],
+                $row["last_update"]
+            );
+        }
+        $stmt = null;
+        return $admin;
+    }
+
+    // used for counting the number of records
+
+    function countAll($sql) {
+        $db = Db::getInstance();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        $results = array();
+        while ($row = $stmt->fetchColumn(0)) {
+            $results[] = $row[0];
+        }
+        return $results[0];
+    }
+
     function getAllAdmin()
     {
-        $db = new DbQueryResult();
         $sql = "SELECT\n"
             . " *\n"
             . "FROM\n"
             . " `administrator`";
-
-        return $db->query($sql);
+        return $this->query($sql);
     }
 
     function getAdminByUsername($username)
     {
         $username_ = $this->stringValue($username);
-        $db = new DbQueryResult();
         $sql = "SELECT\n"
             . " *\n"
             . "FROM\n"
@@ -35,37 +68,31 @@ class AdminDAO extends Utility
             . "WHERE\n"
             . " username = $username_";
 
-        return $db->query($sql);
+        return $this->query($sql);
 
     }
 
     /**
-     * You can only update 2 elements password, and
-     * last update date.
-     * @param $password
-     * @param $adminId
-     * @param $update_time
-     * @return int
+     * I'm only updating 2 elements here
+     * tested
      */
-    function update($password, $adminId, $update_time) {
-        $_password = $this->stringValue($password);
-        $_update_time = $this->stringValue($update_time);
-
+    function update(&$admin) {
+        $_password = $this->stringValue($admin->getPassword());
+        $_update_time = $this->stringValue($admin->getLastUpdate());
         $sql = "UPDATE\n"
             . " `administrator`\n"
             . "SET\n"
             . " `password` = $_password,\n"
             . " `last_update` = $_update_time\n"
             . "WHERE\n"
-            . " `adminId` = $adminId";
-
+            . " `adminId` = ".$admin->getAdminId();
         $db = Db::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt->rowCount();
     }
 
-    // create new admin
+    // create new admin - good enough
     function create($username, $email, $password)
     {
         $_username = $this->stringValue($username);
@@ -88,7 +115,7 @@ class AdminDAO extends Utility
     function isUsernameTaken($usernameStr)
     {
         $exists = null;
-        if ((AdminDAO::getAdminByUsername($usernameStr))) {
+        if (($this->getAdminByUsername($usernameStr))) {
             $exists = "true";
         } else {
             $exists = "false";
@@ -100,46 +127,16 @@ class AdminDAO extends Utility
     function redirectNotFoundAdmin($request_username)
     {
         if (!empty($request_username)) {
-            if (AdminDAO::isUsernameTaken($request_username) == "false") {
+            if ($this->isUsernameTaken($request_username) == "false") {
                 header("Location:not-found.php");
             }
         }
     }
 
-    // admin data specific to username
-    function adminDataByUsername($session_username)
-    {
-        $results = AdminDAO::getAdminByUsername($session_username);
-        $admin_obj = array();
-        if (!$results) {
-            return $results;
-        } else {
-            foreach ($results as $result) {
-                $admin_obj[] = new Admin($result);
-            }
-        }
-        return $admin_obj;
-    }
-
-    // get all admin from the database and map it
-    function adminData()
-    {
-        $results = AdminDAO::getAllAdmin();
-        $admin_obj = array();
-        if (!$results) {
-            return $results;
-        } else {
-            foreach ($results as $result) {
-                $admin_obj[] = new Admin($result);
-            }
-        }
-        return $admin_obj;
-    }
 
     function countAllAdmin() {
-        $db = new DbQueryResult();
         $sql = "SELECT COUNT(*) FROM administrator";
-        return $db->countAll($sql);
+        return $this->countAll($sql);
     }
 
 

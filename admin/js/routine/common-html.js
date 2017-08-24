@@ -50,9 +50,9 @@ var CommonHTML = (function () {
 
 
             // call the event driven functions here
-            this.bindHTMLfn();
+            this.bindCarActionfn();
         },
-        bindHTMLfn: function () {
+        bindCarActionfn: function () {
 
 
             // sets page title dynamically
@@ -101,10 +101,7 @@ var CommonHTML = (function () {
                         "lengthChange": false,
                         searching: false,
                         "bInfo": false,
-                        "aoColumnDefs": [
-                            { 'bSortable': false, 'aTargets': [8] },
-                            // { "width": "5%", "targets": [5,6,7] }
-                        ]
+                        "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [8] }]
                     });
                     fnFindAllCarDecColumnAddComma();
                     break;

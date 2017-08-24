@@ -11,13 +11,19 @@ if(!isset($_SESSION['authenticated'])) {
     if(isset($_REQUEST['username'])) {
         $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
-    $admin_data = $q->adminDataByUsername($_SESSION['adminUsername']);
+    $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
 
     $v = new CarDAO();
     $num_cars = $v->countAllCars();
-    $all_cars = $v->allCarsData();
+    $all_cars = $v->getAllCars();
 }
 
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    print_r($_POST);
+    print_r($_FILES);
+
+}
 
 
 ?>
@@ -60,9 +66,7 @@ if(!isset($_SESSION['authenticated'])) {
 </head>
 <body>
 <div id="main-wrapper">
-
     <div class="template-page-wrapper">
-        <!--/.navbar-collapse -->
 
         <div class="templatemo-content-wrapper">
             <div class="templatemo-content">
@@ -70,7 +74,7 @@ if(!isset($_SESSION['authenticated'])) {
                     <li><a href="dashboard.php">Admin Panel</a></li>
                     <li class="active">Manage Inventory</li>
                 </ol>
-                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php echo $admin_data[0]->getUsername(); ?>">
+                <input type="text" class="hidden" id="admin-username" name="admin-username" title="admin id" value="<?php echo $admin_data[0]->getUsername(); ?>">
                 <h1>Manage Vehicles</h1>
                 <p>Here goes vehicles from the inventory.</p>
 
@@ -136,7 +140,7 @@ if(!isset($_SESSION['authenticated'])) {
                 <!-- add new car button -->
                 <button type="button" class="btn btn-success" id="add-new-car-btn" data-toggle="modal" data-target=".bs-example-modal-lg">Add new</button>
 
-                <!-- template for adding, updating -->
+                <!-- modal template for adding, updating -->
                 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -144,6 +148,7 @@ if(!isset($_SESSION['authenticated'])) {
                                 <div class="col-md-12">
                                     <div class="col-md-12">
                                         <form action="" method="post" name="add-car" id="add-car" onsubmit="" enctype="multipart/form-data">
+                                            <!-- general vehicle info -->
                                             <div class="panel panel-primary">
                                                 <div class="panel-heading">General vehicle info</div>
                                                 <div class="panel-body">
@@ -152,7 +157,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                         <tr>
                                                             <td>Make<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <select name="make" id="make" class="" onchange="new CommonUtil().selectCarMake(this);" required>
+                                                                <select title="make" name="make" id="make" class="" onchange="new CommonUtil().selectCarMake(this);" required>
                                                                     <option selected="selected" value="">Select Make</option>
                                                                     <option value="Acura">Acura</option>
                                                                     <option value="Alfa Romeo">Alfa Romeo</option>
@@ -265,7 +270,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                         <tr>
                                                             <td>Price<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="number" name="price" id="price" title="price" required maxlength="7"/>
+                                                                <input type="number" name="price" id="price" title="price" pattern=".{7,}" required />
                                                                 <b style="font-size: 10px; color: red;" id="price-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
@@ -300,6 +305,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                 </div>
                                             </div>
 
+                                            <!-- category and photos -->
                                             <div class="panel panel-primary">
                                                 <div class="panel-heading">Category and photos (optional)</div>
                                                 <div class="panel-body">
@@ -325,12 +331,10 @@ if(!isset($_SESSION['authenticated'])) {
                                                         <div class="col-md-2"></div>
                                                     </div>
                                                     <div class="row">
-
                                                         <div class="col-md-12">
                                                             Photo(s):
                                                             <input type="file" id="files" name="files[]" multiple />
                                                             <output id="list"></output>
-
                                                             <script>
                                                                 function handleFileSelect(evt) {
                                                                     var files = evt.target.files; // FileList object
@@ -351,7 +355,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                                                 // Render thumbnail.
                                                                                 var span = document.createElement('span');
                                                                                 span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                                                                                    '" title="', escape(theFile.name), '"/>'].join('');
+                                                                                    '" title="', theFile.name, '"/>'].join('');
                                                                                 document.getElementById('list').insertBefore(span, null);
                                                                             };
                                                                         })(f);
@@ -369,6 +373,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                 </div>
                                             </div>
 
+                                            <!-- engine and chassis -->
                                             <div class="panel panel-primary">
                                                 <div class="panel-heading">Engine and chassis</div>
                                                 <div class="panel-body">
@@ -386,14 +391,14 @@ if(!isset($_SESSION['authenticated'])) {
                                                         <tr>
                                                             <td>Capacity (Litre) <span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="text" name="capacity" id="capacity">
+                                                                <input type="number" name="capacity" id="capacity" title="capacity">
                                                                 <b style="font-size: 10px; color: red;" id="capacity-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Doors<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="text" name="doors" id="doors">
+                                                                <input type="number" name="doors" id="doors" title="doors">
                                                                 <b style="font-size: 10px; color: red;" id="door-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
@@ -403,6 +408,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                 </div>
                                             </div>
 
+                                            <!-- submit and cancel buttons -->
                                             <div class="panel panel-success">
                                                 <div class="panel-heading">Submit form</div>
                                                 <div class="panel-body">
@@ -411,7 +417,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                         <tr>
                                                             <td>
                                                                 <input type="submit" class="btn btn-primary" name="submit" value="Submit">
-                                                                <input type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close" value="Cancel"></input>
+                                                                <input type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close" value="Cancel">
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -427,9 +433,7 @@ if(!isset($_SESSION['authenticated'])) {
                 </div>
 
             </div>
-
         </div>
-
 
     </div>
 </div>
@@ -438,8 +442,9 @@ if(!isset($_SESSION['authenticated'])) {
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
-<script src="js/common/util.js"></script>
-<script src="js/common-html.js"></script>
+<script src="js/common/CommonUtil.js"></script>
+<script src="js/routine/common-html.js"></script>
+<!--<script src="js/routine/car-actions.js"></script>-->
 <script src="js/app.js"></script>
 
 </body>

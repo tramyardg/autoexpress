@@ -46,20 +46,18 @@ function CommonUtil() {
        }
     };
 
-    // dynamically show the models of car selected
+    // dynamically show the models of data selected
     this.selectCarMake = function(selectedMake) {
         var selectedMake_id = selectedMake.getAttribute("id");
         var selectVal = $("#"+selectedMake_id).val();
-        console.log(selectVal);
         $.ajax({
             type: "GET",
-            url: "js/car/models.json",
+            url: "js/data/models.json",
             dataType: "json",
             success: function (json) {
                 for (var key in json) {
                     if (json.hasOwnProperty(key)) {
                         if(selectVal === json[key].title) {
-                            console.log("success");
                             // pass the models
                             new CommonUtil().getCarModel(json[key].models);
                             break;
@@ -70,10 +68,9 @@ function CommonUtil() {
         });
     };
 
-    // displays all car models based on make selection
+    // displays all data models based on make selection
     this.getCarModel = function (modelObj) {
         Object.keys(modelObj).forEach(function(key) {
-            console.log(modelObj[key].value);
             var h = '<option value="'+modelObj[key].value+'" title="'+modelObj[key].title+'">'+modelObj[key].value+'</option>';
             $("#model").append(h);
         });

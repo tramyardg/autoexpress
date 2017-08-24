@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $msgTaken = 'This username is already taken.';
     } else {
         if(!empty($username) && !empty($email) && !empty($password)) {
+
             if($q->create($username, $email, $password)) {
                 $result = 'You are one of the admin now!';
             } else {
@@ -127,10 +128,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="js/common/util.js"></script>
+<script src="js/common/CommonUtil.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
-<script src="js/common-html.js"></script>
-<script src="js/validate.min.js"></script>
+<script src="js/routine/common-html.js"></script>
+<script src="js/validation/register-validate.js"></script>
 <script src="js/app.js"></script>
 
 </body>

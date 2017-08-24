@@ -19,15 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // both username and password combination must be correct
         $results = $q->getAdminByUsername($_POST['username']); // checks username
 
-        // check password if match
-        $admin_obj = array();
-        foreach ($results as $result) {
-            $admin_obj[] = new Admin($result);
-        }
-
-
         if(!empty($results)) {
-            if($admin_obj[0]->getPassword() == $password) {
+            if($results[0]->getPassword() == $password) {
                 $exists = '1'; // all good
             } else {
                 $exists = '2'; // incorrect password
@@ -140,9 +133,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="js/common/util.js"></script>
+<script src="js/common/CommonUtil.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
-<script src="js/common-html.js"></script>
+<script src="js/routine/common-html.js"></script>
 <script src="js/validate.min.js"></script>
 <script src="js/app.js"></script>
 

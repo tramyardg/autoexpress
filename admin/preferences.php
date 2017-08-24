@@ -1,7 +1,5 @@
 <?php
 session_start();
-ini_set('date.timezone', 'America/Toronto');
-$time2 = date('Y-m-d H:i:s', gmdate('U'));
 
 require_once 'server/AdminDAO.php';
 require_once 'server/class/Utility.php';
@@ -14,15 +12,22 @@ if(!isset($_SESSION['authenticated'])) {
     if(isset($_REQUEST['username'])) {
         $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
-    $admin_data = $q->adminDataByUsername($_SESSION['adminUsername']);
+    $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
 
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(!empty($_POST['password_1']) && !empty($_POST['password_2'])) {
-            $adminId = $admin_data[0]->getAdminId();
 
             $q = new AdminDAO();
-            $q->update($_POST['password_1'], $adminId, $time2);
+            $save = new Admin(
+                $_POST["admin-id"],
+                $_POST["username"],
+                $_POST["password_1"],
+                $_POST["email"],
+                $_POST["privilege"],
+                $q->getTimeStamp()
+            );
+            $q->update($save);
             header("Location: preferences.php?username=".$admin_data[0]->getUsername().'&updated=true');
         }
     }
@@ -73,17 +78,37 @@ if(!isset($_SESSION['authenticated'])) {
                     <div class="col-md-12">
                         <form action="" role="form" id="templatemo-preferences-form" onsubmit="return PasswordMatchValidate.validateForm();" method="post">
                             <div class="row">
+                                <div class="form-group hidden">
+                                    <input type="text" class="hidden" id="username" name="username" value="<?php echo $admin_data[0]->getUsername(); ?>">
+                                </div>
+
+                                <div class="form-group hidden">
+                                    <input type="number" readonly id="admin-id" name="admin-id" value="<?php echo $admin_data[0]->getAdminId(); ?>">
+                                </div>
+
+                                <div class="form-group hidden">
+                                    <input type="text" readonly id="privilege" name="privilege" value="<?php echo $admin_data[0]->getPrivilege(); ?>">
+                                </div>
+
+                                <div class="form-group hidden">
+                                    <input type="text" readonly id="last-updated" name="last-updated" value="<?php echo $admin_data[0]->getLastUpdate(); ?>">
+                                </div>
+
+                                <div class="form-group hidden">
+                                    <input type="text" readonly id="email" name="email" value="<?php echo $admin_data[0]->getEmail(); ?>">
+                                </div>
+
                                 <div class="form-group">
                                     <div class="col-md-6 margin-bottom-15">
                                         <label>Username</label>
-                                        <p class="form-control-static" id="username"><?php echo $admin_data[0]->getUsername(); ?></p>
+                                        <p class="form-control-static"><?php echo $admin_data[0]->getUsername(); ?></p>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-md-6 margin-bottom-15">
                                         <label>Email address</label>
-                                        <p class="form-control-static" id="email"><?php echo $admin_data[0]->getEmail(); ?></p>
+                                        <p class="form-control-static"><?php echo $admin_data[0]->getEmail(); ?></p>
                                     </div>
                                 </div>
 
@@ -91,7 +116,7 @@ if(!isset($_SESSION['authenticated'])) {
                                     <div class="col-md-6 margin-bottom-15">
                                         <label for="currentPassword">Current Password</label>
                                         <input type="password" class="form-control" id="currentPassword" name="currentPassword"
-                                               value="<?php echo $admin_data[0]->getPassword(); ?>" readonly>
+                                               value="<?php echo $admin_data[0]->getPassword(); ?>" disabled>
                                     </div>
                                 </div>
 
@@ -135,9 +160,9 @@ if(!isset($_SESSION['authenticated'])) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
-<script src="js/common/util.js"></script>
-<script src="js/common-html.js"></script>
-<script src="js/validate.js"></script>
+<script src="js/common/CommonUtil.js"></script>
+<script src="js/routine/common-html.js"></script>
+<script src="js/validation/preference-validate.js"></script>
 <script src="js/app.js"></script>
 
 

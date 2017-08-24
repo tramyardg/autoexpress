@@ -3,6 +3,8 @@ $(document).ready(function () {
     CommonHTML.init();
     sidebarActive();
 
+    // CarActions.init();
+
 
 });
 

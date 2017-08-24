@@ -10,10 +10,9 @@ if(!isset($_SESSION['authenticated'])) {
     if(isset($_REQUEST['username'])) {
         $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
-    $admin_data = $q->adminDataByUsername($_SESSION['adminUsername']);
 
-    $all_admin = $q->adminData();
-
+    $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
+    $all_admin = $q->getAllAdmin();
 
 }
 
@@ -48,7 +47,7 @@ if(!isset($_SESSION['authenticated'])) {
                     <li><a href="dashboard.php">Admin Panel</a></li>
                     <li class="active">Manage Admins</li>
                 </ol>
-                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php echo $admin_data[0]->getUsername(); ?>">
+                <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php  echo $admin_data[0]->getUsername(); ?>">
                 <h1>Manage Administrators</h1>
 
                 <div class="row margin-bottom-30">
@@ -72,7 +71,7 @@ if(!isset($_SESSION['authenticated'])) {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php for ($i = 0; $i < count($all_admin); $i++) {
+                                <?php for ($i = 0; $i < $q->countAllAdmin(); $i++) {
                                         $privilege_array = explode(',', $all_admin[$i]->getPrivilege());
                                     ?>
                                 <tr>
@@ -124,8 +123,8 @@ if(!isset($_SESSION['authenticated'])) {
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
-<script src="js/common/util.js"></script>
-<script src="js/common-html.js"></script>
+<script src="js/common/CommonUtil.js"></script>
+<script src="js/routine/common-html.js"></script>
 <script src="js/app.js"></script>
 
 </body>

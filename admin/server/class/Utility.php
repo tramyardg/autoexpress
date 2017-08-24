@@ -1,5 +1,5 @@
 <?php
-
+ini_set('date.timezone', 'America/Toronto');
 /**
  * Created by PhpStorm.
  * User: RAYMARTHINKPAD
@@ -8,6 +8,10 @@
  */
 class Utility
 {
+    function getTimeStamp() {
+        return date('Y-m-d H:i:s', gmdate('U'));
+    }
+
     function stringValue($str) {
         return "'" . $str . "'";
     }

@@ -17,6 +17,26 @@ class Admin
     private $_last_update;
 
     /**
+     * Admin constructor.
+     * @param $_admin_id
+     * @param $_username
+     * @param $_password
+     * @param $_email
+     * @param $_privilege
+     * @param $_last_update
+     */
+    public function __construct($_admin_id, $_username, $_password, $_email, $_privilege, $_last_update)
+    {
+        $this->_admin_id = $_admin_id;
+        $this->_username = $_username;
+        $this->_password = $_password;
+        $this->_email = $_email;
+        $this->_privilege = $_privilege;
+        $this->_last_update = $_last_update;
+    }
+
+
+    /**
      * @param mixed|null $admin_id
      */
     public function setAdminId($admin_id)
@@ -113,15 +133,28 @@ class Admin
         return $this->_last_update;
     }
 
-
-
-    public function __construct(DbQueryResult $result)
+    function __toString()
     {
-        $this->_admin_id = $result->adminId;
-        $this->_username = $result->username;
-        $this->_password = $result->password;
-        $this->_email = $result->email;
-        $this->_privilege = $result->privilege;
-        $this->_last_update = $result->last_update;
+        $out = "";
+        $out .= 'id ' . $this->_admin_id."\n";
+        $out .= 'username ' . $this->_username."\n";
+        $out .= 'password ' . $this->_password."\n";
+        $out .= 'email ' . $this->_email."\n";
+        $out .= 'privilege ' . $this->_privilege."\n";
+        $out .= 'last update ' . $this->_last_update."\n";
+        return $out;
     }
+
+
+//
+//
+//    public function __construct(DbQueryResult $result)
+//    {
+//        $this->_admin_id = $result->adminId;
+//        $this->_username = $result->username;
+//        $this->_password = $result->password;
+//        $this->_email = $result->email;
+//        $this->_privilege = $result->privilege;
+//        $this->_last_update = $result->last_update;
+//    }
 }
