@@ -14,14 +14,52 @@ if(!isset($_SESSION['authenticated'])) {
     $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
 
     $v = new CarDAO();
-    $num_cars = $v->countAllCars();
     $all_cars = $v->getAllCars();
-}
+    $num_cars = $v->countAllCars();
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    print_r($_POST);
-    print_r($_FILES);
+    // for adding vehicle
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $lastId = $v->getLastRecordId();
+
+        $car = new Vehicle(
+            $v->incrementId($lastId),
+            $_POST["make"],
+            $_POST["year"],
+            $_POST["model"],
+            $_POST["price"],
+            $_POST["mileage"],
+            $_POST["transmission"],
+            $_POST["drivetrain"],
+            $_POST["capacity"],
+            $_POST["category"],
+            $_POST["cylinder"],
+            $_POST["doors"],
+            "Available", // default for adding
+            $v->getTimeStamp()
+        );
+        $condition = 0;
+        if($v->create($car)) {
+            $condition = 1;
+        }
+    }
+
+    if(isset($_GET["action"]) && $v->isVehicleExist($_GET["id"])) {
+        if($_GET["action"] === "delete") {
+            $condition = 0;
+            if($v->delete($_GET["id"])) {
+                $condition = 1;
+            }
+            return $condition;
+        }
+    }
+
+
+
+
+
+
+
 
 }
 
@@ -54,13 +92,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             margin: 2px 0 2px 3px;
         }
         #vehicle-table {
-            width: 80%;
-            text-align: left;
-            margin-left: 0;
-            margin-right: 0;
+            /*width: 80%;*/
+            /*text-align: left;*/
+            /*margin-left: 0;*/
+            /*margin-right: 0;*/
         }
         #add-new-car-btn {
-            margin-top: 15px;
+            /*margin-top: 15px;*/
         }
     </style>
 </head>
@@ -78,13 +116,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <h1>Manage Vehicles</h1>
                 <p>Here goes vehicles from the inventory.</p>
 
-                <div class="row margin-bottom-30">
+                <div class="row margin-bottom-15">
                     <div class="col-md-12">
                         <ul class="nav nav-pills">
                             <li class="active"><a href="#">Number of Vehicles <span class="badge"><?php echo $num_cars; ?></span></a></li>
                         </ul>
                     </div>
                 </div>
+
+                <?php if(isset($condition) && $condition === 1) {?>
+                    <script>alert("1 row affected. The page will reload.");</script>
+                <?php header("refresh: 2; url=inventory.php"); }  ?>
 
                 <!-- car table -->
                 <div class="row">
@@ -122,8 +164,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Actions
                                                 <span class="caret"></span></button>
                                             <ul class="dropdown-menu">
-                                                <li><a href="#">Update</a></li>
-                                                <li><a href="#">Delete</a></li>
+                                                <li><a class="update-vehicle" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" update="<?php echo $all_cars[$i]->getVehicleId(); ?>">Update</a></li>
+                                                <li><a class="delete-vehicle" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" delete="<?php echo $all_cars[$i]->getVehicleId(); ?>">Delete</a></li>
                                             </ul>
                                         </div>
                                     </td>
@@ -138,7 +180,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
                 <!-- add new car button -->
-                <button type="button" class="btn btn-success" id="add-new-car-btn" data-toggle="modal" data-target=".bs-example-modal-lg">Add new</button>
+                <div class="row margin-bottom-15">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-success" id="add-new-car-btn" data-toggle="modal" data-target=".bs-example-modal-lg">Add new</button>
+                    </div>
+                </div>
+
 
                 <!-- modal template for adding, updating -->
                 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -171,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                     <option value="Chrysler">Chrysler</option>
                                                                     <option value="Dodge">Dodge</option>
                                                                     <option value="Ferrari">Ferrari</option>
-                                                                    <option value="Fiat">Fiat</option>
+                                                                    <option value="FIAT">Fiat</option>
                                                                     <option value="Ford">Ford</option>
                                                                     <option value="GMC">GMC</option>
                                                                     <option value="Honda">Honda</option>
@@ -270,14 +317,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <tr>
                                                             <td>Price<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="number" name="price" id="price" title="price" pattern=".{7,}" required />
+                                                                <input type="number" name="price" id="price" title="price" min="0" max="999999" required />
                                                                 <b style="font-size: 10px; color: red;" id="price-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Mileage(Km)<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="number" name="mileage" id="mileage" title="mileage" required/>
+                                                                <input type="number" name="mileage" id="mileage" title="mileage" min="0" max="999999" required/>
                                                                 <b style="font-size: 10px;  color: red;" id="mileage-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
@@ -311,22 +358,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-5">
-                                                            <b>Car</b> <br/>
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Subcompact car"> Subcompact car <br/>
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Compact car"> Compact car <br />
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Mid-size car"> Mid-size car <br />
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Entry-level luxury car"> Entry-level luxury car <br />
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Mid-size luxury car"> Mid-size luxury car <br />
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Full-size car"> Full-size car
+                                                            <b>Car</b><span class="input-required"> *</span><br/>
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Subcompact car"> Subcompact car <br/>
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Compact car"> Compact car <br />
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Mid-size car"> Mid-size car <br />
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Entry-level luxury car"> Entry-level luxury car <br />
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Mid-size luxury car"> Mid-size luxury car <br />
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Full-size car"> Full-size car
                                                         </div>
                                                         <div class="col-md-5">
-                                                            <b>Truck</b><br />
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Minivan"> Minivan<br />
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Van"> Van<br />
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Compact SUV"> Compact SUV<br />
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Mid-size SUV"> Mid-size SUV<br />
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Full-size SUV"> Full-size SUV<br />
-                                                            <input class="right_side" type="radio" name="category" id="category" title="category" value="Pickup"> Pickup
+                                                            <b>Truck</b><span class="input-required"> *</span><br />
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Minivan"> Minivan<br />
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Van"> Van<br />
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Compact SUV"> Compact SUV<br />
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Mid-size SUV"> Mid-size SUV<br />
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Full-size SUV"> Full-size SUV<br />
+                                                            <input required class="right_side" type="radio" name="category" id="category" title="category" value="Pickup"> Pickup
                                                         </div>
                                                         <div class="col-md-2"></div>
                                                     </div>
@@ -368,6 +415,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                 document.getElementById('files').addEventListener('change', handleFileSelect, false);
                                                             </script>
                                                         </div>
+                                                        <div class="col-sm-12"><span class="input-required">*</span> <span class="label label-danger">Required fields</span></div>
                                                     </div>
 
                                                 </div>
@@ -391,14 +439,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <tr>
                                                             <td>Capacity (Litre) <span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="number" name="capacity" id="capacity" title="capacity">
+                                                                <input type="text" name="capacity" id="capacity" minlength="0" maxlength="4" title="capacity" required>
                                                                 <b style="font-size: 10px; color: red;" id="capacity-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Doors<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="number" name="doors" id="doors" title="doors">
+                                                                <input type="number" name="doors" id="doors" title="doors" required min="2" max="6">
                                                                 <b style="font-size: 10px; color: red;" id="door-err">&nbsp;</b>
                                                             </td>
                                                         </tr>
@@ -444,7 +492,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <script src="js/common/CommonTemplate.js"></script>
 <script src="js/common/CommonUtil.js"></script>
 <script src="js/routine/common-html.js"></script>
-<!--<script src="js/routine/car-actions.js"></script>-->
+<script src="js/routine/car-actions.js"></script>
 <script src="js/app.js"></script>
 
 </body>

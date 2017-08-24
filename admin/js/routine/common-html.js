@@ -14,7 +14,8 @@ var CommonHTML = (function () {
     var fnCommonElement = {},
         fnHeaderAndFooterElem = {},
         fnPageTitle = {},
-        fnFindAllCarDecColumnAddComma = {};
+        fnFindAllCarDecColumnAddComma = {},
+        fnManipulateRecordElem = {};
     var adminUsernameSel = {},
         adminTableSel = {},
         carTableSel = {},
@@ -47,6 +48,7 @@ var CommonHTML = (function () {
             fnHeaderAndFooterElem = null;
             fnPageTitle = null;
             fnFindAllCarDecColumnAddComma = null;
+            fnManipulateRecordElem = null;
 
 
             // call the event driven functions here
@@ -79,6 +81,11 @@ var CommonHTML = (function () {
                 mainWrapperSel.last().append(cHTML.footerElement());    // footer
             };
 
+            fnManipulateRecordElem = function () {
+                pageWrapperSel.append(cHTML.confirmDeleteRecord());
+                pageWrapperSel.append(cHTML.rowAffectedSuccessfully());
+            };
+
 
             fnFindAllCarDecColumnAddComma = function () {
                 var numCars = priceColumnSel.length;
@@ -101,9 +108,10 @@ var CommonHTML = (function () {
                         "lengthChange": false,
                         searching: false,
                         "bInfo": false,
-                        "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [8] }]
+                        "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [2, 8] }]
                     });
                     fnFindAllCarDecColumnAddComma();
+                    fnManipulateRecordElem();
                     break;
                 case util.pageName[2].name:
                     fnCommonElement();
@@ -112,6 +120,7 @@ var CommonHTML = (function () {
                         "lengthChange": false,
                         searching: false
                     });
+                    fnManipulateRecordElem();
                     break;
                 case util.pageName[3].name:
                     fnCommonElement();

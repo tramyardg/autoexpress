@@ -35,20 +35,6 @@ class AdminDAO extends Utility
         return $admin;
     }
 
-    // used for counting the number of records
-
-    function countAll($sql) {
-        $db = Db::getInstance();
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-
-        $results = array();
-        while ($row = $stmt->fetchColumn(0)) {
-            $results[] = $row[0];
-        }
-        return $results[0];
-    }
-
     function getAllAdmin()
     {
         $sql = "SELECT\n"
@@ -99,13 +85,13 @@ class AdminDAO extends Utility
         $_email = $this->stringValue($email);
         $_password = $this->stringValue($password);
 
-        $db = Db::getInstance();
         $sql = "INSERT\n"
             . "INTO\n"
             . " administrator(username,\n"
             . " password,\n"
             . " email)\n"
             . "VALUES($_username, $_password, $_email)";
+        $db = Db::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt;
@@ -132,11 +118,9 @@ class AdminDAO extends Utility
             }
         }
     }
-
-
+    
     function countAllAdmin() {
-        $sql = "SELECT COUNT(*) FROM administrator";
-        return $this->countAll($sql);
+        return count($this->getAllAdmin());
     }
 
 

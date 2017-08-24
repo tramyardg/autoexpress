@@ -9,6 +9,7 @@ if(isset($_SESSION['authenticated'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = null;
+    $condition = 0;
 
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -21,11 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $msgTaken = 'This username is already taken.';
     } else {
         if(!empty($username) && !empty($email) && !empty($password)) {
-
             if($q->create($username, $email, $password)) {
-                $result = 'You are one of the admin now!';
-            } else {
-                $result = 'There must be an error. Please try again later.';
+                $cond = 1;
             }
         }
     }
@@ -55,12 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="template-page-wrapper splash2">
        
 		
-		<?php if(!empty($result)) { ?>
+		<?php if($condition === 1) { ?>
 		<div class="templatemo-signin-form">
 			<div class="col-md-12">
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8" style="width: 100%;">
-					<div class="alert alert-success text-center">Success!</div>
+					<div class="alert alert-success text-center">Success! <?php echo 'Redirecting to login page, please wait.';?></div>
+                    <?php header( "refresh:4; url=sign-in.php"); ?>
 				</div>
 				<div class="col-sm-2"></div>
 			</div>

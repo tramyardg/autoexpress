@@ -5,7 +5,10 @@
 var util = new CommonUtil();
 var CarActions = (function () {
 
-    var addCarSel = {};
+    var deleteCarSel = {},
+        confirmDeleteRecordSel = {},
+        deleteConfirmBtnSel = {},
+        rowAffectedSuccessSel = {};
 
 
     return {
@@ -16,7 +19,10 @@ var CarActions = (function () {
          */
         init: function () {
 
-            addCarSel = $("#add-car");
+            deleteCarSel = $(".dropdown a.delete-vehicle");
+            confirmDeleteRecordSel = $('#confirm-delete-record');
+            deleteConfirmBtnSel = $('#delete-yes');
+            rowAffectedSuccessSel = $('#row-affected-successfully');
 
 
 
@@ -25,43 +31,31 @@ var CarActions = (function () {
         },
         bindCarActions: function () {
 
-
-
-            addCarSel.submit(function (event) {
+            deleteCarSel.click(function (event){
+                var dataId = $(this).attr("delete");
+                confirmDeleteRecordSel.modal('show');
                 event.preventDefault();
 
-                // console.log($(this).serialize());
-                var formData = new FormData(this);
-                console.log(formData);
-
-                $.ajax({
-                    type: "post",
-                    url: window.location.pathname,
-                    success: function (data) {
-                        console.log(data);
-                    }
+                deleteConfirmBtnSel.click(function () {
+                    confirmDeleteRecordSel.modal('hide');
+                    rowAffectedSuccessSel.modal('show');
+                    $.ajax({
+                        url: "?action=delete",
+                        type: "get",
+                        data: "id=" + dataId,
+                        success: function(data) {
+                            if(data === 1) {
+                                rowAffectedSuccessSel.modal('show');
+                            }
+                        }
+                    });
                 });
-
-                return false;
+                return false; //for good measure
             });
 
-            console.log(util.getFilename());
-            switch(util.getFilename()) {
-                case util.pageName[0].name: // dashboard
-                    break;
-                case util.pageName[1].name:
-                    break;
-                case util.pageName[2].name:
-                    break;
-                case util.pageName[3].name:
-                    break;
-                case util.pageName[4].name: // sign-in
-                    break;
-                case util.pageName[5].name: // register
-                    break;
-                default:
 
-            }
+
+
 
 
 

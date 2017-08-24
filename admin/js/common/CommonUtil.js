@@ -48,6 +48,8 @@ function CommonUtil() {
 
     // dynamically show the models of data selected
     this.selectCarMake = function(selectedMake) {
+        var modelSel = $("#model");
+        modelSel.empty();
         var selectedMake_id = selectedMake.getAttribute("id");
         var selectVal = $("#"+selectedMake_id).val();
         $.ajax({
@@ -70,9 +72,10 @@ function CommonUtil() {
 
     // displays all data models based on make selection
     this.getCarModel = function (modelObj) {
+        var modelSel = $("#model");
         Object.keys(modelObj).forEach(function(key) {
             var h = '<option value="'+modelObj[key].value+'" title="'+modelObj[key].title+'">'+modelObj[key].value+'</option>';
-            $("#model").append(h);
+            modelSel.append(h);
         });
     };
 

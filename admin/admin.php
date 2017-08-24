@@ -37,7 +37,6 @@ if(!isset($_SESSION['authenticated'])) {
 </head>
 <body>
 <div id="main-wrapper">
-
     <div class="template-page-wrapper">
         <!--/.navbar-collapse -->
 
@@ -49,7 +48,6 @@ if(!isset($_SESSION['authenticated'])) {
                 </ol>
                 <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php  echo $admin_data[0]->getUsername(); ?>">
                 <h1>Manage Administrators</h1>
-
                 <div class="row margin-bottom-30">
                     <div class="col-md-12">
                         <ul class="nav nav-pills">
@@ -57,7 +55,7 @@ if(!isset($_SESSION['authenticated'])) {
                         </ul>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row margin-bottom-30">
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover table-bordered" id="admin-table">

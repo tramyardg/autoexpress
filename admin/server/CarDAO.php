@@ -50,19 +50,6 @@ class CarDAO extends Utility
         return $car;
     }
 
-    // used for counting the number of records
-    function countAll($sql) {
-        $db = Db::getInstance();
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-
-        $results = array();
-        while ($row = $stmt->fetchColumn(0)) {
-            $results[] = $row[0];
-        }
-        return $results[0];
-    }
-
     function getAllCars()
     {
         $sql = "SELECT\n"
@@ -72,22 +59,20 @@ class CarDAO extends Utility
         return $this->query($sql);
     }
 
+    function getCarById($id) {
+        $sql = "SELECT * FROM `vehicle` WHERE `vehicleId` = $id";
+        return $this->query($sql);
+    }
 
-    /**
-     * create-method. This will create new row in database according to supplied
-     * valueObject contents. Make sure that values for all NOT NULL columns are
-     * correctly specified. Also, if this table does not use automatic surrogate-keys
-     * the primary-key must be specified. After INSERT command this method will
-     * read the generated primary-key back to valueObject if automatic surrogate-keys
-     */
     function create(&$valueObject) {
-        $sql =   '   INSERT  '  .
+        $sql =   'INSERT  '  .
             '   INTO  '  .
-            '     `vehicle`( `make`, `yearMade`, `model`, `price`, `mileage`,  '  .
+            '     `vehicle`(`vehicleId`, `make`, `yearMade`, `model`, `price`, `mileage`,  '  .
             ' `transmission`, `drivetrain`,  `engineCapacity`,  `category`,  '  .
             ' `cylinder`, `doors`, `status`,  `dateAdded`  '  .
             '     )  '  .
             '   VALUES(  ';
+        $sql = $sql."'".$valueObject->getVehicleId()."', ";
         $sql = $sql."'".$valueObject->getMake()."', ";
         $sql = $sql."'".$valueObject->getYearMade()."', ";
         $sql = $sql."'".$valueObject->getModel()."', ";
@@ -101,20 +86,48 @@ class CarDAO extends Utility
         $sql = $sql."".$valueObject->getDoors().", ";
         $sql = $sql."'".$valueObject->getStatus()."', ";
         $sql = $sql."'".$valueObject->getDateAdded()."') ";
-//        $db->execute($sql);
 
+        $db = Db::getInstance();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    }
 
+    function update($id) {
 
+    }
 
-        return true;
+    function delete($id) {
+        $sql = "DELETE FROM `vehicle` WHERE `vehicleId` = $id";
+        $db = Db::getInstance();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt;
     }
 
     function countAllCars() {
-        $sql = "SELECT COUNT(*) FROM vehicle";
-        return $this->countAll($sql);
+        return count($this->getAllCars());
+    }
+
+    function getLastRecordId() {
+        $sql = "SELECT vehicleId FROM `vehicle` ORDER BY vehicleid DESC LIMIT 1";
+        $db = Db::getInstance();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn(0);
+
     }
 
 
+    // for registration if username is taken {boolean}
+    function isVehicleExist($id)
+    {
+        $exists = 0;
+        if (($this->getCarById($id))) {
+            $exists = 1;
+        }
+        return $exists;
+    }
 
 
 

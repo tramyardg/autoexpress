@@ -16,6 +16,10 @@ class Utility
         return "'" . $str . "'";
     }
 
+    function incrementId($id) {
+        return intval($id) + 1;
+    }
+
     function lastUpdateDifference($date1, $date2) {
 
         $last_update_date = array(
@@ -44,6 +48,8 @@ class Utility
 
 
     }
+
+
 
 
 
