@@ -11,6 +11,7 @@ class Vehicle
     /**
      * Vehicle constructor.
      * @param $_vehicleId
+     * @param $_diagramId
      * @param $_make
      * @param $_yearMade
      * @param $_model
@@ -270,22 +271,6 @@ class Vehicle
     public function carGeneralInfo() {
         return $this->_yearMade . ' ' . $this->_make . ' ' . $this->_model;
     }
-
-//    public function __construct(DbQueryResult $result){
-//       $this->_vehicleId = $result->vehicleId;
-//       $this->_make = $result->make;
-//       $this->_yearMade = $result->yearMade;
-//       $this->_model = $result->model;
-//       $this->_price = $result->price;
-//       $this->_mileage = $result->mileage;
-//       $this->_transmission = $result->transmission;
-//       $this->_drivetrain = $result->drivetrain;
-//       $this->_engineCapacity = $result->engineCapacity;
-//       $this->_category = $result->category;
-//       $this->_cylinder = $result->cylinder;
-//       $this->_doors = $result->doors;
-//       $this->_status = $result->status;
-//    }
 
     private $_vehicleId;
     private $_make;

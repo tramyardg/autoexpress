@@ -17,46 +17,25 @@ if(!isset($_SESSION['authenticated'])) {
     $all_cars = $v->getAllCars();
     $num_cars = $v->countAllCars();
 
+    // general car info and diagram together
+    if (!empty($_POST['add-car'])) {
+        $condition = $v->isCreated($_POST);
+    }
 
-    // for adding vehicle
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $lastId = $v->getLastRecordId();
 
-        $car = new Vehicle(
-            $v->incrementId($lastId),
-            $_POST["make"],
-            $_POST["year"],
-            $_POST["model"],
-            $_POST["price"],
-            $_POST["mileage"],
-            $_POST["transmission"],
-            $_POST["drivetrain"],
-            $_POST["capacity"],
-            $_POST["category"],
-            $_POST["cylinder"],
-            $_POST["doors"],
-            "Available", // default for adding
-            $v->getTimeStamp()
-        );
-        $condition = 0;
-        if($v->create($car)) {
-            $condition = 1;
+    // car diagram
+    if (isset($_GET["action"])) {
+        if($_GET["action"] === "uploadPhotos") {
+//            print_r($_POST['filesData']);
+            $is_uploaded = $v->isDiagramAdded($_POST['filesData'], $_GET["id"]);
         }
     }
 
-    if(isset($_GET["action"]) && $v->isVehicleExist($_GET["id"])) {
+    if(isset($_GET["action"])) {
         if($_GET["action"] === "delete") {
-            $condition = 0;
-            if($v->delete($_GET["id"])) {
-                $condition = 1;
-            }
-            return $condition;
+            $is_deleted = $v->isDeleted($_GET["id"]);
         }
     }
-
-
-
-
 
 
 
@@ -76,13 +55,13 @@ if(!isset($_SESSION['authenticated'])) {
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/templatemo_main.min.css">
+    <link rel="stylesheet" href="css/templatemo_main.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <style>
         .thumb {
             height: 75px;
             border: 1px solid #000;
-            margin: 10px 5px 0 0;
+            margin: 5px 5px 5px 0;
         }
         .input-required {
             color: red;
@@ -157,6 +136,7 @@ if(!isset($_SESSION['authenticated'])) {
                                             <ul class="dropdown-menu">
                                                 <li><a class="update-vehicle" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" update="<?php echo $all_cars[$i]->getVehicleId(); ?>">Update</a></li>
                                                 <li><a class="delete-vehicle" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" delete="<?php echo $all_cars[$i]->getVehicleId(); ?>">Delete</a></li>
+                                                <li><a class="upload-car-photos" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" upload-photos="<?php echo $all_cars[$i]->getVehicleId(); ?>">Upload photo(s)</a></li>
                                             </ul>
                                         </div>
                                     </td>
@@ -184,8 +164,10 @@ if(!isset($_SESSION['authenticated'])) {
                         <div class="modal-content">
                             <div class="row">
                                 <div class="col-md-12">
+
                                     <div class="col-md-12">
-                                        <form action="" method="post" name="add-car" id="add-car" onsubmit="" enctype="multipart/form-data">
+
+                                        <form action="" method="post" onsubmit="" class="margin-top-15">
                                             <!-- general vehicle info -->
                                             <div class="panel panel-primary">
                                                 <div class="panel-heading">General vehicle info</div>
@@ -345,11 +327,11 @@ if(!isset($_SESSION['authenticated'])) {
 
                                             <!-- category and photos -->
                                             <div class="panel panel-primary">
-                                                <div class="panel-heading">Category and photos (optional)</div>
+                                                <div class="panel-heading">Category</div>
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-5">
-                                                            <b>Car</b><span class="input-required"> *</span><br/>
+                                                            <b>Car</b><br/>
                                                             <input required class="right_side" type="radio" name="category" id="category" title="category" value="Subcompact car"> Subcompact car <br/>
                                                             <input required class="right_side" type="radio" name="category" id="category" title="category" value="Compact car"> Compact car <br />
                                                             <input required class="right_side" type="radio" name="category" id="category" title="category" value="Mid-size car"> Mid-size car <br />
@@ -358,7 +340,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                             <input required class="right_side" type="radio" name="category" id="category" title="category" value="Full-size car"> Full-size car
                                                         </div>
                                                         <div class="col-md-5">
-                                                            <b>Truck</b><span class="input-required"> *</span><br />
+                                                            <b>Truck</b><br/>
                                                             <input required class="right_side" type="radio" name="category" id="category" title="category" value="Minivan"> Minivan<br />
                                                             <input required class="right_side" type="radio" name="category" id="category" title="category" value="Van"> Van<br />
                                                             <input required class="right_side" type="radio" name="category" id="category" title="category" value="Compact SUV"> Compact SUV<br />
@@ -368,47 +350,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                         </div>
                                                         <div class="col-md-2"></div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            Photo(s):
-                                                            <input type="file" id="files" name="files[]" multiple />
-                                                            <output id="list"></output>
-                                                            <script>
-                                                                function handleFileSelect(evt) {
-                                                                    var files = evt.target.files; // FileList object
-
-                                                                    // Loop through the FileList and render image files as thumbnails.
-                                                                    for (var i = 0, f; f = files[i]; i++) {
-
-                                                                        // Only process image files.
-                                                                        if (!f.type.match('image.*')) {
-                                                                            continue;
-                                                                        }
-
-                                                                        var reader = new FileReader();
-
-                                                                        // Closure to capture the file information.
-                                                                        reader.onload = (function (theFile) {
-                                                                            return function (e) {
-                                                                                // Render thumbnail.
-                                                                                var span = document.createElement('span');
-                                                                                span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                                                                                    '" title="', theFile.name, '"/>'].join('');
-                                                                                document.getElementById('list').insertBefore(span, null);
-                                                                            };
-                                                                        })(f);
-
-                                                                        // Read in the image file as a data URL.
-                                                                        reader.readAsDataURL(f);
-                                                                    }
-                                                                }
-
-                                                                document.getElementById('files').addEventListener('change', handleFileSelect, false);
-                                                            </script>
-                                                        </div>
-                                                        <div class="col-sm-12"><span class="input-required">*</span> <span class="label label-danger">Required fields</span></div>
-                                                    </div>
-
+                                                    <span class="input-required">*</span> <span class="label label-danger">Required fields</span>
                                                 </div>
                                             </div>
 
@@ -455,12 +397,76 @@ if(!isset($_SESSION['authenticated'])) {
                                                         <tbody>
                                                         <tr>
                                                             <td>
-                                                                <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Submit">
+                                                                <input type="submit" class="btn btn-primary btn-sm" name="add-car" id="add-car" value="Submit">
                                                                 <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" aria-label="Close" value="Cancel">
                                                             </td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade bs-example-modal-sm" id="upload-car-photos-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <form action="" method="post" id="add-car-photos-form" enctype="multipart/form-data" class="margin-top-15">
+                                            <div class="panel panel-info">
+                                                <div class="panel-heading">Upload photos for this car</div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            Photo(s):
+                                                            <input type="file" id="files" name="files[]" multiple />
+                                                            <output id="list"></output>
+                                                            <script>
+                                                                function handleFileSelect(evt) {
+                                                                    var files = evt.target.files; // FileList object
+
+                                                                    // Loop through the FileList and render image files as thumbnails.
+                                                                    for (var i = 0, f; f = files[i]; i++) {
+
+                                                                        // Only process image files.
+                                                                        if (!f.type.match('image.*')) {
+                                                                            continue;
+                                                                        }
+
+                                                                        var reader = new FileReader();
+
+                                                                        // Closure to capture the file information.
+                                                                        reader.onload = (function (theFile) {
+                                                                            return function (e) {
+                                                                                // Render thumbnail.
+                                                                                var span = document.createElement('span');
+                                                                                span.innerHTML = ['<img class="thumb" id="car-image-'+i+'" src="', e.target.result,
+                                                                                    '" title="', theFile.name, '"/>'].join('');
+                                                                                document.getElementById('list').insertBefore(span, null);
+                                                                            };
+                                                                        })(f);
+
+                                                                        // Read in the image file as a data URL.
+                                                                        reader.readAsDataURL(f);
+                                                                    } // end for
+                                                                }
+
+                                                                document.getElementById('files').addEventListener('change', handleFileSelect, false);
+                                                            </script>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <button type="button" class="btn btn-success btn-sm" id="upload-car-photos-btn" >Upload</button>
+<!--                                                            <input type="submit" class="btn btn-success btn-sm" name="add-car-photos-submit" id="add-car-photos-submit"  value="Upload">-->
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </form>

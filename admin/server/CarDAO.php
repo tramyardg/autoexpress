@@ -72,6 +72,7 @@ class CarDAO extends Utility
             ' `cylinder`, `doors`, `status`,  `dateAdded`  '  .
             '     )  '  .
             '   VALUES(  ';
+
         $sql = $sql."'".$valueObject->getVehicleId()."', ";
         $sql = $sql."'".$valueObject->getMake()."', ";
         $sql = $sql."'".$valueObject->getYearMade()."', ";
@@ -93,6 +94,64 @@ class CarDAO extends Utility
         return $stmt;
     }
 
+    function isCreated($postArray) {
+        $lastCarId = $this->getLastCarId();
+        $car = new Vehicle(
+            $this->incrementId($lastCarId),
+            $postArray["make"],
+            $postArray["year"],
+            $postArray["model"],
+            $postArray["price"],
+            $postArray["mileage"],
+            $postArray["transmission"],
+            $postArray["drivetrain"],
+            $postArray["capacity"],
+            $postArray["category"],
+            $postArray["cylinder"],
+            $postArray["doors"],
+            "Available", // default for adding
+            $this->getTimeStamp()
+        );
+
+        $condition = 0;
+        if($this->create($car)) {
+            $condition = 1;
+        }
+        return $condition;
+    }
+
+
+    // one car can have many photos
+    function addDiagram($files, $id) {
+
+        if(!empty($files)) {
+            $sql = null;
+
+            for($i = 0; $i < count($files); $i++) {
+                $imageData = $files[$i];
+                $sql .= "INSERT INTO `cardiagram`(`diagram`, `vehicleId`) VALUES ('{$imageData}',{$id});";
+            }
+
+            $db = Db::getInstance();
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+        }
+    }
+
+    function isDiagramAdded($files, $id) {
+        if($this->isVehicleExist($id)) {
+            echo 'here 1';
+            $condition = 0;
+
+            if($this->addDiagram($files, $id)) {
+                $condition = 1;
+            }
+            return $condition;
+
+        }
+        return 0;
+    }
+
     function update($id) {
 
     }
@@ -105,19 +164,37 @@ class CarDAO extends Utility
         return $stmt;
     }
 
+    function isDeleted($id) {
+        if($this->isVehicleExist($id)) {
+            $condition = 0;
+            if($this->delete($id)) {
+                $condition = 1;
+            }
+            return $condition;
+        }
+        return 0;
+
+    }
+
     function countAllCars() {
         return count($this->getAllCars());
     }
 
-    function getLastRecordId() {
+    function getLastCarId() {
         $sql = "SELECT vehicleId FROM `vehicle` ORDER BY vehicleid DESC LIMIT 1";
         $db = Db::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchColumn(0);
-
     }
 
+    function getLastDiagramId() {
+        $sql = "SELECT cardiagram.diagramId FROM cardiagram ORDER BY cardiagram.diagramId DESC LIMIT 1";
+        $db = Db::getInstance();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn(0);
+    }
 
     // for registration if username is taken {boolean}
     function isVehicleExist($id)
@@ -128,6 +205,7 @@ class CarDAO extends Utility
         }
         return $exists;
     }
+
 
 
 
