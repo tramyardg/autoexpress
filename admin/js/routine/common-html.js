@@ -70,7 +70,7 @@ var CommonHTML = (function () {
             fnPageTitle();
 
             fnCommonElement = function () {                                            // contents
-                mainWrapperSel.prepend(cHTML.navBarHeaderElem(adminUsernameSel.val()));                         // header
+                mainWrapperSel.prepend(cHTML.navBarHeaderElem());                         // header
                 pageWrapperSel.prepend(cHTML.sideBarElement(adminUsernameSel.val()));     // sidebar
                 pageWrapperSel.last().append(cHTML.footerElement());                      // footer
                 pageWrapperSel.append(cHTML.confirmModalLogout());                        // confirm logout
