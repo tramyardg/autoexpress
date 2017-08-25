@@ -133,7 +133,6 @@ if(!isset($_SESSION['authenticated'])) {
                     <div class="col-md-12">
 
                         <div class="table-responsive">
-                            <h4 class="margin-bottom-15">Vehicles table</h4>
                             <table id="vehicle-table" class="table table-striped table-hover table-bordered">
                                 <thead>
                                 <tr>
@@ -161,7 +160,7 @@ if(!isset($_SESSION['authenticated'])) {
                                     <td><?php echo $all_cars[$i]->getDriveTrain(); ?></td>
                                     <td>
                                         <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Actions
+                                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Actions
                                                 <span class="caret"></span></button>
                                             <ul class="dropdown-menu">
                                                 <li><a class="update-vehicle" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" update="<?php echo $all_cars[$i]->getVehicleId(); ?>">Update</a></li>
@@ -182,7 +181,7 @@ if(!isset($_SESSION['authenticated'])) {
                 <!-- add new car button -->
                 <div class="row margin-bottom-15">
                     <div class="col-sm-12">
-                        <button type="button" class="btn btn-success" id="add-new-car-btn" data-toggle="modal" data-target=".bs-example-modal-lg">Add new</button>
+                        <button type="button" class="btn btn-success btn-sm" id="add-new-car-btn" data-toggle="modal" data-target=".bs-example-modal-lg">Add new</button>
                     </div>
                 </div>
 

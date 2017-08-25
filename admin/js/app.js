@@ -1,14 +1,28 @@
+var util = new CommonUtil();
 $(document).ready(function () {
 
     CommonHTML.init();
     sidebarActive();
 
-    CarActions.init();
-
+    switch(util.getFilename()) {
+        case util.pageName[0].name: // dashboard
+            break;
+        case util.pageName[1].name:
+            CarActions.init();
+            break;
+        case util.pageName[2].name:
+            break;
+        case util.pageName[3].name:
+            break;
+        case util.pageName[4].name: // sign-in
+            break;
+        case util.pageName[5].name: // register
+            break;
+        default:
+    }
 
 });
 
-var util = new CommonUtil();
 function sidebarActive() {
     // goes by order of sidebar item
     var urlFileNameWithExt = util.getFilename();

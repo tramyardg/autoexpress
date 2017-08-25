@@ -143,7 +143,7 @@ if(!isset($_SESSION['authenticated'])) {
 
                             <div class="row templatemo-form-buttons">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
 
                                 </div>
                             </div>

@@ -118,7 +118,7 @@ class AdminDAO extends Utility
             }
         }
     }
-    
+
     function countAllAdmin() {
         return count($this->getAllAdmin());
     }
