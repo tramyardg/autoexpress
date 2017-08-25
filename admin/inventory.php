@@ -116,14 +116,6 @@ if(!isset($_SESSION['authenticated'])) {
                 <h1>Manage Vehicles</h1>
                 <p>Here goes vehicles from the inventory.</p>
 
-                <div class="row margin-bottom-15">
-                    <div class="col-md-12">
-                        <ul class="nav nav-pills">
-                            <li class="active"><a href="#">Number of Vehicles <span class="badge"><?php echo $num_cars; ?></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-
                 <?php if(isset($condition) && $condition === 1) {?>
                     <script>alert("1 row affected. The page will reload.");</script>
                 <?php header("refresh: 2; url=inventory.php"); }  ?>

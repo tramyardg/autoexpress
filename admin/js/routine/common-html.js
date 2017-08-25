@@ -107,7 +107,7 @@ var CommonHTML = (function () {
                         "pageLength": 5,
                         "lengthChange": false,
                         searching: false,
-                        "bInfo": false,
+                        // "bInfo": false,
                         "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [2, 8] }]
                     });
                     fnFindAllCarDecColumnAddComma();

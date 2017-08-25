@@ -48,13 +48,7 @@ if(!isset($_SESSION['authenticated'])) {
                 </ol>
                 <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php  echo $admin_data[0]->getUsername(); ?>">
                 <h1>Manage Administrators</h1>
-                <div class="row margin-bottom-30">
-                    <div class="col-md-12">
-                        <ul class="nav nav-pills">
-                            <li class="active"><a href="#">Admins total <span class="badge"><?php echo $q->countAllAdmin(); ?></span></a></li>
-                        </ul>
-                    </div>
-                </div>
+
                 <div class="row margin-bottom-30">
                     <div class="col-md-12">
                         <div class="table-responsive">

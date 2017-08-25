@@ -39,11 +39,7 @@ if(!isset($_SESSION['authenticated'])) {
     <div class="template-page-wrapper">
         <div class="templatemo-content-wrapper">
             <div class="templatemo-content">
-                <ol class="breadcrumb">
-                    <li><a href="#">Admin Panel</a></li>
-                    <li><a href="#">Dashboard</a></li>
-                    <li class="active">Overview</li>
-                </ol>
+                <ol class="breadcrumb"><li class="active"><a href="#">Admin Panel</a></li></ol>
                 <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php echo $admin_data[0]->getUsername(); ?>">
 
                 <div class="row">
