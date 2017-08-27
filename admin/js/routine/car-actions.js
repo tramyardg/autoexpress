@@ -65,6 +65,15 @@ var CarActions = (function () {
                 return false; //for good measure
             });
 
+            /**
+             * Uploading photo is done as follow:
+             * 1. click link upload photo
+             * 2. modal show up - form with input file multiple
+             * 3. click upload button
+             * 4. gets src of images being uploaded
+             * 5. src is passed to data properties of request as array or single variable
+             * 6. php process the request and done
+             */
             uploadCarPhotoLink.click(function (event){
                 var dataId = $(this).attr('upload-photos');
                 uploadCarPhotoModal.modal('show');
@@ -102,6 +111,29 @@ var CarActions = (function () {
 
                 return false;
             });
+
+            /**
+             * Updating a vehicle INFO is done as follow
+             * ONLY information is to be updated here
+             * no image
+             * 1. admin clicks on a the vehicle they wish to update
+             * 2. update modal form show up similar to adding new vehicle shows up
+             */
+
+
+            /**
+             * OPTION 1. Updating a vehicle PHOTO is done as follow
+             * 1. there will be a link when click it shows a list of image of that car
+             * 2. these images can be deleted
+             */
+
+            /**
+             * OPTION 2. Updating a vehicle PHOTO is done as follow
+             * 1. using the same template for uploading car photos
+             * 2. display current photos if any of that car
+             * 2. these images can be deleted
+             * 3. at the bottom shows a normal upload photos
+             */
 
 
 

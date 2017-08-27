@@ -26,7 +26,6 @@ if(!isset($_SESSION['authenticated'])) {
     // car diagram
     if (isset($_GET["action"])) {
         if($_GET["action"] === "uploadPhotos") {
-//            print_r($_POST['filesData']);
             $is_uploaded = $v->isDiagramAdded($_POST['filesData'], $_GET["id"]);
         }
     }
