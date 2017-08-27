@@ -13,7 +13,8 @@ var CarActions = (function () {
         uploadCarPhotoLink = {},
         uploadCarPhotoModal = {},
         uploadCarPhotoBtn = {},
-        addCarPhotosForm = {};
+        addCarPhotosForm = {},
+        updateUploadedPhotosSel = {};
 
 
     return {
@@ -33,6 +34,7 @@ var CarActions = (function () {
             uploadCarPhotoModal = $('#upload-car-photos-modal');
             uploadCarPhotoBtn = $('#upload-car-photos-btn');
             addCarPhotosForm = $('#add-car-photos-form');
+            updateUploadedPhotosSel = $('#update-uploaded-photos');
 
 
             // call the event driven functions here
@@ -78,6 +80,14 @@ var CarActions = (function () {
                 var dataId = $(this).attr('upload-photos');
                 uploadCarPhotoModal.modal('show');
                 event.preventDefault();
+
+                updateUploadedPhotosSel.DataTable({
+                    "pageLength": 1,
+                    "lengthChange": false,
+                    searching: false,
+                    // "bInfo": false,
+                    "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [0] }]
+                });
 
 
                 uploadCarPhotoBtn.click(function (e) {
@@ -135,6 +145,17 @@ var CarActions = (function () {
              * 3. at the bottom shows a normal upload photos
              */
 
+
+            // switch(util.getFilename()) {
+            //     case util.pageName[1].name:
+            //         updateUploadedPhotosSel.DataTable({
+            //             "pageLength": 1,
+            //             "lengthChange": false,
+            //             searching: false
+            //         });
+            //         break;
+            //     default:
+            // }
 
 
 

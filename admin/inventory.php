@@ -156,8 +156,7 @@ if(!isset($_SESSION['authenticated'])) {
                     </div>
                 </div>
 
-
-                <!-- modal template for adding, updating -->
+                <!-- modal template for adding, updating vehicle info -->
                 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -413,13 +412,115 @@ if(!isset($_SESSION['authenticated'])) {
                     </div>
                 </div>
 
+                <!-- modal template for uploading and updating photos -->
                 <div class="modal fade bs-example-modal-sm" id="upload-car-photos-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="row">
+                                <div class="col-md-12 margin-top-15">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">Deleting photos...</div>
+                                            <div class="panel-body">
+                                                <table id="update-uploaded-photos" width="100%" >
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Hello</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="col-xs-6 col-md-3">
+                                                                <div class="thumbnail">
+                                                                    <img src="" alt="">
+                                                                    <div class="caption">
+                                                                        <p></p>
+                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 1</a></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-6 col-md-3">
+                                                                <div class="thumbnail">
+                                                                    <img src="" alt="">
+                                                                    <div class="caption">
+                                                                        <p></p>
+                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 2</a></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-6 col-md-3">
+                                                                <div class="thumbnail">
+                                                                    <img src="" alt="">
+                                                                    <div class="caption">
+                                                                        <p></p>
+                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 3</a></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-6 col-md-3">
+                                                                <div class="thumbnail">
+                                                                    <img src="" alt="">
+                                                                    <div class="caption">
+                                                                        <p></p>
+                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 4</a></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="col-xs-6 col-md-3">
+                                                                <div class="thumbnail">
+                                                                    <img src="" alt="">
+                                                                    <div class="caption">
+                                                                        <p></p>
+                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 5</a></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-6 col-md-3">
+                                                                <div class="thumbnail">
+                                                                    <img src="" alt="">
+                                                                    <div class="caption">
+                                                                        <p></p>
+                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 6</a></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-6 col-md-3">
+                                                                <div class="thumbnail">
+                                                                    <img src="" alt="">
+                                                                    <div class="caption">
+                                                                        <p></p>
+                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 7</a></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-6 col-md-3">
+                                                                <div class="thumbnail">
+                                                                    <img src="" alt="">
+                                                                    <div class="caption">
+                                                                        <p></p>
+                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 8</a></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="col-md-12">
-                                        <form action="" method="post" id="add-car-photos-form" enctype="multipart/form-data" class="margin-top-15">
+                                        <form action="" method="post" id="add-car-photos-form" enctype="multipart/form-data" class="">
                                             <div class="panel panel-info">
                                                 <div class="panel-heading">Upload photos for this car</div>
                                                 <div class="panel-body">
