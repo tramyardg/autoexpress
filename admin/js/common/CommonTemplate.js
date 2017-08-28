@@ -114,4 +114,22 @@ function CommonTemplate() {
             '               </div>  '  +
             '          </div>  ' ;
     };
+
+    this.getPhotosByCarIdModalContent = function (diagramArray) {
+        // console.log(diagramArray);
+        var h = '';
+        for(var i = 0; i < diagramArray.length; i++) {
+            h += '   		<div class="col-xs-6 col-md-3">  '  +
+                '   			<div class="thumbnail">  '  +
+                '   				<img src="'+diagramArray[i]._diagram+'" alt="">  '  +
+                '   				<div class="caption">  '  +
+                '   					<p></p>  '  +
+                '   					<p><a class="delete-car"  href="?action=deleteCarPhoto&id='+diagramArray[i]._diagramId+'" delete-photos="'+diagramArray[i]._diagramId+'" role="button">Delete</a></p>  '  +
+                '   				</div>  '  +
+                '   			</div>  '  +
+                '   		</div>  ';
+        }
+        return h;
+
+    }
 }

@@ -2,6 +2,7 @@
 session_start();
 require_once 'server/AdminDAO.php';
 require_once 'server/CarDAO.php';
+require_once 'server/DiagramDAO.php';
 require_once 'server/class/Admin.php';
 
 if(!isset($_SESSION['authenticated'])) {
@@ -17,22 +18,43 @@ if(!isset($_SESSION['authenticated'])) {
     $all_cars = $v->getAllCars();
     $num_cars = $v->countAllCars();
 
-    // general car info and diagram together
+    // general car info
     if (!empty($_POST['add-car'])) {
         $condition = $v->isCreated($_POST);
     }
 
-
-    // car diagram
+    // car diagram upload
     if (isset($_GET["action"])) {
         if($_GET["action"] === "uploadPhotos") {
-            $is_uploaded = $v->isDiagramAdded($_POST['filesData'], $_GET["id"]);
+            $is_uploaded = $v->isDiagramAdded(
+                    $_POST['filesData'], // array of images src to be uploaded
+                    $_GET["id"] // query string in the ajax url properties
+            );
         }
     }
 
+    // deleting vehicle
     if(isset($_GET["action"])) {
         if($_GET["action"] === "delete") {
             $is_deleted = $v->isDeleted($_GET["id"]);
+        }
+    }
+
+    $d = new DiagramDAO();
+    if(isset($_GET['action'])) {
+        if($_GET['action'] === "getPhotosByCarId") {
+            $diagram = $d->getPhotosBy_CarId($_GET['id']);
+
+            $data = json_encode($diagram);
+            echo $data;
+            exit();
+        }
+    }
+    
+    // deleting a car photo
+    if(isset($_GET["action"])) {
+        if($_GET["action"] === "deleteCarPhoto") {
+            $deleted_photo = $d->isDeleted($_GET["id"]);
         }
     }
 
@@ -96,7 +118,13 @@ if(!isset($_SESSION['authenticated'])) {
 
                 <?php if(isset($condition) && $condition === 1) {?>
                     <script>alert("1 row affected. The page will reload.");</script>
-                <?php header("refresh: 2; url=inventory.php"); }  ?>
+                <?php header("refresh: 1; url=inventory.php"); }  ?>
+
+                <?php if(isset($deleted_photo) && $deleted_photo === 1) {?>
+                    <script>alert("1 row affected. The page will reload.");</script>
+                <?php header("refresh: 1; url=inventory.php"); }  ?>
+
+
 
                 <!-- car table -->
                 <div class="row">
@@ -130,12 +158,12 @@ if(!isset($_SESSION['authenticated'])) {
                                     <td><?php echo $all_cars[$i]->getDriveTrain(); ?></td>
                                     <td>
                                         <div class="dropdown">
-                                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Actions
+                                            <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Actions
                                                 <span class="caret"></span></button>
                                             <ul class="dropdown-menu">
                                                 <li><a class="update-vehicle" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" update="<?php echo $all_cars[$i]->getVehicleId(); ?>">Update</a></li>
                                                 <li><a class="delete-vehicle" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" delete="<?php echo $all_cars[$i]->getVehicleId(); ?>">Delete</a></li>
-                                                <li><a class="upload-car-photos" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" upload-photos="<?php echo $all_cars[$i]->getVehicleId(); ?>">Upload photo(s)</a></li>
+                                                <li><a class="upload-car-photos" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" upload-delete-photos="<?php echo $all_cars[$i]->getVehicleId(); ?>">Upload / Delete photo(s)</a></li>
                                             </ul>
                                         </div>
                                     </td>
@@ -413,7 +441,7 @@ if(!isset($_SESSION['authenticated'])) {
                 </div>
 
                 <!-- modal template for uploading and updating photos -->
-                <div class="modal fade bs-example-modal-sm" id="upload-car-photos-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal fade bs-example-modal-sm" id="upload-delete-car-photos-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="row">
@@ -421,97 +449,7 @@ if(!isset($_SESSION['authenticated'])) {
                                     <div class="col-md-12">
                                         <div class="panel panel-info">
                                             <div class="panel-heading">Deleting photos...</div>
-                                            <div class="panel-body">
-                                                <table id="update-uploaded-photos" width="100%" >
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Hello</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="col-xs-6 col-md-3">
-                                                                <div class="thumbnail">
-                                                                    <img src="" alt="">
-                                                                    <div class="caption">
-                                                                        <p></p>
-                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 1</a></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xs-6 col-md-3">
-                                                                <div class="thumbnail">
-                                                                    <img src="" alt="">
-                                                                    <div class="caption">
-                                                                        <p></p>
-                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 2</a></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xs-6 col-md-3">
-                                                                <div class="thumbnail">
-                                                                    <img src="" alt="">
-                                                                    <div class="caption">
-                                                                        <p></p>
-                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 3</a></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xs-6 col-md-3">
-                                                                <div class="thumbnail">
-                                                                    <img src="" alt="">
-                                                                    <div class="caption">
-                                                                        <p></p>
-                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 4</a></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="col-xs-6 col-md-3">
-                                                                <div class="thumbnail">
-                                                                    <img src="" alt="">
-                                                                    <div class="caption">
-                                                                        <p></p>
-                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 5</a></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xs-6 col-md-3">
-                                                                <div class="thumbnail">
-                                                                    <img src="" alt="">
-                                                                    <div class="caption">
-                                                                        <p></p>
-                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 6</a></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xs-6 col-md-3">
-                                                                <div class="thumbnail">
-                                                                    <img src="" alt="">
-                                                                    <div class="caption">
-                                                                        <p></p>
-                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 7</a></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xs-6 col-md-3">
-                                                                <div class="thumbnail">
-                                                                    <img src="" alt="">
-                                                                    <div class="caption">
-                                                                        <p></p>
-                                                                        <p><a href="#" class="btn btn-danger btn-xs" role="button">Button 8</a></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                            <div class="panel-body" id="display-images-by-this-car"></div>
                                         </div>
                                     </div>
                                 </div>

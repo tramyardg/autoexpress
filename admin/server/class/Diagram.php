@@ -6,11 +6,24 @@
  * Date: 2017-08-27
  * Time: 2:59 PM
  */
-class Diagram
+class Diagram implements JsonSerializable
 {
     private $_diagramId;
     private $_diagram;
     private $_vehicleId;
+
+    /**
+     * Diagram constructor.
+     * @param $_diagramId
+     * @param $_diagram
+     * @param $_vehicleId
+     */
+    public function __construct($_diagramId, $_diagram, $_vehicleId)
+    {
+        $this->_diagramId = $_diagramId;
+        $this->_diagram = $_diagram;
+        $this->_vehicleId = $_vehicleId;
+    }
 
     /**
      * @return mixed
@@ -60,6 +73,20 @@ class Diagram
         $this->_vehicleId = $vehicleId;
     }
 
+    function __toString()
+    {
+        $out = "";
+        $out .= 'id ' . $this->_diagramId."\n";
+        $out .= 'diagram src ' . $this->_diagram."\n";
+        $out .= 'vehicle id ' . $this->_vehicleId."\n";
+        return $out;
+    }
+
+    // function called when encoded with json_encode
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
 
 
 }
