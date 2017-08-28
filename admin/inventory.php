@@ -58,7 +58,15 @@ if(!isset($_SESSION['authenticated'])) {
         }
     }
 
-
+    // deleting vehicle
+    if(isset($_GET["action"])) {
+        if($_GET["action"] === "updateCarInfo") {
+            $updateCarInfoById = $v->getCarById($_GET['id']);
+            $updateCarInfo_data = json_encode($updateCarInfoById);
+            echo $updateCarInfo_data;
+            exit();
+        }
+    }
 
 
 }
@@ -161,7 +169,7 @@ if(!isset($_SESSION['authenticated'])) {
                                             <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Actions
                                                 <span class="caret"></span></button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="update-vehicle" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" update="<?php echo $all_cars[$i]->getVehicleId(); ?>">Update</a></li>
+                                                <li><a data-target="#updateCarInfoModal" data-toggle="modal" data-id="<?php echo $all_cars[$i]->getVehicleId(); ?>" href="#updateCarInfoModal">Update</a></li>
                                                 <li><a class="delete-vehicle" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" delete="<?php echo $all_cars[$i]->getVehicleId(); ?>">Delete</a></li>
                                                 <li><a class="upload-car-photos" href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>" upload-delete-photos="<?php echo $all_cars[$i]->getVehicleId(); ?>">Upload / Delete photo(s)</a></li>
                                             </ul>
@@ -180,14 +188,14 @@ if(!isset($_SESSION['authenticated'])) {
                 <!-- add new car button -->
                 <div class="row margin-bottom-15">
                     <div class="col-sm-12">
-                        <button type="button" class="btn btn-success btn-sm" id="add-new-car-btn" data-toggle="modal" data-target=".bs-example-modal-lg">Add new</button>
+                        <button type="button" class="btn btn-success btn-sm" id="add-new-car-btn" data-toggle="modal" data-target=".add-new-car-modal-lg">Add new</button>
                     </div>
                 </div>
 
-                <!-- modal template for adding, updating vehicle info -->
-                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <!-- modal template for adding vehicle info -->
+                <div class="modal fade add-new-car-modal-lg " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
+                        <div class="modal-content" id="add-car-info-modal-content">
                             <div class="row">
                                 <div class="col-md-12">
 
@@ -306,7 +314,6 @@ if(!isset($_SESSION['authenticated'])) {
                                                         <tr>
                                                             <td>Model<span class="input-required"> *</span></td>
                                                             <td>
-<!--                                                                <input type="text" name="model" id="model" title="model" required/>-->
                                                                 <select name="model" id="model" title="model" required>
                                                                     <option selected="selected">Select model</option>
                                                                 </select>
@@ -440,6 +447,15 @@ if(!isset($_SESSION['authenticated'])) {
                     </div>
                 </div>
 
+                <!-- modal template for updating vehicle info -->
+                <div class="modal fade updateCarInfoModal" id="updateCarInfoModal" tabindex="-1" role="dialog" aria-labelledby="updateCarInfoModal">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content" id="update-car-info-modal-content">
+
+                        </div>
+                    </div>
+                </div>
+
                 <!-- modal template for uploading and updating photos -->
                 <div class="modal fade bs-example-modal-sm" id="upload-delete-car-photos-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
@@ -502,7 +518,6 @@ if(!isset($_SESSION['authenticated'])) {
                                                         </div>
                                                         <div class="col-md-12">
                                                             <button type="button" class="btn btn-success btn-sm" id="upload-car-photos-btn" >Upload</button>
-<!--                                                            <input type="submit" class="btn btn-success btn-sm" name="add-car-photos-submit" id="add-car-photos-submit"  value="Upload">-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -523,6 +538,7 @@ if(!isset($_SESSION['authenticated'])) {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
 <script src="js/common/CommonUtil.js"></script>

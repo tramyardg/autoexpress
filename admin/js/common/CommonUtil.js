@@ -47,11 +47,23 @@ function CommonUtil() {
     };
 
     // dynamically show the models of data selected
+    // todo
     this.selectCarMake = function(selectedMake) {
-        var modelSel = $("#model");
-        modelSel.empty();
+        // var modelSel = $("#add-car-info-modal-content #model, #update-car-info-modal-content #model");
+        // modelSel.empty();
+        //
+
+        if($('#updateCarInfoModal').hasClass('in')) {
+            var modelSel_update = $("#update-car-general-info-table #model");
+            modelSel_update.empty();
+        } else {
+            var modelSel_add = $("#add-car-info-modal-content #model");
+            modelSel_add.empty();
+        }
+
         var selectedMake_id = selectedMake.getAttribute("id");
         var selectVal = $("#"+selectedMake_id).val();
+
         $.ajax({
             type: "GET",
             url: "js/data/models.json",
@@ -71,8 +83,15 @@ function CommonUtil() {
     };
 
     // displays all data models based on make selection
+    // todo
     this.getCarModel = function (modelObj) {
-        var modelSel = $("#model");
+        var modelSel = null;
+        if($('#updateCarInfoModal').hasClass('in')) {
+            modelSel = $("#update-car-general-info-table #model");
+        } else {
+            modelSel = $("#add-car-info-modal-content #model");
+        }
+        console.log(modelSel);
         Object.keys(modelObj).forEach(function(key) {
             var h = '<option value="'+modelObj[key].value+'" title="'+modelObj[key].title+'">'+modelObj[key].value+'</option>';
             modelSel.append(h);

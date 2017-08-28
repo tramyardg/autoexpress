@@ -6,8 +6,30 @@
  * Date: 2017-08-18
  * Time: 8:04 PM
  */
-class Vehicle
+
+/**
+ * Class Vehicle
+ * implements json serializable so that
+ * it can be encoded in json
+ */
+class Vehicle implements JsonSerializable
 {
+    private $_vehicleId;
+    private $_make;
+    private $_yearMade;
+    private $_model;
+    private $_price;
+    private $_mileage;
+    private $_transmission;
+    private $_drivetrain;
+    private $_engineCapacity;
+    private $_category;
+    private $_cylinder;
+    private $_doors;
+    private $_status;
+    private $_dateAdded;
+
+
     /**
      * Vehicle constructor.
      * @param $_vehicleId
@@ -272,20 +294,10 @@ class Vehicle
         return $this->_yearMade . ' ' . $this->_make . ' ' . $this->_model;
     }
 
-    private $_vehicleId;
-    private $_make;
-    private $_yearMade;
-    private $_model;
-    private $_price;
-    private $_mileage;
-    private $_transmission;
-    private $_drivetrain;
-    private $_engineCapacity;
-    private $_category;
-    private $_cylinder;
-    private $_doors;
-    private $_status;
-    private $_dateAdded;
-
+    // function called when encoded with json_encode
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
 
 }
