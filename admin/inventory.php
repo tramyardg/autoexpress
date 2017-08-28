@@ -40,17 +40,17 @@ if(!isset($_SESSION['authenticated'])) {
         }
     }
 
+    // displaying a car photos for deletion
     $d = new DiagramDAO();
     if(isset($_GET['action'])) {
         if($_GET['action'] === "getPhotosByCarId") {
             $diagram = $d->getPhotosBy_CarId($_GET['id']);
-
             $data = json_encode($diagram);
-            echo $data;
+            echo $data; // sent to ajax don't remove
             exit();
         }
     }
-    
+
     // deleting a car photo
     if(isset($_GET["action"])) {
         if($_GET["action"] === "deleteCarPhoto") {

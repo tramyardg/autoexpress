@@ -165,33 +165,6 @@ var CarActions = (function () {
                     requestErrorModal.modal('show');
                 });
 
-                // console.log(deleteCarPhotoSel);
-
-                // deleting a car photos
-                // deleteCarPhotoSel.click(function (event){
-                //     var carId = $(this).attr("delete-photos");
-                //     alert(carId);
-                //     confirmDeleteRecordSel.modal('show');
-                //     event.preventDefault();
-                //
-                //     // deleteConfirmBtnSel.click(function () {
-                //     //     confirmDeleteRecordSel.modal('hide');
-                //     //     rowAffectedSuccessSel.modal('show');
-                //     //     $.ajax({
-                //     //         url: "?action=deleteCarPhoto",
-                //     //         type: "get",
-                //     //         data: "id=" + carId,
-                //     //         success: function(data) {
-                //     //             if(data === 1) {
-                //     //                 rowAffectedSuccessSel.modal('show');
-                //     //             }
-                //     //         }
-                //     //     }).fail(function(data){
-                //     //         requestErrorModal.modal('show');
-                //     //     });
-                //     // });
-                //     return false; //for good measure
-                // });
             };
 
 
