@@ -359,7 +359,7 @@ function CommonTemplate() {
             '   							<tbody>  '+
             '   							<tr>  '+
             '   								<td>  '+
-            '   									<input type="submit" class="btn btn-primary btn-sm" name="add-car" id="add-car" value="Submit">  '+
+            '   									<input type="submit" class="btn btn-primary btn-sm" name="update-car-submit" id="update-car-submit" value="Submit">  '+
             '   									<input type="button" class="btn btn-default btn-sm" data-dismiss="modal" aria-label="Close" value="Cancel">  '+
             '   								</td>  '+
             '   							</tr>  '+
