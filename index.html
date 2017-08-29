@@ -3,6 +3,7 @@
       <title>AutoExpress.com</title>
       <link href="css/style.css" rel="stylesheet">
       <link href="css/search.css" rel="stylesheet">
+	  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 	  <link href="css/bootstrap.min.css" rel="stylesheet">
    </head>
    <body>
@@ -102,78 +103,166 @@
                         <td><img src="images/5737db2279b7a.jpg"></td>
                         <td>
                            <div id="feature_links">
-                              <div>
-                                 <p><a href="login.php" title="You must log in to use this service">Refer to a friend</a></p>
-                              </div>
-                              <div>
-                                 <p><a href="login.php" title="You must log in to use this service">Calculate payment</a></p>
-                              </div>
-                              <div>
-                                 <p><a href="login.php" title="You must log in to use this service">More Details</a></p>
-                              </div>
+                              <a href="#shareLinkModal" data-toggle="modal" data-target="#shareLinkModal" title="Share this link">
+								<p><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</p>
+							  </a>
+							  <a href="#calculatePaymentModal" data-toggle="modal" data-target="#calculatePaymentModal"  title="Estimate your payment">
+								<p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
+							  </a>
+							  <a href="" title="View more details">
+								<p><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;More Details</p>
+							  </a>
                            </div>
                         </td>
                         <td>
                            <div id="car_info">
-                              <p><b style="font-size: 16px;">2016 BMW M4</b></p>
-                              <p><font style="font-size: 14px; color: rgb(5, 128, 0); font-weight: bold;  text-transform:uppercase;">$66,000</font></p>
+                              <p><b style="font-size: 16px;">2016 BMW M4 <span id="price-style">$66,000</span></b></p>
+                              <p>Available</p>
                               <p>1023 km | Manual | RWD</p>
                            </div>
                         </td>
                      </tr>
                   </tbody>
                </table>
-               <table>
-                  <tbody>
-                     <tr>
-                        <th>Photo</th>
-                        <th><font>Links</font></th>
-                        <th colspan="2" id="vf">Vehicle information</th>
-                     </tr>
-                     <tr>
-                        <td><img src="images/534176f16e59a.jpg"></td>
-                        <td>
-                           <div id="feature_links">
-                              <div>
-                                 <p><a href="login.php" title="You must log in to use this service">Refer to a friend</a></p>
-                              </div>
-                              <div>
-                                 <p><a href="login.php" title="You must log in to use this service">Calculate payment</a></p>
-                              </div>
-                              <div>
-                                 <p><a href="login.php" title="You must log in to use this service">More Details</a></p>
-                              </div>
-                           </div>
-                        </td>
-                        <td>
-                           <div id="car_info">
-                              <p><b style="font-size: 16px;">2013 Jeep Grand Cherokee</b></p>
-                              <p><font style="font-size: 14px; color: rgb(5, 128, 0); font-weight: bold;  text-transform:uppercase;"><b>$35,887</b></font></p>
-                              <p>12878 km | Automatic | AWD</p>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-               <font face="Verdana" size="5" color="red">1</font>
-               <a href="index.php?page=4"><font face="Verdana" size="3">2</font></a>
-               <a href="index.php?page=4"><font face="Verdana" size="3">NEXT</font></a>
+               <nav aria-label="Page navigation">
+				  <ul class="pagination">
+					<li>
+					  <a href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					  </a>
+					</li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li>
+					  <a href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					  </a>
+					</li>
+				  </ul>
+				</nav>
             </div>
             <!-- end .content_car_section -->
-         </div>
-         <!-- end .content -->
-         <div class="footer" style="
-            text-align: center;
-            ">
+			
+			
+			<div class="modal shareLinkModal fade" tabindex="-1" role="dialog" id="shareLinkModal" aria-labelledby="shareLinkModal">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Copy the URL below to share</h4>
+				  </div>
+				  <div class="modal-body">
+					<label for="basic-url">Paste this link in email or IM</label>
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">https://example.com/users/</span>
+					</div>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			
+			<div class="modal calculatePaymentModal fade" tabindex="-1" role="dialog" id="calculatePaymentModal" aria-labelledby="calculatePaymentModal">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Estimate your monthly or bi-weekly payment</h4>
+				  </div>
+				  <div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12">
+							<table id="calculateTbl">
+							   <tbody>
+								  <tr>
+									 <td>Vehicle price:</td>
+									 <td></td>
+									 <td>$</td>
+									 <td><input disabled="" type="text" name="price1" id="price1" value=""></td>
+								  </tr>
+								  <tr>
+									 <td>Trade-in value:</td>
+									 <td></td>
+									 <td>$</td>
+									 <td><input type="text" name="trade_value" id="trade_value"></td>
+								  </tr>
+								  <tr>
+									 <td>Down payment:</td>
+									 <td></td>
+									 <td>$</td>
+									 <td><input type="text" name="cash_down" id="cash_down"></td>
+								  </tr>
+								  <tr>
+									 <td>Term by months:</td>
+									 <td>&nbsp;</td>
+									 <td>*</td>
+									 <td>
+										<select id="term" name="term" onchange="jsFunction(this)">
+										   <option value="0" selected="selected">Select rate</option>
+										   <option value="12">12 months</option>
+										   <option value="24">24 months</option>
+										   <option value="36">36 months</option>
+										   <option value="48">48 months</option>
+										   <option value="60">60 months</option>
+										</select>
+									 </td>
+								  </tr>
+								  <tr>
+									 <td>Interest rate:</td>
+									 <td>&nbsp;</td>
+									 <td>%</td>
+									 <td><input type="text" name="rate1" id="rate1"></td>
+								  </tr>
+								  <tr>
+									 <td>&nbsp;</td>
+									 <td>&nbsp;</td>
+									 <td>&nbsp;</td>
+									 <td><input type="submit" name="calculate" value="Caculate"></td>
+								  </tr>
+								  <tr>
+									 <td>Monthly payments:</td>
+									 <td>&nbsp;</td>
+									 <td>$</td>
+									 <td><font id="payment_value"></font></td>
+								  </tr>
+								  <tr>
+									 <td>Bi-Weekly:</td>
+									 <td>&nbsp;</td>
+									 <td>$</td>
+									 <td><font id="bi_weekly_value"></font></td>
+								  </tr>
+							   </tbody>
+							</table>
+						</div>
+					</div>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			
+			
+         </div><!-- end .content -->
+         <div class="footer">
             <div id="footer_content">
 			  <p style="margin-bottom: 5px"></p>
-			  <p style="
-    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
-">Copyright © 2012-2014 | Raymart De Guzman | Leo Sudarma</p>
+			  <p style="text-shadow: 0 1px 1px rgba(0,0,0,0.5);">Copyright © 2012-2014 | Raymart De Guzman | Leo Sudarma</p>
             </div>
          </div>
          <!-- end .footer -->
       </div>
       <!-- end .container -->
    
-</body></html>
+   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -293,14 +293,6 @@ var CarActions = (function () {
                 }
             };
 
-
-
-
-
-
-
-
-
         }
 
 

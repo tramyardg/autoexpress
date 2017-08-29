@@ -61,7 +61,6 @@ class CarDAO extends Utility
 
     function getCarById($id) {
         $sql = "SELECT * FROM `vehicle` WHERE `vehicleId` = $id";
-//        echo $sql;
         return $this->query($sql);
     }
 
