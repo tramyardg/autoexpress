@@ -213,6 +213,12 @@ h1,h2,h3,h4,h5,h6,p {
 .calculateTbl input, .calculateTbl select {
     margin-bottom: 3px;
 }
-#car-title {
+.calculateTbl tr td {
+    text-align: right;
+}
+.calculateTbl tr:not(:nth-child(6)) td:nth-child(1):after {
+    content: ":";
+}
+.car-title {
     font-size: 15px;
 }
