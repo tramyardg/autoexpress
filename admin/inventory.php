@@ -480,7 +480,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            Photo(s):
+                                                            <p><b>Note</b>: Image file types no greater than 25KiB are processed, otherwise it will not work.</p>
                                                             <input type="file" id="files" name="files[]" multiple />
                                                             <output id="list"></output>
                                                             <script>
@@ -489,6 +489,11 @@ if(!isset($_SESSION['authenticated'])) {
 
                                                                     // Loop through the FileList and render image files as thumbnails.
                                                                     for (var i = 0, f; f = files[i]; i++) {
+
+                                                                        // 25000 bytes = 25KiB
+                                                                        if(f.size > 25000) {
+                                                                            continue;
+                                                                        }
 
                                                                         // Only process image files.
                                                                         if (!f.type.match('image.*')) {
