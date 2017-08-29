@@ -11,37 +11,30 @@ body {
     padding: 0;
     color: #000;
 }
-
 #b2blogo {
     width: 100px;
     height: 30px;
 }
-
 ul {
     list-style-type: none;
 }
-
 img {
     /*width: 180px;*/
     /*height: 135px;*/
 }
-
 #vf {
     width: 80%;
 }
-
 th {
     background-color: #36383D;
     color: #ffffff;
     padding: 5px !important;
     font-size: 11px;
 }
-
 h1,h2,h3,h4,h5,h6,p {
     margin-top: 0;
     padding-left: 19px;
 }
-
 .container_custom {
     width: 68%;
     max-width: 1024px;
@@ -50,45 +43,35 @@ h1,h2,h3,h4,h5,h6,p {
     border-radius: 10px;
     box-shadow: 0 0 10px #9ecaed;
 }
-
 .header {
     color: #e0e0e0;
     background-color: #36383D;
 }
-
 .header p a {
     color: #FFC266;
     text-decoration: none;
 }
-
 .header p a:hover {
     color: #ffffff;
 }
-
 .header span p {
     display: inline-block;
 }
-
 .sidebar1 {
     float: right;
-    width: 25%;
+    width: 20%;
     background: -webkit-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(238,238,238,1) 100%);
     border: solid 1px #C0C0C0;
-    margin-top: 20px;
-    margin-right: 40px;
-	margin-bottom: 20px;
+    margin: 20px 20px 20px 0;
 }
-
 .sidebar1 p {
-    font-size: 14px;
+    /*font-size: 14px;*/
 }
-
 .content {
     width: 77%;
     float: none;
     background: #fff;
 }
-
 .footer {
     padding: 10px 0;
     position: relative;
@@ -100,7 +83,6 @@ h1,h2,h3,h4,h5,h6,p {
     font-size: 10px;
 	text-align:center;
 }
-
 .logotext {
     font: .7em Tahoma, sans-serif;
     font-size: 26px;
@@ -108,120 +90,95 @@ h1,h2,h3,h4,h5,h6,p {
     color: #fff;
     text-shadow: 0 1px 1px rgba(0,0,0,0.5);
 }
-
 .orangelogotext {
     font: .7em Tahoma, sans-serif;
     font-size: 40px;
     font-weight: 700;
     color: #F90;
 }
-
 .menu_header {
-    /* border-top: solid 1px #999; */
     border-bottom: solid 1px #999;
     padding: 10px;
     font-weight: 700;
     background-color: #F90;
-    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+    /*text-shadow: 0 1px 1px rgba(0,0,0,0.5);*/
 }
-
 .content_car_section {
     float: left;
     font-size: 12px;
-    width: 80%;
-    font-size: 11px;
     text-align: left;
     background: #fff;
-    margin-left: 40px;
+    margin-left: 20px;
     margin-top: 20px;
 }
-
 #menu_header_left_section {
     float: left;
     background-color: transparent;
     height: 20px;
 }
-
 #menu_header_left_section a {
     color: #fff;
     text-decoration: none;
 }
-
 #menu_header_left_section a:hover {
     color: #000;
 }
-
 #left_footer {
     float: left;
     width: 30%;
 }
-
 #left_footer h3 {
     color: #FFC266;
     text-align: left;
 }
-
 #left_footer a {
     color: #fff;
     text-decoration: underline;
 }
-
 #left_footer a:hover {
     color: #FFC266;
     text-decoration: underline;
 }
-
 #right_footer {
     float: right;
     width: 30%;
 }
-
 #right_footer h3 {
     color: #FFC266;
     text-align: left;
 }
-
 #right_footer div p {
     display: inline;
     text-align: left;
 }
-
 #middle_footer {
     width: 30%;
     margin: 0 auto;
 }
-
 #middle_footer h3 {
     color: #FFC266;
     text-align: left;
 }
-
 #login {
     font-size: 14px;
     text-align: right;
 }
-
 #footer_content {
     font-size: 12px;
 }
-
 #feature_links {
     width: 200px;
     padding-left: 20px;
 }
-
 #feature_links a:link {
     text-decoration: none;
 }
-
 #feature_links a:hover {
     color: #111;
 }
-
 #feature_links div:hover {
     background-color: #999;
 }
-
 #feature_links div {
     height: 23px;
     width: 180px;
@@ -238,15 +195,12 @@ h1,h2,h3,h4,h5,h6,p {
 	font-size: 12px;
 	margin: 0;
 }
-
-#car_info {
+.car_info {
     width: 100%;
 }
-
 #car_info2 {
     width: 100%;
 }
-
 #car_info2 p {
     text-align: right;
 }
@@ -255,4 +209,10 @@ h1,h2,h3,h4,h5,h6,p {
 	color: rgb(5, 128, 0); 
 	font-weight: bold;  
 	text-transform:uppercase;
+}
+.calculateTbl input, .calculateTbl select {
+    margin-bottom: 3px;
+}
+#car-title {
+    font-size: 15px;
 }

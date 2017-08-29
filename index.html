@@ -1,266 +1,285 @@
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <title>AutoExpress.com</title>
-      <link href="css/style.css" rel="stylesheet">
-      <link href="css/search.css" rel="stylesheet">
-	  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-	  <link href="css/bootstrap.min.css" rel="stylesheet">
-   </head>
-   <body>
-      <div class="container_custom">
-         <div class="header">
-            <div style="float:left;/* padding:20px; */padding-left: 10px;padding-bottom: 10px;" class="logotext">Your<span class="orangelogotext">Logo</span>Here</div>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>AutoExpress.com</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/search.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container_custom">
+    <div class="header">
+        <div style="float:left;/* padding:20px; */padding-left: 10px;padding-bottom: 10px;" class="logotext">Your<span
+                class="orangelogotext">Logo</span>Here
+        </div>
+        <div style="clear:both"></div>
+        <div class="menu_header">
+            <div id="menu_header_left_section">
+                <span><a href="#"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Used Vehicles</a></span>
+            </div>
             <div style="clear:both"></div>
-            <div class="menu_header">
-               <div id="menu_header_left_section">
-                  <span><a href="index.php">Used Vehicles</a></span>
-               </div>
-               <div style="clear:both"></div>
-            </div>
-         </div>
-         <div class="sidebar1">
-            <div class="admin_menu"></div>
-            <div class="search_menu">
-               <form method="get" action="advanced_search.php">
-                  <ul>
-                     <li>Advance search</li>
-                     <li>Make</li>
-                     <li>
+        </div>
+    </div>
+    <div class="sidebar1">
+        <div class="search_menu">
+            <form method="get" action="advanced_search.php">
+                <ul>
+                    <li><label><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Advance Search</label></li>
+                    <li>Make</li>
+                    <li>
                         <select name="make">
-                           <option value="%">select all</option>
-                           <option value="BMW">BMW</option>
-                           <option value="Honda">Honda</option>
-                           <option value="Infiniti">Infiniti</option>
-                           <option value="Jeep">Jeep</option>
-                           <option value="Lexus">Lexus</option>
-                           <option value="Toyota">Toyota</option>
+                            <option value="%">Select all</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Infiniti">Infiniti</option>
+                            <option value="Jeep">Jeep</option>
+                            <option value="Lexus">Lexus</option>
+                            <option value="Toyota">Toyota</option>
                         </select>
-                     </li>
-                     <li>Year: min
+                    </li>
+                    <li>Year: min</li>
+                    <li>
                         <select name="min_year">
-                           <option value="1990">select year&nbsp;</option>
-                           <option value="2000">2000</option>
-                           <option value="2001">2001</option>
-                           <option value="2002">2002</option>
-                           <option value="2003">2003</option>
-                           <option value="2004">2004</option>
-                           <option value="2005">2005</option>
-                           <option value="2006">2006</option>
-                           <option value="2007">2007</option>
-                           <option value="2008">2008</option>
-                           <option value="2009">2009</option>
-                           <option value="2010">2010</option>
-                           <option value="2011">2011</option>
-                           <option value="2012">2012</option>
-                           <option value="2013">2013</option>
-                           <option value="2014">2014</option>
-                           <option value="2015">2015</option>
-                           <option value="2016">2016</option>
-                           <option value="2017">2017</option>
+                            <option value="1990">Select year&nbsp;</option>
+                            <option value="2000">2000</option>
+                            <option value="2001">2001</option>
+                            <option value="2002">2002</option>
+                            <option value="2003">2003</option>
+                            <option value="2004">2004</option>
+                            <option value="2005">2005</option>
+                            <option value="2006">2006</option>
+                            <option value="2007">2007</option>
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
                         </select>
-					</li>
-                     <li>Year: max 
+                    </li>
+                    <li>Year: max</li>
+                    <li>
                         <select name="max_year">
-                           <option value="2020">select year</option>
-                           <option value="2000">2000</option>
-                           <option value="2001">2001</option>
-                           <option value="2002">2002</option>
-                           <option value="2003">2003</option>
-                           <option value="2004">2004</option>
-                           <option value="2005">2005</option>
-                           <option value="2006">2006</option>
-                           <option value="2007">2007</option>
-                           <option value="2008">2008</option>
-                           <option value="2009">2009</option>
-                           <option value="2010">2010</option>
-                           <option value="2011">2011</option>
-                           <option value="2012">2012</option>
-                           <option value="2013">2013</option>
-                           <option value="2014">2014</option>
-                           <option value="2015">2015</option>
-                           <option value="2016">2016</option>
-                           <option value="2017">2017</option>
+                            <option value="2020">Select year</option>
+                            <option value="2000">2000</option>
+                            <option value="2001">2001</option>
+                            <option value="2002">2002</option>
+                            <option value="2003">2003</option>
+                            <option value="2004">2004</option>
+                            <option value="2005">2005</option>
+                            <option value="2006">2006</option>
+                            <option value="2007">2007</option>
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
                         </select>
-					 </li>
-                     <li>Price:</li>
-                     <li><input type="number" name="min_price" placeholder="from"></li>
-                     <li><input type="number" name="max_price" placeholder="to"></li>
-                     <li><input type="submit" name="search" value="Go" style="margin-left: 45px;"></li>
-                  </ul>
-               </form>
+                    </li>
+                    <li>Price:</li>
+                    <li><input type="number" name="min_price" placeholder="from"></li>
+                    <li><input type="number" name="max_price" placeholder="to"></li>
+                    <li><input type="submit" name="search" value="Search"></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content_car_section">
+            <table>
+                <tbody>
+                <tr>
+                    <th>Photo</th>
+                    <th><font>Links</font></th>
+                    <th colspan="2" id="vf">Vehicle Information</th>
+                </tr>
+                <tr>
+                    <td><img src="images/5737db2279b7a.jpg"></td>
+                    <td>
+                        <div id="feature_links">
+                            <a href="#shareLinkModal" data-toggle="modal" data-target="#shareLinkModal"
+                               title="Share this link">
+                                <p><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</p>
+                            </a>
+                            <a href="#calculatePaymentModal" data-toggle="modal" data-target="#calculatePaymentModal"
+                               title="Estimate your payment">
+                                <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
+                            </a>
+                            <a href="" title="View more details">
+                                <p><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;More Details</p>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="car_info">
+                            <p>
+                                <span id="car-title">2016 BMW M4 - </span>
+                                <span id="price-style">$66,000</span>
+                            </p>
+                            <p><span id="availability">Available</span></p>
+                            <p>
+                                <span id="mileage">1023 KM</span>&nbsp;|&nbsp;
+                                <span id="transmission">Manual</span>&nbsp;|&nbsp;
+                                <span id="drivetrain">RWD</span>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- end .content_car_section -->
+
+
+        <div class="modal shareLinkModal fade" tabindex="-1" role="dialog" id="shareLinkModal"
+             aria-labelledby="shareLinkModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Copy the URL below to share</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label>Paste this link in email or IM</label>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">https://example.com/users/</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
-         </div>
-         <div class="content">
-            <div class="content_car_section">
-               <table>
-                  <tbody>
-                     <tr>
-                        <th>Photo</th>
-                        <th><font>Links</font></th>
-                        <th colspan="2" id="vf">Vehicle information</th>
-                     </tr>
-                     <tr>
-                        <td><img src="images/5737db2279b7a.jpg"></td>
-                        <td>
-                           <div id="feature_links">
-                              <a href="#shareLinkModal" data-toggle="modal" data-target="#shareLinkModal" title="Share this link">
-								<p><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</p>
-							  </a>
-							  <a href="#calculatePaymentModal" data-toggle="modal" data-target="#calculatePaymentModal"  title="Estimate your payment">
-								<p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
-							  </a>
-							  <a href="" title="View more details">
-								<p><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;More Details</p>
-							  </a>
-                           </div>
-                        </td>
-                        <td>
-                           <div id="car_info">
-                              <p><b style="font-size: 16px;">2016 BMW M4 <span id="price-style">$66,000</span></b></p>
-                              <p>Available</p>
-                              <p>1023 km | Manual | RWD</p>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-               <nav aria-label="Page navigation">
-				  <ul class="pagination">
-					<li>
-					  <a href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					  </a>
-					</li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li>
-					  <a href="#" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					  </a>
-					</li>
-				  </ul>
-				</nav>
+        </div>
+
+        <div class="modal calculatePaymentModal fade" tabindex="-1" role="dialog" id="calculatePaymentModal"
+             aria-labelledby="calculatePaymentModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Estimate your monthly or bi-weekly payment</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="calculateTbl">
+                                    <tbody>
+                                    <tr>
+                                        <td>Vehicle price</td>
+                                        <td></td>
+                                        <td>$</td>
+                                        <td><input title="Car price" readonly type="text" name="car-price" id="car-price" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trade</td>
+                                        <td></td>
+                                        <td>$</td>
+                                        <td><input title="Trade" type="text" name="trade" id="trade"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Down payment</td>
+                                        <td></td>
+                                        <td>$</td>
+                                        <td><input title="Down payment" type="text" name="cash-down" id="cash-down"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Term by months</td>
+                                        <td>&nbsp;</td>
+                                        <td>*</td>
+                                        <td>
+                                            <select title="Term" id="term" name="term" onchange="">
+                                                <option value="12">12 months</option>
+                                                <option value="24">24 months</option>
+                                                <option value="36">36 months</option>
+                                                <option value="48">48 months</option>
+                                                <option selected="selected" value="60">60 months</option>
+                                                <option value="60">72 months</option>
+                                                <option value="60">84 months</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Interest rate:</td>
+                                        <td>&nbsp;</td>
+                                        <td>%</td>
+                                        <td><input title="Interest rate" type="text" name="int-rate" id="int-rate"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td><input type="button" name="calculate" value="Calculate"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Monthly payments:</td>
+                                        <td>&nbsp;</td>
+                                        <td>$</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bi-Weekly:</td>
+                                        <td>&nbsp;</td>
+                                        <td>$</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
-            <!-- end .content_car_section -->
-			
-			
-			<div class="modal shareLinkModal fade" tabindex="-1" role="dialog" id="shareLinkModal" aria-labelledby="shareLinkModal">
-			  <div class="modal-dialog" role="document">
-				<div class="modal-content">
-				  <div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Copy the URL below to share</h4>
-				  </div>
-				  <div class="modal-body">
-					<label for="basic-url">Paste this link in email or IM</label>
-					<div class="input-group">
-					  <span class="input-group-addon" id="basic-addon3">https://example.com/users/</span>
-					</div>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			
-			<div class="modal calculatePaymentModal fade" tabindex="-1" role="dialog" id="calculatePaymentModal" aria-labelledby="calculatePaymentModal">
-			  <div class="modal-dialog" role="document">
-				<div class="modal-content">
-				  <div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Estimate your monthly or bi-weekly payment</h4>
-				  </div>
-				  <div class="modal-body">
-					<div class="row">
-						<div class="col-xs-12">
-							<table id="calculateTbl">
-							   <tbody>
-								  <tr>
-									 <td>Vehicle price:</td>
-									 <td></td>
-									 <td>$</td>
-									 <td><input disabled="" type="text" name="price1" id="price1" value=""></td>
-								  </tr>
-								  <tr>
-									 <td>Trade-in value:</td>
-									 <td></td>
-									 <td>$</td>
-									 <td><input type="text" name="trade_value" id="trade_value"></td>
-								  </tr>
-								  <tr>
-									 <td>Down payment:</td>
-									 <td></td>
-									 <td>$</td>
-									 <td><input type="text" name="cash_down" id="cash_down"></td>
-								  </tr>
-								  <tr>
-									 <td>Term by months:</td>
-									 <td>&nbsp;</td>
-									 <td>*</td>
-									 <td>
-										<select id="term" name="term" onchange="jsFunction(this)">
-										   <option value="0" selected="selected">Select rate</option>
-										   <option value="12">12 months</option>
-										   <option value="24">24 months</option>
-										   <option value="36">36 months</option>
-										   <option value="48">48 months</option>
-										   <option value="60">60 months</option>
-										</select>
-									 </td>
-								  </tr>
-								  <tr>
-									 <td>Interest rate:</td>
-									 <td>&nbsp;</td>
-									 <td>%</td>
-									 <td><input type="text" name="rate1" id="rate1"></td>
-								  </tr>
-								  <tr>
-									 <td>&nbsp;</td>
-									 <td>&nbsp;</td>
-									 <td>&nbsp;</td>
-									 <td><input type="submit" name="calculate" value="Caculate"></td>
-								  </tr>
-								  <tr>
-									 <td>Monthly payments:</td>
-									 <td>&nbsp;</td>
-									 <td>$</td>
-									 <td><font id="payment_value"></font></td>
-								  </tr>
-								  <tr>
-									 <td>Bi-Weekly:</td>
-									 <td>&nbsp;</td>
-									 <td>$</td>
-									 <td><font id="bi_weekly_value"></font></td>
-								  </tr>
-							   </tbody>
-							</table>
-						</div>
-					</div>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			
-			
-         </div><!-- end .content -->
-         <div class="footer">
-            <div id="footer_content">
-			  <p style="margin-bottom: 5px"></p>
-			  <p style="text-shadow: 0 1px 1px rgba(0,0,0,0.5);">Copyright © 2012-2014 | Raymart De Guzman | Leo Sudarma</p>
-            </div>
-         </div>
-         <!-- end .footer -->
-      </div>
-      <!-- end .container -->
-   
-   
+        </div>
+
+
+    </div><!-- end .content -->
+    <div class="footer">
+        <div id="footer_content">
+            <p style="margin-bottom: 5px"></p>
+            <p style="text-shadow: 0 1px 1px rgba(0,0,0,0.5);">Copyright © 2012-2014 | Raymart De Guzman | Leo
+                Sudarma</p>
+        </div>
+    </div>
+    <!-- end .footer -->
+</div>
+<!-- end .container -->
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
