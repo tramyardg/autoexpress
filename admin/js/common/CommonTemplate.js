@@ -146,7 +146,7 @@ function CommonTemplate() {
             '   							<tr>  '+
             '   								<td>Make<span class="input-required"> *</span></td>  '+
             '   								<td>  '+
-            '   									<select title="make" name="make" id="make" class="" onchange="" required>  '+
+            '   									<select title="make" name="make" id="make" class="" required>  '+
             '                                           <option selected="selected" value="">Select Make</option>'+
             '   										<option value="Acura">Acura</option>  '+
             '   										<option value="Alfa Romeo">Alfa Romeo</option>  '+

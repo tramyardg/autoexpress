@@ -70,6 +70,9 @@ var CarActions = (function () {
 
         bindCarActions: function () {
 
+            // alert($('.add-new-car-modal-lg').hasClass('in'));
+
+
             // deleting a car
             deleteCarSel.click(function (event){
                 var dataId = $(this).attr("delete");
@@ -108,11 +111,10 @@ var CarActions = (function () {
                     dataType: "json",
                     success: function(data) {
 
-                        // console.log(data[0]._make);
+                        // using Mustache to render data object
                         var html = Mustache.render(template.updateCarInfoModalContent(util), data[0]);
                         updateCarInfoModalContent.empty();
                         updateCarInfoModalContent.append(html);
-                        // $('#update-car-info-modal-content input[type=radio]#cylinder').eq(0)
 
                         selectedMakeSelectOptionFn(data[0]._make);
                         selectedYearSelectOptionFn(data[0]._yearMade);
@@ -121,10 +123,11 @@ var CarActions = (function () {
                         checkedDrivetrainRadioBtnFn(data[0]._drivetrain);
                         checkedTransmissionRadioBtnFn(data[0]._transmission);
 
-                        // updateCarInfoModalContent.find('input[type=radio]#make')
-                        //var makes = updateCarInfoModalContent.find('select#make');
-                        //makes.attr('onchange', "new CommonUtil().selectCarMake(this)");
-
+                        // mapping of appropriate models after selecting make
+                        var selectMakeOption = updateCarInfoModalContent.find('select#make');
+                        selectMakeOption.on('change', function () {
+                            util.selectCarMake($(this));
+                        });
 
                     }
                 }).fail(function(data){
@@ -272,6 +275,8 @@ var CarActions = (function () {
                     if(makes.eq(i).val() === make) {
                         makes.eq(i).attr('selected', 'selected');
                         break;
+                    } else {
+                        makes.eq(i).removeAttr('selected');
                     }
                 }
             };
@@ -282,6 +287,8 @@ var CarActions = (function () {
                     if(years.eq(i).val() === year) {
                         years.eq(i).attr('selected', 'selected');
                         break;
+                    } else {
+                        years.eq(i).removeAttr('selected');
                     }
                 }
             };

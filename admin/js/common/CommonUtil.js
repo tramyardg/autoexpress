@@ -47,23 +47,10 @@ function CommonUtil() {
     };
 
     // dynamically show the models of data selected
-    // todo
     this.selectCarMake = function(selectedMake) {
-        // var modelSel = $("#add-car-info-modal-content #model, #update-car-info-modal-content #model");
-        // modelSel.empty();
-        //
-
-        if($('#updateCarInfoModal').hasClass('in')) {
-            var modelSel_update = $("#update-car-general-info-table #model");
-            modelSel_update.empty();
-        } else {
-            var modelSel_add = $("#add-car-info-modal-content #model");
-            modelSel_add.empty();
-        }
-
-        var selectedMake_id = selectedMake.getAttribute("id");
-        var selectVal = $("#"+selectedMake_id).val();
-
+        var modelsSelect = $(selectedMake).parent().parent().next().next().find('#model');
+        modelsSelect.empty();
+        var selectVal = $(selectedMake).val();
         $.ajax({
             type: "GET",
             url: "js/data/models.json",
@@ -72,8 +59,11 @@ function CommonUtil() {
                 for (var key in json) {
                     if (json.hasOwnProperty(key)) {
                         if(selectVal === json[key].title) {
-                            // pass the models
-                            new CommonUtil().getCarModel(json[key].models);
+                            var modelsObj = json[key].models;
+                            Object.keys(modelsObj).forEach(function(key) {
+                                var h = '<option value="'+modelsObj[key].value+'" title="'+modelsObj[key].title+'">'+modelsObj[key].value+'</option>';
+                                modelsSelect.append(h);
+                            });
                             break;
                         }
                     }
@@ -81,21 +71,4 @@ function CommonUtil() {
             }
         });
     };
-
-    // displays all data models based on make selection
-    // todo
-    this.getCarModel = function (modelObj) {
-        var modelSel = null;
-        if($('#updateCarInfoModal').hasClass('in')) {
-            modelSel = $("#update-car-general-info-table #model");
-        } else {
-            modelSel = $("#add-car-info-modal-content #model");
-        }
-        console.log(modelSel);
-        Object.keys(modelObj).forEach(function(key) {
-            var h = '<option value="'+modelObj[key].value+'" title="'+modelObj[key].title+'">'+modelObj[key].value+'</option>';
-            modelSel.append(h);
-        });
-    };
-
 }
