@@ -2,11 +2,10 @@ html {
     background-color: #fff;
 }
 table {
-	font-size: 14px !important;
+	font-size: 12px !important;
 	margin-bottom: 10px !important;
 }
 body {
-    font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     color: #000;
@@ -27,9 +26,12 @@ img {
 }
 th {
     background-color: #36383D;
-    color: #ffffff;
-    padding: 5px !important;
-    font-size: 11px;
+    /*color: #ffffff;*/
+    padding: 0 !important;
+    /*font-size: 11px;*/
+}
+.content_car_section table tr td:first-child {
+    padding: 15px;
 }
 h1,h2,h3,h4,h5,h6,p {
     margin-top: 0;
@@ -90,7 +92,7 @@ h1,h2,h3,h4,h5,h6,p {
     color: #fff;
     text-shadow: 0 1px 1px rgba(0,0,0,0.5);
 }
-.orangelogotext {
+.orange-logo-text {
     font: .7em Tahoma, sans-serif;
     font-size: 40px;
     font-weight: 700;
@@ -101,7 +103,6 @@ h1,h2,h3,h4,h5,h6,p {
     padding: 10px;
     font-weight: 700;
     background-color: #F90;
-    /*text-shadow: 0 1px 1px rgba(0,0,0,0.5);*/
 }
 .content_car_section {
     float: left;
@@ -231,4 +232,16 @@ h1,h2,h3,h4,h5,h6,p {
 #payment-value-notice {
     font-size: 10px;
     padding-top: 10px;
+}
+.modal-monthly-payment, .modal-bi-weekly {
+    color: #F90;
+    font-weight: bold;
+}
+.car-images {
+    position: relative;
+}
+.car-images span {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }

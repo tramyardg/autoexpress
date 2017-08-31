@@ -68,7 +68,7 @@ var CarActions = (function () {
             this.bindCarActions();
         },
 
-        bindPaymentCalculatorActions: function () {
+        bindCarActions: function () {
 
             // alert($('.add-new-car-modal-lg').hasClass('in'));
 
