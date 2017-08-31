@@ -30,13 +30,6 @@ var PaymentCalculator = (function () {
         },
 
         bindPaymentCalculatorActions: function () {
-            /**
-             *
-             * A = the monthly payment.
-             * P = the principal
-             * r = the interest rate per month, which equals the annual interest rate divided by 12
-             * n = the total number of months
-             */
 
             calculatePaymentLinkBtn.click(function (event) {
                 var dataCarPrice = $(this).attr('data-price');
@@ -76,7 +69,6 @@ var PaymentCalculator = (function () {
                         carPrice, downPayment, trade, termByMonths, interestRate, salesTax
                     ]);
 
-                    // var adjustedRate =
                     var h =  "car price=" + carPrice.val + ": downPayment=" + downPayment.val + ": trade=" + trade.val + " : terms=" + termByMonths.val;
                     h += " : interest rate=" + interestRate.val + " : sales tax="+ salesTax.val;
                     console.log(h);
@@ -89,7 +81,6 @@ var PaymentCalculator = (function () {
                         _interestRate: parseFloat(interestRate.val),
                         _salesTax: parseFloat(salesTax.val)
                     };
-                    //
                     if(isValidInputFn(downPayment.val)) {
                         inputs._downPayment = 0;
                     }
@@ -108,7 +99,7 @@ var PaymentCalculator = (function () {
 
 
                     // finally calculate the payment here
-                    // calculateFn(inputs);
+                    calculateFn(inputs);
 
                     e.preventDefault();
                 });
@@ -117,11 +108,51 @@ var PaymentCalculator = (function () {
 
             });
 
+            /**
+             * loan amortization formula
+             * A = the monthly payment.
+             * P = the principal
+             * r = the interest rate per month, which equals the annual interest rate divided by 12
+             * n = the total number of months
+             * adjustRate = r/12
+             * numerator = (r (1 + r) ^ n)
+             * denominator = (((1 + r)^n) - 1)
+             * payment = P * (numerator / denominator)
+             * deduct: down payment, trade in value if any
+             * augment: sales tax if any
+             * @param options
+             */
             calculateFn = function (options) {
+                const MONTHLY = 12;
+                var monthlyInterest = (options._interestRate / MONTHLY);
+                var monthlyInterestRate = monthlyInterest / 100;
+
                 console.log(options);
             };
 
+
+
+
+
+
+
+
+
+
+            
+            /**
+             * Validation for non-numeric input.
+             * Only allowed inputs: 123, 12., 12.232
+             * @param fields
+             */
             onlyNumberAndDigitsAllowedFn = function (fields) {
+                /**
+                 * ^ - Beginning of the line;
+                 * \d* - 0 or more digits;
+                 * \.? - An optional dot (escaped, because in regex, . is a special character);
+                 * \d* - 0 or more digits (the decimal part);
+                 * $ - End of the line.
+                 */
                 var pattern = /^\d*\.?\d*$/;
                 for(var i = 0; i < fields.length; i++) {
                     if(!pattern.test(fields[i].val)) {
@@ -135,16 +166,14 @@ var PaymentCalculator = (function () {
             };
 
             /**
-             * Returns true if the input is valid
+             * Returns true if the input is invalid
+             * Invalid if null, undefined, or empty string
              * @param input
              * @returns {boolean}
              */
             isValidInputFn = function (input) {
                 return input === null || input === undefined || input === "";
             };
-
-
-
         }
     }; // end return
 })();
