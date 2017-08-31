@@ -3,7 +3,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>AutoExpress.com</title>
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/search.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -12,15 +11,15 @@
     <div class="header">
         <div>Your <span class="orange-logo-text">Logo</span> Here</div>
         <div style="clear:both"></div>
-        <div class="menu_header">
-            <div id="menu_header_left_section">
+        <div class="menu-header">
+            <div id="menu-header-left-section">
                 <span><a href="#"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Used Vehicles</a></span>
             </div>
             <div style="clear:both"></div>
         </div>
     </div>
     <div class="sidebar1">
-        <div class="search_menu">
+        <div class="search-menu">
             <form method="get" action="">
                 <ul>
                     <li><label><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Advance Search</label></li>
@@ -93,7 +92,7 @@
         </div>
     </div>
     <div class="content">
-        <div class="content_car_section">
+        <div class="content-car-section">
 
             <!-- car items -->
             <table id="car-item-1">
@@ -341,7 +340,7 @@
 
     </div>
     <div class="footer">
-        <div id="footer_content">
+        <div id="footer-content">
             <p>Copyright © 2012-2014 | Raymart De Guzman | Leo Sudarma</p>
         </div>
     </div>

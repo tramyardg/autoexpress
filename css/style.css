@@ -10,27 +10,17 @@ body {
     padding: 0;
     color: #000;
 }
-#b2blogo {
-    width: 100px;
-    height: 30px;
-}
 ul {
     list-style-type: none;
-}
-img {
-    /*width: 180px;*/
-    /*height: 135px;*/
 }
 .car-info-column {
     width: 80%;
 }
 th {
-    background-color: #36383D;
-    /*color: #ffffff;*/
-    padding: 0 !important;
-    /*font-size: 11px;*/
+    /*background-color: #36383D;*/
+    /*padding: 0 !important;*/
 }
-.content_car_section table tr td:first-child {
+.content-car-section table tr td:first-child {
     padding: 10px 0 0 15px;
 }
 h1,h2,h3,h4,h5,h6,p {
@@ -42,12 +32,13 @@ h1,h2,h3,h4,h5,h6,p {
     max-width: 1024px;
     min-width: 990px;
     margin: 0 auto;
-    /*border-radius: 10px;*/
-    /*box-shadow: 0 0 10px #9ecaed;*/
 }
 .header {
     color: #e0e0e0;
     background-color: #36383D;
+}
+.header div:first-child {
+    margin: 0 0 0 10px;
 }
 .header p a {
     color: #FFC266;
@@ -67,7 +58,6 @@ h1,h2,h3,h4,h5,h6,p {
     margin: 10px 10px 10px 0;
 }
 .sidebar1 p {
-    /*font-size: 14px;*/
 }
 .content {
     width: 77%;
@@ -79,9 +69,6 @@ h1,h2,h3,h4,h5,h6,p {
     position: relative;
     clear: both;
     width: 100%;
-    /*border-bottom: solid 1px #999;*/
-    /*background-color: #36383D;*/
-    /*color: #fff;*/
 	color: #000;
     font-size: 10px;
 	text-align:center;
@@ -94,18 +81,17 @@ h1,h2,h3,h4,h5,h6,p {
     text-shadow: 0 1px 1px rgba(0,0,0,0.5);
 }
 .orange-logo-text {
-    font: .7em Tahoma, sans-serif;
     font-size: 40px;
-    font-weight: 700;
+    font-weight: bolder;
     color: #F90;
 }
-.menu_header {
+.menu-header {
     border-bottom: solid 1px #999;
     padding: 10px;
     font-weight: 700;
     background-color: #F90;
 }
-.content_car_section {
+.content-car-section {
     float: left;
     font-size: 12px;
     text-align: left;
@@ -113,62 +99,22 @@ h1,h2,h3,h4,h5,h6,p {
     margin-left: 10px;
     margin-top: 10px;
 }
-#menu_header_left_section {
+#menu-header-left-section {
     float: left;
     background-color: transparent;
     height: 20px;
 }
-#menu_header_left_section a {
+#menu-header-left-section a {
     color: #fff;
     text-decoration: none;
 }
-#menu_header_left_section a:hover {
+#menu-header-left-section a:hover {
     color: #000;
 }
-#left_footer {
-    float: left;
-    width: 30%;
-}
-#left_footer h3 {
-    color: #FFC266;
-    text-align: left;
-}
-#left_footer a {
-    color: #fff;
-    text-decoration: underline;
-}
-#left_footer a:hover {
-    color: #FFC266;
-    text-decoration: underline;
-}
-#right_footer {
-    float: right;
-    width: 30%;
-}
-#right_footer h3 {
-    color: #FFC266;
-    text-align: left;
-}
-#right_footer div p {
-    display: inline;
-    text-align: left;
-}
-#middle_footer {
-    width: 30%;
-    margin: 0 auto;
-}
-#middle_footer h3 {
-    color: #FFC266;
-    text-align: left;
-}
-#login {
-    font-size: 14px;
-    text-align: right;
-}
-#footer_content {
+#footer-content {
     /*font-size: 12px;*/
 }
-#footer_content p:nth-child(1) {
+#footer-content p:nth-child(1) {
     /*text-shadow: 0 1px 1px rgba(0,0,0,0.5);*/
 }
 .feature_links {
@@ -210,9 +156,9 @@ h1,h2,h3,h4,h5,h6,p {
     text-align: right;
 }
 .price-style {
-	font-size: 14px; 
-	color: rgb(5, 128, 0); 
-	font-weight: bold;  
+	font-size: 14px;
+	color: rgb(5, 128, 0);
+	font-weight: bold;
 	text-transform:uppercase;
 }
 .calculateTbl input, .calculateTbl select {
@@ -227,7 +173,7 @@ h1,h2,h3,h4,h5,h6,p {
 .car-title {
     font-size: 15px;
 }
-.content_car_section table tbody tr:nth-child(2) {
+.content-car-section table tbody tr:nth-child(2) {
     /*padding-top: 10px;*/
 }
 #payment-value-notice {
@@ -245,4 +191,36 @@ h1,h2,h3,h4,h5,h6,p {
     position: absolute;
     bottom: 5px;
     right: 5px;
+}
+.sidebar1 form ul {
+    padding: 10px 10px 0 10px;
+}
+/* search */
+.list_style {
+    font-size: 12px;
+}
+#filter {
+    font-size: 14px;
+    font-weight: bold;
+}
+p {
+    margin: 0;
+}
+.liStyle {
+    font-size: 12px;
+}
+ul li {
+    font-size: 12px;
+}
+.search-menu select {
+    /*width: 80%;*/
+}
+.search-menu {
+    font-size: 12px;
+}
+.search-menu ul {
+    padding-left: 20px;
+}
+.search-menu ul li {
+    padding-bottom: 2px;
 }
