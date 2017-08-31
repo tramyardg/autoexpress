@@ -23,7 +23,7 @@
     </div>
     <div class="sidebar1">
         <div class="search_menu">
-            <form method="get" action="advanced_search.php">
+            <form method="get" action="">
                 <ul>
                     <li><label><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Advance Search</label></li>
                     <li>Make</li>
@@ -96,23 +96,24 @@
     </div>
     <div class="content">
         <div class="content_car_section">
-            <table>
+
+            <!-- car items -->
+            <table id="car-item-1">
                 <tbody>
                 <tr>
                     <th>Photo</th>
-                    <th><font>Links</font></th>
-                    <th colspan="2" id="vf">Vehicle Information</th>
+                    <th>Links</th>
+                    <th colspan="2" class="car-info-column">Vehicle Information</th>
                 </tr>
                 <tr>
                     <td><img src="images/5737db2279b7a.jpg"></td>
                     <td>
-                        <div id="feature_links">
-                            <a href="#shareLinkModal" data-toggle="modal" data-target="#shareLinkModal"
-                               title="Share this link">
+                        <div class="feature_links">
+                            <a href="#" data-toggle="modal" data-target="#shareLinkModal" title="Share this link">
                                 <p><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</p>
                             </a>
-                            <a href="#calculatePaymentModal" data-toggle="modal" data-target="#calculatePaymentModal"
-                               title="Estimate your payment">
+                            <a href="#" class="calculate-payment-link" data-toggle="modal"
+                               data-target="#calculatePaymentModal" data-price="26000" >
                                 <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
                             </a>
                             <a href="" title="View more details">
@@ -123,20 +124,63 @@
                     <td>
                         <div class="car_info">
                             <p>
-                                <span id="car-title">2016 BMW M4 - </span>
-                                <span id="price-style">$66,000</span>
+                                <span class="car-title">2016 BMW M4 - </span>
+                                <span class="price-style">$26,000</span>
                             </p>
-                            <p><span id="availability">Available</span></p>
+                            <p><span class="availability">Available</span></p>
                             <p>
-                                <span id="mileage">1023 KM</span>&nbsp;|&nbsp;
-                                <span id="transmission">Manual</span>&nbsp;|&nbsp;
-                                <span id="drivetrain">RWD</span>
+                                <span class="mileage">1023 KM</span>&nbsp;|&nbsp;
+                                <span class="transmission">Manual</span>&nbsp;|&nbsp;
+                                <span class="drivetrain">RWD</span>
                             </p>
                         </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
+
+            <table id="car-item-2">
+                <tbody>
+                <tr>
+                    <th>Photo</th>
+                    <th>Links</th>
+                    <th colspan="2" class="car-info-column">Vehicle Information</th>
+                </tr>
+                <tr>
+                    <td><img src="images/5737db2279b7a.jpg"></td>
+                    <td>
+                        <div class="feature_links">
+                            <a href="#" data-toggle="modal" data-target="#shareLinkModal" title="Share this link">
+                                <p><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</p>
+                            </a>
+                            <a href="#" class="calculate-payment-link" data-toggle="modal"
+                               data-target="#calculatePaymentModal" data-price="16000" >
+                                <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
+                            </a>
+                            <a href="" title="View more details">
+                                <p><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;More Details</p>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="car_info">
+                            <p>
+                                <span class="car-title">2016 BMW M4 - </span>
+                                <span class="price-style">$16,000</span>
+                            </p>
+                            <p><span class="availability">Available</span></p>
+                            <p>
+                                <span class="mileage">1023 KM</span>&nbsp;|&nbsp;
+                                <span class="transmission">Manual</span>&nbsp;|&nbsp;
+                                <span class="drivetrain">RWD</span>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li>
@@ -156,12 +200,11 @@
                     </li>
                 </ul>
             </nav>
+
         </div>
-        <!-- end .content_car_section -->
 
-
-        <div class="modal shareLinkModal fade" tabindex="-1" role="dialog" id="shareLinkModal"
-             aria-labelledby="shareLinkModal">
+        <!-- share modal -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="shareLinkModal" aria-labelledby="shareLinkModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -182,8 +225,8 @@
             </div>
         </div>
 
-        <div class="modal calculatePaymentModal fade" tabindex="-1" role="dialog" id="calculatePaymentModal"
-             aria-labelledby="calculatePaymentModal">
+        <!-- payment calculator modal -->
+        <div class="modal fade" id="calculatePaymentModal" tabindex="-1"  role="dialog" aria-labelledby="calculatePaymentModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -200,63 +243,84 @@
                                         <td>Vehicle price</td>
                                         <td></td>
                                         <td>&nbsp;</td>
-                                        <td><input title="Car price" readonly type="text" name="car-price" id="car-price" value=""></td>
+                                        <td><input title="Car price" readonly type="text" class="modal-car-price" name="modal-car-price" value=""></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Trade</td>
                                         <td></td>
                                         <td>&nbsp;</td>
-                                        <td><input placeholder="$" title="Trade" type="text" name="trade" id="trade"></td>
+                                        <td><input placeholder="0" title="Trade" type="text" class="modal-trade" name="modal-trade" ></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Down payment</td>
                                         <td></td>
                                         <td>&nbsp;</td>
-                                        <td><input placeholder="$" title="Down payment" type="text" name="cash-down" id="cash-down"></td>
+                                        <td><input placeholder="0" title="Down payment" type="text" class="modal-down-payment" name="modal-down-payment" ></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Term by months</td>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
                                         <td>
-                                            <select title="Term" id="term" name="term" onchange="">
+                                            <select title="Term" class="modal-term" name="modal-term" onchange="">
                                                 <option value="12">12 months</option>
                                                 <option value="24">24 months</option>
                                                 <option value="36">36 months</option>
                                                 <option value="48">48 months</option>
                                                 <option selected="selected" value="60">60 months</option>
-                                                <option value="60">72 months</option>
-                                                <option value="60">84 months</option>
+                                                <option value="72">72 months</option>
+                                                <option value="84">84 months</option>
                                             </select>
                                         </td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Interest rate</td>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
-                                        <td><input placeholder="%" title="Interest rate" type="text" name="int-rate" id="int-rate"></td>
+                                        <td><input placeholder="%" title="Interest rate" type="text" class="modal-int-rate" name="modal-int-rate" ></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sales tax</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td><input placeholder="%" title="Sales tax" type="text" class="modal-sales-tax" name="modal-sales-tax" ></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
-                                        <td><input type="button" name="calculate" value="Calculate"></td>
+                                        <td><input type="button" class="modal-calculate-btn" name="modal-calculate-btn" value="Calculate"></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Monthly payments</td>
                                         <td>&nbsp;</td>
                                         <td>$</td>
-                                        <td>&nbsp;</td>
+                                        <td>&nbsp;<span class="modal-monthly-payment"></span></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Bi-Weekly</td>
                                         <td>&nbsp;</td>
                                         <td>$</td>
-                                        <td>&nbsp;</td>
+                                        <td>&nbsp;<span class="modal-bi-weekly"></span></td>
+                                        <td></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p id="payment-value-notice">Note: This payment calculator uses loan amortization formula and inputs are based on the information you entered. Payment does not include other fees.</p>
+                            </div>
+                            <div class="col-md-3"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -267,21 +331,24 @@
         </div>
 
 
-    </div><!-- end .content -->
+    </div>
     <div class="footer">
         <div id="footer_content">
-            <p style="margin-bottom: 5px"></p>
-            <p style="text-shadow: 0 1px 1px rgba(0,0,0,0.5);">Copyright © 2012-2014 | Raymart De Guzman | Leo
-                Sudarma</p>
+            <p>Copyright © 2012-2014 | Raymart De Guzman | Leo Sudarma</p>
         </div>
     </div>
-    <!-- end .footer -->
 </div>
-<!-- end .container -->
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/PaymentCalculator.js"></script>
+<script>
+    $(document).ready(function () {
+       PaymentCalculator.init();
+    });
+</script>
 </body>
 </html>
