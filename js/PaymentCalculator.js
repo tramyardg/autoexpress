@@ -1,3 +1,7 @@
+/**
+ * Credit: http://www.wikihow.com/Calculate-Auto-Loan-Payments
+ * @type {{init, bindPaymentCalculatorActions}}
+ */
 var PaymentCalculator = (function () {
     var outMonthlyPayment = {};
     var outBiWeeklyPayment = {};
@@ -11,18 +15,11 @@ var PaymentCalculator = (function () {
 
     return {
 
-        /**
-         * All the elements required before an
-         * event occurred must be in the init function.
-         */
         init: function () {
-
-            outMonthlyPayment = null;
-            outBiWeeklyPayment = null;
-
+            outMonthlyPayment = $('.modal-monthly-payment');
+            outBiWeeklyPayment = $('.modal-bi-weekly');
             modalCalculateBtn = $('.modal-calculate-btn');
             calculatePaymentLinkBtn = $('.calculate-payment-link');
-
             calculateFn = null;
             isValidInputFn = null;
 
@@ -34,7 +31,6 @@ var PaymentCalculator = (function () {
             calculatePaymentLinkBtn.click(function (event) {
                 var dataCarPrice = $(this).attr('data-price');
                 var paymentModalId = $(this).attr('data-target');
-
                 var modal = $(paymentModalId);
                 var modalBody = modal.find('.modal-body');
                 modalBody.find('.modal-car-price').val(dataCarPrice);
@@ -43,35 +39,24 @@ var PaymentCalculator = (function () {
                     var carPrice = {
                         elem : modalBody.find('.modal-car-price'),
                         val: modalBody.find('.modal-car-price').val()
-                    };
-                    var downPayment = {
+                    }, downPayment = {
                         elem: modalBody.find('.modal-down-payment'),
                         val: modalBody.find('.modal-down-payment').val()
-                    };
-                    var trade = {
+                    }, trade = {
                         elem:  modalBody.find('.modal-trade'),
                         val:  modalBody.find('.modal-trade').val()
-                    };
-                    var termByMonths = {
+                    }, termByMonths = {
                         elem: modalBody.find('.modal-term'),
                         val: modalBody.find('.modal-term').val()
-                    };
-                    var interestRate = {
+                    }, interestRate = {
                         elem: modalBody.find('.modal-int-rate'),
                         val: modalBody.find('.modal-int-rate').val()
-                    };
-                    var salesTax = {
+                    }, salesTax = {
                         elem: modalBody.find('.modal-sales-tax'),
                         val: modalBody.find('.modal-sales-tax').val()
                     };
 
-                    onlyNumberAndDigitsAllowedFn([
-                        carPrice, downPayment, trade, termByMonths, interestRate, salesTax
-                    ]);
-
-                    var h =  "car price=" + carPrice.val + ": downPayment=" + downPayment.val + ": trade=" + trade.val + " : terms=" + termByMonths.val;
-                    h += " : interest rate=" + interestRate.val + " : sales tax="+ salesTax.val;
-                    console.log(h);
+                    onlyNumberAndDigitsAllowedFn([carPrice, trade, downPayment, termByMonths, interestRate, salesTax]);
 
                     var inputs = {
                         _carPrice: parseFloat(carPrice.val),
@@ -81,25 +66,28 @@ var PaymentCalculator = (function () {
                         _interestRate: parseFloat(interestRate.val),
                         _salesTax: parseFloat(salesTax.val)
                     };
-                    if(isValidInputFn(downPayment.val)) {
+
+                    if(isValidInputFn(downPayment.val))
                         inputs._downPayment = 0;
-                    }
-                    if(isValidInputFn(trade.val)) {
+                    if(isValidInputFn(trade.val))
                         inputs._trade = 0;
-                    }
-                    if(isValidInputFn(interestRate.val)) {
+                    if(isValidInputFn(interestRate.val))
                         inputs._interestRate = 0;
-                    }
-                    if(isValidInputFn(salesTax.val)) {
+                    if(isValidInputFn(salesTax.val))
                         inputs._salesTax = 0;
-                    }
 
-                    console.log(inputs);
-
-
+                    // pre inputs
+                    //console.log(inputs);
 
                     // finally calculate the payment here
-                    calculateFn(inputs);
+                    var _payment = calculateFn(inputs);
+                    var monthlyPayment = _payment.toFixed(2);
+                    var biWeeklyPayment = (_payment / 2).toFixed(2);
+
+                    outMonthlyPayment.empty();
+                    outMonthlyPayment.append(monthlyPayment);
+                    outBiWeeklyPayment.empty();
+                    outBiWeeklyPayment.append(biWeeklyPayment);
 
                     e.preventDefault();
                 });
@@ -125,36 +113,42 @@ var PaymentCalculator = (function () {
             calculateFn = function (options) {
                 const MONTHLY = 12;
                 var monthlyInterest = (options._interestRate / MONTHLY);
-                var monthlyInterestRate = monthlyInterest / 100;
+                var monthlyInterestRate = (monthlyInterest / 100);
+                var numerator = monthlyInterestRate * Math.pow((1 + monthlyInterestRate), options._termByMonths);
+                var denominator = Math.pow((1 + monthlyInterestRate), options._termByMonths) - 1;
 
-                console.log(options);
+
+                var principal = options._carPrice;
+                if(!isValidInputFn(options._salesTax))
+                    principal += principal * (options._salesTax / 100);
+                if(!isValidInputFn(options._trade)) // deduct trade in
+                    principal -= options._trade;
+                if(!isValidInputFn(options._downPayment)) // deduct down payment
+                    principal -= options._downPayment;
+
+
+                // var payment = principal * (numerator / denominator);
+
+
+                //console.log("payment=" +payment);
+                //console.log(options);
+
+                return principal * (numerator / denominator);
             };
 
 
-
-
-
-
-
-
-
-
-            
             /**
              * Validation for non-numeric input.
              * Only allowed inputs: 123, 12., 12.232
              * @param fields
              */
             onlyNumberAndDigitsAllowedFn = function (fields) {
-                /**
-                 * ^ - Beginning of the line;
-                 * \d* - 0 or more digits;
-                 * \.? - An optional dot (escaped, because in regex, . is a special character);
-                 * \d* - 0 or more digits (the decimal part);
-                 * $ - End of the line.
-                 */
                 var pattern = /^\d*\.?\d*$/;
                 for(var i = 0; i < fields.length; i++) {
+                    if(fields[4].val.length === 0 || fields[4].val === 0) { // for interest rate
+                        fields[4].elem.parent().parent().find('td').last().empty();
+                        fields[4].elem.parent().parent().find('td').last().append("<label>&nbsp;Please enter a number.</label>");
+                    }
                     if(!pattern.test(fields[i].val)) {
                         fields[i].elem.parent().parent().find('td').last().empty();
                         fields[i].elem.parent().parent().find('td').last().append("<label>&nbsp;Invalid input.</label>");
