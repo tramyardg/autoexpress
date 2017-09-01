@@ -53,7 +53,7 @@ h1,h2,h3,h4,h5,h6,p {
 .sidebar1 {
     float: right;
     width: 20%;
-    background: -webkit-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(238,238,238,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(54, 56, 61, 0.21) 0%,rgba(54, 56, 61, 0.21) 100%);
     border: solid 1px #C0C0C0;
     margin: 10px 10px 10px 0;
 }
@@ -193,6 +193,9 @@ h1,h2,h3,h4,h5,h6,p {
 }
 .car-images {
     position: relative;
+}
+.car-images span.badge {
+    background-color: #36383d;
 }
 .car-images span {
     position: absolute;

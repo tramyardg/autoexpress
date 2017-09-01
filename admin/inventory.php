@@ -58,15 +58,17 @@ if(!isset($_SESSION['authenticated'])) {
         }
     }
 
-    // deleting vehicle
+    // loading data to modal update
     if(isset($_GET["action"])) {
         if($_GET["action"] === "updateCarInfo") {
             $updateCarInfoById = $v->getCarById($_GET['id']);
             $updateCarInfo_data = json_encode($updateCarInfoById);
-            echo $updateCarInfo_data;
+            echo $updateCarInfo_data; // sent to ajax call
             exit();
         }
     }
+
+    // TODO update car info
 
 
 }
