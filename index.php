@@ -6,6 +6,9 @@ $v = new CarDAO();
 $all_cars = $v->getAllCars();
 $num_cars = $v->countAllCars();
 
+$d = new DiagramDAO();
+
+
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -116,7 +119,7 @@ $num_cars = $v->countAllCars();
                     <td>
                         <div class="row car-images">
                             <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTVlMzljYjA0ZGIgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNWUzOWNiMDRkYiI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NTQ2ODc1IiB5PSI5NC41Ij4xNzF4MTgwPC90ZXh0PjwvZz48L2c+PC9zdmc+">
-                            <span class="badge">4</span>
+                            <span class="badge"><?php echo $d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()); ?></span>
                         </div>
                     </td>
                     <td>
@@ -128,7 +131,7 @@ $num_cars = $v->countAllCars();
                                data-target="#calculatePaymentModal" data-price="<?php echo $all_cars[$i]->getPrice(); ?>" >
                                 <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
                             </a>
-                            <a href="" title="View more details">
+                            <a href="<?php echo 'details.php?carId='.$all_cars[$i]->getVehicleId(); ?>" title="View more details">
                                 <p><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;More Details</p>
                             </a>
                         </div>
@@ -151,7 +154,6 @@ $num_cars = $v->countAllCars();
                 </tbody>
             </table>
             <?php } ?>
-
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li>

@@ -1,10 +1,19 @@
 <?php
-//require_once 'admin/server/CarDAO.php';
-//require_once 'admin/server/DiagramDAO.php';
-//
-//$v = new CarDAO();
-//$all_cars = $v->getAllCars();
-//$num_cars = $v->countAllCars();
+require_once 'admin/server/CarDAO.php';
+require_once 'admin/server/DiagramDAO.php';
+
+$v = new CarDAO();
+$d = new DiagramDAO();
+
+if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
+    $carId = $_GET['carId'];
+    $currCar = $v->getCarById($carId); // current car [0]
+    $num_img = $d->countAllPhotosByCarId($carId);
+
+    $currCarImg = $d->getPhotosBy_CarId($carId);
+} else {
+    header('Location: index.php');
+}
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,7 +32,7 @@
         <div class="clear-both"></div>
         <div class="menu-header">
             <div id="menu-header-left-section">
-                <span><a href="#"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Used Vehicles</a></span>
+                <span><a href="index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Used Vehicles</a></span>
             </div>
             <div class="clear-both"></div>
         </div>
@@ -31,34 +40,39 @@
 </div>
 <div id="details-container">
     <div id="content_section">
-        <div id="vehicle_title"><h3>2010 Toyota Rav4</h3></div>
+        <div id="vehicle_title"><h3><?php echo $currCar[0]->getHeadingTitle(); ?></h3></div>
         <div style="clear: both" ></div>
         <div class="left_section">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                    <?php $h = null; ?>
+                    <?php for($i = 0; $i < $num_img; $i++) { ?>
+                        <?php if($i == 0) { ?>
+                            <?php $h .= '<li data-target="#carousel-example-generic" data-slide-to="'.$i.'" class="active"></li>'; ?>
+                        <?php } else { ?>
+                            <?php $h .= '<li data-target="#carousel-example-generic" data-slide-to="'.$i.'"></li>'; ?>
+                        <?php } ?>
+                    <?php } ?>
+                    <?php echo $h; ?>
                 </ol>
-
                 <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="https://placeholdit.co//i/366x150?bg=111111">
-                    </div>
-                    <div class="item">
-                        <img src="https://placeholdit.co//i/366x150?bg=111111">
-                    </div>
-                    <div class="item">
-                        <img src="https://placeholdit.co//i/366x150?bg=111111">
-                    </div>
-                    <div class="item">
-                        <img src="https://placeholdit.co//i/366x150?bg=111111">
-                    </div>
-                    <div class="item">
-                        <img src="https://placeholdit.co//i/366x150?bg=111111">
-                    </div>
+                    <?php $ht = null; ?>
+                    <?php for($j = 0; $j < $num_img; $j++) { ?>
+                        <?php if($j == 0) { ?>
+                            <?php
+                            $ht .= '<div class="item active">
+                                        <img src="'.$currCarImg[$j]->getDiagram().'">
+                                    </div>';
+                            ?>
+                        <?php } else { ?>
+                            <?php
+                            $ht .= '<div class="item">
+                                        <img src="'.$currCarImg[$j]->getDiagram().'">
+                                    </div>';
+                            ?>
+                        <?php } ?>
+                    <?php } ?>
+                    <?php echo $ht; ?>
                 </div>
                 <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                     <span class="fa fa-arrow-left fa-arrow-position" aria-hidden="true"></span>
@@ -70,7 +84,7 @@
                 </a>
             </div>
             <br><h3><span>Notes</span></h3>
-            <textarea style="resize:vertical; width:186px;" rows="8" name="notes"></textarea>
+            <textarea id="note-text" rows="8" name="notes"></textarea>
         </div>
         <div class="right_section">
             <div id="vehicle_info">
@@ -115,7 +129,7 @@
             </div>
         </div>
         <div style="clear: both" ></div>
-        <button onclick="window.print()">Print</button>
+        <button id="print-btn" onclick="window.print()">Print</button>
     </div>
 </div><!-- end container -->
 

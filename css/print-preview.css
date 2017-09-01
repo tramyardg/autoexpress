@@ -4,19 +4,6 @@
     font-size: 11px;
     width: 1023px;
 }
-#logotext {
-    font:.7em Tahoma, sans-serif;
-    font-size:26px;
-    font-weight:700;
-    color:#000;
-}
-
-#orangelogotext {
-    font:.7em Tahoma, sans-serif;
-    font-size:40px;
-    font-weight:700;
-    color:#F90;
-}
 #details-header {
     margin-top: 20px;
 }
@@ -64,5 +51,16 @@
 }
 .fa-arrow-position {
     position: absolute;
-    bottom: 50;
+    bottom: 50%;
+}
+#carousel-example-generic > div > div.item > img {
+    width: 366px !important;
+    height: 250px !important;
+}
+#note-text {
+    resize:vertical;
+    width: 365px;
+}
+#print-btn {
+    margin-top: 10px;
 }
