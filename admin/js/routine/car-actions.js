@@ -97,9 +97,6 @@ var CarActions = (function () {
             updateCarInfoModal.on('show.bs.modal', function (event) {
                 var updateLink = $(event.relatedTarget); // Button that triggered the modal
                 var carId = updateLink.data("id"); // Button that triggered the modal
-                // var carId = updateLink.data('carid');
-                // event.preventDefault();
-                // alert(carId);
                 $.ajax({
                     url: "?action=updateCarInfo&id="+carId,
                     type: "post",
