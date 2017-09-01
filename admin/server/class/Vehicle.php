@@ -300,4 +300,8 @@ class Vehicle implements JsonSerializable
         return get_object_vars($this);
     }
 
+    public function getHeadingTitle() {
+        return $this->_yearMade . ' ' . $this->_make . ' ' . $this->_model;
+    }
+
 }

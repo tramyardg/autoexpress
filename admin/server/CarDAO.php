@@ -1,7 +1,7 @@
 <?php
 
 require_once 'class/Utility.php';
-require_once '../Db.php';
+require_once 'class/Dbh.php';
 require_once 'class/Vehicle.php';
 /**
  * Created by PhpStorm.
@@ -23,7 +23,7 @@ class CarDAO extends Utility
     // mostly used for select queries, mapping results to a class
     function query($sql)
     {
-        $db = Db::getInstance();
+        $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
@@ -88,7 +88,7 @@ class CarDAO extends Utility
         $sql = $sql."'".$valueObject->getStatus()."', ";
         $sql = $sql."'".$valueObject->getDateAdded()."') ";
 
-        $db = Db::getInstance();
+        $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt;
@@ -132,7 +132,7 @@ class CarDAO extends Utility
                 $sql .= "INSERT INTO `cardiagram`(`diagram`, `vehicleId`) VALUES ('{$imageData}',{$id});";
             }
 
-            $db = Db::getInstance();
+            $db = Dbh::getInstance();
             $stmt = $db->prepare($sql);
             $stmt->execute();
         }
@@ -158,7 +158,7 @@ class CarDAO extends Utility
 
     function delete($id) {
         $sql = "DELETE FROM `vehicle` WHERE `vehicleId` = $id";
-        $db = Db::getInstance();
+        $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt;
@@ -182,7 +182,7 @@ class CarDAO extends Utility
 
     function getLastCarId() {
         $sql = "SELECT vehicleId FROM `vehicle` ORDER BY vehicleid DESC LIMIT 1";
-        $db = Db::getInstance();
+        $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchColumn(0);
@@ -190,7 +190,7 @@ class CarDAO extends Utility
 
     function getLastDiagramId() {
         $sql = "SELECT cardiagram.diagramId FROM cardiagram ORDER BY cardiagram.diagramId DESC LIMIT 1";
-        $db = Db::getInstance();
+        $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchColumn(0);

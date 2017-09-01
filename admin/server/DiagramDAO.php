@@ -7,7 +7,7 @@
  * Time: 3:00 PM
  */
 require_once 'class/Utility.php';
-require_once '../Db.php';
+require_once 'class/Dbh.php';
 require_once 'class/Diagram.php';
 class DiagramDAO
 {
@@ -15,7 +15,7 @@ class DiagramDAO
     // mostly used for select queries, mapping results to a class
     function query($sql)
     {
-        $db = Db::getInstance();
+        $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
@@ -63,7 +63,7 @@ class DiagramDAO
 
     function delete($id) {
         $sql = "DELETE FROM `cardiagram` WHERE `diagramId` = $id";
-        $db = Db::getInstance();
+        $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt;

@@ -1,3 +1,12 @@
+<?php
+require_once 'admin/server/CarDAO.php';
+require_once 'admin/server/DiagramDAO.php';
+
+$v = new CarDAO();
+$all_cars = $v->getAllCars();
+$num_cars = $v->countAllCars();
+
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,12 +19,12 @@
 <div class="container_custom">
     <div class="header">
         <div>Your <span class="orange-logo-text">Logo</span> Here</div>
-        <div style="clear:both"></div>
+        <div class="clear-both"></div>
         <div class="menu-header">
             <div id="menu-header-left-section">
                 <span><a href="#"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Used Vehicles</a></span>
             </div>
-            <div style="clear:both"></div>
+            <div class="clear-both"></div>
         </div>
     </div>
     <div class="sidebar1">
@@ -95,7 +104,8 @@
         <div class="content-car-section">
 
             <!-- car items -->
-            <table id="car-item-1">
+            <?php for($i = 0; $i < $num_cars; $i++) { ?>
+            <table id="car-item-<?php echo $i; ?>">
                 <tbody>
                 <tr>
                     <th>&nbsp;</th>
@@ -115,7 +125,7 @@
                                 <p><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</p>
                             </a>
                             <a href="#" class="calculate-payment-link" data-toggle="modal"
-                               data-target="#calculatePaymentModal" data-price="15090" >
+                               data-target="#calculatePaymentModal" data-price="<?php echo $all_cars[$i]->getPrice(); ?>" >
                                 <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
                             </a>
                             <a href="" title="View more details">
@@ -126,68 +136,22 @@
                     <td>
                         <div class="car_info">
                             <p>
-                                <span class="car-title">2016 BMW M4 - </span>
-                                <span class="price-style">$15,090</span>
+                                <span class="car-title"><?php echo $all_cars[$i]->getHeadingTitle(); ?> - </span>
+                                <span class="price-style">$<?php echo $all_cars[$i]->getPrice(); ?></span>
                             </p>
-                            <p><span class="availability">Available</span></p>
+                            <p><span class="availability"><?php echo $all_cars[$i]->getStatus(); ?></span></p>
                             <p>
-                                <span class="mileage">1023 KM</span>&nbsp;|&nbsp;
-                                <span class="transmission">Manual</span>&nbsp;|&nbsp;
-                                <span class="drivetrain">RWD</span>
+                                <span class="mileage"><?php echo $all_cars[$i]->getMileage(); ?> KM</span>&nbsp;|&nbsp;
+                                <span class="transmission"><?php echo $all_cars[$i]->getTransmission(); ?></span>&nbsp;|&nbsp;
+                                <span class="drivetrain"><?php echo $all_cars[$i]->getDrivetrain(); ?></span>
                             </p>
                         </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
-
-            <table id="car-item-2">
-                <tbody>
-                <tr>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                    <th class="car-info-column">&nbsp;</th>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="row car-images">
-                            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTVlMzljYjA0ZGIgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNWUzOWNiMDRkYiI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NTQ2ODc1IiB5PSI5NC41Ij4xNzF4MTgwPC90ZXh0PjwvZz48L2c+PC9zdmc+">
-                            <span class="badge">4</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="feature_links">
-                            <a href="#" data-toggle="modal" data-target="#shareLinkModal" title="Share this link">
-                                <p><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</p>
-                            </a>
-                            <a href="#" class="calculate-payment-link" data-toggle="modal"
-                               data-target="#calculatePaymentModal" data-price="15090" >
-                                <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
-                            </a>
-                            <a href="" title="View more details">
-                                <p><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;More Details</p>
-                            </a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="car_info">
-                            <p>
-                                <span class="car-title">2016 BMW M4 - </span>
-                                <span class="price-style">$15,090</span>
-                            </p>
-                            <p><span class="availability">Available</span></p>
-                            <p>
-                                <span class="mileage">1023 KM</span>&nbsp;|&nbsp;
-                                <span class="transmission">Manual</span>&nbsp;|&nbsp;
-                                <span class="drivetrain">RWD</span>
-                            </p>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-
+            <?php } ?>
+            
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../Db.php';
+require_once 'server/class/Dbh.php';
 require_once 'server/AdminDAO.php';
 
 if(isset($_SESSION['authenticated'])) {
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="template-page-wrapper splash2">
        
 		
-		<?php if($condition === 1) { ?>
+		<?php if(isset($condition) && $condition === 1) { ?>
 		<div class="templatemo-signin-form">
 			<div class="col-md-12">
 				<div class="col-sm-2"></div>

@@ -7,7 +7,7 @@
  * Time: 2:18 AM
  */
 require_once 'class/Utility.php';
-require_once '../Db.php';
+require_once 'class/Dbh.php';
 require_once 'class/Admin.php';
 
 class AdminDAO extends Utility
@@ -16,7 +16,7 @@ class AdminDAO extends Utility
     // mostly used for select queries, mapping results to a class
     function query($sql)
     {
-        $db = Db::getInstance();
+        $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
@@ -72,7 +72,7 @@ class AdminDAO extends Utility
             . " `last_update` = $_update_time\n"
             . "WHERE\n"
             . " `adminId` = ".$admin->getAdminId();
-        $db = Db::getInstance();
+        $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt->rowCount();
@@ -91,7 +91,7 @@ class AdminDAO extends Utility
             . " password,\n"
             . " email)\n"
             . "VALUES($_username, $_password, $_email)";
-        $db = Db::getInstance();
+        $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt;
