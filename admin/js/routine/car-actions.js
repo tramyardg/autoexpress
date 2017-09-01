@@ -112,6 +112,7 @@ var CarActions = (function () {
                         updateCarInfo_RadioSelect.CYLINDER(data[0]._cylinder);
                         updateCarInfo_RadioSelect.CATEGORY(data[0]._category);
                         updateCarInfo_RadioSelect.DRIVETRAIN(data[0]._drivetrain);
+                        updateCarInfo_RadioSelect.STATUS(data[0]._status);
                         updateCarInfo_RadioSelect.TRANSMISSION(data[0]._transmission);
 
                         // mapping of appropriate models after selecting make
@@ -223,6 +224,8 @@ var CarActions = (function () {
             /**
              * Action > update > all radio and select will be checked and
              * selected based on the selected vehicle
+             * radio: cylinder, category, drivetrain, transmission, status
+             * select: year
              */
             updateCarInfo_RadioSelect = {
                 CYLINDER: function (cylinder) {
@@ -257,6 +260,15 @@ var CarActions = (function () {
                     for(var i = 0; i < transmissions.length; i++) {
                         if(transmissions.eq(i).val() === transmission) {
                             transmissions.eq(i).attr('checked', 'true');
+                            break;
+                        }
+                    }
+                },
+                STATUS: function (status) {
+                    var statuses = updateCarInfoModalContent.find('input[type=radio]#status');
+                    for(var i = 0; i < statuses.length; i++) {
+                        if(statuses.eq(i).val() === status) {
+                            statuses.eq(i).attr('checked', 'true');
                             break;
                         }
                     }

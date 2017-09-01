@@ -231,6 +231,13 @@ function CommonTemplate() {
             '   									<b style="font-size: 10px; color: red;" id="drivetrain-err">&nbsp;</b>  '+
             '   								</td>  '+
             '   							</tr>  '+
+            '                               <tr>  '  +
+            '   	                            <td>Status</td>  '  +
+            '   	                            <td>  '  +
+            '   		                            <input type="radio" name="status" id="status" value="Available" title="status" checked> Available  '  +
+    '   		                                    <input type="radio" name="status" id="status" value="SOLD" title="status"> Sold  '  +
+            '   	                            </td>  '  +
+        '                                   </tr>  '  +
             '   							</tbody>  '+
             '   						</table>  '+
             '   						<span class="input-required">*</span> <span class="label label-danger">Required fields</span>  '+

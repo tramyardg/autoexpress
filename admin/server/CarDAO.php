@@ -109,7 +109,7 @@ class CarDAO extends Utility
             $postArray["category"],
             $postArray["cylinder"],
             $postArray["doors"],
-            "Available", // default for adding
+            $postArray["status"],
             $this->getTimeStamp()
         );
 

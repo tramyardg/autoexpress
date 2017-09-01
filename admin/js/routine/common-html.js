@@ -11,16 +11,20 @@ var CommonHTML = (function () {
     var bodyElem = {};
     var mainWrapperSel = {};
     var confirmModalLogoutSel = {};
+
     var fnCommonElement = {},
         fnHeaderAndFooterElem = {},
         fnPageTitle = {},
         fnFindAllCarDecColumnAddComma = {},
         fnManipulateRecordElem = {};
+
     var adminUsernameSel = {},
         adminTableSel = {},
         carTableSel = {},
         priceColumnSel = {},
         mileageColumnSel = {};
+
+    // var vehicleTableWrapper = {};
 
 
     return {
@@ -39,8 +43,8 @@ var CommonHTML = (function () {
             adminUsernameSel = $('#admin-username');
             adminTableSel = $('#admin-table');
             carTableSel = $('#vehicle-table');
-            priceColumnSel = $("#vehicle-table > tbody > tr > td:nth-child(5)");
-            mileageColumnSel = $("#vehicle-table > tbody > tr > td:nth-child(7)");
+            priceColumnSel = $("#vehicle-table > tbody > tr > td:nth-child(6)");
+            mileageColumnSel = $("#vehicle-table > tbody > tr > td:nth-child(8)");
 
             bodyElem = $('body');
             confirmModalLogoutSel = {};
@@ -50,12 +54,15 @@ var CommonHTML = (function () {
             fnFindAllCarDecColumnAddComma = null;
             fnManipulateRecordElem = null;
 
+            // vehicleTableWrapper = $('#vehicle-table_wrapper');
+
 
             // call the event driven functions here
-            this.bindCarActionfn();
+            this.bindCarActionFn();
         },
-        bindCarActionfn: function () {
+        bindCarActionFn: function () {
 
+            // vehicleTableWrapper.css("width", "80% !important");
 
             // sets page title dynamically
             fnPageTitle = function () {
@@ -89,6 +96,7 @@ var CommonHTML = (function () {
 
             fnFindAllCarDecColumnAddComma = function () {
                 var numCars = priceColumnSel.length;
+                console.log(numCars);
                 for(var i = 0; i < numCars; i++) {
                     priceColumnSel[i].innerHTML = util.addCommaSeparatedDec(priceColumnSel[i].innerHTML);
                     mileageColumnSel[i].innerHTML = util.addCommaSeparatedDec(mileageColumnSel[i].innerHTML);

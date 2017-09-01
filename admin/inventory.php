@@ -198,6 +198,10 @@ if(!isset($_SESSION['authenticated'])) {
                 <div class="modal fade add-new-car-modal-lg " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content" id="add-car-info-modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Add New Vehicle</h4>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
 
@@ -339,7 +343,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                         <tr>
                                                             <td>Transmission<span class="input-required"> *</span></td>
                                                             <td>
-                                                                <input type="radio" name="transmission" id="transmission" value="Automatic" title="transmission" required> Automatic
+                                                                <input type="radio" name="transmission" id="transmission" value="Automatic" title="transmission" required checked> Automatic
                                                                 <input type="radio" name="transmission" id="transmission" value="Manual" title="transmission" required> Manual
                                                                 <b style="font-size: 10px; color: red;" id="transmission-err">&nbsp;</b>
                                                             </td>
@@ -352,6 +356,13 @@ if(!isset($_SESSION['authenticated'])) {
                                                                 <input type="radio" name="drivetrain" id="drivetrain" value="RWD" title="drivetrain" required> RWD
                                                                 <input type="radio" name="drivetrain" id="drivetrain" value="4X4" title="drivetrain" required> 4X4
                                                                 <b style="font-size: 10px; color: red;" id="drivetrain-err">&nbsp;</b>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Status</td>
+                                                            <td>
+                                                                <input type="radio" name="status" id="status" value="Available" title="status" checked> Available
+                                                                <input type="radio" name="status" id="status" value="SOLD" title="status"> Sold
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -452,8 +463,12 @@ if(!isset($_SESSION['authenticated'])) {
                 <!-- modal template for updating vehicle info -->
                 <div class="modal fade updateCarInfoModal" id="updateCarInfoModal" tabindex="-1" role="dialog" aria-labelledby="updateCarInfoModal">
                     <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content" id="update-car-info-modal-content">
-
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Updating Vehicle Info</h4>
+                            </div>
+                            <div id="update-car-info-modal-content"></div>
                         </div>
                     </div>
                 </div>
@@ -462,6 +477,12 @@ if(!isset($_SESSION['authenticated'])) {
                 <div class="modal fade bs-example-modal-sm" id="upload-delete-car-photos-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title">Upload or Delete Photos for this Vehicle</h4>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12 margin-top-15">
                                     <div class="col-md-12">
