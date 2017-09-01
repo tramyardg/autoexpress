@@ -8,7 +8,7 @@ $d = new DiagramDAO();
 if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
     $carId = $_GET['carId'];
     $currCar = $v->getCarById($carId); // current car [0]
-    $num_img = $d->countAllPhotosByCarId($carId);
+    $numImg = $d->countAllPhotosByCarId($carId);
 
     $currCarImg = $d->getPhotosBy_CarId($carId);
 } else {
@@ -46,7 +46,7 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <?php $h = null; ?>
-                    <?php for($i = 0; $i < $num_img; $i++) { ?>
+                    <?php for($i = 0; $i < $numImg; $i++) { ?>
                         <?php if($i == 0) { ?>
                             <?php $h .= '<li data-target="#carousel-example-generic" data-slide-to="'.$i.'" class="active"></li>'; ?>
                         <?php } else { ?>
@@ -57,7 +57,7 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <?php $ht = null; ?>
-                    <?php for($j = 0; $j < $num_img; $j++) { ?>
+                    <?php for($j = 0; $j < $numImg; $j++) { ?>
                         <?php if($j == 0) { ?>
                             <?php
                             $ht .= '<div class="item active">
@@ -107,22 +107,21 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
                     <p>Safety Rating</p>
                 </div>
                 <div id="vehicle_info_right">
-                    <p>$22000</p>
-                    <p>Toyota</p>
-                    <p>Rav4</p>
-                    <p>2010</p>
-                    <p>113212</p>
-                    <p>Automatic</p>
+                    <p>$<?php echo $currCar[0]->getPrice(); ?></p>
+                    <p><?php echo $currCar[0]->getMake(); ?></p>
+                    <p><?php echo $currCar[0]->getModel(); ?></p>
+                    <p><?php echo $currCar[0]->getYearMade(); ?></p>
+                    <p><?php echo $currCar[0]->getMileage(); ?></p>
+                    <p><?php echo $currCar[0]->getTransmission(); ?></p>
                     <p>-</p>
-                    <p>AWD</p>
+                    <p><?php echo $currCar[0]->getDrivetrain(); ?></p>
                     <p>-</p>
                     <p>-</p>
-                    <p>SUV</p>
-                    <p>4</p>
+                    <p><?php echo $currCar[0]->getCategory(); ?></p>
+                    <p><?php echo $currCar[0]->getCylinder(); ?></p>
                     <p>-</p>
-                    <p>5</p>
-                    <p>2.5 L</p>
-
+                    <p><?php echo $currCar[0]->getDoors(); ?></p>
+                    <p><?php echo $currCar[0]->getEngineCapacity(); ?> L</p>
                     <p>N/A</p>
                 </div>
                 <div style="clear: both" ></div>
