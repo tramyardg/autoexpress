@@ -1,0 +1,68 @@
+#details-container {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 auto;
+    font-size: 11px;
+    width: 1023px;
+}
+#logotext {
+    font:.7em Tahoma, sans-serif;
+    font-size:26px;
+    font-weight:700;
+    color:#000;
+}
+
+#orangelogotext {
+    font:.7em Tahoma, sans-serif;
+    font-size:40px;
+    font-weight:700;
+    color:#F90;
+}
+#details-header {
+    margin-top: 20px;
+}
+#vehicle_title {
+    float: left;
+    font-size: 2em !important;
+    /* background: #A60000; */
+}
+#vehicle_title h3 {
+    padding-left: 0 !important;
+}
+#vehicle_price {
+    float: right;
+    font-size: 2em !important;
+}
+#vehicle_price h3 {
+    padding-left:  0 !important;
+}
+.left_section {
+    float: left;
+}
+.left_section h3 {
+    padding-left: 0 !important;
+}
+.right_section {
+    float: left;
+    margin-left: 20px;
+}
+#vehicle_info {
+
+}
+#vehicle_info_left{
+    float: left;
+}
+#vehicle_info_left p{
+    font-weight: bold;
+    margin: 7px;
+}
+#vehicle_info_right{
+    float: right;
+    margin-left: 100px;
+}
+#vehicle_info_right p {
+    margin: 7px;
+}
+.fa-arrow-position {
+    position: absolute;
+    bottom: 50;
+}

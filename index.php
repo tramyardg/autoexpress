@@ -151,7 +151,7 @@ $num_cars = $v->countAllCars();
                 </tbody>
             </table>
             <?php } ?>
-            
+
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li>
