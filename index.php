@@ -118,8 +118,16 @@ $d = new DiagramDAO();
                 <tr>
                     <td>
                         <div class="row car-images">
-                            <?php $currCarImg = $d->getPhotosBy_CarId($all_cars[$i]->getVehicleId()); ?>
-                            <img src="<?php  echo $currCarImg[0]->getDiagram(); ?>">
+                            <?php
+                            $currCarImg = $d->getPhotosBy_CarId($all_cars[$i]->getVehicleId());
+//                            $h = null;
+                            if($d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()) == "0") {
+                                    $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
+                            } else {
+                                $h = $currCarImg[0]->getDiagram();
+                            }
+                            ?>
+                            <img src="<?php  echo $h; ?>">
                             <span class="badge"><?php echo $d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()); ?></span>
                         </div>
                     </td>

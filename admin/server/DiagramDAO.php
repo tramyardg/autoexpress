@@ -45,6 +45,7 @@ class DiagramDAO
 
     function getPhotosBy_CarId($id) {
         $sql = "SELECT `diagramId`, `diagram`, `vehicleId` FROM `cardiagram` WHERE `vehicleId` =" . $id .";";
+//        print empty($this->query($sql));
         return $this->query($sql);
     }
 

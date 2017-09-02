@@ -199,7 +199,7 @@ class CarDAO extends Utility
                 $postArray["status"],
                 $this->getTimeStamp()
             );
-            
+
             $isUpdated_Condition = 0;
             if($this->update($updateThisCar_obj)) {
                 $isUpdated_Condition = 1;
