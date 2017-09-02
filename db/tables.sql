@@ -43,11 +43,13 @@ CREATE TABLE `administrator` (
 --
 
 CREATE TABLE `cardiagram` (
-  `diagramId` int(11) NOT NULL,
-  `diagram` blob,
-  `vehicleId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+  `diagramId` int(11) NOT NULL AUTO_INCREMENT,
+  `diagram` longblob,
+  `vehicleId` int(11) NOT NULL,
+  PRIMARY KEY (`diagramId`),
+  CONSTRAINT `vehicleId` FOREIGN KEY (`vehicleId`) REFERENCES `vehicle` (`vehicleId`)
+    ON DELETE CASCADE
+) ENGINE=InnoDB;
 -- --------------------------------------------------------
 
 --

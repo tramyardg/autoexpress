@@ -140,7 +140,6 @@ class CarDAO extends Utility
 
     function isDiagramAdded($files, $id) {
         if($this->isVehicleExist($id)) {
-            echo 'here 1';
             $condition = 0;
 
             if($this->addDiagram($files, $id)) {
@@ -158,6 +157,15 @@ class CarDAO extends Utility
     }
 
     function delete($id) {
+        /**
+         * Added ON DELETE CASCADE
+         * since vehicleId is a
+         * foreign key in cardiagram
+         * table. The photos of this
+         * vehicle being deleted
+         * will also be deleted in
+         * cardiagram table.
+         */
         $sql = "DELETE FROM `vehicle` WHERE `vehicleId` = $id";
         $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
