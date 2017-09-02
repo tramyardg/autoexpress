@@ -83,7 +83,6 @@ h1,h2,h3,h4,h5,h6,p {
     text-align: left;
     background: #fff;
     margin-left: 10px;
-    margin-top: 10px;
 }
 .divTable .row .car-images img {
     width: 240px !important;
@@ -243,4 +242,10 @@ ul li {
 }
 .divTableBody {
     display: table-row-group;
+}
+#inventory-vehicle-table {
+    border-bottom: none !important;
+}
+#inventory-vehicle-table thead tr th {
+    border-bottom: none !important;
 }
