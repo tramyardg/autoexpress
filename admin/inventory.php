@@ -18,9 +18,9 @@ if(!isset($_SESSION['authenticated'])) {
     $all_cars = $v->getAllCars();
     $num_cars = $v->countAllCars();
 
-    // general car info
-    if (!empty($_POST['add-car'])) {
-        $condition = $v->isCreated($_POST);
+    // adding general car info
+    if (!empty($_POST['add-car-submit'])) {
+        $isAddedCondition = $v->isCreated($_POST);
     }
 
     // car diagram upload
@@ -68,7 +68,10 @@ if(!isset($_SESSION['authenticated'])) {
         }
     }
 
-    // TODO update car info
+    // updating general car info
+    if (!empty($_POST['update-car-submit'])) {
+        $isUpdatedCondition = $v->isUpdated($_POST);
+    }
 
 
 }
@@ -126,7 +129,7 @@ if(!isset($_SESSION['authenticated'])) {
                 <h1>Manage Vehicles</h1>
                 <p>Here goes vehicles from the inventory.</p>
 
-                <?php if(isset($condition) && $condition === 1) {?>
+                <?php if(isset($isAddedCondition) && $isAddedCondition === 1) {?>
                     <script>alert("1 row affected. The page will reload.");</script>
                 <?php header("refresh: 1; url=inventory.php"); }  ?>
 
@@ -134,6 +137,9 @@ if(!isset($_SESSION['authenticated'])) {
                     <script>alert("1 row affected. The page will reload.");</script>
                 <?php header("refresh: 1; url=inventory.php"); }  ?>
 
+                <?php if(isset($isUpdatedCondition) && $isUpdatedCondition === 1) {?>
+                    <script>alert("1 row affected. The page will reload.");</script>
+                <?php header("refresh: 1; url=inventory.php"); }  ?>
 
 
                 <!-- car table -->
@@ -443,7 +449,7 @@ if(!isset($_SESSION['authenticated'])) {
                                                         <tbody>
                                                         <tr>
                                                             <td>
-                                                                <input type="submit" class="btn btn-primary btn-sm" name="add-car" id="add-car" value="Submit">
+                                                                <input type="submit" class="btn btn-primary btn-sm" name="add-car-submit" id="add-car-submit" value="Submit">
                                                                 <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" aria-label="Close" value="Cancel">
                                                             </td>
                                                         </tr>

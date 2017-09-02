@@ -143,6 +143,7 @@ function CommonTemplate() {
             '   					<div class="panel-body">  '+
             '   						<table cellspacing="1" id="update-car-general-info-table">  '+
             '   							<tbody>  '+
+            '                               <tr><td><input type="hidden" class="hidden" value="{{_vehicleId}}" name="update-vehicle-id" id="update-vehicle-id"></td></tr>' +
             '   							<tr>  '+
             '   								<td>Make<span class="input-required"> *</span></td>  '+
             '   								<td><input type="text" readonly value="{{_make}}" name="update-make" id="update-make" ></td>  '+

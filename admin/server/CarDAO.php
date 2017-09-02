@@ -151,9 +151,63 @@ class CarDAO extends Utility
         return 0;
     }
 
-    // TODO
-    function update($id) {
+    function update(&$carObject) {
+        $u = new Utility(); // some of them needs to be a varchar (string)
+        $sql =  '   UPDATE  '.
+            '     `vehicle`  '.
+            '   SET  '.
+            '     `make` = '.$u->stringValue($carObject->getMake()).',  '.
+            '     `yearMade` = '.$carObject->getYearMade().',  '.
+            '     `model` = '.$u->stringValue($carObject->getModel()).',  '.
+            '     `price` = '.$carObject->getPrice().',  '.
+            '     `mileage` = '.$carObject->getMileage().',  '.
+            '     `transmission` = '.$u->stringValue($carObject->getTransmission()).',  '.
+            '     `drivetrain` = '.$u->stringValue($carObject->getDrivetrain()).',  '.
+            '     `engineCapacity` = '.$u->stringValue($carObject->getEngineCapacity()).',  '.
+            '     `category` = '.$u->stringValue($carObject->getCategory()).',  '.
+            '     `cylinder` = '.$carObject->getCylinder().',  '.
+            '     `doors` = '.$carObject->getDoors().',  '.
+            '     `status` = '.$u->stringValue($carObject->getStatus()).',  '.
+            '     `dateAdded` = '.$u->stringValue($carObject->getDateAdded()).'  '.
+            '   WHERE  '.
+            '    `vehicleId` =  ' . $carObject->getVehicleId();
 
+        $db = Dbh::getInstance();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    function isUpdated($postArray) {
+        $id = $postArray['update-vehicle-id'];
+        if($this->isVehicleExist($id)) {
+
+            // syntax: $postArray['nameAttribute']
+            $updateThisCar_obj = new Vehicle(
+                $id,
+                $postArray["update-make"],
+                $postArray["year"],
+                $postArray["update-model"],
+                $postArray["price"],
+                $postArray["mileage"],
+                $postArray["transmission"],
+                $postArray["drivetrain"],
+                $postArray["capacity"],
+                $postArray["category"],
+                $postArray["cylinder"],
+                $postArray["doors"],
+                $postArray["status"],
+                $this->getTimeStamp()
+            );
+            
+            $isUpdated_Condition = 0;
+            if($this->update($updateThisCar_obj)) {
+                $isUpdated_Condition = 1;
+            }
+            return $isUpdated_Condition;
+        } else {
+            return 0;
+        }
     }
 
     function delete($id) {

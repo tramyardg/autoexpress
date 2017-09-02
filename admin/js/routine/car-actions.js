@@ -52,21 +52,11 @@ var CarActions = (function () {
             getPhotosByCarIdFn = null;
             updateCarInfo_RadioSelect = null;
 
-            // checkedCylinderRadioBtnFn = null;
-            // checkedCategoryRadioBtnFn = null;
-            // checkedDrivetrainRadioBtnFn = null;
-            // checkedTransmissionRadioBtnFn = null;
-            // selectedMakeSelectOptionFn = null;
-            // selectedYearSelectOptionFn = null;
-
             // call the event driven functions here
             this.bindCarActions();
         },
 
         bindCarActions: function () {
-
-            // alert($('.add-new-car-modal-lg').hasClass('in'));
-
 
             // deleting a car
             deleteCarSel.click(function (event){
