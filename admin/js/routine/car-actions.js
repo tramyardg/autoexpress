@@ -1,5 +1,10 @@
 /**
  * Created by RAYMARTHINKPAD on 2017-08-23.
+ * some of ajax call, their data type is json
+ * if text is use it will print the whole html
+ * we only need 1 and 0 as output of execution
+ * from php so we need to encode the output
+ * and sent it to ajax as callback (data)
  */
 
 var util = new CommonUtil();
@@ -14,8 +19,7 @@ var CarActions = (function () {
         uploadCarPhotoLink = {},
         uploadDeleteCarPhotoModal = {},
         uploadCarPhotoBtn = {},
-        addCarPhotosForm = {},
-        updateUploadedPhotosSel = {};
+        addCarPhotosForm = {};
 
     var getPhotosByCarIdFn = {},
         displayImagesByThisCarSel = {},
@@ -43,7 +47,6 @@ var CarActions = (function () {
             uploadDeleteCarPhotoModal = $('#upload-delete-car-photos-modal');
             uploadCarPhotoBtn = $('#upload-car-photos-btn');
             addCarPhotosForm = $('#add-car-photos-form');
-            updateUploadedPhotosSel = $('#update-uploaded-photos');
             displayImagesByThisCarSel = $('#display-images-by-this-car');
             updateCarInfoSel = $('.dropdown a.update-vehicle');
             updateCarInfoModal = $('#updateCarInfoModal');
@@ -64,16 +67,20 @@ var CarActions = (function () {
                 confirmDeleteRecordSel.modal('show');
                 event.preventDefault();
 
+                // on clicked Yes
                 deleteConfirmBtnSel.click(function () {
                     confirmDeleteRecordSel.modal('hide');
-                    rowAffectedSuccessSel.modal('show');
                     $.ajax({
                         url: "?action=delete",
                         type: "get",
                         data: "id=" + dataId,
+                        dataType: "json",
                         success: function(data) {
                             if(data === 1) {
-                                rowAffectedSuccessSel.modal('show');
+                                alert('1 row affected.');
+                                window.location.reload(true);
+                            } else {
+                                alert('Something is wrong. Please try again later.');
                             }
                         }
                     }).fail(function(data){
@@ -83,7 +90,7 @@ var CarActions = (function () {
                 return false; //for good measure
             });
 
-            // updating a car info
+            // load data of this car to be updated
             updateCarInfoModal.on('show.bs.modal', function (event) {
                 var updateLink = $(event.relatedTarget); // Button that triggered the modal
                 var carId = updateLink.data("id"); // Button that triggered the modal
@@ -92,7 +99,6 @@ var CarActions = (function () {
                     type: "post",
                     dataType: "json",
                     success: function(data) {
-
                         // using Mustache to render data object
                         var html = Mustache.render(template.updateCarInfoModalContent(util), data[0]);
                         updateCarInfoModalContent.empty();
@@ -106,10 +112,10 @@ var CarActions = (function () {
                         updateCarInfo_RadioSelect.TRANSMISSION(data[0]._transmission);
 
                         // mapping of appropriate models after selecting make
-                        var selectMakeOption = updateCarInfoModalContent.find('select#make');
-                        selectMakeOption.on('change', function () {
-                            util.selectCarMake($(this));
-                        });
+                        // var selectMakeOption = updateCarInfoModalContent.find('select#make');
+                        // selectMakeOption.on('change', function () {
+                        //     util.selectCarMake($(this));
+                        // });
 
                     }
                 }).fail(function(data){
@@ -130,24 +136,17 @@ var CarActions = (function () {
              */
             uploadCarPhotoLink.click(function (event){
                 var carId = $(this).attr('upload-delete-photos');
+                // show modal for uploading and deleting modal
                 uploadDeleteCarPhotoModal.modal('show');
                 event.preventDefault();
 
-                // for displaying list of photos of this vehicle
-                updateUploadedPhotosSel.DataTable({
-                    "pageLength": 1,
-                    "lengthChange": false,
-                    searching: false,
-                    // "bInfo": false,
-                    "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [0] }]
-                });
-
                 // ajax request to display list of photos of this car
+                // not using DataTables
                 getPhotosByCarIdFn(carId);
 
                 uploadCarPhotoBtn.click(function (e) {
                     uploadDeleteCarPhotoModal.modal('hide');
-                    rowAffectedSuccessSel.modal('show');
+                    //rowAffectedSuccessSel.modal('show'); // TODO
 
 
                     var thumbImageSel = $('.thumb');
@@ -161,9 +160,13 @@ var CarActions = (function () {
                         url: "?action=uploadPhotos&id="+carId,
                         type: "post",
                         data: {filesData : filesDataArray},
+                        dataType: "json",
                         success: function(data) {
                             if(data === 1) {
-                                rowAffectedSuccessSel.modal('show');
+                                alert('1 row affected.');
+                                window.location.reload(true);
+                            } else {
+                                alert('Something is wrong. Please try again later.');
                             }
                         }
                     }).fail(function(data){
@@ -178,11 +181,10 @@ var CarActions = (function () {
             });
 
             /**
-             *
              * Updating a vehicle PHOTO is done as follow
              * 1. using the same template for uploading car photos
              * 2. display current photos if any of that car
-             * 2. these images can be deleted
+             * 2. these images can be deleted and
              * 3. at the bottom shows a normal upload photos
              *
              * Making a request to the same page (inventory.php)
@@ -192,7 +194,7 @@ var CarActions = (function () {
              * @param carId
              */
             getPhotosByCarIdFn = function(carId) {
-                $.ajax({ // for deleting photos
+                $.ajax({
                     url: "?action=getPhotosByCarId&id="+carId,
                     type: "post",
                     dataType: "json", // so it returns only the text not the
@@ -212,6 +214,7 @@ var CarActions = (function () {
             };
 
             /**
+             * Populate modal for updating car info
              * Action > update > all radio and select will be checked and
              * selected based on the selected vehicle
              * radio: cylinder, category, drivetrain, transmission, status

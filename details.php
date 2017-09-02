@@ -107,11 +107,11 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
                     <p>Safety Rating</p>
                 </div>
                 <div id="vehicle_info_right">
-                    <p>$<?php echo $currCar[0]->getPrice(); ?></p>
+                    <p class="price">$<?php echo $currCar[0]->getPrice(); ?></p>
                     <p><?php echo $currCar[0]->getMake(); ?></p>
                     <p><?php echo $currCar[0]->getModel(); ?></p>
                     <p><?php echo $currCar[0]->getYearMade(); ?></p>
-                    <p><?php echo $currCar[0]->getMileage(); ?></p>
+                    <p class="mileage"><?php echo $currCar[0]->getMileage(); ?></p>
                     <p><?php echo $currCar[0]->getTransmission(); ?></p>
                     <p>-</p>
                     <p><?php echo $currCar[0]->getDrivetrain(); ?></p>
@@ -137,5 +137,16 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="admin/js/common/CommonUtil.js"></script>
+<script>
+$(document).ready(function () {
+	$('.price-style, .mileage, .price').each(function() {
+		var u = new CommonUtil();
+		var formattedNumber = u.addCommaSeparatedDec($(this)[0].innerHTML);
+		$(this)[0].innerHTML = "";
+		$(this)[0].innerHTML = formattedNumber;
+	});
+});
+</script>
 </body>
 </html>

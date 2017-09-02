@@ -247,5 +247,6 @@ ul li {
     border-bottom: none !important;
 }
 #inventory-vehicle-table thead tr th {
+    padding: 0 !important;
     border-bottom: none !important;
 }

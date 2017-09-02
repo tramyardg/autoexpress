@@ -16,6 +16,9 @@ require_once 'class/Vehicle.php';
  * - select vehicle by id
  * - select all vehicle
  * - advanced search
+ *
+ * Remember list
+ * - ALWAYS RETURN $stmt
  */
 class CarDAO extends Utility
 {
@@ -123,7 +126,6 @@ class CarDAO extends Utility
 
     // one car can have many photos
     function addDiagram($files, $id) {
-
         if(!empty($files)) {
             $sql = null;
 
@@ -135,20 +137,18 @@ class CarDAO extends Utility
             $db = Dbh::getInstance();
             $stmt = $db->prepare($sql);
             $stmt->execute();
+            return $stmt;
         }
     }
 
     function isDiagramAdded($files, $id) {
-        if($this->isVehicleExist($id)) {
-            $condition = 0;
-
-            if($this->addDiagram($files, $id)) {
-                $condition = 1;
-            }
-            return $condition;
-
-        }
-        return 0;
+        if ($this->isVehicleExist($id))
+            if ($this->addDiagram($files, $id))
+                return 1;
+            else
+                return 0;
+        else
+            return 0;
     }
 
     function update(&$carObject) {

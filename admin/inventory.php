@@ -30,6 +30,9 @@ if(!isset($_SESSION['authenticated'])) {
                     $_POST['filesData'], // array of images src to be uploaded
                     $_GET["id"] // query string in the ajax url properties
             );
+            $uploadedJson = json_encode($is_uploaded);
+            echo $uploadedJson;
+            exit();
         }
     }
 
@@ -37,6 +40,9 @@ if(!isset($_SESSION['authenticated'])) {
     if(isset($_GET["action"])) {
         if($_GET["action"] === "delete") {
             $is_deleted = $v->isDeleted($_GET["id"]);
+            $deletedJson = json_encode($is_deleted);
+            echo $deletedJson; // for callback ajax
+            exit();
         }
     }
 
@@ -54,7 +60,7 @@ if(!isset($_SESSION['authenticated'])) {
     // deleting a car photo
     if(isset($_GET["action"])) {
         if($_GET["action"] === "deleteCarPhoto") {
-            $deleted_photo = $d->isDeleted($_GET["id"]);
+            $isDeletedPhoto = $d->isDeleted($_GET["id"]);
         }
     }
 
@@ -133,7 +139,7 @@ if(!isset($_SESSION['authenticated'])) {
                     <script>alert("1 row affected. The page will reload.");</script>
                 <?php header("refresh: 1; url=inventory.php"); }  ?>
 
-                <?php if(isset($deleted_photo) && $deleted_photo === 1) {?>
+                <?php if(isset($isDeletedPhoto) && $isDeletedPhoto === 1) {?>
                     <script>alert("1 row affected. The page will reload.");</script>
                 <?php header("refresh: 1; url=inventory.php"); }  ?>
 

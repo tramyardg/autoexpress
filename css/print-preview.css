@@ -44,7 +44,7 @@
 }
 #vehicle_info_right{
     float: right;
-    margin-left: 100px;
+    margin-left: 50px;
 }
 #vehicle_info_right p {
     margin: 7px;

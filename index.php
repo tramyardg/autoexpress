@@ -30,6 +30,7 @@ $d = new DiagramDAO();
             <div class="clear-both"></div>
         </div>
     </div>
+	
     <div class="sidebar1">
         <div class="search-menu">
             <form method="get" action="">
@@ -103,7 +104,8 @@ $d = new DiagramDAO();
             </form>
         </div>
     </div>
-    <div class="content">
+    
+	<div class="content">
         <div class="content-car-section">
             <table id="inventory-vehicle-table">
                 <thead>
@@ -150,11 +152,11 @@ $d = new DiagramDAO();
                                             <div class="car_info">
                                                 <p>
                                                     <span class="car-title"><?php echo $all_cars[$i]->getHeadingTitle(); ?> - </span>
-                                                    <span class="price-style">$<?php echo $all_cars[$i]->getPrice(); ?></span>
+                                                    $<span class="price-style"><?php echo $all_cars[$i]->getPrice(); ?></span>
                                                 </p>
                                                 <p><span class="availability"><?php echo $all_cars[$i]->getStatus(); ?></span></p>
                                                 <p>
-                                                    <span class="mileage"><?php echo $all_cars[$i]->getMileage(); ?> KM</span>&nbsp;|&nbsp;
+                                                    <span class="mileage"><?php echo $all_cars[$i]->getMileage(); ?></span>&nbsp;|&nbsp;
                                                     <span class="transmission"><?php echo $all_cars[$i]->getTransmission(); ?></span>&nbsp;|&nbsp;
                                                     <span class="drivetrain"><?php echo $all_cars[$i]->getDrivetrain(); ?></span>
                                                 </p>
@@ -300,11 +302,13 @@ $d = new DiagramDAO();
 
 
     </div>
-    <div class="footer">
+    
+	<div class="footer">
         <div id="footer-content">
             <p>Copyright © 2012-2014 | Raymart De Guzman | Leo Sudarma</p>
         </div>
     </div>
+	
 </div>
 
 
@@ -312,6 +316,7 @@ $d = new DiagramDAO();
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/PaymentCalculator.js"></script>
+<script src="admin/js/common/CommonUtil.js"></script>
 <script>
     $(document).ready(function () {
        PaymentCalculator.init();
@@ -320,8 +325,15 @@ $d = new DiagramDAO();
             "lengthChange": false,
             searching: false,
             "ordering": false
-            // "bInfo": false
         });
+		
+		
+		$('.price-style, .mileage').each(function() {
+			var u = new CommonUtil();
+			var formattedNumber = u.addCommaSeparatedDec($(this)[0].innerHTML);
+			$(this)[0].innerHTML = "";
+			$(this)[0].innerHTML = formattedNumber;
+		});
     });
 </script>
 </body>
