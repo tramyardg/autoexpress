@@ -1,9 +1,9 @@
+/**
+ * Credit:
+ * http://divtable.com/converter/
+ */
 html {
     background-color: #fff;
-}
-table {
-    font-size: 12px !important;
-    margin-bottom: 10px !important;
 }
 body {
     margin: 0;
@@ -15,13 +15,6 @@ ul {
 }
 .car-info-column {
     width: 80%;
-}
-th {
-    /*background-color: #36383D;*/
-    /*padding: 0 !important;*/
-}
-.content-car-section table tr td:first-child {
-    padding: 10px 0 0 15px;
 }
 h1,h2,h3,h4,h5,h6,p {
     margin-top: 0;
@@ -73,13 +66,6 @@ h1,h2,h3,h4,h5,h6,p {
     font-size: 10px;
     text-align:center;
 }
-.logotext {
-    font: .7em Tahoma, sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
-}
 .orange-logo-text {
     font-size: 40px;
     font-weight: bolder;
@@ -87,11 +73,9 @@ h1,h2,h3,h4,h5,h6,p {
 }
 .menu-header {
     border-bottom: solid 1px #999;
-    /* margin: 10px; */
     font-weight: 700;
     background-color: #F90;
     width: 100%;
-    /* padding-top: 30px; */
 }
 .content-car-section {
     float: left;
@@ -101,15 +85,13 @@ h1,h2,h3,h4,h5,h6,p {
     margin-left: 10px;
     margin-top: 10px;
 }
-.content-car-section table img {
+.divTable .row .car-images img {
     width: 240px !important;
     height: 150px !important;
 }
 #menu-header-left-section {
-    /* float: left; */
     background-color: transparent;
     height: 20px;
-    /* padding-top: 10; */
 }
 #menu-header-left-section a {
     color: #fff;
@@ -180,9 +162,6 @@ h1,h2,h3,h4,h5,h6,p {
 .car-title {
     font-size: 15px;
 }
-.content-car-section table tbody tr:nth-child(2) {
-    /*padding-top: 10px;*/
-}
 #payment-value-notice {
     font-size: 10px;
     padding-top: 10px;
@@ -200,7 +179,7 @@ h1,h2,h3,h4,h5,h6,p {
 .car-images span {
     position: absolute;
     bottom: 5px;
-    right: 5px;
+    right: 10px;
 }
 .sidebar1 form ul {
     padding: 10px 10px 0 10px;
@@ -233,4 +212,35 @@ ul li {
 }
 .search-menu ul li {
     padding-bottom: 2px;
+}
+/* DivTable.com */
+.divTable{
+    display: table;
+    width: 100%;
+    font-size: 12px;
+}
+.divTableRow {
+    display: table-row;
+}
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+}
+.divTableCell, .divTableHead {
+    /*border: 1px solid #999999;*/
+    display: table-cell;
+    padding: 3px 10px;
+}
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+    font-weight: bold;
+}
+.divTableFoot {
+    background-color: #EEE;
+    display: table-footer-group;
+    font-weight: bold;
+}
+.divTableBody {
+    display: table-row-group;
 }

@@ -103,7 +103,8 @@ var CommonHTML = (function () {
 
             };
 
-            console.log(util.getFilename());
+            // console.log(util.getFilename());
+
             switch(util.getFilename()) {
                 case util.pageName[0].name: // dashboard
                     fnCommonElement();

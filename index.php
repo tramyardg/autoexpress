@@ -8,15 +8,15 @@ $num_cars = $v->countAllCars();
 
 $d = new DiagramDAO();
 
-
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>AutoExpress.com</title>
     <link href="css/style.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" >
 </head>
 <body>
 <div class="container_custom">
@@ -105,83 +105,69 @@ $d = new DiagramDAO();
     </div>
     <div class="content">
         <div class="content-car-section">
-
-            <!-- car items -->
-            <?php for($i = 0; $i < $num_cars; $i++) { ?>
-            <table id="car-item-<?php echo $i; ?>">
+            <table id="inventory-vehicle-table">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
                 <tbody>
-                <tr>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                    <th class="car-info-column">&nbsp;</th>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="row car-images">
-                            <?php
-                            $currCarImg = $d->getPhotosBy_CarId($all_cars[$i]->getVehicleId());
-//                            $h = null;
-                            if($d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()) == "0") {
-                                    $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
-                            } else {
-                                $h = $currCarImg[0]->getDiagram();
-                            }
-                            ?>
-                            <img src="<?php  echo $h; ?>">
-                            <span class="badge"><?php echo $d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()); ?></span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="feature_links">
-                            <a href="#" data-toggle="modal" data-target="#shareLinkModal" title="Share this link">
-                                <p><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</p>
-                            </a>
-                            <a href="#" class="calculate-payment-link" data-toggle="modal"
-                               data-target="#calculatePaymentModal" data-price="<?php echo $all_cars[$i]->getPrice(); ?>" >
-                                <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
-                            </a>
-                            <a href="<?php echo 'details.php?carId='.$all_cars[$i]->getVehicleId(); ?>" title="View more details">
-                                <p><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;More Details</p>
-                            </a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="car_info">
-                            <p>
-                                <span class="car-title"><?php echo $all_cars[$i]->getHeadingTitle(); ?> - </span>
-                                <span class="price-style">$<?php echo $all_cars[$i]->getPrice(); ?></span>
-                            </p>
-                            <p><span class="availability"><?php echo $all_cars[$i]->getStatus(); ?></span></p>
-                            <p>
-                                <span class="mileage"><?php echo $all_cars[$i]->getMileage(); ?> KM</span>&nbsp;|&nbsp;
-                                <span class="transmission"><?php echo $all_cars[$i]->getTransmission(); ?></span>&nbsp;|&nbsp;
-                                <span class="drivetrain"><?php echo $all_cars[$i]->getDrivetrain(); ?></span>
-                            </p>
-                        </div>
-                    </td>
-                </tr>
+                <?php for($i = 0; $i < $num_cars; $i++) { ?>
+                    <tr>
+                        <td>
+                            <div class="divTable" id="car-item-<?php echo $i; ?>">
+                                <div class="divTableBody">
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">
+                                            <div class="row car-images" >
+                                                <?php
+                                                $currCarImg = $d->getPhotosBy_CarId($all_cars[$i]->getVehicleId());
+                                                if($d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()) == "0") {
+                                                    $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
+                                                } else {
+                                                    $h = $currCarImg[0]->getDiagram();
+                                                }
+                                                ?>
+                                                <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>">
+                                                <span class="badge"><?php echo $d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()); ?></span>
+                                            </div>
+                                        </div>
+                                        <div class="divTableCell">
+                                            <div class="feature_links">
+                                                <a href="#" data-toggle="modal" data-target="#shareLinkModal" title="Share this link">
+                                                    <p><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</p>
+                                                </a>
+                                                <a href="#" class="calculate-payment-link" data-toggle="modal"
+                                                   data-target="#calculatePaymentModal" data-price="<?php echo $all_cars[$i]->getPrice(); ?>" >
+                                                    <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
+                                                </a>
+                                                <a href="<?php echo 'details.php?carId='.$all_cars[$i]->getVehicleId(); ?>" title="View more details">
+                                                    <p><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;More Details</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="divTableCell">
+                                            <div class="car_info">
+                                                <p>
+                                                    <span class="car-title"><?php echo $all_cars[$i]->getHeadingTitle(); ?> - </span>
+                                                    <span class="price-style">$<?php echo $all_cars[$i]->getPrice(); ?></span>
+                                                </p>
+                                                <p><span class="availability"><?php echo $all_cars[$i]->getStatus(); ?></span></p>
+                                                <p>
+                                                    <span class="mileage"><?php echo $all_cars[$i]->getMileage(); ?> KM</span>&nbsp;|&nbsp;
+                                                    <span class="transmission"><?php echo $all_cars[$i]->getTransmission(); ?></span>&nbsp;|&nbsp;
+                                                    <span class="drivetrain"><?php echo $all_cars[$i]->getDrivetrain(); ?></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
                 </tbody>
             </table>
-            <?php } ?>
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
 
         </div>
 
@@ -324,12 +310,18 @@ $d = new DiagramDAO();
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/PaymentCalculator.js"></script>
 <script>
     $(document).ready(function () {
        PaymentCalculator.init();
+        $('#inventory-vehicle-table').DataTable({
+            "pageLength": 5,
+            "lengthChange": false,
+            searching: false,
+            "ordering": false
+            // "bInfo": false
+        });
     });
 </script>
 </body>
