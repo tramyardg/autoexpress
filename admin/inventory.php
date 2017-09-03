@@ -23,7 +23,7 @@ if(!isset($_SESSION['authenticated'])) {
         $isAddedCondition = $v->isCreated($_POST);
     }
 
-    // car diagram upload
+    // car diagram upload with ajax
     if (isset($_GET["action"])) {
         if($_GET["action"] === "uploadPhotos") {
             $is_uploaded = $v->isDiagramAdded(
@@ -36,7 +36,7 @@ if(!isset($_SESSION['authenticated'])) {
         }
     }
 
-    // deleting vehicle
+    // deleting vehicle with ajax
     if(isset($_GET["action"])) {
         if($_GET["action"] === "delete") {
             $is_deleted = $v->isDeleted($_GET["id"]);
@@ -46,13 +46,13 @@ if(!isset($_SESSION['authenticated'])) {
         }
     }
 
-    // displaying a car photos for deletion
+    // displaying a car photos for deletion  with ajax
     $d = new DiagramDAO();
     if(isset($_GET['action'])) {
         if($_GET['action'] === "getPhotosByCarId") {
             $diagram = $d->getPhotosBy_CarId($_GET['id']);
-            $data = json_encode($diagram);
-            echo $data; // sent to ajax don't remove
+            $diagramJson = json_encode($diagram);
+            echo $diagramJson; // sent to ajax don't remove
             exit();
         }
     }
@@ -64,7 +64,7 @@ if(!isset($_SESSION['authenticated'])) {
         }
     }
 
-    // loading data to modal update
+    // loading data to modal update with ajax
     if(isset($_GET["action"])) {
         if($_GET["action"] === "updateCarInfo") {
             $updateCarInfoById = $v->getCarById($_GET['id']);

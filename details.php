@@ -43,6 +43,7 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
         <div id="vehicle_title"><h3><?php echo $currCar[0]->getHeadingTitle(); ?></h3></div>
         <div style="clear: both" ></div>
         <div class="left_section">
+            <?php if($numImg > 0) { ?>
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <?php $h = null; ?>
@@ -83,6 +84,11 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            <?php } else { ?>
+            <div class="car-images" >
+                <img src="https://placeholdit.co//i/360x187?&bg=111111&fc=ffffff&text=Photo Unavailable">
+            </div>
+            <?php } ?>
             <br><h3><span>Notes</span></h3>
             <textarea id="note-text" rows="8" name="notes"></textarea>
         </div>
@@ -135,18 +141,7 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script src="js/jquery-3.1.1.min.js"></script>
+<!--<script src="js/jquery-3.1.1.min.js"></script>-->
 <script src="js/bootstrap.min.js"></script>
-<script src="admin/js/common/CommonUtil.js"></script>
-<script>
-$(document).ready(function () {
-	$('.price-style, .mileage, .price').each(function() {
-		var u = new CommonUtil();
-		var formattedNumber = u.addCommaSeparatedDec($(this)[0].innerHTML);
-		$(this)[0].innerHTML = "";
-		$(this)[0].innerHTML = formattedNumber;
-	});
-});
-</script>
 </body>
 </html>

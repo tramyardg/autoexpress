@@ -45,7 +45,7 @@ class DiagramDAO
 
     function getPhotosBy_CarId($id) {
         $sql = "SELECT `diagramId`, `diagram`, `vehicleId` FROM `cardiagram` WHERE `vehicleId` =" . $id .";";
-        return $this->query($sql);
+        return $this->query($sql); // returns a diagram object
     }
 
     function countAllPhotosByCarId($id) {
@@ -54,11 +54,11 @@ class DiagramDAO
 
     function isCarPhotoExist($id)
     {
-        $exists = 0;
         if (($this->getPhotosBy_Id($id))) {
-            $exists = 1;
+            return 1;
+        } else {
+            return 0;
         }
-        return $exists;
     }
 
     function delete($id) {
@@ -71,11 +71,11 @@ class DiagramDAO
 
     function isDeleted($id) {
         if($this->isCarPhotoExist($id)) {
-            $condition = 0;
             if($this->delete($id)) {
-                $condition = 1;
+                return 1;
             }
-            return $condition;
+        } else {
+            return 0;
         }
         return 0;
     }

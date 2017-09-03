@@ -40,6 +40,28 @@ class Utility
     }
 
 
+    // format number with comma given length
+    function formatNumber($num) {
+        $numStr = (string)$num;
+        $numArr = str_split($numStr);
+        $numArrLen = count($numArr);
+        if($numArrLen === 4) { // 1,234
+            array_splice($numArr, 1, 0, ",");
+            return join('', $numArr);
+        } else if($numArrLen === 5) { // 12,345
+            array_splice($numArr, 2, 0, ",");
+            return join('', $numArr);
+        } else if($numArrLen === 6) { // 123,456
+            array_splice($numArr, 3, 0, ",");
+            return join('', $numArr);
+        } else if($numArrLen === 7) { // 1,234,567
+            array_splice($numArr, 1, 0, ",");
+            array_splice($numArr, 5, 0, ",");
+            return join('', $numArr);
+        } else {
+            return $numStr;
+        }
+    }
 
 
 

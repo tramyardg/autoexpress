@@ -116,7 +116,6 @@ function CommonTemplate() {
     };
 
     this.getPhotosByCarIdModalContent = function (diagramArray) {
-        // console.log(diagramArray);
         var h = '';
         for(var i = 0; i < diagramArray.length; i++) {
             h += '   		<div class="col-xs-6 col-md-3">  '  +

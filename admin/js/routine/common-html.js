@@ -97,8 +97,8 @@ var CommonHTML = (function () {
             fnFindAllCarDecColumnAddComma = function () {
                 var numCars = priceColumnSel.length;
                 for(var i = 0; i < numCars; i++) {
-                    priceColumnSel[i].innerHTML = util.addCommaSeparatedDec(priceColumnSel[i].innerHTML);
-                    mileageColumnSel[i].innerHTML = util.addCommaSeparatedDec(mileageColumnSel[i].innerHTML);
+                    //priceColumnSel[i].innerHTML = util.addCommaSeparatedDec(priceColumnSel[i].innerHTML);
+                    //mileageColumnSel[i].innerHTML = util.addCommaSeparatedDec(mileageColumnSel[i].innerHTML);
                 }
 
             };

@@ -1,10 +1,17 @@
 /**
  * Created by RAYMARTHINKPAD on 2017-08-23.
- * some of ajax call, their data type is json
- * if text is use it will print the whole html
- * we only need 1 and 0 as output of execution
- * from php so we need to encode the output
- * and sent it to ajax as callback (data)
+ * some ajax call, their data type is json
+ * so that it will not print the whole html
+ * to do this, json encode the return value from
+ * server its either 1 and 0 -> will be use as
+ * response sent to ajax as callback name data
+ * therefore, if(data === 1) success otherwise
+ * failed to execute
+ *
+ * also remember that server returns
+ * price and mileage with comma
+ * so they must be reformatted in
+ * some area
  */
 
 var util = new CommonUtil();
@@ -13,16 +20,14 @@ var CarActions = (function () {
 
     var deleteCarSel = {},
         confirmDeleteRecordSel = {},
-        deleteConfirmBtnSel = {},
-        rowAffectedSuccessSel = {},
-        requestErrorModal = {},
-        uploadCarPhotoLink = {},
+        deleteConfirmBtnSel = {};
+
+    var uploadCarPhotoLink = {},
         uploadDeleteCarPhotoModal = {},
-        uploadCarPhotoBtn = {},
-        addCarPhotosForm = {};
+        uploadCarPhotoBtn = {};
 
     var getPhotosByCarIdFn = {},
-        displayImagesByThisCarSel = {},
+        displayImagesOfThisCarSel = {},
         updateCarInfoSel = {},
         updateCarInfoModal = {},
         updateCarInfoModalContent = {};
@@ -41,13 +46,12 @@ var CarActions = (function () {
             deleteCarSel = $(".dropdown a.delete-vehicle");
             confirmDeleteRecordSel = $('#confirm-delete-record');
             deleteConfirmBtnSel = $('#delete-yes');
-            rowAffectedSuccessSel = $('#row-affected-successfully');
-            requestErrorModal = $('#request-error');
+            displayImagesOfThisCarSel = $('#display-images-by-this-car');
+
             uploadCarPhotoLink = $('.dropdown a.upload-car-photos');
             uploadDeleteCarPhotoModal = $('#upload-delete-car-photos-modal');
             uploadCarPhotoBtn = $('#upload-car-photos-btn');
-            addCarPhotosForm = $('#add-car-photos-form');
-            displayImagesByThisCarSel = $('#display-images-by-this-car');
+
             updateCarInfoSel = $('.dropdown a.update-vehicle');
             updateCarInfoModal = $('#updateCarInfoModal');
             updateCarInfoModalContent = $('#update-car-info-modal-content');
@@ -83,8 +87,6 @@ var CarActions = (function () {
                                 alert('Something is wrong. Please try again later.');
                             }
                         }
-                    }).fail(function(data){
-                        requestErrorModal.modal('show');
                     });
                 });
                 return false; //for good measure
@@ -100,7 +102,9 @@ var CarActions = (function () {
                     dataType: "json",
                     success: function(data) {
                         // using Mustache to render data object
-                        var html = Mustache.render(template.updateCarInfoModalContent(util), data[0]);
+                        data[0]._price = data[0]._price.replace(/,/g, '');
+                        data[0]._mileage = data[0]._mileage.replace(/,/g, '');
+                        var html = Mustache.render(template.updateCarInfoModalContent(), data[0]);
                         updateCarInfoModalContent.empty();
                         updateCarInfoModalContent.append(html);
 
@@ -111,19 +115,10 @@ var CarActions = (function () {
                         updateCarInfo_RadioSelect.STATUS(data[0]._status);
                         updateCarInfo_RadioSelect.TRANSMISSION(data[0]._transmission);
 
-                        // mapping of appropriate models after selecting make
-                        // var selectMakeOption = updateCarInfoModalContent.find('select#make');
-                        // selectMakeOption.on('change', function () {
-                        //     util.selectCarMake($(this));
-                        // });
-
                     }
-                }).fail(function(data){
-                    requestErrorModal.modal('show');
                 });
 
             });
-
 
             /**
              * Uploading photo is done as follow:
@@ -146,8 +141,6 @@ var CarActions = (function () {
 
                 uploadCarPhotoBtn.click(function (e) {
                     uploadDeleteCarPhotoModal.modal('hide');
-                    //rowAffectedSuccessSel.modal('show'); // TODO
-
 
                     var thumbImageSel = $('.thumb');
                     var thumbLength = thumbImageSel.length;
@@ -162,6 +155,7 @@ var CarActions = (function () {
                         data: {filesData : filesDataArray},
                         dataType: "json",
                         success: function(data) {
+                            console.log(data);
                             if(data === 1) {
                                 alert('1 row affected.');
                                 window.location.reload(true);
@@ -169,8 +163,6 @@ var CarActions = (function () {
                                 alert('Something is wrong. Please try again later.');
                             }
                         }
-                    }).fail(function(data){
-                        requestErrorModal.modal('show');
                     });
 
                     e.preventDefault();
@@ -199,16 +191,17 @@ var CarActions = (function () {
                     type: "post",
                     dataType: "json", // so it returns only the text not the
                     success: function(diagramArray) {
+                        console.log(diagramArray);
+                        // TODO you can use Mustache here
                         if(diagramArray.length > 0) {
                             var diagrams = template.getPhotosByCarIdModalContent(diagramArray);
-                            displayImagesByThisCarSel.empty();
-                            displayImagesByThisCarSel.append(diagrams);
+                            displayImagesOfThisCarSel.empty();
+                            displayImagesOfThisCarSel.append(diagrams);
                         } else {
-                            displayImagesByThisCarSel.append("<p>No photos so far</p>");
+                            displayImagesOfThisCarSel.empty();
+                            displayImagesOfThisCarSel.append("<p>No photos so far</p>");
                         }
                     }
-                }).fail(function(data){
-                    requestErrorModal.modal('show');
                 });
 
             };

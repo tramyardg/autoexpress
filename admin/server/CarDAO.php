@@ -68,29 +68,40 @@ class CarDAO extends Utility
     }
 
     function create(&$valueObject) {
-        $sql =   'INSERT  '  .
-            '   INTO  '  .
-            '     `vehicle`(`vehicleId`, `make`, `yearMade`, `model`, `price`, `mileage`,  '  .
-            ' `transmission`, `drivetrain`,  `engineCapacity`,  `category`,  '  .
-            ' `cylinder`, `doors`, `status`,  `dateAdded`  '  .
-            '     )  '  .
-            '   VALUES(  ';
-
-        $sql = $sql."'".$valueObject->getVehicleId()."', ";
-        $sql = $sql."'".$valueObject->getMake()."', ";
-        $sql = $sql."'".$valueObject->getYearMade()."', ";
-        $sql = $sql."'".$valueObject->getModel()."', ";
-        $sql = $sql."'".$valueObject->getPrice()."', ";
-        $sql = $sql."".$valueObject->getMileage().", ";
-        $sql = $sql."'".$valueObject->getTransmission()."', ";
-        $sql = $sql."'".$valueObject->getDrivetrain()."', ";
-        $sql = $sql."'".$valueObject->getEngineCapacity()."', ";
-        $sql = $sql."'".$valueObject->getCategory()."', ";
-        $sql = $sql."".$valueObject->getCylinder().", ";
-        $sql = $sql."".$valueObject->getDoors().", ";
-        $sql = $sql."'".$valueObject->getStatus()."', ";
-        $sql = $sql."'".$valueObject->getDateAdded()."') ";
-
+        $sql =    '   INSERT  '.
+            '   INTO  '.
+            '     `vehicle`(  '.
+            '       `vehicleId`,  '.
+            '       `make`,  '.
+            '       `yearMade`,  '.
+            '       `model`,  '.
+            '       `price`,  '.
+            '       `mileage`,  '.
+            '       `transmission`,  '.
+            '       `drivetrain`,  '.
+            '       `engineCapacity`,  '.
+            '       `category`,  '.
+            '       `cylinder`,  '.
+            '       `doors`,  '.
+            '       `status`,  '.
+            '       `dateAdded`  '.
+            '     )  '.
+            '   VALUES(  '.
+            '     '.$valueObject->getVehicleId().',  '.
+            '     '.$valueObject->getMake().',  '.
+            '     '.$valueObject->getYearMade().',  '.
+            '     '.$valueObject->getModel().',  '.
+            '     '.$valueObject->getPrice().',  '.
+            '     '.$valueObject->getMileage().',  '.
+            '     '.$valueObject->getTransmission().',  '.
+            '     '.$valueObject->getDrivetrain().',  '.
+            '     '.$valueObject->getEngineCapacity().',  '.
+            '     '.$valueObject->getCategory().',  '.
+            '     '.$valueObject->getCylinder().',  '.
+            '     '.$valueObject->getDoors().',  '.
+            '     '.$valueObject->getStatus().',  '.
+            '     '.$valueObject->getDateAdded().'  '.
+            '  );  ';
         $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -99,30 +110,32 @@ class CarDAO extends Utility
 
     function isCreated($postArray) {
         $lastCarId = $this->getLastCarId();
+        // format price and mileage number
+        $prices = $this->formatNumber($postArray["price"]);
+        $mileages = $this->formatNumber($postArray["mileage"]);
+        // a varchar type must be quoted in a string so we can insert it
         $car = new Vehicle(
             $this->incrementId($lastCarId),
-            $postArray["make"],
+            $this->stringValue($postArray["make"]),
             $postArray["year"],
-            $postArray["model"],
-            $postArray["price"],
-            $postArray["mileage"],
-            $postArray["transmission"],
-            $postArray["drivetrain"],
-            $postArray["capacity"],
-            $postArray["category"],
+            $this->stringValue($postArray["model"]),
+            $this->stringValue($prices),
+            $this->stringValue($mileages),
+            $this->stringValue($postArray["transmission"]),
+            $this->stringValue($postArray["drivetrain"]),
+            $this->stringValue($postArray["capacity"]),
+            $this->stringValue($postArray["category"]),
             $postArray["cylinder"],
             $postArray["doors"],
-            $postArray["status"],
-            $this->getTimeStamp()
+            $this->stringValue($postArray["status"]),
+            $this->stringValue($this->getTimeStamp())
         );
-
-        $condition = 0;
         if($this->create($car)) {
-            $condition = 1;
+            return 1;
+        } else {
+            return 0;
         }
-        return $condition;
     }
-
 
     // one car can have many photos
     function addDiagram($files, $id) {
@@ -141,14 +154,16 @@ class CarDAO extends Utility
         }
     }
 
-    function isDiagramAdded($files, $id) {
-        if ($this->isVehicleExist($id))
-            if ($this->addDiagram($files, $id))
+    function isDiagramAdded($files, $id)
+    {
+        if ($this->isVehicleExist($id)) {
+            if ($this->addDiagram($files, $id)) {
                 return 1;
-            else
-                return 0;
-        else
+            }
+        } else {
             return 0;
+        }
+        return 0;
     }
 
     function update(&$carObject) {
@@ -181,10 +196,8 @@ class CarDAO extends Utility
     function isUpdated($postArray) {
         $id = $postArray['update-vehicle-id'];
         if($this->isVehicleExist($id)) {
-
-            // syntax: $postArray['nameAttribute']
             $updateThisCar_obj = new Vehicle(
-                $id,
+                $id, // syntax: $postArray['nameAttribute']
                 $postArray["update-make"],
                 $postArray["year"],
                 $postArray["update-model"],
@@ -199,15 +212,13 @@ class CarDAO extends Utility
                 $postArray["status"],
                 $this->getTimeStamp()
             );
-
-            $isUpdated_Condition = 0;
             if($this->update($updateThisCar_obj)) {
-                $isUpdated_Condition = 1;
+                return 1;
             }
-            return $isUpdated_Condition;
         } else {
             return 0;
         }
+        return 0;
     }
 
     function delete($id) {
@@ -229,14 +240,13 @@ class CarDAO extends Utility
 
     function isDeleted($id) {
         if($this->isVehicleExist($id)) {
-            $condition = 0;
             if($this->delete($id)) {
-                $condition = 1;
+                return 1;
             }
-            return $condition;
+        } else {
+            return 0;
         }
         return 0;
-
     }
 
     function countAllCars() {
@@ -260,13 +270,12 @@ class CarDAO extends Utility
     }
 
     // for registration if username is taken {boolean}
-    function isVehicleExist($id)
-    {
-        $exists = 0;
+    function isVehicleExist($id) {
         if (($this->getCarById($id))) {
-            $exists = 1;
+            return 1;
+        } else {
+            return 0;
         }
-        return $exists;
     }
 
 

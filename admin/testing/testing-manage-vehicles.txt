@@ -1,0 +1,17 @@
+TESTING manage vehicles actions
+What to test?
+	1. adding vehicle
+	2. updating vehicle info
+	3. deleting vehicle
+
+    4a. uploading vehicle photos
+	4b. deleting photos of a vehicle
+
+----------------------------------------
+
+2017-09-02 8:55pm
+1. passed
+2. passed
+3. passed
+4a. passed
+4b. passed

@@ -12,6 +12,7 @@
  * implements json serializable so that
  * it can be encoded in json
  */
+require_once 'Utility.php';
 class Vehicle implements JsonSerializable
 {
     private $_vehicleId;

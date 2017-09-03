@@ -12,6 +12,7 @@ var PaymentCalculator = (function () {
     var calculateFn = {};
     var isValidInputFn = {};
     var onlyNumberAndDigitsAllowedFn = {};
+    var replaceCommaInNumberFn = {};
 
     return {
 
@@ -30,10 +31,11 @@ var PaymentCalculator = (function () {
 
             calculatePaymentLinkBtn.click(function (event) {
                 var dataCarPrice = $(this).attr('data-price');
+                var noCommaCarPrice = dataCarPrice.replace(/,/g, "");
                 var paymentModalId = $(this).attr('data-target');
                 var modal = $(paymentModalId);
                 var modalBody = modal.find('.modal-body');
-                modalBody.find('.modal-car-price').val(dataCarPrice);
+                modalBody.find('.modal-car-price').val(noCommaCarPrice);
 
                 modalCalculateBtn.click(function (e) {
                     var carPrice = {

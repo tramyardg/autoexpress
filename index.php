@@ -136,9 +136,6 @@ $d = new DiagramDAO();
                                         </div>
                                         <div class="divTableCell">
                                             <div class="feature_links">
-                                                <a href="#" data-toggle="modal" data-target="#shareLinkModal" title="Share this link">
-                                                    <p><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</p>
-                                                </a>
                                                 <a href="#" class="calculate-payment-link" data-toggle="modal"
                                                    data-target="#calculatePaymentModal" data-price="<?php echo $all_cars[$i]->getPrice(); ?>" >
                                                     <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
@@ -152,11 +149,11 @@ $d = new DiagramDAO();
                                             <div class="car_info">
                                                 <p>
                                                     <span class="car-title"><?php echo $all_cars[$i]->getHeadingTitle(); ?> - </span>
-                                                    $<span class="price-style"><?php echo $all_cars[$i]->getPrice(); ?></span>
+                                                    <span class="price-style">$<?php echo $all_cars[$i]->getPrice(); ?></span>
                                                 </p>
                                                 <p><span class="availability"><?php echo $all_cars[$i]->getStatus(); ?></span></p>
                                                 <p>
-                                                    <span class="mileage"><?php echo $all_cars[$i]->getMileage(); ?></span>&nbsp;|&nbsp;
+                                                    <span class="mileage"><?php echo $all_cars[$i]->getMileage(); ?> km</span>&nbsp;|&nbsp;
                                                     <span class="transmission"><?php echo $all_cars[$i]->getTransmission(); ?></span>&nbsp;|&nbsp;
                                                     <span class="drivetrain"><?php echo $all_cars[$i]->getDrivetrain(); ?></span>
                                                 </p>
@@ -316,24 +313,15 @@ $d = new DiagramDAO();
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/PaymentCalculator.js"></script>
-<script src="admin/js/common/CommonUtil.js"></script>
 <script>
     $(document).ready(function () {
        PaymentCalculator.init();
         $('#inventory-vehicle-table').DataTable({
-            "pageLength": 5,
+            "pageLength": 3,
             "lengthChange": false,
             searching: false,
             "ordering": false
         });
-		
-		
-		$('.price-style, .mileage').each(function() {
-			var u = new CommonUtil();
-			var formattedNumber = u.addCommaSeparatedDec($(this)[0].innerHTML);
-			$(this)[0].innerHTML = "";
-			$(this)[0].innerHTML = formattedNumber;
-		});
     });
 </script>
 </body>

@@ -1,0 +1,19 @@
+TESTING register and sign in for admin
+What to test?
+	register
+		1. if username is already taken
+		2. if successfully added (username must be unique)
+	sign in 
+		3. if password is incorrect
+		4. if user exists or not
+
+-----------------------------------------------------------
+2017-09-02 7:55PM
+1. passed
+2. passed
+3. passed
+4. passed
+
+
+
+

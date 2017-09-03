@@ -32,23 +32,6 @@ function CommonUtil() {
         {name: "logout.php", title: "Signing out..."}
     ];
 
-    this.addCommaSeparatedDec = function (str) {
-       var strArr = str.split('');
-       var strLen = strArr.length;
-	   if(strLen === 4) { // 1,168
-		   strArr.splice(1, 0, ",");
-		   return strArr.join("");
-	   } else if(strLen === 5) { // 16,890
-           strArr.splice(2, 0, ",");
-           return strArr.join("");
-       } else if(strLen === 6) { //116,890
-           strArr.splice(3, 0, ",");
-           return strArr.join("");
-       } else {
-           return str;
-       }
-    };
-
     // dynamically show the models of data selected
     this.selectCarMake = function(selectedMake) {
         var modelsSelect = $(selectedMake).parent().parent().next().next().find('#model');
