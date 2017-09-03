@@ -191,12 +191,11 @@ var CarActions = (function () {
                     type: "post",
                     dataType: "json", // so it returns only the text not the
                     success: function(diagramArray) {
-                        console.log(diagramArray);
-                        // TODO you can use Mustache here
+                        var diagramData = { diagrams: diagramArray };
                         if(diagramArray.length > 0) {
-                            var diagrams = template.getPhotosByCarIdModalContent(diagramArray);
+                            var html = Mustache.to_html(template.getPhotosByCarIdModalContent(), diagramData);
                             displayImagesOfThisCarSel.empty();
-                            displayImagesOfThisCarSel.append(diagrams);
+                            displayImagesOfThisCarSel.append(html);
                         } else {
                             displayImagesOfThisCarSel.empty();
                             displayImagesOfThisCarSel.append("<p>No photos so far</p>");

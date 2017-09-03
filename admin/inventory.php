@@ -498,7 +498,7 @@ if(!isset($_SESSION['authenticated'])) {
                             <div class="row">
                                 <div class="col-md-12 margin-top-15">
                                     <div class="col-md-12">
-                                        <div class="panel panel-info">
+                                        <div class="panel panel-warning">
                                             <div class="panel-heading">Deleting photos...</div>
                                             <div class="panel-body" id="display-images-by-this-car"></div>
                                         </div>

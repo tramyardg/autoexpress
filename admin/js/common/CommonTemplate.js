@@ -115,8 +115,8 @@ function CommonTemplate() {
             '          </div>  ' ;
     };
 
-    this.getPhotosByCarIdModalContent = function (diagramArray) {
-        var h = '';
+    this.getPhotosByCarIdModalContent = function () {
+        /*var h = '';
         for(var i = 0; i < diagramArray.length; i++) {
             h += '   		<div class="col-xs-6 col-md-3">  '  +
                 '   			<div class="thumbnail">  '  +
@@ -129,6 +129,9 @@ function CommonTemplate() {
                 '   		</div>  ';
         }
         return h;
+        */
+        return '{{#diagrams}}<div class="col-xs-6 col-md-3"><div class="thumbnail"><img src="{{_diagram}}" alt=""><div class="caption"><p></p><p><a class="delete-car"  href="?action=deleteCarPhoto&id={{_diagramId}}" delete-photos="{{_diagramId}}" role="button">Delete</a></p></div></div></div>{{/diagrams}}';
+
 
     };
 

@@ -15,7 +15,6 @@ var CommonHTML = (function () {
     var fnCommonElement = {},
         fnHeaderAndFooterElem = {},
         fnPageTitle = {},
-        fnFindAllCarDecColumnAddComma = {},
         fnManipulateRecordElem = {};
 
     var adminUsernameSel = {},
@@ -23,8 +22,6 @@ var CommonHTML = (function () {
         carTableSel = {},
         priceColumnSel = {},
         mileageColumnSel = {};
-
-    // var vehicleTableWrapper = {};
 
 
     return {
@@ -51,18 +48,13 @@ var CommonHTML = (function () {
             fnCommonElement = null;
             fnHeaderAndFooterElem = null;
             fnPageTitle = null;
-            fnFindAllCarDecColumnAddComma = null;
             fnManipulateRecordElem = null;
-
-            // vehicleTableWrapper = $('#vehicle-table_wrapper');
 
 
             // call the event driven functions here
             this.bindCarActionFn();
         },
         bindCarActionFn: function () {
-
-            // vehicleTableWrapper.css("width", "80% !important");
 
             // sets page title dynamically
             fnPageTitle = function () {
@@ -94,15 +86,6 @@ var CommonHTML = (function () {
             };
 
 
-            fnFindAllCarDecColumnAddComma = function () {
-                var numCars = priceColumnSel.length;
-                for(var i = 0; i < numCars; i++) {
-                    //priceColumnSel[i].innerHTML = util.addCommaSeparatedDec(priceColumnSel[i].innerHTML);
-                    //mileageColumnSel[i].innerHTML = util.addCommaSeparatedDec(mileageColumnSel[i].innerHTML);
-                }
-
-            };
-
             // console.log(util.getFilename());
 
             switch(util.getFilename()) {
@@ -118,7 +101,6 @@ var CommonHTML = (function () {
                         // "bInfo": false,
                         "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [2, 8] }]
                     });
-                    fnFindAllCarDecColumnAddComma();
                     fnManipulateRecordElem();
                     break;
                 case util.pageName[2].name:
