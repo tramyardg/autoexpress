@@ -123,6 +123,8 @@ $d = new DiagramDAO();
                                         <div class="divTableCell">
                                             <div class="row car-images" >
                                                 <?php
+                                                // first if stmt: use placeholdit as image if this car has no images
+                                                // second if stmt: no badge for car that has no images
                                                 $currCarImg = $d->getPhotosBy_CarId($all_cars[$i]->getVehicleId());
                                                 if($d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()) == "0") {
                                                     $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
@@ -131,7 +133,9 @@ $d = new DiagramDAO();
                                                 }
                                                 ?>
                                                 <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>">
+                                                <?php if($d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()) != "0") { ?>
                                                 <span class="badge"><?php echo $d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()); ?></span>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                         <div class="divTableCell">

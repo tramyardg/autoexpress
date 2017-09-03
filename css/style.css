@@ -174,11 +174,14 @@ h1,h2,h3,h4,h5,h6,p {
 }
 .car-images span.badge {
     background-color: #36383d;
+    color: #ff9900;
+    font-size: 15px;
 }
 .car-images span {
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
+    position: relative;
+    top: 0;
+    vertical-align: top;
+    margin-left: -30px;
 }
 .sidebar1 form ul {
     padding: 10px 10px 0 10px;

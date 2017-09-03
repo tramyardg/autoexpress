@@ -181,7 +181,7 @@ var CarActions = (function () {
              *
              * Making a request to the same page (inventory.php)
              * usually returns everything including this page
-             * itself so use data type text so that
+             * itself so use data type json so that
              * it returns only the echoed encoded json array
              * @param carId
              */

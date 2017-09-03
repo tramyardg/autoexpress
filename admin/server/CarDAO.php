@@ -102,6 +102,7 @@ class CarDAO extends Utility
             '     '.$valueObject->getStatus().',  '.
             '     '.$valueObject->getDateAdded().'  '.
             '  );  ';
+        // echo $sql;
         $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
