@@ -8,16 +8,16 @@ $num_cars = $v->countAllCars();
 
 $d = new DiagramDAO();
 
-$search = filter_input(INPUT_GET, 'search-car');
+$search = filter_input(INPUT_POST, 'search-car');
 if(!empty($search)) {
-    $searchMake = filter_input(INPUT_GET, 'searchMake', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $searchModel = filter_input(INPUT_GET, 'searchModel', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $minYear = filter_input(INPUT_GET, 'minYear', FILTER_VALIDATE_INT);
-    $maxYear = filter_input(INPUT_GET, 'maxYear', FILTER_VALIDATE_INT);
-    $minPrice = filter_input(INPUT_GET, 'minPrice', FILTER_VALIDATE_INT);
-    $maxPrice = filter_input(INPUT_GET, 'maxPrice', FILTER_VALIDATE_INT);
-    $minMileage = filter_input(INPUT_GET, 'minMileage', FILTER_VALIDATE_INT);
-    $maxMileage = filter_input(INPUT_GET, 'maxMileage', FILTER_VALIDATE_INT);
+    $searchMake = filter_input(INPUT_POST, 'searchMake', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $searchModel = filter_input(INPUT_POST, 'searchModel', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $minYear = filter_input(INPUT_POST, 'minYear', FILTER_VALIDATE_INT);
+    $maxYear = filter_input(INPUT_POST, 'maxYear', FILTER_VALIDATE_INT);
+    $minPrice = filter_input(INPUT_POST, 'minPrice', FILTER_VALIDATE_INT);
+    $maxPrice = filter_input(INPUT_POST, 'maxPrice', FILTER_VALIDATE_INT);
+    $minMileage = filter_input(INPUT_POST, 'minMileage', FILTER_VALIDATE_INT);
+    $maxMileage = filter_input(INPUT_POST, 'maxMileage', FILTER_VALIDATE_INT);
 
     $searchArray = array(
         "searchMake" => $searchMake,
@@ -71,7 +71,7 @@ if(!empty($search)) {
 
     <div class="sidebar1">
         <div class="search-menu">
-            <form method="get" action="">
+            <form method="post" action="">
                 <ul>
                     <li><label><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Advance Search</label></li>
                     <li>Make</li>
