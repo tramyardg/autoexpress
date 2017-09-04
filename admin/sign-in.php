@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php ob_start(); session_start();
 require_once 'server/AdminDAO.php';
 require_once 'server/class/Admin.php';
 
@@ -92,9 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8" style="width: 100%;">
                     <div class="alert alert-info text-center">
-                        <?php echo 'Loading, please wait.';
-                        header( "refresh:1; url=dashboard.php?username=".$_SESSION['adminUsername']."" );
-                        ?>
+                        <?php echo 'Loading, please wait.';header( "refresh:1; url=dashboard.php?username=".$_SESSION['adminUsername']."" );?>
                     </div>
                 </div>
                 <div class="col-sm-2"></div>
@@ -136,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <script src="js/common/CommonUtil.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
 <script src="js/routine/common-html.js"></script>
-<script src="js/validate.min.js"></script>
+<script src="js/validation/login-validate.js"></script>
 <script src="js/app.js"></script>
 
 </body>

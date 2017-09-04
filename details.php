@@ -136,6 +136,11 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
         <div style="clear: both" ></div>
         <button id="print-btn" onclick="window.print()">Print</button>
     </div>
+    <div class="footer">
+        <div id="footer-content">
+            <p>Copyright © 2014-2017 | Raymart De Guzman | Leo Sudarma</p>
+        </div>
+    </div>
 </div><!-- end container -->
 
 

@@ -464,7 +464,7 @@ if(!empty($search)) {
     
 	<div class="footer">
         <div id="footer-content">
-            <p>Copyright © 2012-2014 | Raymart De Guzman | Leo Sudarma</p>
+            <p>Copyright © 2014-2017 | Raymart De Guzman | Leo Sudarma</p>
         </div>
     </div>
 	

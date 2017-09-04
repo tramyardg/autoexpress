@@ -6,7 +6,6 @@
  * Date: 2017-08-07
  * Time: 10:11 PM
  */
-//require_once '../../../Db.php';
 class Admin
 {
     private $_admin_id;
