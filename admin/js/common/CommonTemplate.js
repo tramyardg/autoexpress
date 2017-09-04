@@ -97,42 +97,8 @@ function CommonTemplate() {
             '          </div>  ' ;
     };
 
-    this.requestError = function () {
-        return '<div class="modal fade" id="request-error" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  '  +
-            '                aria-hidden="true">  '  +
-            '               <div class="modal-dialog">  '  +
-            '                   <div class="modal-content">  '  +
-            '                       <div class="modal-header text-center-important no-border">  '  +
-            '                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span  '  +
-            '                                   class="sr-only">Close</span></button>  '  +
-            '                           <h4 class="modal-title" id="myModalLabel">There must be an error processing your request. Please try again later.</h4>  '  +
-            '                       </div>  '  +
-            '                       <div class="modal-footer text-center-important no-border">  '  +
-            '                           <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Ok</button>  '  +
-            '                       </div>  '  +
-            '                   </div>  '  +
-            '               </div>  '  +
-            '          </div>  ' ;
-    };
-
     this.getPhotosByCarIdModalContent = function () {
-        /*var h = '';
-        for(var i = 0; i < diagramArray.length; i++) {
-            h += '   		<div class="col-xs-6 col-md-3">  '  +
-                '   			<div class="thumbnail">  '  +
-                '   				<img src="'+diagramArray[i]._diagram+'" alt="">  '  +
-                '   				<div class="caption">  '  +
-                '   					<p></p>  '  +
-                '   					<p><a class="delete-car"  href="?action=deleteCarPhoto&id='+diagramArray[i]._diagramId+'" delete-photos="'+diagramArray[i]._diagramId+'" role="button">Delete</a></p>  '  +
-                '   				</div>  '  +
-                '   			</div>  '  +
-                '   		</div>  ';
-        }
-        return h;
-        */
         return '{{#diagrams}}<div class="col-xs-6 col-md-3"><div class="thumbnail"><img src="{{_diagram}}" alt=""><div class="caption"><p></p><p><a class="delete-car"  href="?action=deleteCarPhoto&id={{_diagramId}}" delete-photos="{{_diagramId}}" role="button">Delete</a></p></div></div></div>{{/diagrams}}';
-
-
     };
 
     this.updateCarInfoModalContent = function () {
