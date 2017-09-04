@@ -48,10 +48,10 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`vehicleId`, `make`, `yearMade`, `model`, `price`, `mileage`, `transmission`, `drivetrain`, `engineCapacity`, `category`, `cylinder`, `doors`, `status`, `dateAdded`) VALUES
-(20, 'Toyota', 2003, 'CELICA', '6977', 93020, 'Manual', 'FWD', '1.8', 'Compact car', 4, 2, 'Available', '2017-09-02 21:41:35'),
-(21, 'Toyota', 2015, 'COROL', '16890', 62362, 'Automatic', 'FWD', '1.8', 'Subcompact car', 4, 4, 'Available', '2017-09-02 02:31:08'),
-(22, 'Honda', 2017, 'ACCORD', '28900', 34560, 'Automatic', 'FWD', '2.4', 'Mid-size car', 4, 4, 'Available', '2017-09-02 20:14:06'),
-(23, 'BMW', 2016, 'X5', '54998', 37114, 'Automatic', 'AWD', '3', 'Mid-size SUV', 6, 4, 'Available', '2017-09-02 20:24:32');
+(20, 'Toyota', 2003, 'CELICA', '6,977', '93,020', 'Manual', 'FWD', '1.8', 'Compact car', 4, 2, 'Available', '2017-09-02 21:41:35'),
+(21, 'Toyota', 2015, 'COROL', '16,890', '62,362', 'Automatic', 'FWD', '1.8', 'Subcompact car', 4, 4, 'Available', '2017-09-02 02:31:08'),
+(22, 'Honda', 2017, 'ACCORD', '28,900', '34,560', 'Automatic', 'FWD', '2.4', 'Mid-size car', 4, 4, 'Available', '2017-09-02 20:14:06'),
+(23, 'BMW', 2016, 'X5', '54,998', '37,114', 'Automatic', 'AWD', '3', 'Mid-size SUV', 6, 4, 'Available', '2017-09-02 20:24:32');
 
 --
 -- Indexes for dumped tables

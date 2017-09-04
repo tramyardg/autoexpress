@@ -8,6 +8,55 @@ $num_cars = $v->countAllCars();
 
 $d = new DiagramDAO();
 
+$search = filter_input(INPUT_GET, 'search-car');
+if(!empty($search)) {
+    $searchMake = filter_input(INPUT_GET, 'searchMake', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $searchModel = filter_input(INPUT_GET, 'searchModel', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $minYear = filter_input(INPUT_GET, 'minYear', FILTER_VALIDATE_INT);
+    $maxYear = filter_input(INPUT_GET, 'maxYear', FILTER_VALIDATE_INT);
+    $minPrice = filter_input(INPUT_GET, 'minPrice', FILTER_VALIDATE_INT);
+    $maxPrice = filter_input(INPUT_GET, 'maxPrice', FILTER_VALIDATE_INT);
+    $minMileage = filter_input(INPUT_GET, 'minMileage', FILTER_VALIDATE_INT);
+    $maxMileage = filter_input(INPUT_GET, 'maxMileage', FILTER_VALIDATE_INT);
+
+    $searchArray = array(
+        "searchMake" => $searchMake,
+        "searchModel" => $searchModel,
+        "minYear" =>$minYear,
+        "maxYear" => $maxYear,
+        "minPrice" => $minPrice,
+        "maxPrice" => $maxPrice,
+        "minMileage" => $minMileage,
+        "maxMileage" => $maxMileage
+    );
+
+    if(empty($searchArray["minPrice"])) {
+        $searchArray["minPrice"] = 0;
+    }
+    if(empty($searchArray["maxPrice"])) {
+        $searchArray["maxPrice"] = 999999;
+    }
+    if(empty($searchArray["minMileage"])) {
+        $searchArray["minMileage"] = 0;
+    }
+    if(empty($searchArray["maxMileage"])) {
+        $searchArray["maxMileage"] = 999999;
+    }
+    $sql = "SELECT\n"
+        . " *\n"
+        . "FROM\n"
+        . " `vehicle`\n"
+        . "WHERE\n"
+        . " make LIKE '%".$searchArray['searchMake']."%' \n"
+        . " AND model LIKE '".$searchArray['searchModel']."' \n"
+        . " AND yearMade BETWEEN ".$searchArray['minYear']." AND ".$searchArray['maxYear']." \n"
+        . " AND (REPLACE(mileage, ',', '')) BETWEEN ".$searchArray['minMileage']." and ".$searchArray['maxMileage']."";
+
+    $searchCarResult = $v->getSearchResult($searchArray);
+    $searchResultLength = count($searchCarResult);
+
+}
+
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -30,7 +79,7 @@ $d = new DiagramDAO();
             <div class="clear-both"></div>
         </div>
     </div>
-	
+
     <div class="sidebar1">
         <div class="search-menu">
             <form method="get" action="">
@@ -38,19 +87,64 @@ $d = new DiagramDAO();
                     <li><label><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Advance Search</label></li>
                     <li>Make</li>
                     <li>
-                        <select name="make">
-                            <option value="%">Select all</option>
+                        <select title="searchMake" name="searchMake" id="searchMake" class="" onchange="selectCarMakeFn(this);">
+                            <option selected value="%">Select all</option>
+                            <option value="Acura">Acura</option>
+                            <option value="Alfa Romeo">Alfa Romeo</option>
+                            <option value="Aston Martin">Aston Martin</option>
+                            <option value="Audi">Audi</option>
+                            <option value="Bentley">Bentley</option>
                             <option value="BMW">BMW</option>
+                            <option value="Buick">Buick</option>
+                            <option value="Cadillac">Cadillac</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Chrysler">Chrysler</option>
+                            <option value="Dodge">Dodge</option>
+                            <option value="Ferrari">Ferrari</option>
+                            <option value="FIAT">Fiat</option>
+                            <option value="Ford">Ford</option>
+                            <option value="GMC">GMC</option>
                             <option value="Honda">Honda</option>
+                            <option value="Hyundai">Hyundai</option>
                             <option value="Infiniti">Infiniti</option>
+                            <option value="Isuzu">Isuzu</option>
+                            <option value="Jaguar">Jaguar</option>
                             <option value="Jeep">Jeep</option>
+                            <option value="Kia">Kia</option>
+                            <option value="Lamborghini">Lamborghini</option>
+                            <option value="Land Rover">Land Rover</option>
                             <option value="Lexus">Lexus</option>
+                            <option value="Lincoln">Lincoln</option>
+                            <option value="Lotus">Lotus</option>
+                            <option value="Maserati">Maserati</option>
+                            <option value="Mazda">Mazda</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="Mini">Mini</option>
+                            <option value="Mitsubishi">Mitsubishi</option>
+                            <option value="Nissan">Nissan</option>
+                            <option value="Pontiac">Pontiac</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="Ram">Ram</option>
+                            <option value="Saab">Saab</option>
+                            <option value="Saturn">Saturn</option>
+                            <option value="Scion">Scion</option>
+                            <option value="Smart">Smart</option>
+                            <option value="Subaru">Subaru</option>
+                            <option value="Suzuki">Suzuki</option>
+                            <option value="Tesla">Tesla</option>
                             <option value="Toyota">Toyota</option>
+                            <option value="Volkswagen">Volkswagen</option>
+                            <option value="Volvo">Volvo</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select name="searchModel" id="searchModel" title="searchModel" required>
+                            <option selected value="%">Select model</option>
                         </select>
                     </li>
                     <li>Year: min</li>
                     <li>
-                        <select name="min_year">
+                        <select title="minYear" name="minYear">
                             <option value="1990">Select year&nbsp;</option>
                             <option value="2000">2000</option>
                             <option value="2001">2001</option>
@@ -70,12 +164,13 @@ $d = new DiagramDAO();
                             <option value="2015">2015</option>
                             <option value="2016">2016</option>
                             <option value="2017">2017</option>
+                            <option value="2018">2018</option>
                         </select>
                     </li>
                     <li>Year: max</li>
                     <li>
-                        <select name="max_year">
-                            <option value="2020">Select year</option>
+                        <select title="maxYear" name="maxYear">
+                            <option value="2019">Select year</option>
                             <option value="2000">2000</option>
                             <option value="2001">2001</option>
                             <option value="2002">2002</option>
@@ -94,12 +189,16 @@ $d = new DiagramDAO();
                             <option value="2015">2015</option>
                             <option value="2016">2016</option>
                             <option value="2017">2017</option>
+                            <option value="2018">2018</option>
                         </select>
                     </li>
                     <li>Price:</li>
-                    <li><input type="number" name="min_price" placeholder="from"></li>
-                    <li><input type="number" name="max_price" placeholder="to"></li>
-                    <li><input type="submit" name="search" value="Search"></li>
+                    <li><input type="number" max="999999" min="0" name="minPrice" placeholder="from"></li>
+                    <li><input type="number" max="999999" min="0" name="maxPrice" placeholder="to"></li>
+                    <li>Mileage:</li>
+                    <li><input type="number" max="999999" min="0" name="minMileage" placeholder="from"></li>
+                    <li><input type="number" max="999999" min="0" name="maxMileage" placeholder="to"></li>
+                    <li><input type="submit" name="search-car" value="Search"></li>
                 </ul>
             </form>
         </div>
@@ -107,68 +206,138 @@ $d = new DiagramDAO();
     
 	<div class="content">
         <div class="content-car-section">
+            <?php ?>
+
             <table id="inventory-vehicle-table">
                 <thead>
                     <tr>
-                        <th>&nbsp;</th>
+                        <th>
+                            &nbsp;
+                            <?php
+                            if(!empty($searchCarResult)) {
+                                $vehicleTxt = ($searchResultLength > 1) ? $vehicleTxt = ' vehicles' : $vehicleTxt = ' vehicle';
+                                echo '<p style="padding: 0;">'.$searchResultLength . ''.$vehicleTxt.' found.</p>';
+                            }
+                            ?>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                <?php for($i = 0; $i < $num_cars; $i++) { ?>
-                    <tr>
-                        <td>
-                            <div class="divTable" id="car-item-<?php echo $i; ?>">
-                                <div class="divTableBody">
-                                    <div class="divTableRow">
-                                        <div class="divTableCell">
-                                            <div class="row car-images" >
-                                                <?php
-                                                // first if stmt: use placeholdit as image if this car has no images
-                                                // second if stmt: no badge for car that has no images
-                                                $currCarImg = $d->getPhotosBy_CarId($all_cars[$i]->getVehicleId());
-                                                if($d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()) == "0") {
-                                                    $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
-                                                } else {
-                                                    $h = $currCarImg[0]->getDiagram();
-                                                }
-                                                ?>
-                                                <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>">
-                                                <?php if($d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()) != "0") { ?>
-                                                <span class="badge"><?php echo $d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()); ?></span>
-                                                <?php } ?>
+                <?php if(empty($searchCarResult)) { ?>
+                <?php   for($i = 0; $i < $num_cars; $i++) { ?>
+                        <tr>
+                            <td>
+                                <div class="divTable" id="car-item-<?php echo $i; ?>">
+                                    <div class="divTableBody">
+                                        <div class="divTableRow">
+                                            <div class="divTableCell">
+                                                <div class="row car-images" >
+                                                    <?php
+                                                    // first if stmt: use placeholdit as image if this car has no images
+                                                    // second if stmt: no badge for car that has no images
+                                                    $currCarImg = $d->getPhotosBy_CarId($all_cars[$i]->getVehicleId());
+                                                    if($d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()) == "0") {
+                                                        $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
+                                                    } else {
+                                                        $h = $currCarImg[0]->getDiagram();
+                                                    }
+                                                    ?>
+                                                    <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>">
+                                                    <?php if($d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()) != "0") { ?>
+                                                        <span class="badge"><?php echo $d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()); ?></span>
+                                                    <?php } ?>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="divTableCell">
-                                            <div class="feature_links">
-                                                <a href="#" class="calculate-payment-link" data-toggle="modal"
-                                                   data-target="#calculatePaymentModal" data-price="<?php echo $all_cars[$i]->getPrice(); ?>" >
-                                                    <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
-                                                </a>
-                                                <a href="<?php echo 'details.php?carId='.$all_cars[$i]->getVehicleId(); ?>" title="View more details">
-                                                    <p><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;More Details</p>
-                                                </a>
+                                            <div class="divTableCell">
+                                                <div class="feature_links">
+                                                    <a href="#" class="calculate-payment-link" data-toggle="modal"
+                                                       data-target="#calculatePaymentModal" data-price="<?php echo $all_cars[$i]->getPrice(); ?>" >
+                                                        <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
+                                                    </a>
+                                                    <a href="<?php echo 'details.php?carId='.$all_cars[$i]->getVehicleId(); ?>" title="View more details">
+                                                        <p><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;More Details</p>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="divTableCell">
-                                            <div class="car_info">
-                                                <p>
-                                                    <span class="car-title"><?php echo $all_cars[$i]->getHeadingTitle(); ?> - </span>
-                                                    <span class="price-style">$<?php echo $all_cars[$i]->getPrice(); ?></span>
-                                                </p>
-                                                <p><span class="availability"><?php echo $all_cars[$i]->getStatus(); ?></span></p>
-                                                <p>
-                                                    <span class="mileage"><?php echo $all_cars[$i]->getMileage(); ?> km</span>&nbsp;|&nbsp;
-                                                    <span class="transmission"><?php echo $all_cars[$i]->getTransmission(); ?></span>&nbsp;|&nbsp;
-                                                    <span class="drivetrain"><?php echo $all_cars[$i]->getDrivetrain(); ?></span>
-                                                </p>
+                                            <div class="divTableCell">
+                                                <div class="car_info">
+                                                    <p>
+                                                        <span class="car-title"><?php echo $all_cars[$i]->getHeadingTitle(); ?> - </span>
+                                                        <span class="price-style">$<?php echo $all_cars[$i]->getPrice(); ?></span>
+                                                    </p>
+                                                    <p><span class="availability"><?php echo $all_cars[$i]->getStatus(); ?></span></p>
+                                                    <p>
+                                                        <span class="mileage"><?php echo $all_cars[$i]->getMileage(); ?> km</span>&nbsp;|&nbsp;
+                                                        <span class="transmission"><?php echo $all_cars[$i]->getTransmission(); ?></span>&nbsp;|&nbsp;
+                                                        <span class="drivetrain"><?php echo $all_cars[$i]->getDrivetrain(); ?></span>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                <?php   } ?>
+                <?php } else { ?>
+                <?php   for($i = 0; $i < $searchResultLength; $i++) { ?>
+                        <tr>
+                            <td>
+                                <div class="divTable" id="car-item-<?php echo $i; ?>">
+                                    <div class="divTableBody">
+                                        <div class="divTableRow">
+                                            <div class="divTableCell">
+                                                <div class="row car-images" >
+                                                    <?php
+                                                    // first if stmt: use placeholdit as image if this car has no images
+                                                    // second if stmt: no badge for car that has no images
+                                                    $currCarImg = $d->getPhotosBy_CarId($searchCarResult[$i]->getVehicleId());
+                                                    if($d->countAllPhotosByCarId($searchCarResult[$i]->getVehicleId()) == "0") {
+                                                        $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
+                                                    } else {
+                                                        $h = $currCarImg[0]->getDiagram();
+                                                    }
+                                                    ?>
+                                                    <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>">
+                                                    <?php if($d->countAllPhotosByCarId($searchCarResult[$i]->getVehicleId()) != "0") { ?>
+                                                        <span class="badge"><?php echo $d->countAllPhotosByCarId($searchCarResult[$i]->getVehicleId()); ?></span>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                            <div class="divTableCell">
+                                                <div class="feature_links">
+                                                    <a href="#" class="calculate-payment-link" data-toggle="modal"
+                                                       data-target="#calculatePaymentModal" data-price="<?php echo $searchCarResult[$i]->getPrice(); ?>" >
+                                                        <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
+                                                    </a>
+                                                    <a href="<?php echo 'details.php?carId='.$searchCarResult[$i]->getVehicleId(); ?>" title="View more details">
+                                                        <p><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;More Details</p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="divTableCell">
+                                                <div class="car_info">
+                                                    <p>
+                                                        <span class="car-title"><?php echo $searchCarResult[$i]->getHeadingTitle(); ?> - </span>
+                                                        <span class="price-style">$<?php echo $searchCarResult[$i]->getPrice(); ?></span>
+                                                    </p>
+                                                    <p><span class="availability"><?php echo $searchCarResult[$i]->getStatus(); ?></span></p>
+                                                    <p>
+                                                        <span class="mileage"><?php echo $searchCarResult[$i]->getMileage(); ?> km</span>&nbsp;|&nbsp;
+                                                        <span class="transmission"><?php echo $searchCarResult[$i]->getTransmission(); ?></span>&nbsp;|&nbsp;
+                                                        <span class="drivetrain"><?php echo $searchCarResult[$i]->getDrivetrain(); ?></span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                <?php   } ?>
                 <?php } ?>
+
+
                 </tbody>
             </table>
 
@@ -327,6 +496,31 @@ $d = new DiagramDAO();
             "ordering": false
         });
     });
+    function selectCarMakeFn(selectedMake) {
+        var modelsSelect = $(selectedMake).parent().next().find('#searchModel');
+        modelsSelect.empty();
+        var selectVal = $(selectedMake).val();
+        modelsSelect.append('<option selected value="%">Select model</option>');
+        $.ajax({
+            type: "GET",
+            url: "admin/js/data/models.json",
+            dataType: "json",
+            success: function (json) {
+                for (var key in json) {
+                    if (json.hasOwnProperty(key)) {
+                        if(selectVal === json[key].title) {
+                            var modelsObj = json[key].models;
+                            Object.keys(modelsObj).forEach(function(key) {
+                                var h = '<option value="'+modelsObj[key].value+'" title="'+modelsObj[key].title+'">'+modelsObj[key].value+'</option>';
+                                modelsSelect.append(h);
+                            });
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>

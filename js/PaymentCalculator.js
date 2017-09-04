@@ -12,7 +12,6 @@ var PaymentCalculator = (function () {
     var calculateFn = {};
     var isValidInputFn = {};
     var onlyNumberAndDigitsAllowedFn = {};
-    var replaceCommaInNumberFn = {};
 
     return {
 
