@@ -34,6 +34,8 @@ var CarActions = (function () {
 
     var updateCarInfo_RadioSelect = {};
 
+    var loader = {};
+
 
     return {
 
@@ -59,6 +61,8 @@ var CarActions = (function () {
             getPhotosByCarIdFn = null;
             updateCarInfo_RadioSelect = null;
 
+            loader = $('.loader');
+
             // call the event driven functions here
             this.bindCarActions();
         },
@@ -74,6 +78,7 @@ var CarActions = (function () {
                 // on clicked Yes
                 deleteConfirmBtnSel.click(function () {
                     confirmDeleteRecordSel.modal('hide');
+                    loader.css('display', 'block');
                     $.ajax({
                         url: "?action=delete",
                         type: "get",
@@ -81,12 +86,15 @@ var CarActions = (function () {
                         dataType: "json",
                         success: function(data) {
                             if(data === 1) {
-                                alert('1 row affected.');
                                 window.location.reload(true);
                             } else {
                                 alert('Something is wrong. Please try again later.');
                             }
                         }
+                    }).done(function () {
+                        loader.css('display', 'none');
+                    }).fail(function () {
+                        alert('Error. Please try again later');
                     });
                 });
                 return false; //for good measure
@@ -148,7 +156,7 @@ var CarActions = (function () {
                     for(var i = 0; i < thumbLength; i++) {
                         filesDataArray.push(thumbImageSel.eq(i).attr('src'));
                     }
-
+                    loader.css('display', 'block');
                     $.ajax({ // for uploading photos
                         url: "?action=uploadPhotos&id="+carId,
                         type: "post",
@@ -157,12 +165,15 @@ var CarActions = (function () {
                         success: function(data) {
                             console.log(data);
                             if(data === 1) {
-                                alert('1 row affected.');
                                 window.location.reload(true);
                             } else {
                                 alert('Something is wrong. Please try again later.');
                             }
                         }
+                    }).done(function () {
+                        loader.css('display', 'none');
+                    }).fail(function () {
+                        alert('Error. Please try again later');
                     });
 
                     e.preventDefault();
@@ -201,6 +212,10 @@ var CarActions = (function () {
                             displayImagesOfThisCarSel.append("<p>No photos so far</p>");
                         }
                     }
+                }).done(function () {
+                    loader.has('loading-photos').css('display', 'none');
+                }).fail(function () {
+                    alert('Error. Please try again later');
                 });
 
             };

@@ -109,19 +109,62 @@ if(!isset($_SESSION['authenticated'])) {
         table tbody tr td input, select {
             margin: 2px 0 2px 3px;
         }
-        #vehicle-table {
-            /*width: 80%;*/
-            /*text-align: left;*/
-            /*margin-left: 0;*/
-            /*margin-right: 0;*/
+        /* Center the loader */
+        .loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+
+            border-top: 16px solid blue;
+            border-right: 16px solid green;
+            border-bottom: 16px solid red;
+            display: none;
         }
-        #add-new-car-btn {
-            /*margin-top: 15px;*/
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
         }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Add animation to "page content" */
+        .animate-bottom {
+            position: relative;
+            -webkit-animation-name: animatebottom;
+            -webkit-animation-duration: 1s;
+            animation-name: animatebottom;
+            animation-duration: 1s
+        }
+
+        @-webkit-keyframes animatebottom {
+            from { bottom:-100px; opacity:0 }
+            to { bottom:0px; opacity:1 }
+        }
+
+        @keyframes animatebottom {
+            from{ bottom:-100px; opacity:0 }
+            to{ bottom:0; opacity:1 }
+        }
+
     </style>
 </head>
 <body>
 <div id="main-wrapper">
+    <div class="loader"></div>
     <div class="template-page-wrapper">
 
         <div class="templatemo-content-wrapper">
@@ -135,17 +178,14 @@ if(!isset($_SESSION['authenticated'])) {
                 <p>Here goes vehicles from the inventory.</p>
 
                 <?php if(isset($isAddedCondition) && $isAddedCondition === 1) {?>
-                    <script>alert("1 row affected. The page will reload.");</script>
+                    <div class="loader show"></div>
                 <?php header("refresh: 1; url=inventory.php"); }  ?>
-
                 <?php if(isset($isDeletedPhoto) && $isDeletedPhoto === 1) {?>
-                    <script>alert("1 row affected. The page will reload.");</script>
+                    <div class="loader show"></div>
                 <?php header("refresh: 1; url=inventory.php"); }  ?>
-
                 <?php if(isset($isUpdatedCondition) && $isUpdatedCondition === 1) {?>
-                    <script>alert("1 row affected. The page will reload.");</script>
+                    <div class="loader show"></div>
                 <?php header("refresh: 1; url=inventory.php"); }  ?>
-
 
                 <!-- car table -->
                 <div class="row">
