@@ -42,19 +42,8 @@ if(!empty($search)) {
     if(empty($searchArray["maxMileage"])) {
         $searchArray["maxMileage"] = 999999;
     }
-    $sql = "SELECT\n"
-        . " *\n"
-        . "FROM\n"
-        . " `vehicle`\n"
-        . "WHERE\n"
-        . " make LIKE '%".$searchArray['searchMake']."%' \n"
-        . " AND model LIKE '".$searchArray['searchModel']."' \n"
-        . " AND yearMade BETWEEN ".$searchArray['minYear']." AND ".$searchArray['maxYear']." \n"
-        . " AND (REPLACE(mileage, ',', '')) BETWEEN ".$searchArray['minMileage']." and ".$searchArray['maxMileage']."";
-
     $searchCarResult = $v->getSearchResult($searchArray);
     $searchResultLength = count($searchCarResult);
-
 }
 
 ?>
