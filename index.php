@@ -207,6 +207,11 @@ if(!empty($search)) {
                                 $vehicleTxt = ($searchResultLength > 1) ? $vehicleTxt = ' vehicles' : $vehicleTxt = ' vehicle';
                                 echo '<p style="padding: 0;">'.$searchResultLength . ''.$vehicleTxt.' found.</p>';
                             }
+                            if(!empty($search)) {
+                                if($searchResultLength === 0) {
+                                    echo 'no vehicles found.';
+                                }
+                            }
                             ?>
                         </th>
                     </tr>
