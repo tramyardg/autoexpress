@@ -48,6 +48,11 @@ class DiagramDAO
         return $this->query($sql); // returns a diagram object
     }
 
+    function getPhotosBy_CarId_LimitOne($id) {
+        $sql = "SELECT `diagramId`, `diagram`, `vehicleId` FROM `cardiagram` WHERE `vehicleId` =" . $id . " LIMIT 1";
+        return $this->query($sql); // returns a diagram object
+    }
+
     function countAllPhotosByCarId($id) {
         return count($this->getPhotosBy_CarId($id));
     }

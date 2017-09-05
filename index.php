@@ -229,7 +229,7 @@ if(!empty($search)) {
                                                     <?php
                                                     // first if stmt: use placeholdit as image if this car has no images
                                                     // second if stmt: no badge for car that has no images
-                                                    $currCarImg = $d->getPhotosBy_CarId($all_cars[$i]->getVehicleId());
+                                                    $currCarImg = $d->getPhotosBy_CarId_LimitOne($all_cars[$i]->getVehicleId());
                                                     if($d->countAllPhotosByCarId($all_cars[$i]->getVehicleId()) == "0") {
                                                         $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
                                                     } else {

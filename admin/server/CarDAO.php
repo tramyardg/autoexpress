@@ -62,6 +62,35 @@ class CarDAO extends Utility
         return $this->query($sql);
     }
 
+    /**
+     * get vehicle with images all at one query
+     * instead of two (no need to use DiagramDAO)
+     * returns unique vehicle id since
+     * vehicle can have more than one image
+     * Problem diagramId and diagram is
+     * not map since query() only returns car object.
+     *
+     * Suggestion
+     * You can add diagramId, and diagram
+     * properties in vehicle entity.
+     */
+    function getVehiclesWithPhotos() {
+        $sql = "SELECT\n"
+            . " vehicle.vehicleId, vehicle.make, vehicle.yearMade,\n"
+            . " vehicle.model, vehicle.price, vehicle.mileage,\n"
+            . " vehicle.transmission, vehicle.drivetrain,\n"
+            . " vehicle.engineCapacity, vehicle.category, vehicle.cylinder,\n"
+            . " vehicle.doors, vehicle.status, vehicle.dateAdded,\n"
+            . " cardiagram.diagramId, cardiagram.diagram\n"
+            . "FROM\n"
+            . " cardiagram\n"
+            . "RIGHT JOIN\n"
+            . " vehicle ON cardiagram.vehicleId = vehicle.vehicleId\n"
+            . "GROUP BY\n"
+            . " vehicle.vehicleId;";
+        return $this->query($sql);
+    }
+
     function getCarById($id) {
         $sql = "SELECT * FROM `vehicle` WHERE `vehicleId` = $id";
         return $this->query($sql);
@@ -165,6 +194,8 @@ class CarDAO extends Utility
             $stmt = $db->prepare($sql);
             $stmt->execute();
             return $stmt;
+        } else {
+            return null;
         }
     }
 
@@ -181,23 +212,23 @@ class CarDAO extends Utility
     }
 
     function update(&$carObject) {
-        $u = new Utility(); // some of them needs to be a varchar (string)
+        // some of them needs to be a varchar (string)
         $sql =  '   UPDATE  '.
             '     `vehicle`  '.
             '   SET  '.
-            '     `make` = '.$u->stringValue($carObject->getMake()).',  '.
+            '     `make` = '.$this->stringValue($carObject->getMake()).',  '.
             '     `yearMade` = '.$carObject->getYearMade().',  '.
-            '     `model` = '.$u->stringValue($carObject->getModel()).',  '.
+            '     `model` = '.$this->stringValue($carObject->getModel()).',  '.
             '     `price` = '.$carObject->getPrice().',  '.
             '     `mileage` = '.$carObject->getMileage().',  '.
-            '     `transmission` = '.$u->stringValue($carObject->getTransmission()).',  '.
-            '     `drivetrain` = '.$u->stringValue($carObject->getDrivetrain()).',  '.
-            '     `engineCapacity` = '.$u->stringValue($carObject->getEngineCapacity()).',  '.
-            '     `category` = '.$u->stringValue($carObject->getCategory()).',  '.
+            '     `transmission` = '.$this->stringValue($carObject->getTransmission()).',  '.
+            '     `drivetrain` = '.$this->stringValue($carObject->getDrivetrain()).',  '.
+            '     `engineCapacity` = '.$this->stringValue($carObject->getEngineCapacity()).',  '.
+            '     `category` = '.$this->stringValue($carObject->getCategory()).',  '.
             '     `cylinder` = '.$carObject->getCylinder().',  '.
             '     `doors` = '.$carObject->getDoors().',  '.
-            '     `status` = '.$u->stringValue($carObject->getStatus()).',  '.
-            '     `dateAdded` = '.$u->stringValue($carObject->getDateAdded()).'  '.
+            '     `status` = '.$this->stringValue($carObject->getStatus()).',  '.
+            '     `dateAdded` = '.$this->stringValue($carObject->getDateAdded()).'  '.
             '   WHERE  '.
             '    `vehicleId` =  ' . $carObject->getVehicleId();
 
@@ -291,6 +322,7 @@ class CarDAO extends Utility
             return 0;
         }
     }
+
 
 
 
