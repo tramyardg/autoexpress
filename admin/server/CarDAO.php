@@ -62,14 +62,41 @@ class CarDAO extends Utility
         return $this->query($sql);
     }
 
+    function getCarsByNumRecords($rowStart, $numRecordsPerPage) {
+        $sql = "SELECT\n"
+            . " `vehicleId`,\n"
+            . " `make`,\n"
+            . " `yearMade`,\n"
+            . " `model`,\n"
+            . " `price`,\n"
+            . " `mileage`,\n"
+            . " `transmission`,\n"
+            . " `drivetrain`,\n"
+            . " `engineCapacity`,\n"
+            . " `category`,\n"
+            . " `cylinder`,\n"
+            . " `doors`,\n"
+            . " `status`,\n"
+            . " `dateAdded`\n"
+            . "FROM\n"
+            . " `vehicle`\n"
+            . "LIMIT $rowStart, $numRecordsPerPage";
+
+        $db = Dbh::getInstance();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    }
+
     /**
      * get vehicle with images all at one query
      * instead of two (no need to use DiagramDAO)
      * returns unique vehicle id since
      * vehicle can have more than one image
      * Problem diagramId and diagram is
-     * not map since query() only returns car object.
-     *
+     * not map since query() only returns 
+	 * a car object.
+     * 
      * Suggestion
      * You can add diagramId, and diagram
      * properties in vehicle entity.

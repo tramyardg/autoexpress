@@ -202,7 +202,9 @@ var CarActions = (function () {
                     type: "post",
                     dataType: "json", // so it returns only the text not the
                     success: function(diagramArray) {
+                        // console.log(diagramArray);
                         var diagramData = { diagrams: diagramArray };
+                        console.log(diagramData);
                         if(diagramArray.length > 0) {
                             var html = Mustache.to_html(template.getPhotosByCarIdModalContent(), diagramData);
                             displayImagesOfThisCarSel.empty();
