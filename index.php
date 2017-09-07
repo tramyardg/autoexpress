@@ -26,7 +26,7 @@ $vehicleObj = $v->getCarsByNumRecords($startingPoint, $recordsPerPage);
 
 $s = new AdvanceSearch(); // search result
 $s->getSearchInputResult('search-car');
-echo $s->resultFoundMessage();
+//echo $s->resultFoundMessage();
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -66,12 +66,13 @@ echo $s->resultFoundMessage();
                                                     <?php
                                                     // first if stmt: use 'place hold' it as image if this car has no images
                                                     // second if stmt: no badge for car that has no images
-//                                                    $currCarImg = $d->getPhotosBy_CarId($vehicleObj[$i]->getVehicleId());
-//                                                    if($d->countAllPhotosByCarId($vehicleObj[$i]->getVehicleId()) == "0") {
+//                                                    echo $row['vehicleId'];
+                                                    $currCarImg = $d->getPhotosBy_CarId($row['vehicleId']);
+                                                    if($d->countAllPhotosByCarId($row['vehicleId']) == "0") {
                                                         $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
-//                                                    } else {
-//                                                        $h = $currCarImg[0]->getDiagram();
-//                                                    }
+                                                    } else {
+                                                        $h = $currCarImg[0]->getDiagram();
+                                                    }
                                                     ?>
                                                     <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>">
                                                         <span class="badge"></span>
