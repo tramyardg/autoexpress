@@ -62,7 +62,16 @@ class CarDAO extends Utility
         return $this->query($sql);
     }
 
-    function getCarsByNumRecords($rowStart, $numRecordsPerPage) {
+    /**
+     * Mainly used for pagination.
+     * Does not return a car object.
+     * usage:
+     *  while($row['colName'] = fetch()) {}
+     * @param $rowStart
+     * @param $numRecordsPerPage
+     * @return PDOStatement
+     */
+    function getCarsLimitByRecPerPage($rowStart, $numRecordsPerPage) {
         $sql = "SELECT\n"
             . " `vehicleId`,\n"
             . " `make`,\n"
@@ -81,7 +90,6 @@ class CarDAO extends Utility
             . "FROM\n"
             . " `vehicle`\n"
             . "LIMIT $rowStart, $numRecordsPerPage";
-
         $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -89,6 +97,7 @@ class CarDAO extends Utility
     }
 
     /**
+     * ALPHA
      * get vehicle with images all at one query
      * instead of two (no need to use DiagramDAO)
      * returns unique vehicle id since
@@ -192,19 +201,6 @@ class CarDAO extends Utility
         } else {
             return 0;
         }
-    }
-
-    function getSearchResult($searchArray) {
-        $sql = "SELECT\n"
-            . " *\n"
-            . "FROM\n"
-            . " `vehicle`\n"
-            . "WHERE\n"
-            . " make LIKE '%".$searchArray['searchMake']."%' \n"
-            . " AND model LIKE '".$searchArray['searchModel']."' \n"
-            . " AND yearMade BETWEEN ".$searchArray['minYear']." AND ".$searchArray['maxYear']." \n"
-            . " AND (REPLACE(mileage, ',', '')) BETWEEN ".$searchArray['minMileage']." and ".$searchArray['maxMileage']."";
-        return $this->query($sql);
     }
 
     // one car can have many photos
@@ -327,14 +323,6 @@ class CarDAO extends Utility
 
     function getLastCarId() {
         $sql = "SELECT vehicleId FROM `vehicle` ORDER BY vehicleid DESC LIMIT 1";
-        $db = Dbh::getInstance();
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchColumn(0);
-    }
-
-    function getLastDiagramId() {
-        $sql = "SELECT cardiagram.diagramId FROM cardiagram ORDER BY cardiagram.diagramId DESC LIMIT 1";
         $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();

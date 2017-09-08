@@ -1,4 +1,5 @@
 <?php
+require_once 'class/Dbh.php';
 require_once 'CarDAO.php';
 require_once 'DiagramDAO.php';
 /**
@@ -10,10 +11,62 @@ require_once 'DiagramDAO.php';
 define("MAX_PRICE_MILEAGE", 999999);
 define("MIN_PRICE_MILEAGE", 0);
 
-class AdvanceSearch
+class AdvanceSearchDAO extends CarDAO
 {
 
-    public function getSearchInputResult($submitBtnName) {
+    public $searchResultLength;
+
+    /**
+     * @return mixed
+     */
+    public function getSearchResultLength()
+    {
+        return $this->searchResultLength;
+    }
+
+    /**
+     * @param mixed $searchResultLength
+     */
+    public function setSearchResultLength($searchResultLength)
+    {
+        $this->searchResultLength = $searchResultLength;
+    }
+
+    /**
+     * Does not return car object, use
+     * row['colName'] to get content
+     * @param $searchArray
+     * @return PDOStatement
+     */
+    function getSearchResult($searchArray) {
+        $sql = "SELECT\n"
+            . " *\n"
+            . "FROM\n"
+            . " `vehicle`\n"
+            . "WHERE\n"
+            . " make LIKE '%".$searchArray['searchMake']."%' \n"
+            . " AND model LIKE '".$searchArray['searchModel']."' \n"
+            . " AND yearMade BETWEEN ".$searchArray['minYear']." AND ".$searchArray['maxYear']." \n"
+            . " AND (REPLACE(mileage, ',', '')) BETWEEN ".$searchArray['minMileage']." and ".$searchArray['maxMileage'];
+        // echo $sql;
+        $db = Dbh::getInstance();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        $this->setSearchResultLength($stmt->rowCount());
+
+        return $stmt;
+    }
+
+
+
+    /**
+     * This function is important
+     * because it sets
+     * @param $submitBtnName
+     * @return null|PDOStatement
+     */
+    function getSearchInputResult($submitBtnName) {
         $search = filter_input(INPUT_GET, $submitBtnName);
 
         if(!empty($search)) {
@@ -49,12 +102,8 @@ class AdvanceSearch
             if(empty($searchArray["maxMileage"])) {
                 $searchArray["maxMileage"] = MAX_PRICE_MILEAGE;
             }
-            $v = new CarDAO();
-            $searchCarResult = $v->getSearchResult($searchArray);
 
-            $numResult =  count($searchCarResult);
-
-            $this->setNumberOfResult($numResult);
+            $searchCarResult = $this->getSearchResult($searchArray);
 
             return $searchCarResult; // returns a car object
         } else {
@@ -62,31 +111,13 @@ class AdvanceSearch
         }
     }
 
-    private $numberOfResult;
-
-    /**
-     * @return mixed
-     */
-    public function getNumberOfResult()
-    {
-        return $this->numberOfResult;
-    }
-
-    /**
-     * @param mixed $numberOfResult
-     */
-    public function setNumberOfResult($numberOfResult)
-    {
-        $this->numberOfResult = $numberOfResult;
-    }
-
-    public function resultFoundMessage() {
-        if($this->getNumberOfResult() === 0) {
+    public function getResultFoundMessage() {
+        if($this->getSearchResultLength() === 0) {
             return '<p style="padding: 0;">no vehicle found.</p>';
-        } else if($this->getNumberOfResult() === 1) {
+        } else if($this->getSearchResultLength() === 1) {
             return '<p style="padding: 0;">1 vehicle found.</p>';
         } else {
-            return '<p style="padding: 0;">'. $this->getNumberOfResult() . ' vehicles found.</p>';
+            return '<p style="padding: 0;">'. $this->getSearchResultLength() . ' vehicles found.</p>';
         }
     }
 

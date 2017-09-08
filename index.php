@@ -1,33 +1,24 @@
 <?php
 require_once 'admin/server/CarDAO.php';
 require_once 'admin/server/DiagramDAO.php';
-require_once 'admin/server/AdvanceSearch.php';
+require_once 'admin/server/AdvanceSearchDAO.php';
+require_once 'admin/server/class/Paging.php';
 
 $v = new CarDAO();
 $d = new DiagramDAO();
-$numCars = $v->countAllCars();
+$s = new AdvanceSearchDAO();
+$numberOfCars = $v->countAllCars();
 
-$page = null;
-if(isset($_GET['page'])) {
-    $page = $_GET['page'];
-}
-if(!isset($_GET['page'])){
-    $page = 0;
-}
-
-$startingPoint = $page;
-
-$recordsPerPage = 2;
-$prev = $startingPoint - $recordsPerPage;
-$next = $startingPoint + $recordsPerPage;
+$p = new Paging();
+define('RECORDS_PER_PAGE', 1);
+$p->setRecordsPerPage(RECORDS_PER_PAGE);
+$p->setPageQueryStr('page');
+$p->setStartingRow($p->getPageRowNumber());
 
 
-$vehicleObj = $v->getCarsByNumRecords($startingPoint, $recordsPerPage);
-
-$s = new AdvanceSearch(); // search result
-$s->getSearchInputResult('search-car');
-//echo $s->resultFoundMessage();
-
+$rowCarField = $v->getCarsLimitByRecPerPage($p->getStartingRow(), $p->getRecordsPerPage());
+$carObjSearchResult = $s->getSearchInputResult('search-car');
+//print_r($carObjSearchResult);
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -42,12 +33,12 @@ $s->getSearchInputResult('search-car');
 <div class="container_custom">
     <?php include 'template/header.php'; ?>
     <?php include 'template/advance-search.php'; ?>
-    
 	<div class="content">
         <div class="content-car-section">
             <?php ?>
 
-            <table id="inventory-vehicle-table">
+            <?php $hideIndexResult = empty($carObjSearchResult) ? "visible" : "hidden"; ?>
+            <table id="inventory-vehicle-table"  class="<?php echo $hideIndexResult; ?>" >
                 <thead>
                     <tr>
                         <th>
@@ -55,7 +46,7 @@ $s->getSearchInputResult('search-car');
                     </tr>
                 </thead>
                 <tbody>
-                <?php  while($row = $vehicleObj->fetch())  { ?>
+                <?php  while($row = $rowCarField->fetch())  { ?>
                         <tr>
                             <td>
                                 <div class="divTable" id="car-item-<?php  ?>">
@@ -66,16 +57,14 @@ $s->getSearchInputResult('search-car');
                                                     <?php
                                                     // first if stmt: use 'place hold' it as image if this car has no images
                                                     // second if stmt: no badge for car that has no images
-//                                                    echo $row['vehicleId'];
-                                                    $currCarImg = $d->getPhotosBy_CarId($row['vehicleId']);
+                                                    $currSearchCarImg = $d->getPhotosBy_CarId($row['vehicleId']);
                                                     if($d->countAllPhotosByCarId($row['vehicleId']) == "0") {
                                                         $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
                                                     } else {
-                                                        $h = $currCarImg[0]->getDiagram();
+                                                        $h = $currSearchCarImg[0]->getDiagram();
                                                     }
                                                     ?>
-                                                    <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>">
-                                                        <span class="badge"></span>
+                                                    <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>"><span class="badge"></span>
                                                 </div>
                                             </div>
                                             <div class="divTableCell">
@@ -113,29 +102,95 @@ $s->getSearchInputResult('search-car');
 
                 </tbody>
             </table>
-
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example" class="<?php echo $hideIndexResult; ?>">
                 <ul class="pagination">
-                    <?php if($numCars > $recordsPerPage) { ?>
-                        <?php if($prev >= 0) { ?>
-                            <li class="page-item"><a href="index.php?page=<?php echo $prev; ?>">Previous</a></li>
+                    <?php if($numberOfCars > $p->getRecordsPerPage()) { ?>
+                        <?php if($p->getPrev() >= 0) { ?>
+                            <li class="page-item"><a href="index.php?page=<?php echo $p->getPrev(); ?>">Previous</a></li>
                         <?php } ?>
                         <?php $pageNumber = 1; ?>
-                        <?php for($i = 0; $i < $numCars; $i = $i + $recordsPerPage) { ?>
-                            <?php if($i != $startingPoint) { ?>
+                        <?php for($i = 0; $i < $numberOfCars; $i = $i + $p->getRecordsPerPage()) { ?>
+                            <?php if($i != $p->getStartingRow()) { ?>
                                 <li class="page-item"><a href="index.php?page=<?php echo $i; ?>"><?php echo $pageNumber; ?></a></li>
                             <?php } else { ?>
                                 <li class="page-item active"><a href="index.php?page=<?php echo $i; ?>"><?php echo $pageNumber; ?></a></li>
                             <?php } ?>
                             <?php $pageNumber = $pageNumber + 1; ?>
                         <?php } ?>
-                        <?php if($next < $numCars) { ?>
-                            <li class="page-item"><a href="index.php?page=<?php echo $next; ?>">Next</a></li>
+                        <?php if($p->getNext() < $numberOfCars) { ?>
+                            <li class="page-item"><a href="index.php?page=<?php echo $p->getNext(); ?>">Next</a></li>
                         <?php } ?>
                     <?php } ?>
-
                 </ul>
             </nav>
+
+            <?php if(!empty($carObjSearchResult)) { ?>
+            <!-- search result -->
+            <table id="search-result-vehicle-table">
+                <thead>
+                <tr>
+                    <th>
+                        <?php echo $s->getResultFoundMessage(); ?>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php  while($rowSearchResult = $carObjSearchResult->fetch())  { ?>
+                    <tr >
+                        <td>
+                            <div class="divTable" id="car-item-<?php  ?>">
+                                <div class="divTableBody">
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">
+                                            <div class="row car-images" >
+                                                <?php
+                                                // first if stmt: use 'place hold' it as image if this car has no images
+                                                // second if stmt: no badge for car that has no images
+                                                $currSearchCarImg = $d->getPhotosBy_CarId($rowSearchResult['vehicleId']);
+                                                if($d->countAllPhotosByCarId($rowSearchResult['vehicleId']) == "0") {
+                                                    $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
+                                                } else {
+                                                    $h = $currSearchCarImg[0]->getDiagram();
+                                                }
+                                                ?>
+                                                <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>"><span class="badge"></span>
+                                            </div>
+                                        </div>
+                                        <div class="divTableCell">
+                                            <div class="feature_links">
+                                                <a href="#" class="calculate-payment-link" data-toggle="modal"
+                                                   data-target="#calculatePaymentModal" data-price="<?php echo $rowSearchResult['price']; ?>" >
+                                                    <p><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;Estimate payment</p>
+                                                </a>
+                                                <a href="<?php echo 'details.php?carId='.$rowSearchResult['vehicleId']; ?>" title="View more details">
+                                                    <p><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;More Details</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="divTableCell">
+                                            <div class="car_info">
+                                                <p>
+                                                    <span class="car-title"><?php ?> - </span>
+                                                    <span class="price-style">$<?php echo $rowSearchResult['price']; ?></span>
+                                                </p>
+                                                <p><span class="availability"><?php echo $rowSearchResult['status']; ?></span></p>
+                                                <p>
+                                                    <span class="mileage"><?php echo $rowSearchResult['mileage']; ?> km</span>&nbsp;|&nbsp;
+                                                    <span class="transmission"><?php echo $rowSearchResult['transmission']; ?></span>&nbsp;|&nbsp;
+                                                    <span class="drivetrain"><?php echo $rowSearchResult['drivetrain']; ?></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                <?php   } ?>
+                <?php } ?>
+
+                </tbody>
+            </table>
 
         </div>
 
@@ -149,18 +204,18 @@ $s->getSearchInputResult('search-car');
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!--<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>-->
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/PaymentCalculator.js"></script>
 <script>
     $(document).ready(function () {
        PaymentCalculator.init();
-//        $('#inventory-vehicle-table').DataTable({
-//            "pageLength": 3,
-//            "lengthChange": false,
-//            searching: false,
-//            "ordering": false
-//        });
+        $('#search-result-vehicle-table').DataTable({
+            "pageLength": 1,
+            "lengthChange": false,
+            searching: false,
+            "ordering": false
+        });
     });
     function selectCarMakeFn(selectedMake) {
         var modelsSelect = $(selectedMake).parent().next().find('#searchModel');
