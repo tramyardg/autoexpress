@@ -10,7 +10,7 @@ $s = new AdvanceSearchDAO();
 $numberOfCars = $v->countAllCars();
 
 $p = new Paging();
-define('RECORDS_PER_PAGE', 1);
+define('RECORDS_PER_PAGE', 2);
 $p->setRecordsPerPage(RECORDS_PER_PAGE);
 $p->setPageQueryStr('page');
 $p->setStartingRow($p->getPageRowNumber());
@@ -81,7 +81,7 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                                             <div class="divTableCell">
                                                 <div class="car_info">
                                                     <p>
-                                                        <span class="car-title"><?php ?> - </span>
+                                                        <span class="car-title"><?php echo $row['vehicleTitle']; ?> - </span>
                                                         <span class="price-style">$<?php echo $row['price']; ?></span>
                                                     </p>
                                                     <p><span class="availability"><?php echo $row['status']; ?></span></p>
@@ -125,7 +125,6 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
             </nav>
 
             <?php if(!empty($carObjSearchResult)) { ?>
-            <!-- search result -->
             <table id="search-result-vehicle-table">
                 <thead>
                 <tr>
@@ -170,7 +169,7 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                                         <div class="divTableCell">
                                             <div class="car_info">
                                                 <p>
-                                                    <span class="car-title"><?php ?> - </span>
+                                                    <span class="car-title"><?php echo $rowSearchResult['vehicleTitle'] ?> - </span>
                                                     <span class="price-style">$<?php echo $rowSearchResult['price']; ?></span>
                                                 </p>
                                                 <p><span class="availability"><?php echo $rowSearchResult['status']; ?></span></p>
@@ -186,11 +185,10 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                             </div>
                         </td>
                     </tr>
-                <?php   } ?>
-                <?php } ?>
-
+                <?php   } // end while ?>
                 </tbody>
             </table>
+            <?php } // end if ?>
 
         </div>
 

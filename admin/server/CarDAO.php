@@ -86,10 +86,16 @@ class CarDAO extends Utility
             . " `cylinder`,\n"
             . " `doors`,\n"
             . " `status`,\n"
-            . " `dateAdded`\n"
+            . " `dateAdded`,\n"
+            .  " CONCAT(`yearMade`,\n"
+            . " ' ',\n"
+            . " `make`,\n"
+            . " ' ',\n"
+            . " `model`) AS `vehicleTitle`\n"
             . "FROM\n"
             . " `vehicle`\n"
             . "LIMIT $rowStart, $numRecordsPerPage";
+        //echo $sql;
         $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
