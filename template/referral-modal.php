@@ -33,8 +33,6 @@
                                         <div class="divTableCell-referral">Required fields <span style="color: red;">*</span></div>
                                         <div class="divTableCell-referral">
                                             <input class="btn btn-success" name="submit_referral" type="submit" value="Submit">
-                                            <span class="col-md-12"></span>
-                                            <input class="btn btn-default" name="cancel" type="button" value="Cancel"></div>
                                     </div>
                                 </div>
                             </div>

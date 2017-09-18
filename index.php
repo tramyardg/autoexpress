@@ -35,8 +35,6 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
     <?php include 'template/advance-search.php'; ?>
 	<div class="content">
         <div class="content-car-section">
-            <?php ?>
-
             <?php $hideIndexResult = empty($carObjSearchResult) ? "visible" : "hidden"; ?>
             <table id="inventory-vehicle-table"  class="<?php echo $hideIndexResult; ?>" >
                 <thead>
@@ -220,25 +218,28 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
 		<?php include 'template/referral-modal.php'; ?>
 
     </div>
+	
     <?php include 'template/footer.php'; ?>
 	
 </div>
 
 
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/PaymentCalculator.js"></script>
 <script>
     $(document).ready(function () {
        PaymentCalculator.init();
-        $('#search-result-vehicle-table').DataTable({
+	   var searchResultVehicleTableExists = document.getElementById("search-result-vehicle-table");
+	   if(document.body.contains(searchResultVehicleTableExists)) {
+		$('#search-result-vehicle-table').DataTable({
             "pageLength": 1,
             "lengthChange": false,
             searching: false,
             "ordering": false
-        });
+        });   
+	   }
     });
     function selectCarMakeFn(selectedMake) {
         var modelsSelect = $(selectedMake).parent().next().find('#searchModel');
