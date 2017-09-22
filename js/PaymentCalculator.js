@@ -11,6 +11,7 @@ var PaymentCalculator = (function () {
 
     var calculateFn = {};
     var isValidInputFn = {};
+    var isValid_Trade_DownPayment_Fn = {};
     var onlyNumberAndDigitsAllowedFn = {};
 
     return {
@@ -22,12 +23,14 @@ var PaymentCalculator = (function () {
             calculatePaymentLinkBtn = $('.calculate-payment-link');
             calculateFn = null;
             isValidInputFn = null;
+            isValid_Trade_DownPayment_Fn = null;
 
             this.bindPaymentCalculatorActions();
         },
 
         bindPaymentCalculatorActions: function () {
 
+            // link
             calculatePaymentLinkBtn.click(function (event) {
                 var dataCarPrice = $(this).attr('data-price');
                 var noCommaCarPrice = dataCarPrice.replace(/,/g, "");
@@ -36,6 +39,7 @@ var PaymentCalculator = (function () {
                 var modalBody = modal.find('.modal-body');
                 modalBody.find('.modal-car-price').val(noCommaCarPrice);
 
+                // button
                 modalCalculateBtn.click(function (e) {
                     var carPrice = {
                         elem : modalBody.find('.modal-car-price'),
@@ -77,6 +81,7 @@ var PaymentCalculator = (function () {
                     if(isValidInputFn(salesTax.val))
                         inputs._salesTax = 0;
 
+                    isValid_Trade_DownPayment_Fn(inputs);
                     // pre inputs
                     //console.log(inputs);
 
@@ -169,6 +174,14 @@ var PaymentCalculator = (function () {
             isValidInputFn = function (input) {
                 return input === null || input === undefined || input === "";
             };
+
+            isValid_Trade_DownPayment_Fn = function (input) {
+                if(input._downPayment > input._carPrice) {
+                    alert('Down payment cannot be greater than car price.');
+                } else if(input._trade > input._carPrice) {
+                    alert('Trade cannot be greater than car price.');
+                }
+            }
         }
     }; // end return
 })();
