@@ -288,3 +288,6 @@ ul li {
 .divTable-referral textarea {
     resize: none;
 }
+.calculateTbl {
+    font-size: 14px !important;
+}

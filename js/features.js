@@ -1,5 +1,7 @@
 /**
- * Credit: http://www.wikihow.com/Calculate-Auto-Loan-Payments
+ * Credit:
+ * http://www.wikihow.com/Calculate-Auto-Loan-Payments
+ * https://www.w3resource.com/javascript/form/email-validation.php
  * @type {{init, bindPaymentCalculatorActions}}
  */
 var PaymentCalculator = (function () {
@@ -182,6 +184,49 @@ var PaymentCalculator = (function () {
                     alert('Trade cannot be greater than car price.');
                 }
             }
+        }
+    }; // end return
+})();
+
+var VehicleReferral = (function () {
+
+    // todo
+    // if more than one email - validate comma separated
+
+    var validateEmail = {};
+
+    var referralModalForm = {};
+
+    return {
+
+        /**
+         * All the elements required before an
+         * event occurred must be in the init function.
+         */
+        init: function () {
+
+            validateEmail = null;
+            referralModalForm = $('#referral-modal-form');
+
+            // call the event driven functions here
+            this.bindCarReferralActions();
+        },
+        bindCarReferralActions: function () {
+
+            referralModalForm.find('input[type=submit]').click(function () {
+                alert('hello');
+            });
+
+            validateEmail = function(mail)
+            {
+                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+                {
+                    return (true)
+                }
+                alert("You have entered an invalid email address!");
+                return (false)
+            }
+
         }
     }; // end return
 })();

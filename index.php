@@ -224,10 +224,11 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/PaymentCalculator.js"></script>
+<script src="js/features.js"></script>
 <script>
     $(document).ready(function () {
        PaymentCalculator.init();
+       VehicleReferral.init();
 	   var searchResultVehicleTableExists = document.getElementById("search-result-vehicle-table");
 	   if(document.body.contains(searchResultVehicleTableExists)) {
 		$('#search-result-vehicle-table').DataTable({
