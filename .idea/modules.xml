@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../autoexpress.live/.idea/autoexpress.co.nf.iml" filepath="$PROJECT_DIR$/../autoexpress.live/.idea/autoexpress.co.nf.iml" />
+      <module fileurl="file://C:\xampp\htdocs\autoexpress.live\.idea\autoexpress.co.nf.iml" filepath="C:\xampp\htdocs\autoexpress.live\.idea\autoexpress.co.nf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/autoexpress.live.iml" filepath="$PROJECT_DIR$/.idea/autoexpress.live.iml" />
     </modules>
   </component>
 </project>

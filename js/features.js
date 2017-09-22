@@ -199,32 +199,30 @@ var VehicleReferral = (function () {
 
     return {
 
-        /**
-         * All the elements required before an
-         * event occurred must be in the init function.
-         */
         init: function () {
 
             validateEmail = null;
             referralModalForm = $('#referral-modal-form');
 
-            // call the event driven functions here
             this.bindCarReferralActions();
         },
         bindCarReferralActions: function () {
 
             referralModalForm.find('input[type=submit]').click(function () {
-                alert('hello');
+                var friendEmails = referralModalForm.find('input[type=text]#receiver-email').val();
+				var emailArray = friendEmails.split(",");
+
+				for(var i = 0; i < emailArray.length; i++) {
+					if(!validateEmail(emailArray[i].trim())) {
+                        alert("You have entered an invalid email address!");
+                        return false;
+                    }
+				}
+				return true;
             });
 
-            validateEmail = function(mail)
-            {
-                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-                {
-                    return (true)
-                }
-                alert("You have entered an invalid email address!");
-                return (false)
+            validateEmail = function(mail) {
+                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail);
             }
 
         }
