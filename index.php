@@ -58,21 +58,18 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                                                     $currSearchCarImg = $d->getPhotosBy_CarId($row['vehicleId']);
                                                     $isMoreThanOneImg = 0;
                                                     if($d->countAllPhotosByCarId($row['vehicleId']) == "0") {
-                                                        $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
-
+                                                        $h = "http://via.placeholder.com/350?text=Photo+Unavailable";
                                                     } else {
                                                         $h = $currSearchCarImg[0]->getDiagram();
                                                         $isMoreThanOneImg = 1;
                                                     }
                                                     ?>
                                                     <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>">
+                                                    <?php if(!empty($d->countAllPhotosByCarId($row['vehicleId']))) { ?>
                                                     <span class="badge">
-                                                        <?php
-                                                        if(!empty($d->countAllPhotosByCarId($row['vehicleId']))) {
-                                                            echo $d->countAllPhotosByCarId($row['vehicleId']);
-                                                        }
-                                                        ?>
+                                                        <?php echo $d->countAllPhotosByCarId($row['vehicleId']); ?>
                                                     </span>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                             <div class="divTableCell">
