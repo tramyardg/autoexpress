@@ -21,7 +21,7 @@ class Dbh
             $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
             self::$instance = new PDO('mysql:
             host=' . 'localhost' . ';
-            dbname=' . 'test' . '',
+            dbname=' . 'autoexpress' . '',
                 '' . 'root' . '',
                 '' . '' . '',
                 $pdo_options

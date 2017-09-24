@@ -1,0 +1,6 @@
+Options +FollowSymLinks
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^autoexpress.live/admin[nc]
+RewriteRule ^(.*)$ http://www.autoexpress.live/admin/$1 [r=301,nc]
+
+DirectoryIndex sign-in.php

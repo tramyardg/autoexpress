@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="045f5b24-860a-43fb-ad94-313beeaa0b3b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list default="true" id="045f5b24-860a-43fb-ad94-313beeaa0b3b" name="Default" comment="car referral update">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/.htaccess" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/server/class/Dbh.php" afterPath="$PROJECT_DIR$/admin/server/class/Dbh.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/testing/testing-manage-vehicles.txt" afterPath="$PROJECT_DIR$/admin/testing/testing-manage-vehicles.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/features.js" afterPath="$PROJECT_DIR$/js/features.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template.html" afterPath="$PROJECT_DIR$/template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/referral-modal.php" afterPath="$PROJECT_DIR$/template/referral-modal.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,17 +15,86 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings" doNotAsk="true" />
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="features.js" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="features.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/features.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2116">
-              <caret line="207" column="10" lean-forward="true" selection-start-line="207" selection-start-column="10" selection-end-line="207" selection-end-column="10" />
+            <state relative-caret-position="229">
+              <caret line="212" column="10" lean-forward="false" selection-start-line="212" selection-start-column="10" selection-end-line="212" selection-end-column="10" />
               <folding>
-                <marker date="1506124711907" expanded="true" signature="6624:6630" ph=" " />
-                <marker date="1506124711907" expanded="true" signature="6915:6921" ph=" " />
+                <marker date="1506125477688" expanded="true" signature="6624:6630" ph=" " />
+                <marker date="1506125477688" expanded="true" signature="6915:6921" ph=" " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testing-manage-vehicles.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/testing/testing-manage-vehicles.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="10" lean-forward="false" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="inventory.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/inventory.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="77" column="33" lean-forward="true" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CarDAO.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/server/CarDAO.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="277" column="26" lean-forward="false" selection-start-line="277" selection-start-column="16" selection-end-line="277" selection-end-column="26" />
+              <folding>
+                <element signature="e#105#415#0#PHP" expanded="false" />
+                <element signature="n#query#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="e#674#1253#0#PHP" expanded="false" />
+                <element signature="n#getAllCars#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="e#1481#1707#0#PHP" expanded="false" />
+                <element signature="n#getCarsLimitByRecPerPage#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="e#2652#3063#0#PHP" expanded="false" />
+                <element signature="n#getVehiclesWithPhotos#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="n#getCarById#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="n#create#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="n#isCreated#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="e#6589#6685#0#PHP" expanded="false" />
+                <element signature="e#6647#6685#0#PHP" expanded="false" />
+                <element signature="n#addDiagram#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="e#6776#7223#0#PHP" expanded="false" />
+                <element signature="e#6835#7036#0#PHP" expanded="false" />
+                <element signature="e#7182#7223#0#PHP" expanded="false" />
+                <element signature="n#isDiagramAdded#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="e#7286#7458#0#PHP" expanded="false" />
+                <element signature="e#7332#7409#0#PHP" expanded="false" />
+                <element signature="e#7420#7458#0#PHP" expanded="false" />
+                <element signature="n#update#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="n#delete#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="e#9853#10106#0#PHP" expanded="false" />
+                <element signature="n#isDeleted#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="e#10334#10492#0#PHP" expanded="false" />
+                <element signature="e#10379#10443#0#PHP" expanded="false" />
+                <element signature="e#10454#10492#0#PHP" expanded="false" />
+                <element signature="n#countAllCars#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="n#getLastCarId#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="n#isVehicleExist#0;n#CarDAO#0;n#!!top" expanded="false" />
+                <element signature="e#10949#11051#0#PHP" expanded="false" />
+                <element signature="e#11013#11051#0#PHP" expanded="false" />
+                <marker date="1506048187838" expanded="false" signature="3840:3884" ph="SELECT * FRO... vehicle" />
+                <marker date="1506048187838" expanded="false" signature="6941:7019" ph="INSERT INTO `cardiagram`... " />
+                <marker date="1506048187838" expanded="false" signature="10123:10165" ph="DELETE FROM " />
+                <marker date="1506048187838" expanded="false" signature="10644:10707" ph="SELECT vehic... vehicle" />
               </folding>
             </state>
           </provider>
@@ -45,6 +114,8 @@
         <option value="$PROJECT_DIR$/template/referral-modal.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/js/features.js" />
+        <option value="$PROJECT_DIR$/admin/.htaccess" />
+        <option value="$PROJECT_DIR$/admin/testing/testing-manage-vehicles.txt" />
       </list>
     </option>
   </component>
@@ -80,8 +151,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -104,12 +173,32 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="autoexpress.live" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="autoexpress.live" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -212,7 +301,8 @@
       <updated>1506048215218</updated>
       <workItem from="1506048220393" duration="5871000" />
       <workItem from="1506099446639" duration="54000" />
-      <workItem from="1506122951044" duration="1757000" />
+      <workItem from="1506122951044" duration="1946000" />
+      <workItem from="1506204794153" duration="1021000" />
     </task>
     <task id="LOCAL-00001" summary="using https://placeholder.com/#">
       <created>1506050127838</created>
@@ -235,26 +325,33 @@
       <option name="project" value="LOCAL" />
       <updated>1506053713285</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="car referral update">
+      <created>1506124748089</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1506124748089</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7682000" />
+    <option name="totallyTimeSpent" value="8892000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21235521" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28957528" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.899729" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.8983957" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -311,6 +408,17 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/js/features.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1506125477688" expanded="true" signature="6624:6630" ph=" " />
+            <marker date="1506125477688" expanded="true" signature="6915:6921" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/db/tables.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -353,13 +461,83 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/features.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2116">
-          <caret line="207" column="10" lean-forward="true" selection-start-line="207" selection-start-column="10" selection-end-line="207" selection-end-column="10" />
+        <state relative-caret-position="229">
+          <caret line="212" column="10" lean-forward="false" selection-start-line="212" selection-start-column="10" selection-end-line="212" selection-end-column="10" />
           <folding>
-            <marker date="1506124711907" expanded="true" signature="6624:6630" ph=" " />
-            <marker date="1506124711907" expanded="true" signature="6915:6921" ph=" " />
+            <marker date="1506125477688" expanded="true" signature="6624:6630" ph=" " />
+            <marker date="1506125477688" expanded="true" signature="6915:6921" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/testing/testing-manage-vehicles.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="10" lean-forward="false" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/inventory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="77" column="33" lean-forward="true" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/server/CarDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="277" column="26" lean-forward="false" selection-start-line="277" selection-start-column="16" selection-end-line="277" selection-end-column="26" />
+          <folding>
+            <element signature="e#105#415#0#PHP" expanded="false" />
+            <element signature="n#query#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="e#674#1253#0#PHP" expanded="false" />
+            <element signature="n#getAllCars#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="e#1481#1707#0#PHP" expanded="false" />
+            <element signature="n#getCarsLimitByRecPerPage#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="e#2652#3063#0#PHP" expanded="false" />
+            <element signature="n#getVehiclesWithPhotos#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="n#getCarById#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="n#create#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="n#isCreated#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="e#6589#6685#0#PHP" expanded="false" />
+            <element signature="e#6647#6685#0#PHP" expanded="false" />
+            <element signature="n#addDiagram#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="e#6776#7223#0#PHP" expanded="false" />
+            <element signature="e#6835#7036#0#PHP" expanded="false" />
+            <element signature="e#7182#7223#0#PHP" expanded="false" />
+            <element signature="n#isDiagramAdded#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="e#7286#7458#0#PHP" expanded="false" />
+            <element signature="e#7332#7409#0#PHP" expanded="false" />
+            <element signature="e#7420#7458#0#PHP" expanded="false" />
+            <element signature="n#update#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="n#delete#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="e#9853#10106#0#PHP" expanded="false" />
+            <element signature="n#isDeleted#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="e#10334#10492#0#PHP" expanded="false" />
+            <element signature="e#10379#10443#0#PHP" expanded="false" />
+            <element signature="e#10454#10492#0#PHP" expanded="false" />
+            <element signature="n#countAllCars#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="n#getLastCarId#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="n#isVehicleExist#0;n#CarDAO#0;n#!!top" expanded="false" />
+            <element signature="e#10949#11051#0#PHP" expanded="false" />
+            <element signature="e#11013#11051#0#PHP" expanded="false" />
+            <marker date="1506048187838" expanded="false" signature="3840:3884" ph="SELECT * FRO... vehicle" />
+            <marker date="1506048187838" expanded="false" signature="6941:7019" ph="INSERT INTO `cardiagram`... " />
+            <marker date="1506048187838" expanded="false" signature="10123:10165" ph="DELETE FROM " />
+            <marker date="1506048187838" expanded="false" signature="10644:10707" ph="SELECT vehic... vehicle" />
           </folding>
         </state>
       </provider>
