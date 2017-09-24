@@ -19,7 +19,9 @@ What to test?
 
 2017-09-23 6:15pm
 1. passed
-2. failed (price returns only two numbers)
+2. failed (price returns only two numbers) - db problem price column in decimal not varchar
 3. passed
-4a. failed error "Error. Please try again later"
+4a. failed error "Error. Please try again later" - db problem cardiagram id not auto increment
 4b. passed
+
+-------------------------------------------
