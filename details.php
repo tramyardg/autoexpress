@@ -86,7 +86,7 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
             </div>
             <?php } else { ?>
             <div class="car-images" >
-                <img src="https://placeholdit.co//i/360x187?&bg=111111&fc=ffffff&text=Photo Unavailable">
+                <img src="http://via.placeholder.com/350?text=Photo+Unavailable">
             </div>
             <?php } ?>
             <br><h3><span>Notes</span></h3>
