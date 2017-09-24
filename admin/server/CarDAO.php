@@ -228,16 +228,14 @@ class CarDAO extends Utility
         }
     }
 
+    // precondition: this vehicle already exists
     function isDiagramAdded($files, $id)
     {
-        if ($this->isVehicleExist($id)) {
-            if ($this->addDiagram($files, $id)) {
-                return 1;
-            }
+        if ($this->addDiagram($files, $id)) {
+            return 1;
         } else {
             return 0;
         }
-        return 0;
     }
 
     function update(&$carObject) {
@@ -313,14 +311,11 @@ class CarDAO extends Utility
     }
 
     function isDeleted($id) {
-        if($this->isVehicleExist($id)) {
-            if($this->delete($id)) {
-                return 1;
-            }
+        if ($this->delete($id)) {
+            return 1;
         } else {
             return 0;
         }
-        return 0;
     }
 
     function countAllCars() {

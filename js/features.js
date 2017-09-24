@@ -44,14 +44,14 @@ var PaymentCalculator = (function () {
                 // button
                 modalCalculateBtn.click(function (e) {
                     var carPrice = {
-                        elem : modalBody.find('.modal-car-price'),
+                        elem: modalBody.find('.modal-car-price'),
                         val: modalBody.find('.modal-car-price').val()
                     }, downPayment = {
                         elem: modalBody.find('.modal-down-payment'),
                         val: modalBody.find('.modal-down-payment').val()
                     }, trade = {
-                        elem:  modalBody.find('.modal-trade'),
-                        val:  modalBody.find('.modal-trade').val()
+                        elem: modalBody.find('.modal-trade'),
+                        val: modalBody.find('.modal-trade').val()
                     }, termByMonths = {
                         elem: modalBody.find('.modal-term'),
                         val: modalBody.find('.modal-term').val()
@@ -74,13 +74,13 @@ var PaymentCalculator = (function () {
                         _salesTax: parseFloat(salesTax.val)
                     };
 
-                    if(isValidInputFn(downPayment.val))
+                    if (isValidInputFn(downPayment.val))
                         inputs._downPayment = 0;
-                    if(isValidInputFn(trade.val))
+                    if (isValidInputFn(trade.val))
                         inputs._trade = 0;
-                    if(isValidInputFn(interestRate.val))
+                    if (isValidInputFn(interestRate.val))
                         inputs._interestRate = 0;
-                    if(isValidInputFn(salesTax.val))
+                    if (isValidInputFn(salesTax.val))
                         inputs._salesTax = 0;
 
                     isValid_Trade_DownPayment_Fn(inputs);
@@ -127,11 +127,11 @@ var PaymentCalculator = (function () {
 
 
                 var principal = options._carPrice;
-                if(!isValidInputFn(options._salesTax))
+                if (!isValidInputFn(options._salesTax))
                     principal += principal * (options._salesTax / 100);
-                if(!isValidInputFn(options._trade)) // deduct trade in
+                if (!isValidInputFn(options._trade)) // deduct trade in
                     principal -= options._trade;
-                if(!isValidInputFn(options._downPayment)) // deduct down payment
+                if (!isValidInputFn(options._downPayment)) // deduct down payment
                     principal -= options._downPayment;
 
 
@@ -152,12 +152,12 @@ var PaymentCalculator = (function () {
              */
             onlyNumberAndDigitsAllowedFn = function (fields) {
                 var pattern = /^\d*\.?\d*$/;
-                for(var i = 0; i < fields.length; i++) {
-                    if(fields[4].val.length === 0 || fields[4].val === 0) { // for interest rate
+                for (var i = 0; i < fields.length; i++) {
+                    if (fields[4].val.length === 0 || fields[4].val === 0) { // for interest rate
                         fields[4].elem.parent().parent().find('td').last().empty();
                         fields[4].elem.parent().parent().find('td').last().append("<label>&nbsp;Please enter a number.</label>");
                     }
-                    if(!pattern.test(fields[i].val)) {
+                    if (!pattern.test(fields[i].val)) {
                         fields[i].elem.parent().parent().find('td').last().empty();
                         fields[i].elem.parent().parent().find('td').last().append("<label>&nbsp;Invalid input.</label>");
                         break;
@@ -178,9 +178,9 @@ var PaymentCalculator = (function () {
             };
 
             isValid_Trade_DownPayment_Fn = function (input) {
-                if(input._downPayment > input._carPrice) {
+                if (input._downPayment > input._carPrice) {
                     alert('Down payment cannot be greater than car price.');
-                } else if(input._trade > input._carPrice) {
+                } else if (input._trade > input._carPrice) {
                     alert('Trade cannot be greater than car price.');
                 }
             }
@@ -193,7 +193,7 @@ var VehicleReferral = (function () {
     // todo
     // if more than one email - validate comma separated
 
-    var validateEmail = {};
+    var validEmailFormat = {};
 
     var referralModalForm = {};
 
@@ -205,7 +205,7 @@ var VehicleReferral = (function () {
          */
         init: function () {
 
-            validateEmail = null;
+            validEmailFormat = null;
             referralModalForm = $('#referral-modal-form');
 
             // call the event driven functions here
@@ -215,20 +215,19 @@ var VehicleReferral = (function () {
 
             referralModalForm.find('input[type=submit]').click(function () {
                 var friendEmails = referralModalForm.find('input[type=text]#receiver-email').val();
-				var emailArray = friendEmails.split(",");
-				for(var i = 0; i < emailArray.length; i++) {
-					return (validateEmail(emailArray[i]));
-				}
+                var emailArray = friendEmails.split(",");
+
+                for (var i = 0; i < emailArray.length; i++) {
+                    if (!validEmailFormat(emailArray[i].trim())) {
+                        alert("You have entered an invalid email address!");
+                        return false;
+                    }
+                }
+                return true;
             });
 
-            validateEmail = function(mail)
-            {
-                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-                {
-                    return (true)
-                }
-                alert("You have entered an invalid email address!");
-                return (false)
+            validEmailFormat = function (input) {
+                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input);
             }
 
         }

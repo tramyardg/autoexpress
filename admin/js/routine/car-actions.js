@@ -83,9 +83,8 @@ var CarActions = (function () {
                         url: "?action=delete",
                         type: "get",
                         data: "id=" + dataId,
-                        dataType: "json",
                         success: function(data) {
-                            if(data === 1) {
+                            if(data === "1") {
                                 window.location.reload(true);
                             } else {
                                 alert('Something is wrong. Please try again later.');
@@ -109,9 +108,11 @@ var CarActions = (function () {
                     type: "post",
                     dataType: "json",
                     success: function(data) {
-                        // using Mustache to render data object
+                        // removing commas for input type number
                         data[0]._price = data[0]._price.replace(/,/g, '');
                         data[0]._mileage = data[0]._mileage.replace(/,/g, '');
+
+                        // using Mustache to render data object
                         var html = Mustache.render(template.updateCarInfoModalContent(), data[0]);
                         updateCarInfoModalContent.empty();
                         updateCarInfoModalContent.append(html);
@@ -156,15 +157,16 @@ var CarActions = (function () {
                     for(var i = 0; i < thumbLength; i++) {
                         filesDataArray.push(thumbImageSel.eq(i).attr('src'));
                     }
+
                     loader.css('display', 'block');
+
                     $.ajax({ // for uploading photos
                         url: "?action=uploadPhotos&id="+carId,
                         type: "post",
                         data: {filesData : filesDataArray},
-                        dataType: "json",
                         success: function(data) {
                             console.log(data);
-                            if(data === 1) {
+                            if(data === "1") {
                                 window.location.reload(true);
                             } else {
                                 alert('Something is wrong. Please try again later.');
@@ -217,7 +219,7 @@ var CarActions = (function () {
                 }).done(function () {
                     loader.has('loading-photos').css('display', 'none');
                 }).fail(function () {
-                    alert('Error. Please try again later');
+                    alert('Error. Please try again later.');
                 });
 
             };

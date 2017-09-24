@@ -25,12 +25,10 @@ if(!isset($_SESSION['authenticated'])) {
     // car diagram upload with ajax
     if (isset($_GET["action"])) {
         if($_GET["action"] === "uploadPhotos") {
-            $is_uploaded = $v->isDiagramAdded(
+            echo $is_uploaded = $v->isDiagramAdded(
                     $_POST['filesData'], // array of images src to be uploaded
                     $_GET["id"] // query string in the ajax url properties
             );
-            $uploadedJson = json_encode($is_uploaded);
-            echo $uploadedJson;
             exit();
         }
     }
@@ -38,9 +36,7 @@ if(!isset($_SESSION['authenticated'])) {
     // deleting vehicle with ajax
     if(isset($_GET["action"])) {
         if($_GET["action"] === "delete") {
-            $is_deleted = $v->isDeleted($_GET["id"]);
-            $deletedJson = json_encode($is_deleted);
-            echo $deletedJson; // for callback ajax
+            echo $is_deleted = $v->isDeleted($_GET["id"]);
             exit();
         }
     }
