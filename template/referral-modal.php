@@ -1,5 +1,5 @@
 <!-- payment calculator modal -->
-<form action="" method="post" id="referral-modal-form">
+<form action="../phpmailer.php" method="post" id="referral-modal-form">
     <div class="modal fade" id="referACarModal" tabindex="-1"  role="dialog" aria-labelledby="referACarModalLabel">
         <div class="modal-dialog modal-custom-lg" role="document">
             <div class="modal-content">

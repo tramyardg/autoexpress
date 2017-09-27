@@ -1,40 +1,58 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 require_once 'vendor/autoload.php';
 
-$mail = new PHPMailer;
 
-//Server settings
-$mail->SMTPDebug = 1;
-$mail->isSMTP();
-$mail->Host = 'smtp.gmail.com';
-$mail->SMTPAuth = true;
-$mail->SMTPSecure = 'tls'; // or 'tls'
-$mail->Port = 587; // or 465
-$mail->Username = "raymart54@gmail.com";
-$mail->Password = "password";
+$mail = new PHPMailer(true);
+try { 
+	
+	$mail->SMTPDebug = 2;
+	$mail->IsSMTP();
+	$mail->Host = "smtp.gmail.com";
+	$mail->Port = 25; // or 465
+	$mail->SMTPSecure = "tls"; // or 'tls'
+	$mail->SMTPAuth = true;
+	$mail->Username = "raymart54@gmail.com";
+	$mail->Password = "9d?]NQr<";
 
-//Recipients
-$mail->setFrom("example@gmail.com");
-$mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
-$mail->addAddress('ellen@example.com');               // Name is optional
-$mail->addReplyTo('info@example.com', 'Information');
-$mail->addCC('cc@example.com');
-$mail->addBCC('bcc@example.com');
+	if (!empty($_POST['submit_referral'])) {
+		$senderName = $_POST['sender-name'];
+		$senderEmail = $_POST['sender-email'];
+		$receiverEmail = $_POST['receiver-email'];
+		$message = $_POST['message'];
+		
+		$inputs = array(
+			"senderName" => $senderName,
+			"senderEmail" => $senderEmail,
+			"receiverEmail" => $receiverEmail,
+			"message" => $message
+		);
+		
+		//print_r($inputs);
+		
+		
+		//Recipients
+		$mail->setFrom($inputs['senderEmail']);
+		$mail->addAddress($inputs['receiverEmail']);     
+		//$mail->addReplyTo($senderEmail, 'Information');
+		//$mail->addCC($senderEmail);
+		//$mail->addBCC($mail->Username);
 
-//Content
-$mail->isHTML(true);                                  // Set email format to HTML
-$mail->Subject = 'Here is the subject';
-$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+		//Content
+		$mail->isHTML(true);                                  
+		$mail->Subject = 'Here is the subject';
+		$mail->Body = '<b>' . $inputs['message'] . '</b>';
+		$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-if(!$mail->send()) {
+		$mail->send();
+		echo 'Message has been sent';
+	}
+} catch (Exception $e) {
     echo 'Message could not be sent.';
-    echo "Mailer Error: " . $mail->ErrorInfo;
-} else {
-    echo "Message has been sent successfully.";
+    echo 'Mailer Error: ' . $mail->ErrorInfo;
 }
-
-// todo make a function for multiple email to be send
 
 
