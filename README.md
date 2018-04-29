@@ -12,9 +12,9 @@ Other features to be implemented:
  - Make an offer
 
 ### Screenshots - Customer
-![Home page](https://github.com/tramyardg/autoexpress/blob/readMe/image/home_page.PNG)
-![Payment calculator](https://github.com/tramyardg/autoexpress/blob/readMe/image/calc_payment.PNG)
+![Home page](https://github.com/tramyardg/autoexpress/blob/master/image/home_page.PNG)
+![Payment calculator](https://github.com/tramyardg/autoexpress/blob/master/image/calc_payment.PNG)
 
 ### Screenshots - Admin
-![Admin dashboard](https://github.com/tramyardg/autoexpress/blob/readMe/image/admin_dashboard.PNG)
-![Admin manage inventory](https://github.com/tramyardg/autoexpress/blob/readMe/image/admin_inventory.PNG)
+![Admin dashboard](https://github.com/tramyardg/autoexpress/blob/master/image/admin_dashboard.PNG)
+![Admin manage inventory](https://github.com/tramyardg/autoexpress/blob/master/image/admin_inventory.PNG)
