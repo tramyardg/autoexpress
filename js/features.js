@@ -1,7 +1,6 @@
 /**
  * Credit:
  * http://www.wikihow.com/Calculate-Auto-Loan-Payments
- * https://www.w3resource.com/javascript/form/email-validation.php
  * @type {{init, bindPaymentCalculatorActions}}
  */
 var PaymentCalculator = (function () {
@@ -17,7 +16,6 @@ var PaymentCalculator = (function () {
     var onlyNumberAndDigitsAllowedFn = {};
 
     return {
-
         init: function () {
             outMonthlyPayment = $('.modal-monthly-payment');
             outBiWeeklyPayment = $('.modal-bi-weekly');
@@ -31,8 +29,6 @@ var PaymentCalculator = (function () {
         },
 
         bindPaymentCalculatorActions: function () {
-
-            // link
             calculatePaymentLinkBtn.click(function (event) {
                 var dataCarPrice = $(this).attr('data-price');
                 var noCommaCarPrice = dataCarPrice.replace(/,/g, "");
@@ -41,7 +37,6 @@ var PaymentCalculator = (function () {
                 var modalBody = modal.find('.modal-body');
                 modalBody.find('.modal-car-price').val(noCommaCarPrice);
 
-                // button
                 modalCalculateBtn.click(function (e) {
                     var carPrice = {
                         elem: modalBody.find('.modal-car-price'),
@@ -74,18 +69,20 @@ var PaymentCalculator = (function () {
                         _salesTax: parseFloat(salesTax.val)
                     };
 
-                    if (isValidInputFn(downPayment.val))
+                    if (isValidInputFn(downPayment.val)) {
                         inputs._downPayment = 0;
-                    if (isValidInputFn(trade.val))
+                    }
+                    if (isValidInputFn(trade.val)) {
                         inputs._trade = 0;
-                    if (isValidInputFn(interestRate.val))
+                    }
+                    if (isValidInputFn(interestRate.val)) {
                         inputs._interestRate = 0;
-                    if (isValidInputFn(salesTax.val))
+                    }
+                    if (isValidInputFn(salesTax.val)) {
                         inputs._salesTax = 0;
+                    }
 
                     isValid_Trade_DownPayment_Fn(inputs);
-                    // pre inputs
-                    //console.log(inputs);
 
                     // finally calculate the payment here
                     var _payment = calculateFn(inputs);
@@ -99,11 +96,8 @@ var PaymentCalculator = (function () {
 
                     e.preventDefault();
                 });
-
                 event.preventDefault();
-
             });
-
             /**
              * loan amortization formula
              * A = the monthly payment.
@@ -125,26 +119,20 @@ var PaymentCalculator = (function () {
                 var numerator = monthlyInterestRate * Math.pow((1 + monthlyInterestRate), options._termByMonths);
                 var denominator = Math.pow((1 + monthlyInterestRate), options._termByMonths) - 1;
 
-
                 var principal = options._carPrice;
-                if (!isValidInputFn(options._salesTax))
+                if (!isValidInputFn(options._salesTax)) {
                     principal += principal * (options._salesTax / 100);
-                if (!isValidInputFn(options._trade)) // deduct trade in
+                }
+                if (!isValidInputFn(options._trade)) {
+                    // deduct trade in
                     principal -= options._trade;
-                if (!isValidInputFn(options._downPayment)) // deduct down payment
+                }
+                if (!isValidInputFn(options._downPayment)) {
+                    // deduct down payment
                     principal -= options._downPayment;
-
-
-                // var payment = principal * (numerator / denominator);
-
-
-                //console.log("payment=" +payment);
-                //console.log(options);
-
+                }
                 return principal * (numerator / denominator);
             };
-
-
             /**
              * Validation for non-numeric input.
              * Only allowed inputs: 123, 12., 12.232
@@ -166,7 +154,6 @@ var PaymentCalculator = (function () {
                     }
                 }
             };
-
             /**
              * Returns true if the input is invalid
              * Invalid if null, undefined, or empty string
@@ -176,7 +163,6 @@ var PaymentCalculator = (function () {
             isValidInputFn = function (input) {
                 return input === null || input === undefined || input === "";
             };
-
             isValid_Trade_DownPayment_Fn = function (input) {
                 if (input._downPayment > input._carPrice) {
                     alert('Down payment cannot be greater than car price.');
@@ -189,34 +175,20 @@ var PaymentCalculator = (function () {
 })();
 
 var VehicleReferral = (function () {
-
-    // todo
     // if more than one email - validate comma separated
-
     var validEmailFormat = {};
-
     var referralModalForm = {};
-
     return {
-
-        /**
-         * All the elements required before an
-         * event occurred must be in the init function.
-         */
         init: function () {
-
             validEmailFormat = null;
             referralModalForm = $('#referral-modal-form');
 
-            // call the event driven functions here
             this.bindCarReferralActions();
         },
         bindCarReferralActions: function () {
-
             referralModalForm.find('input[type=submit]').click(function () {
                 var friendEmails = referralModalForm.find('input[type=text]#receiver-email').val();
                 var emailArray = friendEmails.split(",");
-
                 for (var i = 0; i < emailArray.length; i++) {
                     if (!validEmailFormat(emailArray[i].trim())) {
                         alert("You have entered an invalid email address!");
@@ -225,11 +197,9 @@ var VehicleReferral = (function () {
                 }
                 return true;
             });
-
             validEmailFormat = function (input) {
                 return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input);
             }
-
         }
     }; // end return
 })();

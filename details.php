@@ -86,7 +86,7 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
             </div>
             <?php } else { ?>
             <div class="car-images" >
-                <img src="http://via.placeholder.com/350?text=Photo+Unavailable">
+                <img src="https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111">
             </div>
             <?php } ?>
             <br><h3><span>Notes</span></h3>
@@ -138,7 +138,7 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
     </div>
     <div class="footer">
         <div id="footer-content">
-            <p>Copyright © 2014-2017 | Raymart De Guzman | Leo Sudarma</p>
+            <p>Copyright © 2014 - 2018 | Raymart De Guzman | Leo Sudarma</p>
         </div>
     </div>
 </div><!-- end container -->
@@ -146,7 +146,6 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<!--<script src="js/jquery-3.1.1.min.js"></script>-->
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

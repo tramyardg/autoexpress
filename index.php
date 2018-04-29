@@ -58,7 +58,7 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                                                     $currSearchCarImg = $d->getPhotosBy_CarId($row['vehicleId']);
                                                     $isMoreThanOneImg = 0;
                                                     if($d->countAllPhotosByCarId($row['vehicleId']) == "0") {
-                                                        $h = "http://via.placeholder.com/350?text=Photo+Unavailable";
+														$h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
                                                     } else {
                                                         $h = $currSearchCarImg[0]->getDiagram();
                                                         $isMoreThanOneImg = 1;
@@ -155,7 +155,8 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                                                 // second if stmt: no badge for car that has no images
                                                 $currSearchCarImg = $d->getPhotosBy_CarId($rowSearchResult['vehicleId']);
                                                 if($d->countAllPhotosByCarId($rowSearchResult['vehicleId']) == "0") {
-                                                    $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
+                                                    //$h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
+													$h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
                                                 } else {
                                                     $h = $currSearchCarImg[0]->getDiagram();
                                                 }
