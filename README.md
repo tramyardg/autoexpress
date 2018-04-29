@@ -11,6 +11,10 @@ Other features to be implemented:
  - Schedule a test drive
  - Make an offer
 
-**Screenshots - Customer**
+### Screenshots - Customer
+![Home page](https://github.com/tramyardg/autoexpress/blob/readMe/image/home_page.PNG)
+![Payment calculator](https://github.com/tramyardg/autoexpress/blob/readMe/image/calc_payment.PNG)
 
-**Screenshots - Admin**
+### Screenshots - Admin
+![Admin dashboard](https://github.com/tramyardg/autoexpress/blob/readMe/image/admin_dashboard.PNG)
+![Admin manage inventory](https://github.com/tramyardg/autoexpress/blob/readMe/image/admin_inventory.PNG)
