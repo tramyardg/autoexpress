@@ -6,10 +6,15 @@ for the vehicle he or she desired on the website. If the buyer finds the desired
 vehicle he or she can contact the seller to get more information of the vehicle. 
 A car buyer can also calculate their monthly or bi-weekly payment.
 
-Other features to be implemented:
- - Share this car
- - Schedule a test drive
- - Make an offer
+### Features
+- Advanced search
+- Montly or bi-weekly payment calculator
+- Administrator module
+
+### Other features to be implemented
+- Share a car via email
+- Schedule a test drive
+- Make an offer to the dealer
 
 ### Screenshots - Customer
 ![Home page](https://github.com/tramyardg/autoexpress/blob/master/image/home_page.PNG)
