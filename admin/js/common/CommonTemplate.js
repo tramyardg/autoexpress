@@ -22,7 +22,7 @@ function CommonTemplate() {
     this.footerElement = function () {
         return '<footer class="templatemo-footer">  ' +
             '               <div class="templatemo-copyright">  ' +
-            '                   <p>Copyright © 2017 AutoExpress.co.nf</p>  ' +
+            '                   <p>Copyright © 2018 AutoExpress.co.nf</p>  ' +
             '               </div>  ' +
             '          </footer>  ';
     };

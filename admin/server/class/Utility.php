@@ -1,22 +1,28 @@
 <?php
 ini_set('date.timezone', 'America/Toronto');
-/**
- * Created by PhpStorm.
- * User: RAYMARTHINKPAD
- * Date: 2017-08-15
- * Time: 2:03 AM
- */
+
 class Utility
 {
-    function getTimeStamp() {
+
+    /**
+     * Utility constructor.
+     */
+    public function __construct()
+    {
+    }
+
+    function getTimeStamp()
+    {
         return date('Y-m-d H:i:s', gmdate('U'));
     }
 
-    function stringValue($str) {
+    function stringValue($str)
+    {
         return "'" . $str . "'";
     }
 
-    function incrementId($id) {
+    function incrementId($id)
+    {
         return intval($id) + 1;
     }
 
@@ -26,7 +32,8 @@ class Utility
      * @param $file
      * @return array
      */
-    function reArrayFiles($file) {
+    function reArrayFiles($file)
+    {
         $file_array = array();
         $file_count = count($file['name']);
         $file_key = array_keys($file);
@@ -39,31 +46,11 @@ class Utility
         return $file_array;
     }
 
-
-    // format number with comma given length
-    function formatNumber($num) {
-        $numStr = (string)$num;
-        $numArr = str_split($numStr);
-        $numArrLen = count($numArr);
-        if($numArrLen === 4) { // 1,234
-            array_splice($numArr, 1, 0, ",");
-            return join('', $numArr);
-        } else if($numArrLen === 5) { // 12,345
-            array_splice($numArr, 2, 0, ",");
-            return join('', $numArr);
-        } else if($numArrLen === 6) { // 123,456
-            array_splice($numArr, 3, 0, ",");
-            return join('', $numArr);
-        } else if($numArrLen === 7) { // 1,234,567
-            array_splice($numArr, 1, 0, ",");
-            array_splice($numArr, 5, 0, ",");
-            return join('', $numArr);
-        } else {
-            return $numStr;
-        }
+    function formatNumber($num)
+    {
+        $three_dec_format = number_format($num, 3);
+        $pos_of_dot = strpos($three_dec_format, '.');
+        $final_number = substr($three_dec_format, 0, $pos_of_dot);
+        return $this->stringValue($final_number);
     }
-
-
-
-
 }

@@ -4,10 +4,6 @@ require_once 'class/Utility.php';
 require_once 'class/Dbh.php';
 require_once 'class/Vehicle.php';
 /**
- * Created by PhpStorm.
- * User: RAYMARTHINKPAD
- * Date: 2017-08-06
- * Time: 8:05 PM
  *
  * Contains managing data query functions
  * - add vehicle
@@ -182,17 +178,14 @@ class CarDAO extends Utility
 
     function isCreated($postArray) {
         $lastCarId = $this->getLastCarId();
-        // format price and mileage number
-        $prices = $this->formatNumber($postArray["price"]);
-        $mileages = $this->formatNumber($postArray["mileage"]);
         // a varchar type must be quoted in a string so we can insert it
         $car = new Vehicle(
             $this->incrementId($lastCarId),
             $this->stringValue($postArray["make"]),
             $postArray["year"],
             $this->stringValue($postArray["model"]),
-            $this->stringValue($prices),
-            $this->stringValue($mileages),
+            $this->formatNumber($postArray["price"]),
+            $this->formatNumber($postArray["mileage"]),
             $this->stringValue($postArray["transmission"]),
             $this->stringValue($postArray["drivetrain"]),
             $this->stringValue($postArray["capacity"]),
@@ -258,7 +251,7 @@ class CarDAO extends Utility
             '     `dateAdded` = '.$this->stringValue($carObject->getDateAdded()).'  '.
             '   WHERE  '.
             '    `vehicleId` =  ' . $carObject->getVehicleId();
-
+        // echo $sql;
         $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -273,8 +266,8 @@ class CarDAO extends Utility
                 $postArray["update-make"],
                 $postArray["year"],
                 $postArray["update-model"],
-                $postArray["price"],
-                $postArray["mileage"],
+                $this->formatNumber($postArray["price"]),
+                $this->formatNumber($postArray["mileage"]),
                 $postArray["transmission"],
                 $postArray["drivetrain"],
                 $postArray["capacity"],
@@ -338,8 +331,4 @@ class CarDAO extends Utility
             return 0;
         }
     }
-
-
-
-
 }

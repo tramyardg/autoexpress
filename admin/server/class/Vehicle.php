@@ -1,13 +1,6 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: RAYMARTHINKPAD
- * Date: 2017-08-18
- * Time: 8:04 PM
- */
-
-/**
  * Class Vehicle
  * implements json serializable so that
  * it can be encoded in json
