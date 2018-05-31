@@ -174,9 +174,20 @@ var VehicleReferral = (function () {
     var validEmailFormat_Fn = function (input) {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input);
     };
+    var referralRequest = function (params) {
+        $.ajax({
+            url: 'mailer/referral.php',
+            type: 'post',
+            data: params
+        }).done(function (response) {
+            if (response === '1') {
+                console.log(response);
+            }
+        });
+    };
     var referralModalForm_Fn = function () {
         referralModalForm_Sel.find('input[type=submit]').click(function () {
-            var friendEmails = referralModalForm_Sel.find('input[type=text]#receiver-email').val();
+            var friendEmails = referralModalForm_Sel.find('input[type=text]#receiverEmail').val();
             var emailArray = friendEmails.split(",");
             var canProceed = true;
             for (var i = 0; i < emailArray.length; i++) {
@@ -187,9 +198,7 @@ var VehicleReferral = (function () {
             }
             if (canProceed === true) {
                 alert('hello there');
-                // console.log(referralModalForm_Sel.serializeArray()[0].value);
-                // TODO
-                // pass the serialize to ajax function
+                referralRequest(referralModalForm_Sel.serializeArray())
             }
             return false;
         });

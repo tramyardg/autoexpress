@@ -13,11 +13,11 @@
                                 <div class="divTableBody-refferal">
                                     <div class="divTableRow-referral">
                                         <div class="divTableCell-referral">Your name <span style="color: red;">*</span></div>
-                                        <div class="divTableCell-referral"><input id="sender-name" name="sender-name" type="text" required title="sender name"></div>
+                                        <div class="divTableCell-referral"><input id="senderName" name="senderName" type="text" required title="sender name"></div>
                                     </div>
                                     <div class="divTableRow-referral">
                                         <div class="divTableCell-referral">Friend email (please use comma without space if more than one email)<span style="color: red;"> *</span></div>
-                                        <div class="divTableCell-referral"><input title="Receiver email" id="receiver-email" name="receiver-email" type="text" required>&nbsp;<span id="emailadd1_err" style="color: red;"></span></div>
+                                        <div class="divTableCell-referral"><input title="Receiver email" id="receiverEmail" name="receiverEmail" type="text" required>&nbsp;<span id="emailadd1_err" style="color: red;"></span></div>
                                     </div>
                                     <div class="divTableRow-referral">
                                         <div class="divTableCell-referral">Message</div>
