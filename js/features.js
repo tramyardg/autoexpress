@@ -1,8 +1,3 @@
-/**
- * Credit:
- * http://www.wikihow.com/Calculate-Auto-Loan-Payments
- * @type {{init, bindPaymentCalculatorActions}}
- */
 var PaymentCalculator = (function () {
     var outMonthlyPayment = {};
     var outBiWeeklyPayment = {};
@@ -175,31 +170,37 @@ var PaymentCalculator = (function () {
 })();
 
 var VehicleReferral = (function () {
-    // if more than one email - validate comma separated
-    var validEmailFormat = {};
-    var referralModalForm = {};
+    var referralModalForm_Sel = null;
+    var validEmailFormat_Fn = function (input) {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input);
+    };
+    var referralModalForm_Fn = function () {
+        referralModalForm_Sel.find('input[type=submit]').click(function () {
+            var friendEmails = referralModalForm_Sel.find('input[type=text]#receiver-email').val();
+            var emailArray = friendEmails.split(",");
+            var canProceed = true;
+            for (var i = 0; i < emailArray.length; i++) {
+                if (!validEmailFormat_Fn(emailArray[i].trim())) {
+                    alert("You have entered an invalid email address!");
+                    canProceed = false;
+                }
+            }
+            if (canProceed === true) {
+                alert('hello there');
+                // console.log(referralModalForm_Sel.serializeArray()[0].value);
+                // TODO
+                // pass the serialize to ajax function
+            }
+            return false;
+        });
+    };
+    var mainActions = function () {
+        referralModalForm_Fn();
+    };
     return {
         init: function () {
-            validEmailFormat = null;
-            referralModalForm = $('#referral-modal-form');
-
-            this.bindCarReferralActions();
-        },
-        bindCarReferralActions: function () {
-            referralModalForm.find('input[type=submit]').click(function () {
-                var friendEmails = referralModalForm.find('input[type=text]#receiver-email').val();
-                var emailArray = friendEmails.split(",");
-                for (var i = 0; i < emailArray.length; i++) {
-                    if (!validEmailFormat(emailArray[i].trim())) {
-                        alert("You have entered an invalid email address!");
-                        return false;
-                    }
-                }
-                return true;
-            });
-            validEmailFormat = function (input) {
-                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input);
-            }
+            referralModalForm_Sel = $('#referral-modal-form');
+            mainActions();
         }
-    }; // end return
+    };
 })();

@@ -1,5 +1,25 @@
 {
-    "require": {
-        "phpmailer/phpmailer": "^6.0"
+  "name": "autoexpress.co.nf",
+  "description": "Car dealership website.",
+  "type": "B2C",
+  "keywords": [
+    "dealership, payment calculator, inquire vehicle info, sell car, buy car"
+  ],
+  "homepage": "http://autoexpress.co.nf/",
+  "authors": [
+    {
+      "name": "Raymart De Guzman",
+      "email": "raymart54@gmail.com",
+      "role": "owner/creator"
     }
+  ],
+  "require": {
+    "php": ">=5.3.3",
+    "phpunit/phpunit": "5.4.*"
+  },
+  "autoload": {
+    "classmap": [
+      "admin/"
+    ]
+  }
 }
