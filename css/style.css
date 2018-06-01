@@ -291,3 +291,7 @@ ul li {
 .calculateTbl {
     font-size: 14px !important;
 }
+.car-logo {
+    width: 100px;
+    height: 60px;
+}
