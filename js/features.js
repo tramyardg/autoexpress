@@ -180,8 +180,9 @@ var VehicleReferral = (function () {
             type: 'post',
             data: params
         }).done(function (response) {
-            if (response === '1') {
-                console.log(response);
+            if (response === '1' || response === 1) {
+                alert('sent');
+                console.log('sent');
             }
         });
     };
@@ -197,7 +198,6 @@ var VehicleReferral = (function () {
                 }
             }
             if (canProceed === true) {
-                alert('hello there');
                 referralRequest(referralModalForm_Sel.serializeArray())
             }
             return false;
