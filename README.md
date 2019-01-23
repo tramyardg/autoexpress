@@ -6,6 +6,14 @@ for the vehicle he or she desired on the website. If the buyer finds the desired
 vehicle he or she can contact the seller to get more information of the vehicle. 
 A car buyer can also calculate their monthly or bi-weekly payment.
 
+### Setup
+1. Clone this repo.
+2. Create the database.
+3. Configure `\autoexpress\admin\server\class\Dbh.php` file so it matches your web server database username and password.
+4. Create the tables by importing the sql file `\db\DLL.sql`.
+5. Create an admin account directly by way of `INSERT` statement.
+6. Now you can add car to the inventory in `admin/inventory.php`
+
 ### Features
 - Advanced search
 - Montly or bi-weekly payment calculator
