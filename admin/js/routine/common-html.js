@@ -94,13 +94,10 @@ var CommonHTML = (function () {
                     break;
                 case util.pageName[1].name:
                     fnCommonElement();
-                    carTableSel.DataTable({
-                        "pageLength": 5,
-                        "lengthChange": false,
-                        searching: false,
-                        // "bInfo": false,
-                        "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [2, 8] }]
-                    });
+                    // carTableSel.DataTable({
+                    //     "pageLength": 5,
+                    //     searching: false
+                    // });
                     fnManipulateRecordElem();
                     break;
                 case util.pageName[2].name:
