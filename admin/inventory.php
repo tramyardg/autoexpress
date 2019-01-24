@@ -5,10 +5,19 @@ require_once 'server/AdminDAO.php';
 require_once 'server/CarDAO.php';
 require_once 'server/DiagramDAO.php';
 require_once 'server/class/Admin.php';
+require_once 'server/class/Paging.php';
 
+$num_cars = null;
+$rowCarField = null;
 if (!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 } else {
+    $p = new Paging();
+    define('RECORDS_PER_PAGE', 2);
+    $p->setRecordsPerPage(RECORDS_PER_PAGE);
+    $p->setPageQueryStr('rowNumber');
+    $p->setStartingRow($p->getPageRowNumber());
+
     $q = new AdminDAO();
     if (isset($_REQUEST['username'])) {
         $q->redirectNotFoundAdmin($_REQUEST['username']);
@@ -18,6 +27,7 @@ if (!isset($_SESSION['authenticated'])) {
     $v = new CarDAO();
     $all_cars = $v->getAllCars();
     $num_cars = $v->countAllCars();
+    $rowCarField = $v->getCarsLimitByRecPerPage($p->getStartingRow(), $p->getRecordsPerPage());
 
     // adding general car info
     if (!empty($_POST['add-car-submit'])) {
@@ -113,7 +123,6 @@ if (!isset($_SESSION['authenticated'])) {
                 <input type="text" class="hidden" id="admin-username" name="admin-username" title="admin id"
                        value="<?php echo $admin_data[0]->getUsername(); ?>">
                 <h1>Manage Vehicles</h1>
-                <p>Here goes vehicles from the inventory.</p>
                 <?php if (isset($isAddedCondition) && $isAddedCondition === 1) { ?>
                     <div class="loader show"></div>
                     <?php header("refresh: 1; url=inventory.php");
@@ -145,16 +154,16 @@ if (!isset($_SESSION['authenticated'])) {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php for ($i = 0; $i < $num_cars; $i++) { ?>
+                                <?php while ($row = $rowCarField->fetch()) { ?>
                                     <tr>
-                                        <td><?php echo $all_cars[$i]->getYearMade(); ?></td>
-                                        <td><?php echo $all_cars[$i]->getMake(); ?></td>
-                                        <td><?php echo $all_cars[$i]->getModel(); ?></td>
-                                        <td><?php echo $all_cars[$i]->getPrice(); ?></td>
-                                        <td><?php echo $all_cars[$i]->getStatus(); ?></td>
-                                        <td><?php echo $all_cars[$i]->getMileage(); ?></td>
-                                        <td><?php echo $all_cars[$i]->getTransmission(); ?></td>
-                                        <td><?php echo $all_cars[$i]->getDriveTrain(); ?></td>
+                                        <td><?php echo $row['yearMade']; ?></td>
+                                        <td><?php echo $row['make'];?></td>
+                                        <td><?php echo $row['model']; ?></td>
+                                        <td><?php echo $row['price']; ?></td>
+                                        <td><?php echo $row['status']; ?></td>
+                                        <td><?php echo $row['mileage']; ?></td>
+                                        <td><?php echo $row['transmission']; ?></td>
+                                        <td><?php echo $row['drivetrain']; ?></td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-primary btn-xs dropdown-toggle" type="button"
@@ -162,15 +171,15 @@ if (!isset($_SESSION['authenticated'])) {
                                                     <span class="caret"></span></button>
                                                 <ul class="dropdown-menu">
                                                     <li><a data-target="#updateCarInfoModal" data-toggle="modal"
-                                                           data-id="<?php echo $all_cars[$i]->getVehicleId(); ?>"
+                                                           data-id="<?php echo $row['vehicleId']; ?>"
                                                            href="#updateCarInfoModal">Update</a></li>
                                                     <li><a class="delete-vehicle"
-                                                           href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>"
-                                                           delete="<?php echo $all_cars[$i]->getVehicleId(); ?>">Delete</a>
+                                                           href="?id=<?php echo $row['vehicleId']; ?>"
+                                                           delete="<?php echo $row['vehicleId']; ?>">Delete</a>
                                                     </li>
                                                     <li><a class="upload-car-photos"
-                                                           href="?id=<?php echo $all_cars[$i]->getVehicleId(); ?>"
-                                                           upload-delete-photos="<?php echo $all_cars[$i]->getVehicleId(); ?>">Upload
+                                                           href="?id=<?php echo $row['vehicleId']; ?>"
+                                                           upload-delete-photos="<?php echo $row['vehicleId']; ?>">Upload
                                                             / Delete photo(s)</a></li>
                                                 </ul>
                                             </div>
@@ -179,6 +188,27 @@ if (!isset($_SESSION['authenticated'])) {
                                 <?php } ?>
                                 </tbody>
                             </table>
+                            <nav aria-label="Page navigation example" class="<?php if($num_cars <= $p->getRecordsPerPage()) {echo 'hidden';} ?>">
+                                <ul class="pagination">
+                                    <?php if($num_cars > $p->getRecordsPerPage()) { ?>
+                                        <?php if($p->getPrev() >= 0) { ?>
+                                            <li class="page-item"><a href="inventory.php?rowNumber=<?php echo $p->getPrev(); ?>">Previous</a></li>
+                                        <?php } ?>
+                                        <?php $pageNumber = 1; ?>
+                                        <?php for($i = 0; $i < $num_cars; $i = $i + $p->getRecordsPerPage()) { ?>
+                                            <?php if($i != $p->getStartingRow()) { ?>
+                                                <li class="page-item"><a href="inventory.php?rowNumber=<?php echo $i; ?>"><?php echo $pageNumber; ?></a></li>
+                                            <?php } else { ?>
+                                                <li class="page-item active"><a href="inventory.php?rowNumber=<?php echo $i; ?>"><?php echo $pageNumber; ?></a></li>
+                                            <?php } ?>
+                                            <?php $pageNumber = $pageNumber + 1; ?>
+                                        <?php } ?>
+                                        <?php if($p->getNext() < $num_cars) { ?>
+                                            <li class="page-item"><a href="inventory.php?rowNumber=<?php echo $p->getNext(); ?>">Next</a></li>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </ul>
+                            </nav>
                         </div>
 
                     </div>
@@ -277,6 +307,7 @@ if (!isset($_SESSION['authenticated'])) {
                                                             <select name="year" id="year" title="year" required>
                                                                 <option selected="selected" value="">Select year
                                                                 </option>
+                                                                <option value="2019">2019</option>
                                                                 <option value="2018">2018</option>
                                                                 <option value="2017">2017</option>
                                                                 <option value="2016">2016</option>
