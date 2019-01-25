@@ -56,19 +56,16 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                                         <div class="divTableCell">
                                             <div class="row car-images" >
                                                 <?php
-                                                // first if stmt: use 'place hold' it as image if this car has no images
+                                                // first if stmt: uses placeholder.com as placeholder for car with no images
                                                 // second if stmt: no badge for car that has no images
                                                 $currSearchCarImg = $d->getPhotosBy_CarId($row['vehicleId']);
-                                                $isMoreThanOneImg = 0;
-                                                if($d->countAllPhotosByCarId($row['vehicleId']) == "0") {
-                                                    $h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
-                                                } else {
+                                                if ($d->countAllPhotosByCarId($row['vehicleId']) == "0")
+                                                    $h = "https://via.placeholder.com/272x150/000000/FFFFFF/?text=AutoExpress.com";
+                                                else
                                                     $h = $currSearchCarImg[0]->getDiagram();
-                                                    $isMoreThanOneImg = 1;
-                                                }
                                                 ?>
                                                 <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>">
-                                                <?php if(!empty($d->countAllPhotosByCarId($row['vehicleId']))) { ?>
+                                                <?php if (!empty($d->countAllPhotosByCarId($row['vehicleId']))) { ?>
                                                 <span class="badge">
                                                     <?php echo $d->countAllPhotosByCarId($row['vehicleId']); ?>
                                                 </span>

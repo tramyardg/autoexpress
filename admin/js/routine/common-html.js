@@ -94,10 +94,6 @@ var CommonHTML = (function () {
           break;
         case util.pageName[1].name:
           fnCommonElement();
-          // carTableSel.DataTable({
-          //     "pageLength": 5,
-          //     searching: false
-          // });
           fnManipulateRecordElem();
           break;
         case util.pageName[2].name:
@@ -119,10 +115,7 @@ var CommonHTML = (function () {
           fnHeaderAndFooterElem();
           break;
         default:
-
       }
     }
-
-
   }; // end return
 })();
