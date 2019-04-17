@@ -34,25 +34,6 @@ if (!isset($_SESSION['authenticated'])) {
         $isAddedCondition = $v->isCreated($_POST);
     }
 
-    // car diagram upload with ajax
-    if (isset($_GET["action"])) {
-        if ($_GET["action"] === "uploadPhotos") {
-            echo $is_uploaded = $v->isDiagramAdded(
-                $_POST['filesData'], // array of images src to be uploaded
-                $_GET["id"] // query string in the ajax url properties
-            );
-            exit();
-        }
-    }
-
-    // deleting vehicle with ajax
-//    if (isset($_GET["action"])) {
-//        if ($_GET["action"] === "delete") {
-//            echo $is_deleted = $v->isDeleted($_GET["id"]);
-//            exit();
-//        }
-//    }
-
     // displaying a car photos for deletion  with ajax
     $d = new DiagramDAO();
     if (isset($_GET['action'])) {

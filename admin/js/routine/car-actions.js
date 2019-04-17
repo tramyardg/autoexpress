@@ -63,24 +63,9 @@ var CarActions = (function () {
                 confirmDeleteRecordSel.modal('show');
                 event.preventDefault();
 
-                // on clicked Yes
                 deleteConfirmBtnSel.click(function () {
                     confirmDeleteRecordSel.modal('hide');
                     loader.css('display', 'block');
-                    // alert('alert asd');
-                    // $.ajax({
-                    //     url: "?action=delete",
-                    //     type: "get",
-                    //     data: "id=" + dataId,
-                    //     success: function (data) {
-                    //         data === "1" ? location.reload() : alert('Something is wrong. Please try again later.');
-                    //     }
-                    // }).done(function () {
-                    //     loader.css('display', 'none');
-                    // }).fail(function () {
-                    //     alert('Error. Please try again later');
-                    // });
-
                     $.get("api/deleteVehicle.php?action=delete&id=" + dataId, function (data) {
                         if (data === "1") {
                             loader.css('display', 'none');
@@ -89,12 +74,7 @@ var CarActions = (function () {
                             alert('Something is wrong. Please try again later.');
                         }
                     });
-
                 });
-                //return false; //for good measure
-
-
-
             });
 
             // load data of this car to be updated
@@ -148,6 +128,7 @@ var CarActions = (function () {
 
                 uploadCarPhotoBtn.click(function (e) {
                     uploadDeleteCarPhotoModal.modal('hide');
+                    e.preventDefault();
 
                     var thumbImageSel = $('.thumb');
                     var thumbLength = thumbImageSel.length;
@@ -158,29 +139,15 @@ var CarActions = (function () {
 
                     loader.css('display', 'block');
 
-                    $.ajax({ // for uploading photos
-                        url: "?action=uploadPhotos&id=" + carId,
-                        type: "post",
-                        data: {filesData: filesDataArray},
-                        success: function (data) {
-                            console.log(data);
-                            if (data === "1") {
-                                window.location.reload(true);
-                            } else {
-                                alert('Something is wrong. Please try again later.');
-                            }
+                    $.post("api/uploadCarImages.php?action=uploadPhotos&id=" + carId, {filesData: filesDataArray}, function (data) {
+                        if (data === "1") {
+                            loader.css('display', 'none');
+                            location.reload();
+                        } else {
+                            alert('Something is wrong. Please try again later.');
                         }
-                    }).done(function () {
-                        loader.css('display', 'none');
-                    }).fail(function () {
-                        alert('Error. Please try again later');
                     });
-
-                    e.preventDefault();
-                    return false;
                 });
-
-                return false;
             });
 
             /**
