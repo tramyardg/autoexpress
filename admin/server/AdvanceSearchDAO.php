@@ -2,12 +2,11 @@
 require_once 'class/Dbh.php';
 require_once 'CarDAO.php';
 require_once 'DiagramDAO.php';
+
 /**
- * Created by PhpStorm.
- * User: RAYMARTHINKPAD
- * Date: 2017-09-07
- * Time: 12:35 AM
+ * @author: @tramyardg
  */
+
 define("MAX_PRICE_MILEAGE", 999999);
 define("MIN_PRICE_MILEAGE", 0);
 
@@ -16,17 +15,11 @@ class AdvanceSearchDAO extends CarDAO
 
     public $searchResultLength;
 
-    /**
-     * @return mixed
-     */
     public function getSearchResultLength()
     {
         return $this->searchResultLength;
     }
 
-    /**
-     * @param mixed $searchResultLength
-     */
     public function setSearchResultLength($searchResultLength)
     {
         $this->searchResultLength = $searchResultLength;
@@ -38,7 +31,8 @@ class AdvanceSearchDAO extends CarDAO
      * @param $searchArray
      * @return PDOStatement
      */
-    function getSearchResult($searchArray) {
+    function getSearchResult($searchArray)
+    {
         $sql = "SELECT\n"
             . " `vehicleId`,\n"
             . " `make`,\n"
@@ -54,7 +48,7 @@ class AdvanceSearchDAO extends CarDAO
             . " `doors`,\n"
             . " `status`,\n"
             . " `dateAdded`,\n"
-            .  " CONCAT(`yearMade`,\n"
+            . " CONCAT(`yearMade`,\n"
             . " ' ',\n"
             . " `make`,\n"
             . " ' ',\n"
@@ -62,10 +56,10 @@ class AdvanceSearchDAO extends CarDAO
             . "FROM\n"
             . " `vehicle`\n"
             . "WHERE\n"
-            . " make LIKE '%".$searchArray['searchMake']."%' \n"
-            . " AND model LIKE '".$searchArray['searchModel']."' \n"
-            . " AND yearMade BETWEEN ".$searchArray['minYear']." AND ".$searchArray['maxYear']." \n"
-            . " AND (REPLACE(mileage, ',', '')) BETWEEN ".$searchArray['minMileage']." and ".$searchArray['maxMileage'];
+            . " make LIKE '%" . $searchArray['searchMake'] . "%' \n"
+            . " AND model LIKE '" . $searchArray['searchModel'] . "' \n"
+            . " AND yearMade BETWEEN " . $searchArray['minYear'] . " AND " . $searchArray['maxYear'] . " \n"
+            . " AND (REPLACE(mileage, ',', '')) BETWEEN " . $searchArray['minMileage'] . " and " . $searchArray['maxMileage'];
         // echo $sql;
         $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
@@ -77,17 +71,17 @@ class AdvanceSearchDAO extends CarDAO
     }
 
 
-
     /**
      * This function is important
      * because it sets
      * @param $submitBtnName
      * @return null|PDOStatement
      */
-    function getSearchInputResult($submitBtnName) {
+    function getSearchInputResult($submitBtnName)
+    {
         $search = filter_input(INPUT_GET, $submitBtnName);
 
-        if(!empty($search)) {
+        if (!empty($search)) {
             $searchMake = filter_input(INPUT_GET, 'searchMake', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $searchModel = filter_input(INPUT_GET, 'searchModel', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $minYear = filter_input(INPUT_GET, 'minYear', FILTER_VALIDATE_INT);
@@ -100,7 +94,7 @@ class AdvanceSearchDAO extends CarDAO
             $searchArray = array(
                 "searchMake" => $searchMake,
                 "searchModel" => $searchModel,
-                "minYear" =>$minYear,
+                "minYear" => $minYear,
                 "maxYear" => $maxYear,
                 "minPrice" => $minPrice,
                 "maxPrice" => $maxPrice,
@@ -108,16 +102,16 @@ class AdvanceSearchDAO extends CarDAO
                 "maxMileage" => $maxMileage
             );
 
-            if(empty($searchArray["minPrice"])) {
+            if (empty($searchArray["minPrice"])) {
                 $searchArray["minPrice"] = MIN_PRICE_MILEAGE;
             }
-            if(empty($searchArray["maxPrice"])) {
+            if (empty($searchArray["maxPrice"])) {
                 $searchArray["maxPrice"] = MAX_PRICE_MILEAGE;
             }
-            if(empty($searchArray["minMileage"])) {
+            if (empty($searchArray["minMileage"])) {
                 $searchArray["minMileage"] = MIN_PRICE_MILEAGE;
             }
-            if(empty($searchArray["maxMileage"])) {
+            if (empty($searchArray["maxMileage"])) {
                 $searchArray["maxMileage"] = MAX_PRICE_MILEAGE;
             }
 
@@ -129,15 +123,14 @@ class AdvanceSearchDAO extends CarDAO
         }
     }
 
-    public function getResultFoundMessage() {
-        if($this->getSearchResultLength() === 0) {
+    public function getResultFoundMessage()
+    {
+        if ($this->getSearchResultLength() === 0) {
             return '<p style="padding: 0;">no vehicle found.</p>';
-        } else if($this->getSearchResultLength() === 1) {
+        } else if ($this->getSearchResultLength() === 1) {
             return '<p style="padding: 0;">1 vehicle found.</p>';
         } else {
-            return '<p style="padding: 0;">'. $this->getSearchResultLength() . ' vehicles found.</p>';
+            return '<p style="padding: 0;">' . $this->getSearchResultLength() . ' vehicles found.</p>';
         }
     }
-
-
 }

@@ -46,12 +46,12 @@ if (!isset($_SESSION['authenticated'])) {
     }
 
     // deleting vehicle with ajax
-    if (isset($_GET["action"])) {
-        if ($_GET["action"] === "delete") {
-            echo $is_deleted = $v->isDeleted($_GET["id"]);
-            exit();
-        }
-    }
+//    if (isset($_GET["action"])) {
+//        if ($_GET["action"] === "delete") {
+//            echo $is_deleted = $v->isDeleted($_GET["id"]);
+//            exit();
+//        }
+//    }
 
     // displaying a car photos for deletion  with ajax
     $d = new DiagramDAO();

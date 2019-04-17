@@ -86,7 +86,7 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
             </div>
             <?php } else { ?>
             <div class="car-images" >
-                <img src="https://via.placeholder.com/272x150/000000/FFFFFF/?text=AutoExpress.com">
+                <img src="https://via.placeholder.com/272x150/36383D/FFFFFF/?text=AutoExpress.com">
             </div>
             <?php } ?>
             <br><h3><span>Notes</span></h3>

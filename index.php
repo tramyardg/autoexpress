@@ -60,7 +60,7 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                                                 // second if stmt: no badge for car that has no images
                                                 $currSearchCarImg = $d->getPhotosBy_CarId($row['vehicleId']);
                                                 if ($d->countAllPhotosByCarId($row['vehicleId']) == "0")
-                                                    $h = "https://via.placeholder.com/272x150/000000/FFFFFF/?text=AutoExpress.com";
+                                                    $h = "https://via.placeholder.com/272x150/36383D/FFFFFF/?text=Sample image here";
                                                 else
                                                     $h = $currSearchCarImg[0]->getDiagram();
                                                 ?>
