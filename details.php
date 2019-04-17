@@ -30,8 +30,7 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
     <meta property="og:url" content="http://autoexpress.co.nf"/>
     <meta property="og:title" content="AutoExpress.co.nf - Raymart De Guzman">
     <meta property="og:description" content="Autoexpress.co.nf is a car dealership app built for both car dealer and car buyer. A car dealer manages the car being viewed on the website by adding, updating, deleting and uploading photos of a car. On the other hand, a car buyer can search for the vehicle he or she desired on the website. If the buyer finds the desired vehicle he or she can contact the seller to get more information of the vehicle. A car buyer can also calculate their monthly or bi-weekly payment.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/tramyardg/autoexpress/blob/master/image/home_page.PNG"/>
-
+    <meta property="og:image" content="https://raw.githubusercontent.com/tramyardg/autoexpress/master/image/homePage.PNG"/>
 
     <link rel="apple-touch-icon" sizes="180x180" href="image/favicon_package_v0.16/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="image/favicon_package_v0.16/favicon-32x32.png">
