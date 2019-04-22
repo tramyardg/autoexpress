@@ -1,10 +1,15 @@
-class AdminPageTemplate2 {
+class AdminPageTemplate {
 
-    pageTitle() {
-
+    static footer() {
+        let currentYear = (new Date().getYear()) + "";
+        return `<footer class="templatemo-footer">   
+                   <div class="templatemo-copyright">   
+                   <p>Copyright  @20${currentYear.substr(1)} AutoExpress.co.nf - Raymart De Guzman</p>   
+                   </div>   
+                </footer>`;
     }
 
-    sideBar(username) {
+    static sideBar(username) {
         return `
         <div class="navbar-collapse collapse templatemo-sidebar">   
           <ul class="templatemo-sidebar-menu">   

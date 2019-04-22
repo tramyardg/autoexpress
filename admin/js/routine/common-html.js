@@ -2,7 +2,6 @@
  * Created by RAYMARTHINKPAD on 2017-08-04.
  */
 var cHTML = new CommonTemplate();
-var cHTML2 = new AdminPageTemplate2();
 var util = new CommonUtil();
 var CommonHTML = (function () {
   // regular variables and jquery variables here
@@ -57,28 +56,16 @@ var CommonHTML = (function () {
     },
     bindCarActionFn: function () {
 
-      // sets page title dynamically
-      fnPageTitle = function () {
-        for (var i = 0; i < util.pageName.length; i++) {
-          if (util.getFilename() === util.pageName[i].name) {
-            headSel.append(cHTML.pageTitle(util.pageName[i].title));
-          }
-        }
-
-      };
-
-      fnPageTitle();
-
       fnCommonElement = function () {                                            // contents
         mainWrapperSel.prepend(cHTML.navBarHeaderElem());                         // header
-        pageWrapperSel.prepend(cHTML2.sideBar(adminUsernameSel.val()));     // sidebar
-        pageWrapperSel.last().append(cHTML.footerElement());                      // footer
+        pageWrapperSel.prepend(AdminPageTemplate.sideBar(adminUsernameSel.val()));     // sidebar
+        pageWrapperSel.last().append(AdminPageTemplate.footer());                      // footer
         pageWrapperSel.append(cHTML.confirmModalLogout());                        // confirm logout
       };
 
       fnHeaderAndFooterElem = function () {                   // contents
         mainWrapperSel.prepend(cHTML.navBarHeaderElem());       // header
-        mainWrapperSel.last().append(cHTML.footerElement());    // footer
+        mainWrapperSel.last().append(AdminPageTemplate.footer());    // footer
       };
 
       fnManipulateRecordElem = function () {
