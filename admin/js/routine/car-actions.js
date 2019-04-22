@@ -19,7 +19,8 @@ var CarActions = (function () {
         displayImagesOfThisCarSel = {},
         updateCarInfoSel = {},
         updateCarInfoModal = {},
-        updateCarInfoModalContent = {};
+        updateCarInfoModalContent = {},
+        checkedField = null;
 
     var updateCarInfo_RadioSelect = {};
 
@@ -96,7 +97,8 @@ var CarActions = (function () {
                         updateCarInfoModalContent.append(html);
 
                         updateCarInfo_RadioSelect.YEAR(data[0]._yearMade);
-                        updateCarInfo_RadioSelect.CYLINDER(data[0]._cylinder);
+                        // updateCarInfo_RadioSelect.CYLINDER(data[0]._cylinder);
+                        checkedField(data[0]._cylinder, 'input[type=radio]#cylinder');
                         updateCarInfo_RadioSelect.CATEGORY(data[0]._category);
                         updateCarInfo_RadioSelect.DRIVETRAIN(data[0]._drivetrain);
                         updateCarInfo_RadioSelect.STATUS(data[0]._status);
@@ -196,6 +198,16 @@ var CarActions = (function () {
              * radio: cylinder, category, drivetrain, transmission, status
              * select: year
              */
+            checkedField = function(val, fieldElem)
+            {
+                var formField = updateCarInfoModalContent.find(fieldElem);
+                formField.find(fieldElem).map(function (value, index) {
+                    if (value === val) {
+                        formField.eq(index).attr('checked', 'true');
+                    }
+                })
+            };
+
             updateCarInfo_RadioSelect = {
                 CYLINDER: function (cylinder) {
                     var cylinders = updateCarInfoModalContent.find('input[type=radio]#cylinder');

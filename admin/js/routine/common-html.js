@@ -2,6 +2,7 @@
  * Created by RAYMARTHINKPAD on 2017-08-04.
  */
 var cHTML = new CommonTemplate();
+var cHTML2 = new AdminPageTemplate2();
 var util = new CommonUtil();
 var CommonHTML = (function () {
   // regular variables and jquery variables here
@@ -70,7 +71,7 @@ var CommonHTML = (function () {
 
       fnCommonElement = function () {                                            // contents
         mainWrapperSel.prepend(cHTML.navBarHeaderElem());                         // header
-        pageWrapperSel.prepend(cHTML.sideBarElement(adminUsernameSel.val()));     // sidebar
+        pageWrapperSel.prepend(cHTML2.sideBar(adminUsernameSel.val()));     // sidebar
         pageWrapperSel.last().append(cHTML.footerElement());                      // footer
         pageWrapperSel.append(cHTML.confirmModalLogout());                        // confirm logout
       };
