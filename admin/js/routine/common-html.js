@@ -1,23 +1,20 @@
-/**
- * Created by RAYMARTHINKPAD on 2017-08-04.
- */
-var cHTML = new CommonTemplate();
-var util = new CommonUtil();
-var CommonHTML = (function () {
+let cHTML = new CommonTemplate();
+let util = new CommonUtil();
+let CommonHTML = (function () {
   // regular variables and jquery variables here
-  var headSel = {};
-  var sidebarMenuItemSel = {};
-  var pageWrapperSel = {};
-  var bodyElem = {};
-  var mainWrapperSel = {};
-  var confirmModalLogoutSel = {};
+  let headSel = {},
+      sidebarMenuItemSel = {},
+      pageWrapperSel = {},
+      bodyElem = {},
+      mainWrapperSel = {},
+      confirmModalLogoutSel = {};
 
-  var fnCommonElement = {},
+  let fnCommonElement = {},
       fnHeaderAndFooterElem = {},
       fnPageTitle = {},
       fnManipulateRecordElem = {};
 
-  var adminUsernameSel = {},
+  let adminUsernameSel = {},
       adminTableSel = {},
       carTableSel = {},
       priceColumnSel = {},

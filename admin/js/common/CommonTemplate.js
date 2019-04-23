@@ -248,21 +248,9 @@ function CommonTemplate() {
         '   						<span class="input-required">*</span> <span class="label label-danger">Required fields</span>  ' +
         '   					</div>  ' +
         '   				</div>  ' +
-        '   				<div class="panel panel-success">  ' +
-        '   					<div class="panel-heading">Submit form</div>  ' +
-        '   					<div class="panel-body">  ' +
-        '   						<table>  ' +
-        '   							<tbody>  ' +
-        '   							<tr>  ' +
-        '   								<td>  ' +
-        '   									<input type="submit" class="btn btn-primary btn-sm" name="update-car-submit" id="update-car-submit" value="Submit">  ' +
-        '   									<input type="button" class="btn btn-default btn-sm" data-dismiss="modal" aria-label="Close" value="Cancel">  ' +
-        '   								</td>  ' +
-        '   							</tr>  ' +
-        '   							</tbody>  ' +
-        '   						</table>  ' +
-        '   					</div>  ' +
-        '   				</div>  ' +
+        '   				<div style="margin-bottom: 1em; text-align: right;">  ' +
+        '						<input type="submit" class="btn btn-primary btn-sm" name="update-car-submit" id="update-car-submit" value="Submit">  ' +
+        '  					</div>  ' +
         '   			</form>  ' +
         '   		</div>  ' +
         '   	</div>  ' +

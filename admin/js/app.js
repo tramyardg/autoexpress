@@ -1,4 +1,3 @@
-var util = new CommonUtil();
 $(document).ready(function () {
 
   CommonHTML.init();
@@ -25,8 +24,8 @@ $(document).ready(function () {
 
 function sidebarActive() {
   // goes by order of sidebar item
-  var urlFileNameWithExt = util.getFilename();
-  var $sidebarMenuItem = $(".templatemo-sidebar-menu li");
+  let urlFileNameWithExt = util.getFilename();
+  let $sidebarMenuItem = $(".templatemo-sidebar-menu li");
   if (urlFileNameWithExt === util.pageName[0].name) {
     $sidebarMenuItem.eq(0).addClass('active');
   } else if (urlFileNameWithExt === util.pageName[1].name) {
