@@ -1,10 +1,10 @@
 /**
  * Created by RAYMARTHINKPAD on 2017-08-23.
  */
-var util = new CommonUtil();
+let util = new CommonUtil();
 
-var RegisterValidate = (function () {
-  var fields = {
+let RegisterValidate = (function () {
+  let fields = {
     email: {selector: null},
     username: {selector: null},
     password: {selector: null},

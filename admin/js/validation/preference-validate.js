@@ -1,8 +1,8 @@
 /**
  * Created by RAYMARTHINKPAD on 2017-08-23.
  */
-var PasswordMatchValidate = (function () {
-  var fields = {
+let PasswordMatchValidate = (function () {
+  let fields = {
     password_1: {selector: null},
     password_2: {selector: null}
   };

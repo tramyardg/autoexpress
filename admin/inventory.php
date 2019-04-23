@@ -517,24 +517,11 @@ if (!isset($_SESSION['authenticated'])) {
                                         </div>
 
                                         <!-- submit and cancel buttons -->
-                                        <div class="panel panel-success">
-                                            <div class="panel-heading">Submit form</div>
-                                            <div class="panel-body">
-                                                <table>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <input type="submit" class="btn btn-primary btn-sm"
-                                                                   name="add-car-submit" id="add-car-submit"
-                                                                   value="Submit">
-                                                            <input type="button" class="btn btn-default btn-sm"
-                                                                   data-dismiss="modal" aria-label="Close"
-                                                                   value="Cancel">
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input type="submit" class="btn btn-primary btn-sm"
+                                                       name="add-car-submit" id="add-car-submit"
+                                                       value="Submit">
                                         </div>
                                     </form>
                                 </div>

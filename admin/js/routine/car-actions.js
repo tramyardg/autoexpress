@@ -52,7 +52,7 @@ let CarActions = (function () {
 
       // deleting a car
       deleteCarSel.click(function (event) {
-        var dataId = $(this).attr("delete");
+        let dataId = $(this).attr("delete");
         confirmDeleteRecordSel.modal('show');
         event.preventDefault();
 
@@ -72,8 +72,8 @@ let CarActions = (function () {
 
       // load data of this car to be updated
       updateCarInfoModal.on('show.bs.modal', function (event) {
-        var updateLink = $(event.relatedTarget); // Button that triggered the modal
-        var carId = updateLink.data("id"); // Button that triggered the modal
+        let updateLink = $(event.relatedTarget); // Button that triggered the modal
+        let carId = updateLink.data("id"); // Button that triggered the modal
         $.ajax({
           url: "?action=updateCarInfo&id=" + carId,
           type: "post",
@@ -84,7 +84,8 @@ let CarActions = (function () {
             data[0]._mileage = data[0]._mileage.replace(/,/g, '');
 
             // using Mustache to render data object
-            var html = Mustache.render(template.updateCarInfoModalContent(), data[0]);
+            // todo updateCarInfoModalContent: separate into smaller section
+            let html = Mustache.render(template.updateCarInfoModalContent(), data[0]);
             updateCarInfoModalContent.empty();
             updateCarInfoModalContent.append(html);
 
@@ -109,7 +110,7 @@ let CarActions = (function () {
        * 6. php process the request and done
        */
       uploadCarPhotoLink.click(function (event) {
-        var carId = $(this).attr('upload-delete-photos');
+        let carId = $(this).attr('upload-delete-photos');
         // show modal for uploading and deleting modal
         uploadDeleteCarPhotoModal.modal('show');
         event.preventDefault();
@@ -122,10 +123,9 @@ let CarActions = (function () {
           uploadDeleteCarPhotoModal.modal('hide');
           e.preventDefault();
 
-          var thumbImageSel = $('.thumb');
-          var thumbLength = thumbImageSel.length;
-          var filesDataArray = [];
-          for (var i = 0; i < thumbLength; i++) {
+          let thumbImageSel = $('.thumb');
+          let filesDataArray = [];
+          for (let i = 0; i < thumbImageSel.length; i++) {
             filesDataArray.push(thumbImageSel.eq(i).attr('src'));
           }
 
@@ -162,10 +162,10 @@ let CarActions = (function () {
           dataType: "json", // so it returns only the text not the
           success: function (diagramArray) {
             // console.log(diagramArray);
-            var diagramData = {diagrams: diagramArray};
+            let diagramData = {diagrams: diagramArray};
             console.log(diagramData);
             if (diagramArray.length > 0) {
-              var html = Mustache.to_html(template.getPhotosByCarIdModalContent(), diagramData);
+              let html = Mustache.to_html(template.getPhotosByCarIdModalContent(), diagramData);
               displayImagesOfThisCarSel.empty();
               displayImagesOfThisCarSel.append(html);
             } else {

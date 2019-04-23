@@ -1,8 +1,8 @@
 /**
  * Created by RAYMARTHINKPAD on 2017-08-23.
  */
-var LoginValidate = (function () {
-  var fields = {
+let LoginValidate = (function () {
+  let fields = {
     username: {selector: null},
     password: {selector: null}
   };
