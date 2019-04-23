@@ -20,9 +20,7 @@ var CarActions = (function () {
         updateCarInfoSel = {},
         updateCarInfoModal = {},
         updateCarInfoModalContent = {},
-        checkedField = null;
-
-    var updateCarInfo_RadioSelect = {};
+        checkedField = {};
 
     var loader = {};
 
@@ -48,7 +46,7 @@ var CarActions = (function () {
             updateCarInfoModalContent = $('#update-car-info-modal-content');
 
             getPhotosByCarIdFn = null;
-            updateCarInfo_RadioSelect = null;
+			checkedField = null;
 
             loader = $('.loader');
 
@@ -96,14 +94,12 @@ var CarActions = (function () {
                         updateCarInfoModalContent.empty();
                         updateCarInfoModalContent.append(html);
 
-                        updateCarInfo_RadioSelect.YEAR(data[0]._yearMade);
-                        // updateCarInfo_RadioSelect.CYLINDER(data[0]._cylinder);
-                        checkedField(data[0]._cylinder, 'input[type=radio]#cylinder');
-                        updateCarInfo_RadioSelect.CATEGORY(data[0]._category);
-                        updateCarInfo_RadioSelect.DRIVETRAIN(data[0]._drivetrain);
-                        updateCarInfo_RadioSelect.STATUS(data[0]._status);
-                        updateCarInfo_RadioSelect.TRANSMISSION(data[0]._transmission);
-
+                        checkedField.field(data[0]._yearMade, 'select#year option');
+						checkedField.field(data[0]._cylinder, 'input[type=radio]#cylinder');
+						checkedField.field(data[0]._category, 'input[type=radio]#category');
+						checkedField.field(data[0]._drivetrain, 'input[type=radio]#drivetrain');
+						checkedField.field(data[0]._status, 'input[type=radio]#status');
+						checkedField.field(data[0]._transmission, 'input[type=radio]#transmission');
                     }
                 });
 
@@ -198,75 +194,26 @@ var CarActions = (function () {
              * radio: cylinder, category, drivetrain, transmission, status
              * select: year
              */
-            checkedField = function(val, fieldElem)
-            {
-                var formField = updateCarInfoModalContent.find(fieldElem);
-                formField.find(fieldElem).map(function (value, index) {
-                    if (value === val) {
-                        formField.eq(index).attr('checked', 'true');
-                    }
-                })
+            checkedField = {
+				field: function(val, fieldElem) {
+					let formField = updateCarInfoModalContent.find(fieldElem);
+					for (let i = 0; i < formField.length; i++) {
+						if (fieldElem.indexOf("radio") === -1) {
+							if (formField.eq(i).val() === val) {
+								formField.eq(i).attr('selected', 'selected');
+								break;
+							} else {
+								formField.eq(i).removeAttr('selected');
+							}
+						} else {
+							if (formField.eq(i).val() === val) {
+								formField.eq(i).attr('checked', 'true');
+								break;
+							}
+						}
+                    }					
+				}
             };
-
-            updateCarInfo_RadioSelect = {
-                CYLINDER: function (cylinder) {
-                    var cylinders = updateCarInfoModalContent.find('input[type=radio]#cylinder');
-                    for (var i = 0; i < cylinders.length; i++) {
-                        if (cylinders.eq(i).val() === cylinder) {
-                            cylinders.eq(i).attr('checked', 'true');
-                            break;
-                        }
-                    }
-                },
-                CATEGORY: function (category) {
-                    var categories = updateCarInfoModalContent.find('input[type=radio]#category');
-                    for (var i = 0; i < categories.length; i++) {
-                        if (categories.eq(i).val() === category) {
-                            categories.eq(i).attr('checked', 'true');
-                            break;
-                        }
-                    }
-                },
-                DRIVETRAIN: function (drivetrain) {
-                    var drivetrains = updateCarInfoModalContent.find('input[type=radio]#drivetrain');
-                    for (var i = 0; i < drivetrains.length; i++) {
-                        if (drivetrains.eq(i).val() === drivetrain) {
-                            drivetrains.eq(i).attr('checked', 'true');
-                            break;
-                        }
-                    }
-                },
-                TRANSMISSION: function (transmission) {
-                    var transmissions = updateCarInfoModalContent.find('input[type=radio]#transmission');
-                    for (var i = 0; i < transmissions.length; i++) {
-                        if (transmissions.eq(i).val() === transmission) {
-                            transmissions.eq(i).attr('checked', 'true');
-                            break;
-                        }
-                    }
-                },
-                STATUS: function (status) {
-                    var statuses = updateCarInfoModalContent.find('input[type=radio]#status');
-                    for (var i = 0; i < statuses.length; i++) {
-                        if (statuses.eq(i).val() === status) {
-                            statuses.eq(i).attr('checked', 'true');
-                            break;
-                        }
-                    }
-                },
-                YEAR: function (year) {
-                    var years = updateCarInfoModalContent.find('select#year option');
-                    for (var i = 0; i < years.length; i++) {
-                        if (years.eq(i).val() === year) {
-                            years.eq(i).attr('selected', 'selected');
-                            break;
-                        } else {
-                            years.eq(i).removeAttr('selected');
-                        }
-                    }
-                }
-            };
-
         }
     }; // end return
 })();

@@ -90,7 +90,7 @@ if (!isset($_SESSION['authenticated'])) {
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/templatemo_main.css">
-<!--    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">-->
+	<link rel="stylesheet" href="css/datatables.min.css">
     <style>
         .input-required {
             color: red;
@@ -645,13 +645,12 @@ if (!isset($_SESSION['authenticated'])) {
     </div>
 </div>
 
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-<!--<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/datatables.min.js"></script>
 
 <script src="js/common/CommonTemplate.js"></script>
 <script src="js/common/AdminPageTemplate.js"></script>
