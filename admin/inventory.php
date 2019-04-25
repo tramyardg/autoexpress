@@ -52,16 +52,6 @@ if (!isset($_SESSION['authenticated'])) {
         }
     }
 
-    // loading data to modal update with ajax
-    if (isset($_GET["action"])) {
-        if ($_GET["action"] === "updateCarInfo") {
-            $updateCarInfoById = $v->getCarById($_GET['id']);
-            $updateCarInfo_data = json_encode($updateCarInfoById);
-            echo $updateCarInfo_data; // sent to ajax call
-            exit();
-        }
-    }
-
     // updating general car info
     if (!empty($_POST['update-car-submit'])) {
         $isUpdatedCondition = $v->isUpdated($_POST);
@@ -161,9 +151,8 @@ if (!isset($_SESSION['authenticated'])) {
                                                         data-toggle="dropdown">Actions
                                                     <span class="caret"></span></button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a data-target="#updateCarInfoModal" data-toggle="modal"
-                                                           data-id="<?php echo $row['vehicleId']; ?>"
-                                                           href="#updateCarInfoModal">Update</a></li>
+                                                    <li><a id="updateCar_link" class="btn btn-sm left"
+                                                           data-id="<?php echo $row['vehicleId']; ?>">Update</a></li>
                                                     <li><a class="delete-vehicle"
                                                            href="?id=<?php echo $row['vehicleId']; ?>"
                                                            delete="<?php echo $row['vehicleId']; ?>">Delete</a>
@@ -530,21 +519,6 @@ if (!isset($_SESSION['authenticated'])) {
                     </div>
                 </div>
 
-                <!-- modal template for updating vehicle info -->
-                <div class="modal fade updateCarInfoModal" id="updateCarInfoModal" tabindex="-1" role="dialog"
-                     aria-labelledby="updateCarInfoModal">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                            aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Updating Vehicle Info</h4>
-                            </div>
-                            <div id="update-car-info-modal-content"></div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- modal template for uploading and updating photos -->
                 <div class="modal fade bs-example-modal-sm" id="upload-delete-car-photos-modal" tabindex="-1"
                      role="dialog" aria-labelledby="myLargeModalLabel">
@@ -630,9 +604,21 @@ if (!isset($_SESSION['authenticated'])) {
             </div>
         </div>
     </div>
+    <!-- modal template for updating vehicle info -->
+    <div class="modal fade update-car-modal" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Updating Vehicle Info</h4>
+                </div>
+                <!--                            <div id="update-car-info-modal-content"></div>-->
+            </div>
+        </div>
+    </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/jquery.min.js"></script>

@@ -16,25 +16,6 @@ function CommonTemplate() {
         '  </div>  ';
   };
 
-  this.confirmModalLogout = function () {
-    return '<div class="modal fade" id="confirmModalLogout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  ' +
-        '                aria-hidden="true">  ' +
-        '               <div class="modal-dialog">  ' +
-        '                   <div class="modal-content">  ' +
-        '                       <div class="modal-header text-center-important no-border">  ' +
-        '                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span  ' +
-        '                                   class="sr-only">Close</span></button>  ' +
-        '                           <h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>  ' +
-        '                       </div>  ' +
-        '                       <div class="modal-footer text-center-important no-border" >  ' +
-        '                           <a href="logout.php" class="btn btn-primary btn-sm">Yes</a>  ' +
-        '                           <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">No</button>  ' +
-        '                       </div>  ' +
-        '                   </div>  ' +
-        '               </div>  ' +
-        '          </div>  ';
-  };
-
   this.confirmDeleteRecord = function () {
     return '<div class="modal fade" id="confirm-delete-record" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  ' +
         '                aria-hidden="true">  ' +

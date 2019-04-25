@@ -11,8 +11,9 @@ let CarActions = (function () {
 
   let getPhotosByCarIdFn = {},
       displayImagesOfThisCarSel = {},
-      updateCarInfoSel = {},
-      updateCarInfoModal = {},
+      // updateCarInfoSel = {},
+      updateCarLink = {},
+      updateCarModal = {},
       updateCarInfoModalContent = {},
       checkedField = {};
 
@@ -35,8 +36,9 @@ let CarActions = (function () {
       uploadDeleteCarPhotoModal = $('#upload-delete-car-photos-modal');
       uploadCarPhotoBtn = $('#upload-car-photos-btn');
 
-      updateCarInfoSel = $('.dropdown a.update-vehicle');
-      updateCarInfoModal = $('#updateCarInfoModal');
+      // updateCarInfoSel = $('.dropdown a.update-vehicle');
+      updateCarLink = $('a#updateCar_link');
+      updateCarModal = $('.update-car-modal');
       updateCarInfoModalContent = $('#update-car-info-modal-content');
 
       getPhotosByCarIdFn = null;
@@ -71,33 +73,34 @@ let CarActions = (function () {
       });
 
       // load data of this car to be updated
-      updateCarInfoModal.on('show.bs.modal', function (event) {
-        let updateLink = $(event.relatedTarget); // Button that triggered the modal
-        let carId = updateLink.data("id"); // Button that triggered the modal
-        $.ajax({
-          url: "?action=updateCarInfo&id=" + carId,
-          type: "post",
-          dataType: "json",
-          success: function (data) {
-            // removing commas for input type number
-            data[0]._price = data[0]._price.replace(/,/g, '');
-            data[0]._mileage = data[0]._mileage.replace(/,/g, '');
+      updateCarLink.click(function(event) {
+        let carId = $(this).attr('data-id');
+        // console.log($(this).attr('data-id'));
+        updateCarModal.modal('show');
+        updateCarModal.on('shown.bs.modal', function () {
+          $.get("api/updateCar.php?action=updateCar&id=" + carId, function (data) {
+            let modalContent = $(updateCarModal).find('.modal-content');
+            let carObj = JSON.parse(data)[0];
+            carObj._price = carObj._price.replace(/,/g, '');
+            carObj._mileage = carObj._mileage.replace(/,/g, '');
+            console.log(carObj);
 
-            // using Mustache to render data object
-            // todo updateCarInfoModalContent: separate into smaller section
-            let html = Mustache.render(template.updateCarInfoModalContent(), data[0]);
-            updateCarInfoModalContent.empty();
-            updateCarInfoModalContent.append(html);
+            let adminUpdateCar = new AdminPageTemplate(carObj._vehicleId, carObj._make);
+            modalContent.empty();
+            modalContent.append(adminUpdateCar.updateCarModalContainer());
 
+            checkedField.field(modalContent, carObj._yearMade, 'select#year option');
+            /*
             checkedField.field(data[0]._yearMade, 'select#year option');
             checkedField.field(data[0]._cylinder, 'input[type=radio]#cylinder');
             checkedField.field(data[0]._category, 'input[type=radio]#category');
             checkedField.field(data[0]._drivetrain, 'input[type=radio]#drivetrain');
             checkedField.field(data[0]._status, 'input[type=radio]#status');
-            checkedField.field(data[0]._transmission, 'input[type=radio]#transmission');
-          }
-        });
+            checkedField.field(data[0]._transmission, 'input[type=radio]#transmission');*/
 
+          });
+        });
+        event.preventDefault();
       });
 
       /**
@@ -189,8 +192,9 @@ let CarActions = (function () {
        * select: year
        */
       checkedField = {
-        field: function (val, fieldElem) {
-          let formField = updateCarInfoModalContent.find(fieldElem);
+        field: function (modalContent, val, fieldElem) {
+          console.log('debug');
+          let formField = modalContent.find(fieldElem);
           for (let i = 0; i < formField.length; i++) {
             if (fieldElem.indexOf("radio") === -1) {
               if (formField.eq(i).val() === val) {

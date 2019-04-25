@@ -57,7 +57,7 @@ let CommonHTML = (function () {
         mainWrapperSel.prepend(AdminPageTemplate.navBar());
         pageWrapperSel.prepend(AdminPageTemplate.sideBar(adminUsernameSel.val()));     // sidebar
         pageWrapperSel.last().append(AdminPageTemplate.footer());
-        pageWrapperSel.append(cHTML.confirmModalLogout());                        // confirm logout
+        pageWrapperSel.append(AdminPageTemplate.logoutModal());                        // confirm logout
       };
 
       fnHeaderAndFooterElem = function () {                   // contents
