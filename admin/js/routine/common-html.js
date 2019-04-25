@@ -54,15 +54,15 @@ let CommonHTML = (function () {
     bindCarActionFn: function () {
 
       fnCommonElement = function () {                                            // contents
-        mainWrapperSel.prepend(cHTML.navBarHeaderElem());                         // header
+        mainWrapperSel.prepend(AdminPageTemplate.navBar());
         pageWrapperSel.prepend(AdminPageTemplate.sideBar(adminUsernameSel.val()));     // sidebar
-        pageWrapperSel.last().append(AdminPageTemplate.footer());                      // footer
+        pageWrapperSel.last().append(AdminPageTemplate.footer());
         pageWrapperSel.append(cHTML.confirmModalLogout());                        // confirm logout
       };
 
       fnHeaderAndFooterElem = function () {                   // contents
-        mainWrapperSel.prepend(cHTML.navBarHeaderElem());       // header
-        mainWrapperSel.last().append(AdminPageTemplate.footer());    // footer
+        mainWrapperSel.prepend(AdminPageTemplate.navBar());
+        mainWrapperSel.last().append(AdminPageTemplate.footer());
       };
 
       fnManipulateRecordElem = function () {

@@ -22,4 +22,18 @@ class AdminPageTemplate {
         </div>`;
     }
 
+    static navBar() {
+        return `
+        <div class="navbar navbar-inverse" role="navigation">
+           <div class="pull-right" style="position: relative; top: 10px; right: 10px;"><p></p></div>
+           <div class="navbar-header">
+              <div class="logo">
+                 <h1>Dashboard - Admin</h1>
+              </div>
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span   
+                 class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span   
+                 class="icon-bar"></span> <span class="icon-bar"></span></button>   
+           </div>
+        </div>`;
+    }
 }

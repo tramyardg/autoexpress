@@ -5,9 +5,9 @@ function CommonUtil() {
   };
 
   this.getFilename = function () {
-    var locHref = location.href;
-    var startIndex = (locHref.lastIndexOf("/") + 1); // returns an index
-    var fileName = locHref.substr(startIndex);
+    let locHref = location.href;
+    let startIndex = (locHref.lastIndexOf("/") + 1); // returns an index
+    let fileName = locHref.substr(startIndex);
 
     if (fileName.indexOf("?") > 0) {
       return locHref.substr(startIndex, fileName.lastIndexOf('?'));
@@ -34,20 +34,21 @@ function CommonUtil() {
 
   // dynamically show the models of data selected
   this.selectCarMake = function (selectedMake) {
-    var modelsSelect = $(selectedMake).parent().parent().next().next().find('#model');
+    let modelsSelect = $(selectedMake).parent().parent().next().next().find('#model');
     modelsSelect.empty();
-    var selectVal = $(selectedMake).val();
+    let selectVal = $(selectedMake).val();
+    // todo use shorthand get request
     $.ajax({
       type: "GET",
       url: "js/data/models.json",
       dataType: "json",
       success: function (json) {
-        for (var key in json) {
+        for (let key in json) {
           if (json.hasOwnProperty(key)) {
             if (selectVal === json[key].title) {
-              var modelsObj = json[key].models;
+              let modelsObj = json[key].models;
               Object.keys(modelsObj).forEach(function (key) {
-                var h = '<option value="' + modelsObj[key].value + '" title="' + modelsObj[key].title + '">' + modelsObj[key].value + '</option>';
+                let h = '<option value="' + modelsObj[key].value + '" title="' + modelsObj[key].title + '">' + modelsObj[key].value + '</option>';
                 modelsSelect.append(h);
               });
               break;
