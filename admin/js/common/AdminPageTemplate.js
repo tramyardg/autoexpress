@@ -1,17 +1,24 @@
 class AdminPageTemplate {
 
-  constructor(id, make) {
-    this.id = id;
-    this.make = make;
+  constructor(options) {
+    this.id = options.id;
+    this.make = options.make;
+    this.model = options.model;
+    this.year = options.year;
+    this.price = options.price;
+    this.cylinder = options.cylinder;
+    this.drivetrain = options.drivetrain;
+    this.status = options.status;
+    this.transmission = options.transmission;
   }
 
   static footer() {
     let currentYear = (new Date().getYear()) + "";
     return `<footer class="templatemo-footer">   
-                   <div class="templatemo-copyright">   
-                   <p>Copyright  @20${currentYear.substr(1)} AutoExpress.co.nf - Raymart De Guzman</p>   
-                   </div>   
-                </footer>`;
+               <div class="templatemo-copyright">   
+               <p>Copyright  @20${currentYear.substr(1)} AutoExpress.co.nf - Raymart De Guzman</p>   
+               </div>   
+            </footer>`;
   }
 
   static sideBar(username) {
@@ -81,9 +88,11 @@ class AdminPageTemplate {
             <div class="panel-body">   
               <table cellspacing="1" id="update-car-general-info-table">   
                 <tbody>
-                ${this.updateCarModal_HiddenVid(this.id)}
-                ${this.updateCarModal_SelectMake(this.make)}
+                ${this.updateCarModal_HiddenVid()}
+                ${this.updateCarModal_SelectMake()}
                 ${this.updateCarModal_SelectYear()}
+                ${this.updateCarModal_Model()}
+                ${this.updateCarModal_Price()}
                 </tbody>
               </table>
             </div>
@@ -92,15 +101,15 @@ class AdminPageTemplate {
       `;
   }
 
-  updateCarModal_HiddenVid(id) {
-    return `<tr><td><input type="hidden" class="hidden" value="${id}" name="update-vehicle-id" id="update-vehicle-id"></td></tr>`;
+  updateCarModal_HiddenVid() {
+    return `<tr><td><input type="hidden" class="hidden" value="${this.id}" name="update-vehicle-id" id="update-vehicle-id"></td></tr>`;
   }
 
-  updateCarModal_SelectMake(make) {
+  updateCarModal_SelectMake() {
     return `<tr>
-                    <td>Make<span class="input-required"> *</span></td>   
-                    <td><input type="text" readonly value="${make}" name="update-make" id="update-make" ></td>   
-                </tr>`;
+                <td>Make<span class="input-required"> *</span></td>   
+                <td><input type="text" readonly value="${this.make}" name="update-make" id="update-make" ></td>   
+            </tr>`;
   }
 
   updateCarModal_SelectYear() {
@@ -154,6 +163,24 @@ class AdminPageTemplate {
         </td></tr>`;
   }
 
+  updateCarModal_Model() {
+    return `<tr>
+                <td>Model<span class="input-required"> *</span></td>
+                <td><input type="text" readonly value="${this.model}" name="update-model" id="update-model" ></td>
+            </tr>`;
+  }
+
+  updateCarModal_Price() {
+    return `
+    <tr>
+        <td>Price<span class="input-required"> *</span></td>
+        <td>
+         <input type="number" name="price" id="price" title="price" min="0" max="999999" required value="${this.price}" />
+         <b style="font-size: 10px; color: red;" id="price-err">&nbsp;</b>
+        </td>
+    </tr>`;
+  }
+  
   updateCarModal() {
 
   }

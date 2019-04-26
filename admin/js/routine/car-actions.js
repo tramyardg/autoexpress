@@ -77,26 +77,37 @@ let CarActions = (function () {
         let carId = $(this).attr('data-id');
         // console.log($(this).attr('data-id'));
         updateCarModal.modal('show');
+        let modalContent = $(updateCarModal).find('.modal-content');
+        modalContent.empty();
         updateCarModal.on('shown.bs.modal', function () {
           $.get("api/updateCar.php?action=updateCar&id=" + carId, function (data) {
-            let modalContent = $(updateCarModal).find('.modal-content');
             let carObj = JSON.parse(data)[0];
             carObj._price = carObj._price.replace(/,/g, '');
             carObj._mileage = carObj._mileage.replace(/,/g, '');
             console.log(carObj);
 
-            let adminUpdateCar = new AdminPageTemplate(carObj._vehicleId, carObj._make);
+            let options = {
+              id: carObj._vehicleId,
+              make: carObj._make,
+              model: carObj._model,
+              year: carObj._yearMade,
+              price: carObj._price,
+              cylinder: carObj._cylinder,
+              category: carObj._category,
+              drivetrain: carObj._drivetrain,
+              status: carObj._status,
+              transmission: carObj._transmission
+            };
+            let adminUpdateCar = new AdminPageTemplate(options);
             modalContent.empty();
             modalContent.append(adminUpdateCar.updateCarModalContainer());
 
-            checkedField.field(modalContent, carObj._yearMade, 'select#year option');
-            /*
-            checkedField.field(data[0]._yearMade, 'select#year option');
-            checkedField.field(data[0]._cylinder, 'input[type=radio]#cylinder');
-            checkedField.field(data[0]._category, 'input[type=radio]#category');
-            checkedField.field(data[0]._drivetrain, 'input[type=radio]#drivetrain');
-            checkedField.field(data[0]._status, 'input[type=radio]#status');
-            checkedField.field(data[0]._transmission, 'input[type=radio]#transmission');*/
+            checkedField.field(modalContent, options.year, 'select#year option');
+            // checkedField.field(modalContent, options.cylinder, 'input[type=radio]#cylinder');
+            // checkedField.field(modalContent, options.category, 'input[type=radio]#category');
+            // checkedField.field(modalContent, options.drivetrain, 'input[type=radio]#drivetrain');
+            // checkedField.field(modalContent, options.status, 'input[type=radio]#status');
+            // checkedField.field(modalContent, options.transmission, 'input[type=radio]#transmission');
 
           });
         });
