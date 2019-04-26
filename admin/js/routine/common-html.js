@@ -74,14 +74,14 @@ let CommonHTML = (function () {
       // console.log(util.getFilename());
 
       switch (util.getFilename()) {
-        case util.pageName[0].name: // dashboard
+        case util.pageName[util.pageEnum.dashboard].name:
           fnCommonElement();
           break;
-        case util.pageName[1].name:
+        case util.pageName[util.pageEnum.inventory].name:
           fnCommonElement();
           fnManipulateRecordElem();
           break;
-        case util.pageName[2].name:
+        case util.pageName[util.pageEnum.admin].name:
           fnCommonElement();
           adminTableSel.DataTable({
             "pageLength": 5,
@@ -90,17 +90,20 @@ let CommonHTML = (function () {
           });
           fnManipulateRecordElem();
           break;
-        case util.pageName[3].name:
+        case util.pageName[util.pageEnum.preferences].name:
           fnCommonElement();
           break;
-        case util.pageName[4].name: // sign-in
+        case util.pageName[util.pageEnum.login].name:
           fnHeaderAndFooterElem();
           break;
-        case util.pageName[5].name: // register
+        case util.pageName[util.pageEnum.register].name:
           fnHeaderAndFooterElem();
+          break;
+        case util.pageName[util.pageEnum.updateCar].name:
+          fnCommonElement();
           break;
         default:
       }
     }
-  }; // end return
+  };
 })();

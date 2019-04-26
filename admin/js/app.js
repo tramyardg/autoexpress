@@ -34,5 +34,7 @@ function sidebarActive() {
     $sidebarMenuItem.eq(2).addClass('active');
   } else if (urlFileNameWithExt === util.pageName[3].name) {
     $sidebarMenuItem.eq(3).addClass('active');
+  } else if (urlFileNameWithExt === util.pageName[util.pageName.length - 1].name) {
+    $sidebarMenuItem.eq(1).addClass('active');
   }
 }

@@ -67,7 +67,7 @@ if (!isset($_SESSION['authenticated'])) {
             <div class="templatemo-content">
                 <ol class="breadcrumb">
                     <li><a href="dashboard.php">Admin Panel</a></li>
-                    <li class="active">Manage Inventory</li>
+                    <li class="active">Manage Inventory > Update Car #</li>
                 </ol>
                 <input type="text" class="hidden" id="admin-username" name="admin-username" title="admin id"
                        value="<?php echo $admin_data[0]->getUsername(); ?>">
