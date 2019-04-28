@@ -136,6 +136,7 @@ if (!isset($_SESSION['authenticated'])) {
                                 </thead>
                                 <tbody>
                                 <?php while ($row = $rowCarField->fetch()) { ?>
+                                    <?php $carId = $row['vehicleId']; ?>
                                     <tr>
                                         <td><?php echo $row['yearMade']; ?></td>
                                         <td><?php echo $row['make'];?></td>
@@ -151,16 +152,31 @@ if (!isset($_SESSION['authenticated'])) {
                                                         data-toggle="dropdown">Actions
                                                     <span class="caret"></span></button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a id="updateCar_link" class="btn btn-sm left"
-                                                           data-id="<?php echo $row['vehicleId']; ?>">Update</a></li>
-                                                    <li><a class="delete-vehicle"
+                                                    <li>
+                                                        <a id="updateCar_link" class="btn btn-sm left"
+                                                           data-id="<?php echo $carId; ?>">Update</a>
+                                                    </li>
+                                                    <li>
+                                                        <?php
+                                                        $toHash = $carId;
+                                                        $toHash .= date("m.d.y");
+                                                        $hash = sha1($toHash);
+
+                                                        ?>
+                                                        <a class="btn btn-sm left"
+                                                           href="updateCar.php?updateId=<?php echo $row['vehicleId'] . '&h=' . $hash; ?>">Update</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="delete-vehicle"
                                                            href="?id=<?php echo $row['vehicleId']; ?>"
                                                            delete="<?php echo $row['vehicleId']; ?>">Delete</a>
                                                     </li>
-                                                    <li><a class="upload-car-photos"
+                                                    <li>
+                                                        <a class="upload-car-photos"
                                                            href="?id=<?php echo $row['vehicleId']; ?>"
                                                            upload-delete-photos="<?php echo $row['vehicleId']; ?>">Upload
-                                                            / Delete photo(s)</a></li>
+                                                            / Delete photo(s)</a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -519,86 +535,86 @@ if (!isset($_SESSION['authenticated'])) {
                     </div>
                 </div>
 
-                <!-- modal template for uploading and updating photos -->
-                <div class="modal fade bs-example-modal-sm" id="upload-delete-car-photos-modal" tabindex="-1"
-                     role="dialog" aria-labelledby="myLargeModalLabel">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title">Upload or Delete Photos for this Vehicle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- modal template for uploading and updating photos -->
+    <div class="modal fade bs-example-modal-sm" id="upload-delete-car-photos-modal" tabindex="-1"
+         role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Upload or Delete Photos for this Vehicle</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 margin-top-15">
+                        <div class="col-md-12">
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">Deleting photos...</div>
+                                <div class="panel-body" id="display-images-by-this-car"></div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 margin-top-15">
-                                    <div class="col-md-12">
-                                        <div class="panel panel-warning">
-                                            <div class="panel-heading">Deleting photos...</div>
-                                            <div class="panel-body" id="display-images-by-this-car"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="" method="post" id="add-car-photos-form"
+                              enctype="multipart/form-data" class="">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">Upload photos for this car</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p><b>Note</b>: Only image file types are allowed to be
+                                                uploaded, otherwise it will not work.</p>
+                                            <input type="file" id="files" name="files[]" multiple/>
+                                            <output id="list"></output>
+                                            <script>
+                                              function handleFileSelect(evt) {
+                                                var files = evt.target.files; // FileList object
+
+                                                // Loop through the FileList and render image files as thumbnails.
+                                                for (var i = 0, f; f = files[i]; i++) {
+
+                                                  // Only process image files.
+                                                  if (!f.type.match('image.*')) {
+                                                    continue;
+                                                  }
+
+                                                  var reader = new FileReader();
+
+                                                  // Closure to capture the file information.
+                                                  reader.onload = (function (theFile) {
+                                                    return function (e) {
+                                                      // Render thumbnail.
+                                                      var span = document.createElement('span');
+                                                      span.innerHTML = ['<img class="thumb" id="car-image-' + i + '" src="', e.target.result,
+                                                        '" title="', theFile.name, '"/>'].join('');
+                                                      document.getElementById('list').insertBefore(span, null);
+                                                    };
+                                                  })(f);
+
+                                                  // Read in the image file as a data URL.
+                                                  reader.readAsDataURL(f);
+                                                } // end for
+                                              }
+
+                                              document.getElementById('files').addEventListener('change', handleFileSelect, false);
+                                            </script>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-success btn-sm"
+                                                    id="upload-car-photos-btn">Upload
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <form action="" method="post" id="add-car-photos-form"
-                                              enctype="multipart/form-data" class="">
-                                            <div class="panel panel-info">
-                                                <div class="panel-heading">Upload photos for this car</div>
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <p><b>Note</b>: Only image file types are allowed to be
-                                                                uploaded, otherwise it will not work.</p>
-                                                            <input type="file" id="files" name="files[]" multiple/>
-                                                            <output id="list"></output>
-                                                            <script>
-                                                                function handleFileSelect(evt) {
-                                                                    var files = evt.target.files; // FileList object
-
-                                                                    // Loop through the FileList and render image files as thumbnails.
-                                                                    for (var i = 0, f; f = files[i]; i++) {
-
-                                                                        // Only process image files.
-                                                                        if (!f.type.match('image.*')) {
-                                                                            continue;
-                                                                        }
-
-                                                                        var reader = new FileReader();
-
-                                                                        // Closure to capture the file information.
-                                                                        reader.onload = (function (theFile) {
-                                                                            return function (e) {
-                                                                                // Render thumbnail.
-                                                                                var span = document.createElement('span');
-                                                                                span.innerHTML = ['<img class="thumb" id="car-image-' + i + '" src="', e.target.result,
-                                                                                    '" title="', theFile.name, '"/>'].join('');
-                                                                                document.getElementById('list').insertBefore(span, null);
-                                                                            };
-                                                                        })(f);
-
-                                                                        // Read in the image file as a data URL.
-                                                                        reader.readAsDataURL(f);
-                                                                    } // end for
-                                                                }
-
-                                                                document.getElementById('files').addEventListener('change', handleFileSelect, false);
-                                                            </script>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <button type="button" class="btn btn-success btn-sm"
-                                                                    id="upload-car-photos-btn">Upload
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

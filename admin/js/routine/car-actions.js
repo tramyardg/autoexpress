@@ -153,6 +153,10 @@ let CarActions = (function () {
               alert('Something is wrong. Please try again later.');
             }
           });
+
+          e.preventDefault();
+          return false;
+
         });
       });
 
