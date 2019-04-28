@@ -74,25 +74,25 @@ class AdminPageTemplate {
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
-                ${this.updateCarModalForm()}
+                ${this.updateCarForm()}
                 </div>
             </div>
         </div>`;
   }
 
-  updateCarModalForm() {
+  updateCarForm() {
     return `
       <form action="" method="post" onsubmit="" class="margin-top-15">   
-        <div class="panel panel-primary">   
+        <div class="panel panel-default">   
           <div class="panel-heading">General vehicle info</div>   
             <div class="panel-body">   
               <table cellspacing="1" id="update-car-general-info-table">   
                 <tbody>
-                ${this.updateCarModal_HiddenVid()}
-                ${this.updateCarModal_SelectMake()}
-                ${this.updateCarModal_SelectYear()}
-                ${this.updateCarModal_Model()}
-                ${this.updateCarModal_Price()}
+                ${this.updateCar_HiddenVid()}
+                ${this.updateCar_SelectMake()}
+                ${this.updateCar_SelectYear()}
+                ${this.updateCar_Model()}
+                ${this.updateCar_Price()}
                 </tbody>
               </table>
             </div>
@@ -101,18 +101,18 @@ class AdminPageTemplate {
       `;
   }
 
-  updateCarModal_HiddenVid() {
+  updateCar_HiddenVid() {
     return `<tr><td><input type="hidden" class="hidden" value="${this.id}" name="update-vehicle-id" id="update-vehicle-id"></td></tr>`;
   }
 
-  updateCarModal_SelectMake() {
+  updateCar_SelectMake() {
     return `<tr>
                 <td>Make<span class="input-required"> *</span></td>   
                 <td><input type="text" readonly value="${this.make}" name="update-make" id="update-make" ></td>   
             </tr>`;
   }
 
-  updateCarModal_SelectYear() {
+  updateCar_SelectYear() {
     return `<tr>
         <td>Year<span class="input-required"> *</span></td>   
         <td>   
@@ -163,14 +163,14 @@ class AdminPageTemplate {
         </td></tr>`;
   }
 
-  updateCarModal_Model() {
+  updateCar_Model() {
     return `<tr>
                 <td>Model<span class="input-required"> *</span></td>
                 <td><input type="text" readonly value="${this.model}" name="update-model" id="update-model" ></td>
             </tr>`;
   }
 
-  updateCarModal_Price() {
+  updateCar_Price() {
     return `
     <tr>
         <td>Price<span class="input-required"> *</span></td>
@@ -180,8 +180,7 @@ class AdminPageTemplate {
         </td>
     </tr>`;
   }
-  
-  updateCarModal() {
 
-  }
+
+
 }

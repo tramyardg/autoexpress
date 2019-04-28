@@ -620,20 +620,6 @@ if (!isset($_SESSION['authenticated'])) {
             </div>
         </div>
     </div>
-    <!-- modal template for updating vehicle info -->
-    <div class="modal fade update-car-modal" tabindex="-1" role="dialog"
-         aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Updating Vehicle Info</h4>
-                </div>
-                <!--                            <div id="update-car-info-modal-content"></div>-->
-            </div>
-        </div>
-    </div>
 </div>
 
 <script src="js/jquery-3.1.1.min.js"></script>

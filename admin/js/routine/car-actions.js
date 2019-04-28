@@ -206,27 +206,6 @@ let CarActions = (function () {
        * radio: cylinder, category, drivetrain, transmission, status
        * select: year
        */
-      checkedField = {
-        field: function (modalContent, val, fieldElem) {
-          console.log('debug');
-          let formField = modalContent.find(fieldElem);
-          for (let i = 0; i < formField.length; i++) {
-            if (fieldElem.indexOf("radio") === -1) {
-              if (formField.eq(i).val() === val) {
-                formField.eq(i).attr('selected', 'selected');
-                break;
-              } else {
-                formField.eq(i).removeAttr('selected');
-              }
-            } else {
-              if (formField.eq(i).val() === val) {
-                formField.eq(i).attr('checked', 'true');
-                break;
-              }
-            }
-          }
-        }
-      };
     }
   }; // end return
 })();
