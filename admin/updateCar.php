@@ -98,6 +98,7 @@ if (!isset($_SESSION['authenticated'])) {
 <script src="js/datatables.min.js"></script>
 
 <script src="js/common/CommonTemplate.js"></script>
+<script src="js/common/AddOrUpdateTemplate.js"></script>
 <script src="js/common/AdminPageTemplate.js"></script>
 <script src="js/common/CommonUtil.js"></script>
 <script src="js/routine/common-html.js"></script>
@@ -124,7 +125,6 @@ if (isset($_GET['updateId']) && isset($_GET['h']))
 
     let checkedField = {
       field: function (modalContent, val, fieldElem) {
-        console.log('debug');
         let formField = modalContent.find(fieldElem);
         for (let i = 0; i < formField.length; i++) {
           if (fieldElem.indexOf("radio") === -1) {
@@ -149,6 +149,7 @@ if (isset($_GET['updateId']) && isset($_GET['h']))
     carObj._price = carObj._price.replace(/,/g, '');
     carObj._mileage = carObj._mileage.replace(/,/g, '');
     let options = {
+      isForUpdate: true,
       id: carObj._vehicleId,
       make: carObj._make,
       model: carObj._model,
@@ -159,16 +160,23 @@ if (isset($_GET['updateId']) && isset($_GET['h']))
       category: carObj._category,
       drivetrain: carObj._drivetrain,
       status: carObj._status,
-      transmission: carObj._transmission
+      transmission: carObj._transmission,
+      engineCapacity: carObj._engineCapacity,
+      doors: carObj._doors
     };
 
-    let adminUpdateCar = new AdminPageTemplate(options);
+    let adminUpdateCar = new AddOrUpdateTemplate(options);
     let updateCarContainerDiv = $('#updateCarContainer');
 
     updateCarContainerDiv.empty();
-    updateCarContainerDiv.append(adminUpdateCar.updateCarModalContainer());
+    updateCarContainerDiv.append(adminUpdateCar.addOrUpdateCar_Container());
 
     checkedField.field(updateCarContainerDiv, options.year, 'select#year option');
+    checkedField.field(updateCarContainerDiv, options.cylinder, 'input[type=radio]#cylinder');
+    checkedField.field(updateCarContainerDiv, options.category, 'input[type=radio]#category');
+    checkedField.field(updateCarContainerDiv, options.drivetrain, 'input[type=radio]#drivetrain');
+    checkedField.field(updateCarContainerDiv, options.status, 'input[type=radio]#status');
+    checkedField.field(updateCarContainerDiv, options.transmission, 'input[type=radio]#transmission');
 
     console.log(options);
   })

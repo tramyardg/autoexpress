@@ -100,7 +100,7 @@ let CarActions = (function () {
             };
             let adminUpdateCar = new AdminPageTemplate(options);
             modalContent.empty();
-            modalContent.append(adminUpdateCar.updateCarModalContainer());
+            modalContent.append(adminUpdateCar.addOrUpdateCar_Container());
 
             checkedField.field(modalContent, options.year, 'select#year option');
             // checkedField.field(modalContent, options.cylinder, 'input[type=radio]#cylinder');
