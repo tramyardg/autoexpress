@@ -154,6 +154,7 @@ if (isset($_GET['updateId']) && isset($_GET['h']))
       model: carObj._model,
       year: carObj._yearMade,
       price: carObj._price,
+      mileage: carObj._mileage,
       cylinder: carObj._cylinder,
       category: carObj._category,
       drivetrain: carObj._drivetrain,

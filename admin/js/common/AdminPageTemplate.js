@@ -6,6 +6,7 @@ class AdminPageTemplate {
     this.model = options.model;
     this.year = options.year;
     this.price = options.price;
+    this.mileage = options.mileage;
     this.cylinder = options.cylinder;
     this.drivetrain = options.drivetrain;
     this.status = options.status;
@@ -93,6 +94,10 @@ class AdminPageTemplate {
                 ${this.updateCar_SelectYear()}
                 ${this.updateCar_Model()}
                 ${this.updateCar_Price()}
+                ${this.updateCar_Mileage()}
+                ${this.updateCar_Transmission()}
+                ${this.updateCar_drivetrain()}
+                ${this.updateCar_status()}
                 </tbody>
               </table>
             </div>
@@ -180,6 +185,51 @@ class AdminPageTemplate {
         </td>
     </tr>`;
   }
+
+  updateCar_Mileage() {
+    return `<tr>   
+              <td>Mileage(Km)<span class="input-required"> *</span></td>   
+              <td>   
+                <input type="number" name="mileage" id="mileage" title="mileage" min="0" max="999999" required/ value="${this.mileage}">   
+                <b style="font-size: 10px;  color: red;" id="mileage-err">&nbsp;</b>   
+              </td>   
+            </tr>`;
+  }
+
+  updateCar_Transmission() {
+    return `<tr>   
+              <td>Transmission <span class="input-required"> *</span>&nbsp;</td>   
+              <td>
+                <input type="radio" name="transmission" id="transmission" value="Automatic" title="transmission" required>&nbsp;Automatic   
+                <input type="radio" name="transmission" id="transmission" value="Manual" title="transmission" required>&nbsp;Manual   
+                <b style="font-size: 10px; color: red;" id="transmission-err">&nbsp;</b>   
+              </td>   
+            </tr>`;
+  }
+
+  updateCar_drivetrain() {
+    return `<tr>   
+              <td>Drivetrain<span class="input-required"> *</span></td>   
+              <td>   
+                <input type="radio" name="drivetrain" id="drivetrain" value="AWD" title="drivetrain" required> AWD   
+                <input type="radio" name="drivetrain" id="drivetrain" value="FWD" title="drivetrain" required> FWD   
+                <input type="radio" name="drivetrain" id="drivetrain" value="RWD" title="drivetrain" required> RWD   
+                <input type="radio" name="drivetrain" id="drivetrain" value="4X4" title="drivetrain" required> 4X4   
+                <b style="font-size: 10px; color: red;" id="drivetrain-err">&nbsp;</b>   
+              </td>   
+            </tr>`;
+  }
+
+  updateCar_status() {
+    return `<tr>
+              <td>Status</td>
+              <td>
+                <input type="radio" name="status" id="status" value="Available" title="status" checked> Available
+                <input type="radio" name="status" id="status" value="SOLD" title="status"> Sold
+                </td>
+            </tr>`;
+  }
+
 
 
 
