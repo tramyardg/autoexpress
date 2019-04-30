@@ -170,13 +170,14 @@ if (isset($_GET['updateId']) && isset($_GET['h']))
     updateCarContainerDiv.empty();
     updateCarContainerDiv.append(adminUpdateCar.addOrUpdateCar_Container());
 
-    checkedField.field(updateCarContainerDiv, options.year, 'select#year option');
-    checkedField.field(updateCarContainerDiv, options.cylinder, 'input[type=radio]#cylinder');
-    checkedField.field(updateCarContainerDiv, options.category, 'input[type=radio]#category');
-    checkedField.field(updateCarContainerDiv, options.drivetrain, 'input[type=radio]#drivetrain');
-    checkedField.field(updateCarContainerDiv, options.status, 'input[type=radio]#status');
-    checkedField.field(updateCarContainerDiv, options.transmission, 'input[type=radio]#transmission');
-
+    if (options.isForUpdate) {
+      checkedField.field(updateCarContainerDiv, options.year, 'select#year option');
+      checkedField.field(updateCarContainerDiv, options.cylinder, 'input[type=radio]#cylinder');
+      checkedField.field(updateCarContainerDiv, options.category, 'input[type=radio]#category');
+      checkedField.field(updateCarContainerDiv, options.drivetrain, 'input[type=radio]#drivetrain');
+      checkedField.field(updateCarContainerDiv, options.status, 'input[type=radio]#status');
+      checkedField.field(updateCarContainerDiv, options.transmission, 'input[type=radio]#transmission');
+    }
     console.log(options);
   })
 </script>

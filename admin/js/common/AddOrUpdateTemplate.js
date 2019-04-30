@@ -1,19 +1,21 @@
 class AddOrUpdateTemplate {
 
   constructor(options) {
-    this.isForUpdate = options.isForUpdate; // otherwise it is used for adding
-    this.id = options.id;
-    this.make = options.make;
-    this.model = options.model;
-    this.year = options.year;
-    this.price = options.price;
-    this.mileage = options.mileage;
-    this.cylinder = options.cylinder;
-    this.drivetrain = options.drivetrain;
-    this.status = options.status;
-    this.transmission = options.transmission;
-    this.engineCapacity = options.engineCapacity;
-    this.doors = options.doors;
+    if (options.isForUpdate || options === 'null') {
+      this.isForUpdate = options.isForUpdate; // otherwise it is used for adding
+      this.id = options.id;
+      this.make = options.make;
+      this.model = options.model;
+      this.year = options.year;
+      this.price = options.price;
+      this.mileage = options.mileage;
+      this.cylinder = options.cylinder;
+      this.drivetrain = options.drivetrain;
+      this.status = options.status;
+      this.transmission = options.transmission;
+      this.engineCapacity = options.engineCapacity;
+      this.doors = options.doors;
+    }
   }
 
   addOrUpdateCar_Container() {
@@ -33,7 +35,6 @@ class AddOrUpdateTemplate {
             <div class="panel-body">   
               <table cellspacing="1" id="update-car-general-info-table">   
                 <tbody>
-                ${this.isForUpdate ? this.updateCar_HiddenVid() : null}
                 ${this.addOrUpdateCar_SelectMake()}
                 ${this.addOrUpdateCar_SelectYear()}
                 ${this.addOrUpdateCar_Model()}
@@ -54,7 +55,7 @@ class AddOrUpdateTemplate {
   }
 
   updateCar_HiddenVid() {
-    return `<tr><td><input type="hidden" class="hidden" value="${this.id}" name="update-vehicle-id" id="update-vehicle-id"></td></tr>`;
+    return `<tr><td><input type="hidden" class="hidden" value="${this.isForUpdate ? this.id : ''}" name="update-vehicle-id" id="update-vehicle-id"></td></tr>`;
   }
 
   addOrUpdateCar_SelectMake() {

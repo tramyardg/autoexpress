@@ -219,10 +219,11 @@ if (!isset($_SESSION['authenticated'])) {
                                             aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title">Add New Vehicle</h4>
                             </div>
+                            <div id="addCarContainer"></div>
+                            <!--
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="" method="post" onsubmit="" class="margin-top-15">
-                                        <!-- general vehicle info -->
                                         <div class="panel panel-primary">
                                             <div class="panel-heading">General vehicle info</div>
                                             <div class="panel-body">
@@ -409,7 +410,6 @@ if (!isset($_SESSION['authenticated'])) {
                                             </div>
                                         </div>
 
-                                        <!-- category and photos -->
                                         <div class="panel panel-primary">
                                             <div class="panel-heading">Category</div>
                                             <div class="panel-body">
@@ -465,7 +465,6 @@ if (!isset($_SESSION['authenticated'])) {
                                             </div>
                                         </div>
 
-                                        <!-- engine and chassis -->
                                         <div class="panel panel-primary">
                                             <div class="panel-heading">Engine and chassis</div>
                                             <div class="panel-body">
@@ -511,7 +510,6 @@ if (!isset($_SESSION['authenticated'])) {
                                             </div>
                                         </div>
 
-                                        <!-- submit and cancel buttons -->
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <input type="submit" class="btn btn-primary btn-sm"
@@ -521,6 +519,7 @@ if (!isset($_SESSION['authenticated'])) {
                                     </form>
                                 </div>
                             </div>
+                            -->
                         </div>
                     </div>
                 </div>
@@ -623,6 +622,14 @@ if (!isset($_SESSION['authenticated'])) {
 <script src="js/routine/common-html.js"></script>
 <script src="js/routine/car-actions.js"></script>
 <script src="js/app.js"></script>
+
+<script src="js/common/AddOrUpdateTemplate.js"></script>
+<script>
+  let adminAddCar = new AddOrUpdateTemplate('null');
+  let addCarContainerDiv = $('#addCarContainer');
+  addCarContainerDiv.empty();
+  addCarContainerDiv.append(adminAddCar.addOrUpdateCar_Container());
+</script>
 
 </body>
 </html>
