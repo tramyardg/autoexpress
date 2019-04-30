@@ -51,11 +51,6 @@ if (!isset($_SESSION['authenticated'])) {
             $isDeletedPhoto = $d->isDeleted($_GET["id"]);
         }
     }
-
-    // updating general car info
-    if (!empty($_POST['update-car-submit'])) {
-        $isUpdatedCondition = $v->isUpdated($_POST);
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -153,15 +148,10 @@ if (!isset($_SESSION['authenticated'])) {
                                                     <span class="caret"></span></button>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <a id="updateCar_link" class="btn btn-sm left"
-                                                           data-id="<?php echo $carId; ?>">Update</a>
-                                                    </li>
-                                                    <li>
                                                         <?php
                                                         $toHash = $carId;
                                                         $toHash .= date("m.d.y");
                                                         $hash = sha1($toHash);
-
                                                         ?>
                                                         <a class="btn btn-sm left"
                                                            href="updateCar.php?updateId=<?php echo $row['vehicleId'] . '&h=' . $hash; ?>">Update</a>

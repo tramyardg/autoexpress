@@ -20,7 +20,6 @@ if (!isset($_SESSION['authenticated'])) {
     $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
 
     $v = new CarDAO();
-    // updating general car info
     if (!empty($_POST['update-car-submit'])) {
         $isUpdatedCondition = $v->isUpdated($_POST);
     }

@@ -60,7 +60,7 @@ class AddOrUpdateTemplate {
   addOrUpdateCar_SelectMake() {
     return `<tr>
                 <td>Make<span class="input-required"> *</span></td>   
-                <td><input type="text" readonly value="${this.isForUpdate ? this.make : ''}" name="update-make" id="update-make" ></td>   
+                <td><input type="text" ${this.isForUpdate ? 'readonly' : ''} value="${this.isForUpdate ? this.make : ''}" name="update-make" id="update-make" ></td>   
             </tr>`;
   }
 
@@ -118,7 +118,7 @@ class AddOrUpdateTemplate {
   addOrUpdateCar_Model() {
     return `<tr>
                 <td>Model<span class="input-required"> *</span></td>
-                <td><input type="text" readonly value="${this.isForUpdate ? this.model : ''}" name="update-model" id="update-model" ></td>
+                <td><input type="text" ${this.isForUpdate ? 'readonly' : ''} value="${this.isForUpdate ? this.model : ''}" name="update-model" id="update-model" ></td>
             </tr>`;
   }
 
@@ -247,7 +247,8 @@ class AddOrUpdateTemplate {
 
   addOrUpdateCar_SubmitButton() {
     return `<div style="margin-bottom: 2em;">
-                <input type="submit" class="btn btn-primary btn-sm" name="update-car-submit" id="update-car-submit" value="Submit">
+                <input type="submit" class="btn btn-primary btn-sm" name="${this.isForUpdate ? 'update-car-submit' : 'add-car-submit'}" 
+                id="${this.isForUpdate ? 'update-car-submit' : 'add-car-submit'}" value="Submit">
             </div>`;
   }
 
