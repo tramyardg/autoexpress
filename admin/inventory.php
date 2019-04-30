@@ -219,7 +219,7 @@ if (!isset($_SESSION['authenticated'])) {
                                             aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title">Add New Vehicle</h4>
                             </div>
-                            <div id="addCarContainer"></div>
+                            <div style="padding: 1em;" id="addCarContainer"></div>
                             <!--
                             <div class="row">
                                 <div class="col-md-12">

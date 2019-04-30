@@ -1,7 +1,7 @@
 class AddOrUpdateTemplate {
 
   constructor(options) {
-    if (options.isForUpdate || options === 'null') {
+    if (options.isForUpdate || options !== 'null') {
       this.isForUpdate = options.isForUpdate; // otherwise it is used for adding
       this.id = options.id;
       this.make = options.make;
@@ -35,8 +35,7 @@ class AddOrUpdateTemplate {
             <div class="panel-body">   
               <table cellspacing="1" id="update-car-general-info-table">   
                 <tbody>
-                ${this.addOrUpdateCar_SelectMake()}
-                ${this.addOrUpdateCar_SelectYear()}
+                ${this.isForUpdate ? this.addOrUpdateCar_InputMake() : this.addOrUpdateCar_SelectMake()}
                 ${this.addOrUpdateCar_Model()}
                 ${this.addOrUpdateCar_Price()}
                 ${this.addOrUpdateCar_Mileage()}
@@ -58,11 +57,72 @@ class AddOrUpdateTemplate {
     return `<tr><td><input type="hidden" class="hidden" value="${this.isForUpdate ? this.id : ''}" name="update-vehicle-id" id="update-vehicle-id"></td></tr>`;
   }
 
-  addOrUpdateCar_SelectMake() {
+  addOrUpdateCar_InputMake() {
     return `<tr>
                 <td>Make<span class="input-required"> *</span></td>   
-                <td><input type="text" ${this.isForUpdate ? 'readonly' : ''} value="${this.isForUpdate ? this.make : ''}" name="update-make" id="update-make" ></td>   
+                <td><input type="text" value="${this.make}" name="update-make" id="update-make" ></td>   
             </tr>`;
+  }
+
+  addOrUpdateCar_SelectMake() {
+    return `<tr>
+              <td>Make<span class="input-required"> *</span></td>
+              <td>
+                  <select title="make" name="make" id="make" class=""
+                          onchange="new CommonUtil().selectCarMake(this);"
+                          required>
+                      <option selected="selected" value="">Select Make
+                      </option>
+                      <option value="Acura">Acura</option>
+                      <option value="Alfa Romeo">Alfa Romeo</option>
+                      <option value="Aston Martin">Aston Martin</option>
+                      <option value="Audi">Audi</option>
+                      <option value="Bentley">Bentley</option>
+                      <option value="BMW">BMW</option>
+                      <option value="Buick">Buick</option>
+                      <option value="Cadillac">Cadillac</option>
+                      <option value="Chevrolet">Chevrolet</option>
+                      <option value="Chrysler">Chrysler</option>
+                      <option value="Dodge">Dodge</option>
+                      <option value="Ferrari">Ferrari</option>
+                      <option value="FIAT">Fiat</option>
+                      <option value="Ford">Ford</option>
+                      <option value="GMC">GMC</option>
+                      <option value="Honda">Honda</option>
+                      <option value="Hyundai">Hyundai</option>
+                      <option value="Infiniti">Infiniti</option>
+                      <option value="Isuzu">Isuzu</option>
+                      <option value="Jaguar">Jaguar</option>
+                      <option value="Jeep">Jeep</option>
+                      <option value="Kia">Kia</option>
+                      <option value="Lamborghini">Lamborghini</option>
+                      <option value="Land Rover">Land Rover</option>
+                      <option value="Lexus">Lexus</option>
+                      <option value="Lincoln">Lincoln</option>
+                      <option value="Lotus">Lotus</option>
+                      <option value="Maserati">Maserati</option>
+                      <option value="Mazda">Mazda</option>
+                      <option value="Mercedes-Benz">Mercedes-Benz</option>
+                      <option value="Mini">Mini</option>
+                      <option value="Mitsubishi">Mitsubishi</option>
+                      <option value="Nissan">Nissan</option>
+                      <option value="Pontiac">Pontiac</option>
+                      <option value="Porsche">Porsche</option>
+                      <option value="Ram">Ram</option>
+                      <option value="Saab">Saab</option>
+                      <option value="Saturn">Saturn</option>
+                      <option value="Scion">Scion</option>
+                      <option value="Smart">Smart</option>
+                      <option value="Subaru">Subaru</option>
+                      <option value="Suzuki">Suzuki</option>
+                      <option value="Tesla">Tesla</option>
+                      <option value="Toyota">Toyota</option>
+                      <option value="Volkswagen">Volkswagen</option>
+                      <option value="Volvo">Volvo</option>
+                  </select>
+                  <b style="font-size: 10px; color: red;" id="make-err">&nbsp;</b>
+              </td>
+          </tr>`;
   }
 
   addOrUpdateCar_SelectYear() {
@@ -119,7 +179,7 @@ class AddOrUpdateTemplate {
   addOrUpdateCar_Model() {
     return `<tr>
                 <td>Model<span class="input-required"> *</span></td>
-                <td><input type="text" ${this.isForUpdate ? 'readonly' : ''} value="${this.isForUpdate ? this.model : ''}" name="update-model" id="update-model" ></td>
+                <td><input type="text" ${this.isForUpdate ? 'readonly' : 'required'} value="${this.isForUpdate ? this.model : ''}" name="update-model" id="update-model" ></td>
             </tr>`;
   }
 
