@@ -624,11 +624,17 @@ if (!isset($_SESSION['authenticated'])) {
 <script src="js/app.js"></script>
 
 <script src="js/common/AddOrUpdateTemplate.js"></script>
-<script>
+<script type="text/javascript">
   let adminAddCar = new AddOrUpdateTemplate('null');
   let addCarContainerDiv = $('#addCarContainer');
   addCarContainerDiv.empty();
   addCarContainerDiv.append(adminAddCar.addOrUpdateCar_Container());
+  $('select#make').on('change', function (ele) {
+    // console.log('hello');
+    // let modelsSelect = $(ele).parent().parent().next().next().find('#model');
+    // console.log(modelsSelect);
+    console.log($(ele)[0].currentTarget);
+  });
 </script>
 
 </body>

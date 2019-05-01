@@ -36,7 +36,8 @@ class AddOrUpdateTemplate {
               <table cellspacing="1" id="update-car-general-info-table">   
                 <tbody>
                 ${this.isForUpdate ? this.addOrUpdateCar_InputMake() : this.addOrUpdateCar_SelectMake()}
-                ${this.addOrUpdateCar_Model()}
+                ${this.isForUpdate ? this.addOrUpdateCar_InputModel() : this.addOrUpdateCar_SelectModel()}
+                ${this.addOrUpdateCar_SelectYear()}
                 ${this.addOrUpdateCar_Price()}
                 ${this.addOrUpdateCar_Mileage()}
                 ${this.addOrUpdateCar_Transmission()}
@@ -69,7 +70,7 @@ class AddOrUpdateTemplate {
               <td>Make<span class="input-required"> *</span></td>
               <td>
                   <select title="make" name="make" id="make" class=""
-                          onchange="new CommonUtil().selectCarMake(this);"
+<!--                          onchange="new CommonUtil().selectCarMake(this);"-->
                           required>
                       <option selected="selected" value="">Select Make
                       </option>
@@ -176,10 +177,22 @@ class AddOrUpdateTemplate {
         </td></tr>`;
   }
 
-  addOrUpdateCar_Model() {
+  addOrUpdateCar_InputModel() {
     return `<tr>
                 <td>Model<span class="input-required"> *</span></td>
                 <td><input type="text" ${this.isForUpdate ? 'readonly' : 'required'} value="${this.isForUpdate ? this.model : ''}" name="update-model" id="update-model" ></td>
+            </tr>`;
+  }
+
+  addOrUpdateCar_SelectModel() {
+    return `<tr>
+              <td>Model<span class="input-required"> *</span></td>
+              <td>
+                  <select name="model" id="model" title="model" required>
+                      <option selected="selected">Select model</option>
+                  </select>
+                  <b style="font-size: 10px; color: red;" id="model-err">&nbsp;</b>
+              </td>
             </tr>`;
   }
 
