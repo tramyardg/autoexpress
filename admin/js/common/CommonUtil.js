@@ -30,45 +30,20 @@ function CommonUtil() {
   ];
 
   // dynamically show the models of data selected
-  this.selectCarMake = function (selectedMake) {
-    let modelsSelect = $(selectedMake).parent().parent().next().next().find('#model');
+  this.selectCarMake = function (make) {
+    let modelsSelect = $('select#model');
     modelsSelect.empty();
-    let selectVal = $(selectedMake).val();
-    $.getJSON("js/data/models.json", function (json) {
-      for (let key in json) {
-        if (json.hasOwnProperty(key)) {
-          if (selectVal === json[key].title) {
-            let modelsObj = json[key].models;
-            Object.keys(modelsObj).forEach(function (key) {
-              let h = '<option value="' + modelsObj[key].value + '" title="' + modelsObj[key].title + '">' + modelsObj[key].value + '</option>';
-              modelsSelect.append(h);
-            });
-            break;
-          }
-        }
-      }
-    });
 
-    /*
-    $.ajax({
-      type: "GET",
-      url: "js/data/models.json",
-      dataType: "json",
-      success: function (json) {
-        for (let key in json) {
-          if (json.hasOwnProperty(key)) {
-            if (selectVal === json[key].title) {
-              let modelsObj = json[key].models;
-              Object.keys(modelsObj).forEach(function (key) {
-                let h = '<option value="' + modelsObj[key].value + '" title="' + modelsObj[key].title + '">' + modelsObj[key].value + '</option>';
-                modelsSelect.append(h);
-              });
-              break;
-            }
-          }
+    let selectedMake = $(make).val();
+    $.getJSON("js/data/models.json", function (json) {
+      json.map((k) => {
+        if (k.title === selectedMake) {
+          k.models.map((k1) => {
+            modelsSelect.append(`<option value="${k1.value}" title="${k1.value}">${k1.value}</option>`);
+          })
         }
-      }
-    });*/
+      })
+    });
   };
 
   this.pageEnum = {

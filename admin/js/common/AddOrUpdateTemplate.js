@@ -70,8 +70,7 @@ class AddOrUpdateTemplate {
               <td>Make<span class="input-required"> *</span></td>
               <td>
                   <select title="make" name="make" id="make" class=""
-<!--                          onchange="new CommonUtil().selectCarMake(this);"-->
-                          required>
+                          onchange="new CommonUtil().selectCarMake(this);" required>
                       <option selected="selected" value="">Select Make
                       </option>
                       <option value="Acura">Acura</option>
