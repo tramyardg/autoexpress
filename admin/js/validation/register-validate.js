@@ -1,8 +1,3 @@
-/**
- * Created by RAYMARTHINKPAD on 2017-08-23.
- */
-let util = new CommonUtil();
-
 let RegisterValidate = (function () {
   let fields = {
     email: {selector: null},

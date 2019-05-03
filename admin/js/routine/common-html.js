@@ -83,11 +83,6 @@ let CommonHTML = (function () {
           break;
         case util.pageName[util.pageEnum.admin].name:
           fnCommonElement();
-          adminTableSel.DataTable({
-            "pageLength": 5,
-            "lengthChange": false,
-            searching: false
-          });
           fnManipulateRecordElem();
           break;
         case util.pageName[util.pageEnum.preferences].name:

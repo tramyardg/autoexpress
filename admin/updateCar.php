@@ -93,7 +93,7 @@ if (!isset($_SESSION['authenticated'])) {
 
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 <script src="js/datatables.min.js"></script>
 
 <script src="js/common/CommonTemplate.js"></script>

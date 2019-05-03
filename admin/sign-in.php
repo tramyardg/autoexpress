@@ -140,6 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/common/AdminPageTemplate.js"></script>
 <script src="js/common/CommonUtil.js"></script>
 <script src="js/common/CommonTemplate.js"></script>
 <script src="js/routine/common-html.js"></script>
