@@ -223,7 +223,8 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
     </div>
     <?php include 'template/footer.php'; ?>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/features.js"></script>
