@@ -164,8 +164,7 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                                                 // second if stmt: no badge for car that has no images
                                                 $currSearchCarImg = $d->getPhotosBy_CarId($rowSearchResult['vehicleId']);
                                                 if($d->countAllPhotosByCarId($rowSearchResult['vehicleId']) == "0") {
-                                                    //$h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
-													$h = "https://placeholdit.co//i/272x150?text=Photo Unavailable&bg=111111";
+                                                    $h = "https://via.placeholder.com/272x150/36383D/FFFFFF/?text=Sample image here";
                                                 } else {
                                                     $h = $currSearchCarImg[0]->getDiagram();
                                                 }
