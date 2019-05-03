@@ -145,6 +145,13 @@ body {
 #templatemo_sort_btn {
     margin-bottom: 20px
 }
+.input-required {
+    color: red !important;
+}
+#car-general-info-table tbody tr td input,
+table tbody tr td input, select {
+    margin: 2px 0 2px 3px !important;
+}
 .alert,
 .breadcrumb,
 .btn,

@@ -76,15 +76,6 @@ if (!isset($_SESSION['authenticated'])) {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/templatemo_main.css">
 	<link rel="stylesheet" href="css/datatables.min.css">
-    <style>
-        .input-required {
-            color: red;
-        }
-        #car-general-info-table tbody tr td input,
-        table tbody tr td input, select {
-            margin: 2px 0 2px 3px;
-        }
-    </style>
 </head>
 <body>
 <div id="main-wrapper">
@@ -564,23 +555,23 @@ if (!isset($_SESSION['authenticated'])) {
                                             <output id="list"></output>
                                             <script>
                                               function handleFileSelect(evt) {
-                                                var files = evt.target.files; // FileList object
+                                                let files = evt.target.files; // FileList object
 
                                                 // Loop through the FileList and render image files as thumbnails.
-                                                for (var i = 0, f; f = files[i]; i++) {
+                                                for (let i = 0, f; f = files[i]; i++) {
 
                                                   // Only process image files.
                                                   if (!f.type.match('image.*')) {
                                                     continue;
                                                   }
 
-                                                  var reader = new FileReader();
+                                                  let reader = new FileReader();
 
                                                   // Closure to capture the file information.
                                                   reader.onload = (function (theFile) {
                                                     return function (e) {
                                                       // Render thumbnail.
-                                                      var span = document.createElement('span');
+                                                      let span = document.createElement('span');
                                                       span.innerHTML = ['<img class="thumb" id="car-image-' + i + '" src="', e.target.result,
                                                         '" title="', theFile.name, '"/>'].join('');
                                                       document.getElementById('list').insertBefore(span, null);
