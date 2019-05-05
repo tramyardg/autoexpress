@@ -4,8 +4,8 @@ session_start();
 require_once 'server/AdminDAO.php';
 require_once 'server/CarDAO.php';
 require_once 'server/DiagramDAO.php';
-require_once 'server/class/Admin.php';
-require_once 'server/class/Paging.php';
+require_once 'server/model/Admin.php';
+require_once 'server/model/Paging.php';
 
 $num_cars = null;
 $rowCarField = null;
@@ -272,7 +272,7 @@ if (!isset($_SESSION['authenticated'])) {
                                                     return function (e) {
                                                       // Render thumbnail.
                                                       let span = document.createElement('span');
-                                                      span.innerHTML = ['<img class="thumb" id="car-image-' + i + '" src="', e.target.result,
+                                                      span.innerHTML = ['<img model="thumb" id="car-image-' + i + '" src="', e.target.result,
                                                         '" title="', theFile.name, '"/>'].join('');
                                                       document.getElementById('list').insertBefore(span, null);
                                                     };

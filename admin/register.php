@@ -1,5 +1,5 @@
 <?php ob_start(); session_start();
-require_once 'server/class/Dbh.php';
+require_once 'server/model/Dbh.php';
 require_once 'server/AdminDAO.php';
 
 if(isset($_SESSION['authenticated'])) {

@@ -2,7 +2,7 @@
 require_once 'admin/server/CarDAO.php';
 require_once 'admin/server/DiagramDAO.php';
 require_once 'admin/server/AdvanceSearchDAO.php';
-require_once 'admin/server/class/Paging.php';
+require_once 'admin/server/model/Paging.php';
 
 $v = new CarDAO();
 $d = new DiagramDAO();

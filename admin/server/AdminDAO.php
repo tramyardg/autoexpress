@@ -6,14 +6,14 @@
  * Date: 2017-08-07
  * Time: 2:18 AM
  */
-require_once 'class/Utility.php';
-require_once 'class/Dbh.php';
-require_once 'class/Admin.php';
+require_once 'model/Utility.php';
+require_once 'model/Dbh.php';
+require_once 'model/Admin.php';
 
 class AdminDAO extends Utility
 {
 
-    // mostly used for select queries, mapping results to a class
+    // mostly used for select queries, mapping results to a model
     function query($sql)
     {
         $db = Dbh::getInstance();

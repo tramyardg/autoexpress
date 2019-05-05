@@ -1,8 +1,8 @@
 <?php
 
-require_once 'class/Utility.php';
-require_once 'class/Dbh.php';
-require_once 'class/Vehicle.php';
+require_once 'model/Utility.php';
+require_once 'model/Dbh.php';
+require_once 'model/Vehicle.php';
 /**
  *
  * Contains managing data query functions
@@ -19,7 +19,7 @@ require_once 'class/Vehicle.php';
 class CarDAO extends Utility
 {
 
-    // mostly used for select queries, mapping results to a class
+    // mostly used for select queries, mapping results to a model
     function query($sql)
     {
         $db = Dbh::getInstance();

@@ -1,5 +1,5 @@
 <?php
-require_once 'class/Dbh.php';
+require_once 'model/Dbh.php';
 require_once 'CarDAO.php';
 require_once 'DiagramDAO.php';
 

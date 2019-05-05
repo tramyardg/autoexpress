@@ -4,8 +4,8 @@ session_start();
 require_once 'server/AdminDAO.php';
 require_once 'server/CarDAO.php';
 require_once 'server/DiagramDAO.php';
-require_once 'server/class/Admin.php';
-require_once 'server/class/Paging.php';
+require_once 'server/model/Admin.php';
+require_once 'server/model/Paging.php';
 
 $num_cars = null;
 $rowCarField = null;

@@ -1,8 +1,8 @@
 <?php ob_start(); session_start();
 
 require_once 'server/AdminDAO.php';
-require_once 'server/class/Utility.php';
-require_once 'server/class/Admin.php';
+require_once 'server/model/Utility.php';
+require_once 'server/model/Admin.php';
 
 if(!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
