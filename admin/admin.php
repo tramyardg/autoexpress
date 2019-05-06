@@ -12,11 +12,7 @@ if(!isset($_SESSION['authenticated'])) {
 
     $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
     $all_admin = $q->getAllAdmin();
-
 }
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -12,10 +12,7 @@ if(!isset($_SESSION['authenticated'])) {
     }
     $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
     $c = new CarDAO();
-
-
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

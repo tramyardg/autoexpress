@@ -152,7 +152,6 @@ if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
 
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

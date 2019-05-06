@@ -13,7 +13,6 @@ if(!isset($_SESSION['authenticated'])) {
     }
     $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
 
-
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(!empty($_POST['password_1']) && !empty($_POST['password_2'])) {
 
@@ -32,9 +31,6 @@ if(!isset($_SESSION['authenticated'])) {
     }
 
 }
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
