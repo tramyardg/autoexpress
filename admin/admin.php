@@ -1,12 +1,14 @@
-<?php ob_start(); session_start();
+<?php
+ob_start();
+session_start();
 require_once 'server/AdminDAO.php';
 require_once 'server/model/Admin.php';
 
-if(!isset($_SESSION['authenticated'])) {
+if (!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 } else {
     $q = new AdminDAO();
-    if(isset($_REQUEST['username'])) {
+    if (isset($_REQUEST['username'])) {
         $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
 
@@ -69,7 +71,7 @@ if(!isset($_SESSION['authenticated'])) {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php for ($i = 0; $i < $q->countAllAdmin(); $i++) {
+                                <?php for ($i = 0; $i < count($q->getAllAdmin()); $i++) {
                                         $privilege_array = explode(',', $all_admin[$i]->getPrivilege());
                                     ?>
                                 <tr>

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: RAYMARTHINKPAD
- * Date: 2017-08-07
- * Time: 2:18 AM
- */
 require_once 'model/Utility.php';
 require_once 'model/Dbh.php';
 require_once 'model/Admin.php';
@@ -55,14 +49,14 @@ class AdminDAO extends Utility
             . " username = $username_";
 
         return $this->query($sql);
-
     }
 
     /**
      * I'm only updating 2 elements here
      * tested
      */
-    function update(&$admin) {
+    function update(&$admin)
+    {
         $_password = $this->stringValue($admin->getPassword());
         $_update_time = $this->stringValue($admin->getLastUpdate());
         $sql = "UPDATE\n"
@@ -71,7 +65,7 @@ class AdminDAO extends Utility
             . " `password` = $_password,\n"
             . " `last_update` = $_update_time\n"
             . "WHERE\n"
-            . " `adminId` = ".$admin->getAdminId();
+            . " `adminId` = " . $admin->getAdminId();
         $db = Dbh::getInstance();
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -97,31 +91,14 @@ class AdminDAO extends Utility
         return $stmt;
     }
 
-    // for registration if username is taken {boolean}
-    function isUsernameTaken($usernameStr)
-    {
-        $exists = null;
-        if (($this->getAdminByUsername($usernameStr))) {
-            $exists = "true";
-        } else {
-            $exists = "false";
-        }
-        return $exists;
-    }
-
     // redirect 404 if users trying to access a non-existing admin
     function redirectNotFoundAdmin($request_username)
     {
         if (!empty($request_username)) {
-            if ($this->isUsernameTaken($request_username) == "false") {
+            if (count($this->getAdminByUsername($request_username)) > 0) {
                 header("Location:not-found.php");
             }
         }
     }
-
-    function countAllAdmin() {
-        return count($this->getAllAdmin());
-    }
-
 
 }

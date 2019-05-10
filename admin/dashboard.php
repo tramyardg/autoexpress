@@ -1,13 +1,15 @@
-<?php ob_start(); session_start();
+<?php
+ob_start();
+session_start();
 require_once 'server/AdminDAO.php';
 require_once 'server/model/Admin.php';
 require_once 'server/CarDAO.php';
 
-if(!isset($_SESSION['authenticated'])) {
+if (!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 } else {
     $q = new AdminDAO();
-    if(isset($_REQUEST['username'])) {
+    if (isset($_REQUEST['username'])) {
         $q->redirectNotFoundAdmin($_REQUEST['username']);
     }
     $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
@@ -64,7 +66,7 @@ if(!isset($_SESSION['authenticated'])) {
                                         <i class="fa fa-user fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge"><?php echo $q->countAllAdmin(); ?></div>
+                                        <div class="huge"><?php echo count($q->getAllAdmin()); ?></div>
                                         <div>Administrators</div>
                                     </div>
                                 </div>

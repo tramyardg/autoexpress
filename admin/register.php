@@ -1,9 +1,11 @@
-<?php ob_start(); session_start();
+<?php
+ob_start();
+session_start();
 require_once 'server/model/Dbh.php';
 require_once 'server/AdminDAO.php';
 
-if(isset($_SESSION['authenticated'])) {
-	header('Location: dashboard.php');
+if (isset($_SESSION['authenticated'])) {
+    header('Location: dashboard.php');
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -17,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $q = new AdminDAO();
 
     $msgTaken = null;
-    if($q->isUsernameTaken($username) == "true") {
+    if (count($q->getAdminByUsername($username)) > 0) {
         $msgTaken = 'This username is already taken.';
     } else {
-        if(!empty($username) && !empty($email) && !empty($password)) {
-            if($q->create($username, $email, $password)) {
+        if (!empty($username) && !empty($email) && !empty($password)) {
+            if ($q->create($username, $email, $password)) {
                 $cond = 1;
             }
         }
@@ -59,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div id="main-wrapper">
 
     <div class="template-page-wrapper splash2">
-       
-		
-		<?php if(isset($cond) && $cond === 1) { ?>
+
+
+        <?php if (isset($cond) && $cond === 1) { ?>
 		<div class="templatemo-signin-form">
 			<div class="col-md-12">
 				<div class="col-sm-2"></div>
@@ -74,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		</div>
 		<?php } ?>
 
-        <?php if(!empty($msgTaken)) { ?>
+        <?php if (!empty($msgTaken)) { ?>
             <div class="templatemo-signin-form">
                 <div class="col-md-12">
                     <div class="col-sm-2"></div>
@@ -87,7 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php } ?>
 		
         <form action="" method="post" onsubmit="return RegisterValidate.validateForm();" name="register-form" id="register-form" class="form-horizontal templatemo-signin-form" role="form" >
-        <!--<form action="./model/forms/register.php" method="post" name="register-form" id="register-form" class="form-horizontal templatemo-signin-form" role="form" >-->
             <div class="form-group">
                 <div class="col-md-12">
                     <label for="username" class="col-sm-2 control-label">Username</label>
