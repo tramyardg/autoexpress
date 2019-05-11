@@ -6,10 +6,9 @@ require_once '../server/DiagramDAO.php';
 $v = new CarDAO();
 if (isset($_GET["action"])) {
     if ($_GET["action"] === "uploadPhotos") {
-        echo $is_uploaded = $v->isDiagramAdded(
-            $_POST['filesData'], // array of images src to be uploaded
-            $_GET["id"] // query string in the ajax url properties
-        );
+        // $_POST['filesData'], // array of images src to be uploaded
+        // $_GET["id"] // query string in the ajax url properties
+        echo $this->addDiagram($_POST['filesData'], $_GET["id"]) != null ? 1 : 0;
         exit();
     }
 }

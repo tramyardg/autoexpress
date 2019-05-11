@@ -5,7 +5,7 @@ require_once 'admin/server/DiagramDAO.php';
 $v = new CarDAO();
 $d = new DiagramDAO();
 
-if(isset($_GET['carId']) && $v->isVehicleExist($_GET['carId'])) {
+if (isset($_GET['carId']) && count($v->getCarById($_GET['carId'])) > 0) {
     $carId = $_GET['carId'];
     $currCar = $v->getCarById($carId); // current car [0]
     $numImg = $d->countAllPhotosByCarId($carId);

@@ -221,16 +221,6 @@ class CarDAO extends Utility
         }
     }
 
-    // precondition: this vehicle already exists
-    function isDiagramAdded($files, $id)
-    {
-        if ($this->addDiagram($files, $id)) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
     function update(&$carObject) {
         // some of them needs to be a varchar (string)
         $sql =  '   UPDATE  '.
@@ -258,9 +248,10 @@ class CarDAO extends Utility
         return $stmt;
     }
 
-    function isUpdated($postArray) {
+    function isUpdated($postArray)
+    {
         $id = $postArray['update-vehicle-id'];
-        if($this->isVehicleExist($id)) {
+        if (count($this->getCarById($id)) > 0) {
             $updateThisCar_obj = new Vehicle(
                 $id, // syntax: $postArray['nameAttribute']
                 $postArray["update-make"],
@@ -277,7 +268,7 @@ class CarDAO extends Utility
                 $postArray["status"],
                 $this->getTimeStamp()
             );
-            if($this->update($updateThisCar_obj)) {
+            if ($this->update($updateThisCar_obj)) {
                 return 1;
             }
         } else {
@@ -323,12 +314,4 @@ class CarDAO extends Utility
         return $stmt->fetchColumn(0);
     }
 
-    // for registration if username is taken {boolean}
-    function isVehicleExist($id) {
-        if (($this->getCarById($id))) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
 }
