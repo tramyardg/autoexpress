@@ -1,33 +1,25 @@
-<?php ob_start(); session_start();
+<?php
+ob_start();
+session_start();
 require_once 'server/AdminDAO.php';
 require_once 'server/model/Admin.php';
 
-if(isset($_SESSION['authenticated'])) {
-	header('Location: dashboard.php');
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    $exists = null;
+    $exists = '3';
     $util = new Utility();
-
     $q = new AdminDAO();
     if(!empty($_POST['username']) && !empty($_POST['password'])) {
         $password = $_POST['password'];
-
         // both username and password combination must be correct
-        $results = $q->getAdminByUsername($_POST['username']); // checks username
-
+        $results = $q->getAdminByUsername($_POST['username']);
+        // checks username
         if(!empty($results)) {
             if($results[0]->getPassword() == $password) {
                 $exists = '1'; // all good
             } else {
                 $exists = '2'; // incorrect password
             }
-        } else {
-            $exists = '3';     // username not exists
         }
-
     }
 
     // very important lines do not remove
@@ -36,6 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['adminUsername'] = $_POST['username'];
     }
 
+    if(isset($_SESSION['authenticated'])) {
+        header('Location: dashboard.php');
+    }
 }
 ?>
 <!DOCTYPE html>

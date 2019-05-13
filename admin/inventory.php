@@ -19,9 +19,6 @@ if (!isset($_SESSION['authenticated'])) {
     $p->setStartingRow($p->getPageRowNumber());
 
     $q = new AdminDAO();
-    if (isset($_REQUEST['username'])) {
-        $q->redirectNotFoundAdmin($_REQUEST['username']);
-    }
     $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
 
     $v = new CarDAO();
