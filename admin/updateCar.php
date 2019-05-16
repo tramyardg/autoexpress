@@ -14,9 +14,6 @@ if (!isset($_SESSION['authenticated'])) {
 } else {
 
     $q = new AdminDAO();
-    if (isset($_REQUEST['username'])) {
-        $q->redirectNotFoundAdmin($_REQUEST['username']);
-    }
     $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
 
     $v = new CarDAO();

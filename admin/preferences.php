@@ -8,9 +8,6 @@ if(!isset($_SESSION['authenticated'])) {
     header('Location: sign-in.php');
 } else {
     $q = new AdminDAO();
-    if(isset($_REQUEST['username'])) {
-        $q->redirectNotFoundAdmin($_REQUEST['username']);
-    }
     $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
