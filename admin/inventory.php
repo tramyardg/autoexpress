@@ -239,8 +239,7 @@ if (!isset($_SESSION['authenticated'])) {
 
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="" method="post" id="add-car-photos-form"
-                              enctype="multipart/form-data" class="">
+                        <form method="post" id="add-car-photos-form" enctype="multipart/form-data">
                             <div class="panel panel-info">
                                 <div class="panel-heading">Upload photos for this car</div>
                                 <div class="panel-body">
@@ -277,15 +276,15 @@ if (!isset($_SESSION['authenticated'])) {
 
                                                   // Read in the image file as a data URL.
                                                   reader.readAsDataURL(f);
+                                                  console.log(f);
                                                 } // end for
                                               }
                                               document.getElementById('files').addEventListener('change', handleFileSelect, false);
                                             </script>
                                         </div>
                                         <div class="col-md-12">
-                                            <button type="button" class="btn btn-success btn-sm"
-                                                    id="upload-car-photos-btn">Upload
-                                            </button>
+                                            <input type="submit" class="btn btn-success btn-sm" value="Upload" id="upload-car-photos-btn"
+                                            name="upload-car-photos-btn">
                                         </div>
                                     </div>
                                 </div>

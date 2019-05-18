@@ -33,7 +33,7 @@ let CarActions = (function () {
 
       uploadCarPhotoLink = $('.dropdown a.upload-car-photos');
       uploadDeleteCarPhotoModal = $('#upload-delete-car-photos-modal');
-      uploadCarPhotoBtn = $('#upload-car-photos-btn');
+      uploadCarPhotoBtn = $('input[name=upload-car-photos-btn]');
 
       updateCarLink = $('a#updateCar_link');
       updateCarModal = $('.update-car-modal');
@@ -126,31 +126,29 @@ let CarActions = (function () {
         // not using DataTables
         getPhotosByCarIdFn(carId);
 
-        uploadCarPhotoBtn.click(function (e) {
-          uploadDeleteCarPhotoModal.modal('hide');
-          e.preventDefault();
+        return false;
+      });
 
-          let thumbImageSel = $('.thumb');
-          let filesDataArray = [];
-          for (let i = 0; i < thumbImageSel.length; i++) {
-            filesDataArray.push(thumbImageSel.eq(i).attr('src'));
+      uploadCarPhotoBtn.click(function () {
+        uploadDeleteCarPhotoModal.modal('hide');
+
+        let thumbImageSel = $('img[model=thumb]');
+        let filesDataArray = [];
+        for (let i = 0; i < thumbImageSel.length; i++) {
+          filesDataArray.push(thumbImageSel.eq(i).attr('src'));
+        }
+        console.log(filesDataArray);
+
+        $.ajax({
+          url: 'api/uploadCarImages.php',
+          type: 'POST',
+          data: {imagesData: filesDataArray},
+          dataType: 'json',
+          success: function (data) {
+            console.log(data);
           }
-
-          loader.css('display', 'block');
-
-          $.post("api/uploadCarImages.php?action=uploadPhotos&id=" + carId, {filesData: filesDataArray}, function (data) {
-            if (data === "1") {
-              loader.css('display', 'none');
-              location.reload();
-            } else {
-              alert('Something is wrong. Please try again later.');
-            }
-          });
-
-          e.preventDefault();
-          return false;
-
         });
+        return false;
       });
 
       /**
