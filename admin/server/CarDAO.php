@@ -13,8 +13,6 @@ require_once 'model/Vehicle.php';
  * - select all vehicle
  * - advanced search
  *
- * Remember list
- * - ALWAYS RETURN $stmt
  */
 class CarDAO extends Utility
 {
@@ -251,7 +249,7 @@ class CarDAO extends Utility
     function isUpdated($postArray)
     {
         $id = $postArray['update-vehicle-id'];
-        if (count($this->getCarById($id)) > 0) {
+        if (($this->getCarById($id))) {
             $updateThisCar_obj = new Vehicle(
                 $id, // syntax: $postArray['nameAttribute']
                 $postArray["update-make"],

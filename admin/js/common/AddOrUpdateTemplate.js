@@ -35,6 +35,7 @@ class AddOrUpdateTemplate {
             <div class="panel-body">   
               <table cellspacing="1" id="update-car-general-info-table">   
                 <tbody>
+                ${this.isForUpdate ? this.updateCar_HiddenId() : ''}
                 ${this.isForUpdate ? this.addOrUpdateCar_InputMake() : this.addOrUpdateCar_SelectMake()}
                 ${this.isForUpdate ? this.addOrUpdateCar_InputModel() : this.addOrUpdateCar_SelectModel()}
                 ${this.addOrUpdateCar_SelectYear()}
@@ -54,8 +55,8 @@ class AddOrUpdateTemplate {
       </form>`;
   }
 
-  updateCar_HiddenVid() {
-    return `<tr><td><input type="hidden" class="hidden" value="${this.isForUpdate ? this.id : ''}" name="update-vehicle-id" id="update-vehicle-id"></td></tr>`;
+  updateCar_HiddenId() {
+    return `<tr><td><input type="hidden" class="hidden" value="${this.id}" name="update-vehicle-id" id="update-vehicle-id"></td></tr>`;
   }
 
   addOrUpdateCar_InputMake() {

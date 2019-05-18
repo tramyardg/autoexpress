@@ -11,7 +11,6 @@ let CarActions = (function () {
 
   let getPhotosByCarIdFn = {},
       displayImagesOfThisCarSel = {},
-      // updateCarInfoSel = {},
       updateCarLink = {},
       updateCarModal = {},
       updateCarInfoModalContent = {},
@@ -36,7 +35,6 @@ let CarActions = (function () {
       uploadDeleteCarPhotoModal = $('#upload-delete-car-photos-modal');
       uploadCarPhotoBtn = $('#upload-car-photos-btn');
 
-      // updateCarInfoSel = $('.dropdown a.update-vehicle');
       updateCarLink = $('a#updateCar_link');
       updateCarModal = $('.update-car-modal');
       updateCarInfoModalContent = $('#update-car-info-modal-content');
@@ -103,11 +101,6 @@ let CarActions = (function () {
             modalContent.append(adminUpdateCar.addOrUpdateCar_Container());
 
             checkedField.field(modalContent, options.year, 'select#year option');
-            // checkedField.field(modalContent, options.cylinder, 'input[type=radio]#cylinder');
-            // checkedField.field(modalContent, options.category, 'input[type=radio]#category');
-            // checkedField.field(modalContent, options.drivetrain, 'input[type=radio]#drivetrain');
-            // checkedField.field(modalContent, options.status, 'input[type=radio]#status');
-            // checkedField.field(modalContent, options.transmission, 'input[type=radio]#transmission');
 
           });
         });
@@ -207,5 +200,5 @@ let CarActions = (function () {
        * select: year
        */
     }
-  }; // end return
+  };
 })();
