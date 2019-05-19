@@ -249,38 +249,6 @@ if (!isset($_SESSION['authenticated'])) {
                                                 uploaded, otherwise it will not work.</p>
                                             <input type="file" id="files" name="files[]" multiple/>
                                             <output id="list"></output>
-                                            <script>
-                                              function handleFileSelect(evt) {
-                                                let files = evt.target.files; // FileList object
-
-                                                // Loop through the FileList and render image files as thumbnails.
-                                                for (let i = 0, f; f = files[i]; i++) {
-
-                                                  // Only process image files.
-                                                  if (!f.type.match('image.*')) {
-                                                    continue;
-                                                  }
-
-                                                  let reader = new FileReader();
-
-                                                  // Closure to capture the file information.
-                                                  reader.onload = (function (theFile) {
-                                                    return function (e) {
-                                                      // Render thumbnail.
-                                                      let span = document.createElement('span');
-                                                      span.innerHTML = ['<img model="thumb" id="car-image-' + i + '" src="', e.target.result,
-                                                        '" title="', theFile.name, '"/>'].join('');
-                                                      document.getElementById('list').insertBefore(span, null);
-                                                    };
-                                                  })(f);
-
-                                                  // Read in the image file as a data URL.
-                                                  reader.readAsDataURL(f);
-                                                  console.log(f);
-                                                } // end for
-                                              }
-                                              document.getElementById('files').addEventListener('change', handleFileSelect, false);
-                                            </script>
                                         </div>
                                         <div class="col-md-12">
                                             <input type="submit" class="btn btn-success btn-sm" value="Upload" id="upload-car-photos-btn"
@@ -315,6 +283,35 @@ if (!isset($_SESSION['authenticated'])) {
   let addCarContainerDiv = $('#addCarContainer');
   addCarContainerDiv.empty();
   addCarContainerDiv.append(adminAddCar.addOrUpdateCar_Container());
+
+  function previewSelectedImages(evt) {
+    let files = evt.target.files; // FileList object
+    // Loop through the FileList and render image files as thumbnails.
+    for (let i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      let reader = new FileReader();
+      // Closure to capture the file information.
+      reader.onload = (function (theFile) {
+        return function (e) {
+          // Render thumbnail.
+          let span = document.createElement('span');
+          span.innerHTML = ['<img model="thumb" id="car-image-' + i + '" src="', e.target.result,
+            '" title="', theFile.name, '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+      console.log(f);
+    }
+  }
+  document.getElementById('files').addEventListener('change', previewSelectedImages, false);
 </script>
 
 </body>
