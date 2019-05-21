@@ -1,4 +1,4 @@
-INSERT INTO `administrator` (`adminId`, `username`, `password`, `email`, `privilege`, `last_update`)
+INSERT INTO `administrator` (`adminId`, `username`, `password`, `email`, `admin_level`, `last_update`)
 VALUES (1, 'admin', 'admin', 'admin@gmail.com', '3', '2019-01-23 18:50:52'),
        (2, 'leo', 'leo', 'leo@gmail.com', '2', '2019-05-10 02:19:02'),
        (3, 'ray', 'ray', 'ray@gmail.com', '3', '2019-05-10 02:44:41');
