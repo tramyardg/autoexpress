@@ -1,3 +1,10 @@
+# tables
+# [ ] administrator
+# [ ] useraccount
+# [ ] vehicle
+# [ ] cardiagram
+# [ ] companies
+
 CREATE TABLE administrator
 (
     adminId     INT                                 NOT NULL AUTO_INCREMENT,
