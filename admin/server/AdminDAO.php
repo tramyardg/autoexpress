@@ -21,7 +21,7 @@ class AdminDAO extends Utility
                 $row["username"],
                 $row["password"],
                 $row["email"],
-                $row["privilege"],
+                $row["admin_level"],
                 $row["last_update"]
             );
         }

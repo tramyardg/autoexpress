@@ -2,101 +2,92 @@
 
 class Admin
 {
-    private $_admin_id;
-    private $_username;
-    private $_password;
-    private $_email;
-    private $_privilege;
-    private $_last_update;
+    private $adminId;
+    private $username;
+    private $password;
+    private $email;
+    private $admin_level;
+    private $last_update;
 
-    /**
-     * Admin constructor.
-     * @param $_admin_id
-     * @param $_username
-     * @param $_password
-     * @param $_email
-     * @param $_privilege
-     * @param $_last_update
-     */
-    public function __construct($_admin_id, $_username, $_password, $_email, $_privilege, $_last_update)
+    public function __construct($admin_id, $username, $password, $email, $admin_level, $last_update)
     {
-        $this->_admin_id = $_admin_id;
-        $this->_username = $_username;
-        $this->_password = $_password;
-        $this->_email = $_email;
-        $this->_privilege = $_privilege;
-        $this->_last_update = $_last_update;
+        $this->adminId = $admin_id;
+        $this->username = $username;
+        $this->password = $password;
+        $this->email = $email;
+        $this->admin_level = $admin_level;
+        $this->last_update = $last_update;
     }
 
     public function setAdminId($admin_id)
     {
-        $this->_admin_id = $admin_id;
+        $this->adminId = $admin_id;
     }
 
     public function setUsername($username)
     {
-        $this->_username = $username;
+        $this->username = $username;
     }
 
     public function setPassword($password)
     {
-        $this->_password = $password;
+        $this->password = $password;
     }
 
     public function setEmail($email)
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
-    public function setPrivilege($privilege)
+    public function setAdminLevel($admin_level)
     {
-        $this->_privilege = $privilege;
+        $this->admin_level = $admin_level;
     }
 
     public function setLastUpdate($last_update)
     {
-        $this->_last_update = $last_update;
+        $this->last_update = $last_update;
     }
 
     public function getAdminId()
     {
-        return $this->_admin_id;
+        return $this->adminId;
     }
 
     public function getUsername()
     {
-        return $this->_username;
+        return $this->username;
     }
 
     public function getPassword()
     {
-        return $this->_password;
+        return $this->password;
     }
 
     public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
 
-    public function getPrivilege()
+    public function getAdminLevel()
     {
-        return $this->_privilege;
+        return $this->admin_level;
     }
 
     public function getLastUpdate()
     {
-        return $this->_last_update;
+        return $this->last_update;
     }
 
     function __toString()
     {
         $out = "";
-        $out .= 'id ' . $this->_admin_id . "\n";
-        $out .= 'username ' . $this->_username . "\n";
-        $out .= 'password ' . $this->_password . "\n";
-        $out .= 'email ' . $this->_email . "\n";
-        $out .= 'privilege ' . $this->_privilege . "\n";
-        $out .= 'last update ' . $this->_last_update . "\n";
+        $out .= 'id ' . $this->adminId . "\n";
+        $out .= 'username ' . $this->username . "\n";
+        $out .= 'password ' . $this->password . "\n";
+        $out .= 'email ' . $this->email . "\n";
+        $out .= 'admin_level ' . $this->admin_level . "\n";
+        $out .= 'last update ' . $this->last_update . "\n";
         return $out;
     }
 

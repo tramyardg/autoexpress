@@ -1,14 +1,13 @@
 CREATE TABLE administrator
 (
-  adminId     INT                                 NOT NULL AUTO_INCREMENT
-    PRIMARY KEY,
-  username    VARCHAR(10)                         NOT NULL,
-  password    VARCHAR(100)                        NOT NULL,
-  email       VARCHAR(30)                         NOT NULL,
-  privilege   VARCHAR(20) DEFAULT '1,2,3'         NULL,
-  last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP NULL,
-  CONSTRAINT username
-  UNIQUE (username)
+    adminId     INT                                 NOT NULL AUTO_INCREMENT,
+    username    VARCHAR(10)                         NOT NULL,
+    password    VARCHAR(100)                        NOT NULL,
+    email       VARCHAR(30)                         NOT NULL,
+    admin_level ENUM ('0', '1', '2', '3')           NOT NULL,
+    last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP NULL,
+    CONSTRAINT username UNIQUE (username),
+    PRIMARY KEY (adminId)
 );
 
 CREATE TABLE cardiagram

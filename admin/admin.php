@@ -51,64 +51,9 @@ if (!isset($_SESSION['authenticated'])) {
                     <li class="active">Manage Admins</li>
                 </ol>
                 <input type="text" class="hidden" id="admin-username" name="admin-username" value="<?php  echo $admin_data[0]->getUsername(); ?>">
-                <h1>Manage Administrators</h1>
-
+                <h1>Admin Level</h1>
+                <code>TO DO</code>
                 <div class="row margin-bottom-30">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover table-bordered" id="admin-table">
-                                <thead>
-                                <tr>
-                                    <th>ID #</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
-                                    <th>Email</th>
-                                    <th>Privilege(s)</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php for ($i = 0; $i < count($q->getAllAdmin()); $i++) {
-                                        $privilege_array = explode(',', $all_admin[$i]->getPrivilege());
-                                    ?>
-                                <tr>
-                                    <td><?php echo $all_admin[$i]->getAdminId();  ?></td>
-                                    <td><?php echo $all_admin[$i]->getUsername();  ?></td>
-                                    <td>
-                                        <input type="password" class="form-control" id="password" name="password"
-                                               placeholder="Password" value="<?php echo $all_admin[$i]->getPassword();  ?>" readonly>
-                                    </td>
-                                    <td><?php echo $all_admin[$i]->getEmail();  ?></td>
-                                    <td>
-                                        <?php if (in_array("1", $privilege_array)) { ?>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" checked disabled>Add vehicles</label>
-                                        </div>
-                                        <?php } ?>
-                                        <?php if (in_array("2", $privilege_array)) { ?>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" checked disabled>Update
-                                                vehicles</label>
-                                        </div>
-                                        <?php } ?>
-                                        <?php if (in_array("3", $privilege_array)) { ?>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" checked disabled>Delete
-                                                vehicles</label>
-                                        </div>
-                                        <?php } ?>
-                                        <?php if (in_array("4", $privilege_array)) { ?>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" checked disabled>Manage other admins</label>
-                                        </div>
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-                                <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>

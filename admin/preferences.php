@@ -19,7 +19,6 @@ if(!isset($_SESSION['authenticated'])) {
                 $_POST["username"],
                 $_POST["password_1"],
                 $_POST["email"],
-                $_POST["privilege"],
                 $q->getTimeStamp()
             );
             $q->update($save);
@@ -90,10 +89,6 @@ if(!isset($_SESSION['authenticated'])) {
                                 </div>
 
                                 <div class="form-group hidden">
-                                    <input type="text" readonly id="privilege" name="privilege" value="<?php echo $admin_data[0]->getPrivilege(); ?>">
-                                </div>
-
-                                <div class="form-group hidden">
                                     <input type="text" readonly id="last-updated" name="last-updated" value="<?php echo $admin_data[0]->getLastUpdate(); ?>">
                                 </div>
 
@@ -103,21 +98,21 @@ if(!isset($_SESSION['authenticated'])) {
 
                                 <div class="form-group">
                                     <div class="col-md-6 margin-bottom-15">
-                                        <label>Username</label>
+                                        <h4>Username</h4>
                                         <p class="form-control-static"><?php echo $admin_data[0]->getUsername(); ?></p>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-md-6 margin-bottom-15">
-                                        <label>Email address</label>
+                                        <h4>Email address</h4>
                                         <p class="form-control-static"><?php echo $admin_data[0]->getEmail(); ?></p>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-md-6 margin-bottom-15">
-                                        <label for="currentPassword">Current Password</label>
+                                        <h4 for="currentPassword">Current Password</h4>
                                         <input type="password" class="form-control" id="currentPassword" name="currentPassword"
                                                value="<?php echo $admin_data[0]->getPassword(); ?>" disabled>
                                     </div>
@@ -125,7 +120,7 @@ if(!isset($_SESSION['authenticated'])) {
 
                                 <div class="form-group">
                                     <div class="col-md-6 margin-bottom-15">
-                                        <label for="password_1">New Password</label>
+                                        <h4 for="password_1">New Password</h4>
                                         <input type="password" class="form-control" id="password_1" name="password_1"
                                                placeholder="New Password" maxlength="10" minlength="5">
                                         <label class="util-msg"></label>
@@ -134,7 +129,7 @@ if(!isset($_SESSION['authenticated'])) {
 
                                 <div class="form-group">
                                     <div class="col-md-6 margin-bottom-15">
-                                        <label for="password_2">Confirm New Password</label>
+                                        <h4 for="password_2">Confirm New Password</h4>
                                         <input type="password" class="form-control" id="password_2" name="password_2"
                                                placeholder="Confirm New Password" maxlength="10" minlength="5">
                                         <label class="util-msg"></label>
