@@ -1,6 +1,8 @@
 <?php
 ob_start();
 session_start();
+require_once 'server/model/Enum.php';
+require_once 'server/model/AdminLevel.php';
 require_once 'server/AdminDAO.php';
 require_once 'server/model/Admin.php';
 
@@ -9,6 +11,8 @@ if (!isset($_SESSION['authenticated'])) {
 } else {
     $q = new AdminDAO();
     $admin_data = $q->getAdminByUsername($_SESSION['adminUsername']);
+    $adminLevel = $admin_data[0]->getAdminLevel();
+    $levelArray = AdminLevel::splitAdminLevelArray(intval($adminLevel));
     $all_admin = $q->getAllAdmin();
 }
 ?>
@@ -42,8 +46,6 @@ if (!isset($_SESSION['authenticated'])) {
 <body>
 <div id="main-wrapper">
     <div class="template-page-wrapper">
-        <!--/.navbar-collapse -->
-
         <div class="templatemo-content-wrapper">
             <div class="templatemo-content">
                 <ol class="breadcrumb">
