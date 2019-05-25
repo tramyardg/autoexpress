@@ -10,9 +10,13 @@ class AdminLevel extends Enum
     const READ_UPDATE_INSERT_DELETE = 3;
 
     public static function splitAdminLevelArray($levelNumber) {
-        $str = AdminLevel::toString($levelNumber);
-        $strippedUnderscore = str_replace("_", " ", $str);
-        return explode(" ", $strippedUnderscore);
+        if ($levelNumber == 0) {
+            return "NONE";
+        } else {
+            $str = AdminLevel::toString($levelNumber);
+            $strippedUnderscore = str_replace("_", " ", $str);
+            return explode(" ", $strippedUnderscore);
+        }
     }
 }
 

@@ -14,6 +14,15 @@ if (!isset($_SESSION['authenticated'])) {
     $adminLevel = $admin_data[0]->getAdminLevel();
     $levelArray = AdminLevel::splitAdminLevelArray(intval($adminLevel));
     $all_admin = $q->getAllAdmin();
+
+    $canRead = $canUpdate = $canInsert = $canDelete = '';
+    if (is_array($levelArray)) {
+        $canRead = in_array("READ", $levelArray) == true ? 'checked' : '';
+        $canUpdate = in_array("UPDATE", $levelArray) == true ? 'checked' : '';
+        $canInsert = in_array("INSERT", $levelArray) == true ? 'checked' : '';
+        $canDelete = in_array("DELETE", $levelArray) == true ? 'checked' : '';
+    }
+
 }
 ?>
 <!DOCTYPE html>
@@ -63,7 +72,8 @@ if (!isset($_SESSION['authenticated'])) {
                     <div class="col-md-6">
                         <div class="col-md-3">READ</div>
                         <div class="col-md-3">
-                            <input type="checkbox" name="readPermission" value="read" onclick="return false;">
+                            <input type="checkbox" name="readPermission" value="read" <?php echo $canRead; ?>
+                                   onclick="return false;">
                         </div>
                     </div>
                 </div>
@@ -71,7 +81,8 @@ if (!isset($_SESSION['authenticated'])) {
                     <div class="col-md-6">
                         <div class="col-md-3">UPDATE</div>
                         <div class="col-md-3">
-                            <input type="checkbox" name="updatePermission" value="update" onclick="return false;">
+                            <input type="checkbox" name="updatePermission" value="update" <?php echo $canUpdate; ?>
+                                   onclick="return false;">
                         </div>
                     </div>
                 </div>
@@ -79,7 +90,8 @@ if (!isset($_SESSION['authenticated'])) {
                     <div class="col-md-6">
                         <div class="col-md-3">INSERT</div>
                         <div class="col-md-3">
-                            <input type="checkbox" name="insertPermission" value="insert" onclick="return false;">
+                            <input type="checkbox" name="insertPermission" value="insert" <?php echo $canInsert; ?>
+                                   onclick="return false;">
                         </div>
                     </div>
                 </div>
@@ -87,7 +99,8 @@ if (!isset($_SESSION['authenticated'])) {
                     <div class="col-md-6">
                         <div class="col-md-3">DELETE</div>
                         <div class="col-md-3">
-                            <input type="checkbox" name="deletePermission" value="delete" onclick="return false;">
+                            <input type="checkbox" name="deletePermission" value="delete" <?php echo $canDelete; ?>
+                                   onclick="return false;">
                         </div>
                     </div>
                 </div>
@@ -95,7 +108,9 @@ if (!isset($_SESSION['authenticated'])) {
                     <div class="col-md-6">
                         <div class="col-md-3">NONE</div>
                         <div class="col-md-3">
-                            <input type="checkbox" name="nonePermission" value="none" onclick="return false;">
+                            <?php $noLevel = $levelArray == "NONE" ? 'checked' : ''; ?>
+                            <input type="checkbox" name="nonePermission" value="none" <?php echo $noLevel; ?>
+                                   onclick="return false;">
                         </div>
                     </div>
                 </div>
