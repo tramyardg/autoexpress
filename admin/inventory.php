@@ -1,6 +1,8 @@
 <?php
 ob_start();
 session_start();
+require_once 'server/model/Enum.php';
+require_once 'server/model/AdminLevel.php';
 require_once 'server/AdminDAO.php';
 require_once 'server/CarDAO.php';
 require_once 'server/DiagramDAO.php';
@@ -47,6 +49,16 @@ if (!isset($_SESSION['authenticated'])) {
         if ($_GET["action"] === "deleteCarPhoto") {
             $isDeletedPhoto = $d->isDeleted($_GET["id"]);
         }
+    }
+
+    $adminLevel = $admin_data[0]->getAdminLevel();
+    $levelArray = AdminLevel::splitAdminLevelArray(intval($adminLevel));
+    $canRead = $canUpdate = $canInsert = $canDelete = '';
+    if (is_array($levelArray)) {
+        $canRead = in_array("READ", $levelArray) ? 'true' : 'false';
+        $canUpdate = in_array("UPDATE", $levelArray) ? 'true' : 'false';
+        $canInsert = in_array("INSERT", $levelArray) ? 'true' : 'false';
+        $canDelete = in_array("DELETE", $levelArray) ? 'true' : 'false';
     }
 }
 ?>
@@ -119,7 +131,12 @@ if (!isset($_SESSION['authenticated'])) {
                                 </thead>
                                 <tbody>
                                 <?php while ($row = $rowCarField->fetch()) { ?>
-                                    <?php $carId = $row['vehicleId']; ?>
+                                    <?php
+                                    $carId = $row['vehicleId'];
+                                    $toHash = $carId;
+                                    $toHash .= date("m.d.y");
+                                    $hash = sha1($toHash);
+                                    ?>
                                     <tr>
                                         <td><?php echo $row['yearMade']; ?></td>
                                         <td><?php echo $row['make'];?></td>
@@ -135,26 +152,26 @@ if (!isset($_SESSION['authenticated'])) {
                                                         data-toggle="dropdown">Actions
                                                     <span class="caret"></span></button>
                                                 <ul class="dropdown-menu">
+                                                    <?php if ($canUpdate == 'true') { ?>
                                                     <li>
-                                                        <?php
-                                                        $toHash = $carId;
-                                                        $toHash .= date("m.d.y");
-                                                        $hash = sha1($toHash);
-                                                        ?>
-                                                        <a class="btn btn-sm left"
-                                                           href="updateCar.php?updateId=<?php echo $row['vehicleId'] . '&h=' . $hash; ?>">Update</a>
+                                                        <a href="updateCar.php?updateId=<?php echo $row['vehicleId'] . '&h=' . $hash; ?>">Update</a>
                                                     </li>
+                                                    <?php } ?>
+                                                    <?php if ($canDelete == 'true') { ?>
                                                     <li>
                                                         <a class="delete-vehicle"
                                                            href="?id=<?php echo $row['vehicleId']; ?>"
                                                            delete="<?php echo $row['vehicleId']; ?>">Delete</a>
                                                     </li>
+                                                    <?php } ?>
+                                                    <?php if ($canUpdate == 'true') { ?>
                                                     <li>
                                                         <a class="upload-car-photos"
                                                            href="?id=<?php echo $row['vehicleId']; ?>"
-                                                           upload-delete-photos="<?php echo $row['vehicleId']; ?>">Upload
-                                                            / Delete photo(s)</a>
+                                                           upload-delete-photos="<?php echo $row['vehicleId']; ?>">Manage
+                                                            photo(s)</a>
                                                     </li>
+                                                    <?php } ?>
                                                 </ul>
                                             </div>
                                         </td>
