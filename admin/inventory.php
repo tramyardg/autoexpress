@@ -206,6 +206,7 @@ if (!isset($_SESSION['authenticated'])) {
                 </div>
 
                 <!-- add new car button -->
+                <?php if ($canInsert == 'true') { ?>
                 <div class="row margin-bottom-15">
                     <div class="col-sm-12">
                         <button type="button" class="btn btn-success btn-sm" id="add-new-car-btn" data-toggle="modal"
@@ -213,8 +214,10 @@ if (!isset($_SESSION['authenticated'])) {
                         </button>
                     </div>
                 </div>
+                <?php } ?>
 
                 <!-- modal template for adding vehicle info -->
+                <?php if ($canInsert == 'true') { ?>
                 <div class="modal fade add-new-car-modal-lg " tabindex="-1" role="dialog"
                      aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
@@ -228,11 +231,14 @@ if (!isset($_SESSION['authenticated'])) {
                         </div>
                     </div>
                 </div>
+                <?php } ?>
 
             </div>
         </div>
     </div>
+
     <!-- modal template for uploading and updating photos -->
+    <?php if ($canUpdate == 'true') { ?>
     <div class="modal fade bs-example-modal-sm" id="upload-delete-car-photos-modal" tabindex="-1"
          role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
@@ -280,6 +286,8 @@ if (!isset($_SESSION['authenticated'])) {
             </div>
         </div>
     </div>
+    <?php } ?>
+
 </div>
 
 <script src="../js/jquery-3.1.1.min.js"></script>
