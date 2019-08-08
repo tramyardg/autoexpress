@@ -169,12 +169,12 @@ const PaymentCalculator = (function () {
     }; // end return
 })();
 
-var VehicleReferral = (function () {
-    var referralModalForm_Sel = null;
-    var validEmailFormat_Fn = function (input) {
+let VehicleReferral = (function () {
+    let referralModalForm_Sel = null;
+    let validEmailFormat_Fn = function (input) {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input);
     };
-    var referralRequest = function (params) {
+    let referralRequest = function (params) {
         $.ajax({
             url: 'mailer/referral.php',
             type: 'post',
@@ -186,12 +186,12 @@ var VehicleReferral = (function () {
             }
         });
     };
-    var referralModalForm_Fn = function () {
+    let referralModalForm_Fn = function () {
         referralModalForm_Sel.find('input[type=submit]').click(function () {
-            var friendEmails = referralModalForm_Sel.find('input[type=text]#receiverEmail').val();
-            var emailArray = friendEmails.split(",");
-            var canProceed = true;
-            for (var i = 0; i < emailArray.length; i++) {
+            let friendEmails = referralModalForm_Sel.find('input[type=text]#receiverEmail').val();
+            let emailArray = friendEmails.split(",");
+            let canProceed = true;
+            for (let i = 0; i < emailArray.length; i++) {
                 if (!validEmailFormat_Fn(emailArray[i].trim())) {
                     alert("You have entered an invalid email address!");
                     canProceed = false;
@@ -203,7 +203,7 @@ var VehicleReferral = (function () {
             return false;
         });
     };
-    var mainActions = function () {
+    let mainActions = function () {
         referralModalForm_Fn();
     };
     return {
