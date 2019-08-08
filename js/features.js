@@ -1,14 +1,14 @@
-var PaymentCalculator = (function () {
-    var outMonthlyPayment = {};
-    var outBiWeeklyPayment = {};
+const PaymentCalculator = (function () {
+    let outMonthlyPayment = {};
+    let outBiWeeklyPayment = {};
 
-    var modalCalculateBtn = {};
-    var calculatePaymentLinkBtn = {};
+    let modalCalculateBtn = {};
+    let calculatePaymentLinkBtn = {};
 
-    var calculateFn = {};
-    var isValidInputFn = {};
-    var isValid_Trade_DownPayment_Fn = {};
-    var onlyNumberAndDigitsAllowedFn = {};
+    let calculateFn = {};
+    let isValidInputFn = {};
+    let isValid_Trade_DownPayment_Fn = {};
+    let onlyNumberAndDigitsAllowedFn = {};
 
     return {
         init: function () {
@@ -25,15 +25,15 @@ var PaymentCalculator = (function () {
 
         bindPaymentCalculatorActions: function () {
             calculatePaymentLinkBtn.click(function (event) {
-                var dataCarPrice = $(this).attr('data-price');
-                var noCommaCarPrice = dataCarPrice.replace(/,/g, "");
-                var paymentModalId = $(this).attr('data-target');
-                var modal = $(paymentModalId);
-                var modalBody = modal.find('.modal-body');
+                let dataCarPrice = $(this).attr('data-price');
+                let noCommaCarPrice = dataCarPrice.replace(/,/g, "");
+                let paymentModalId = $(this).attr('data-target');
+                let modal = $(paymentModalId);
+                let modalBody = modal.find('.modal-body');
                 modalBody.find('.modal-car-price').val(noCommaCarPrice);
 
                 modalCalculateBtn.click(function (e) {
-                    var carPrice = {
+                    let carPrice = {
                         elem: modalBody.find('.modal-car-price'),
                         val: modalBody.find('.modal-car-price').val()
                     }, downPayment = {
@@ -55,7 +55,7 @@ var PaymentCalculator = (function () {
 
                     onlyNumberAndDigitsAllowedFn([carPrice, trade, downPayment, termByMonths, interestRate, salesTax]);
 
-                    var inputs = {
+                    let inputs = {
                         _carPrice: parseFloat(carPrice.val),
                         _downPayment: parseFloat(downPayment.val),
                         _trade: parseFloat(trade.val),
@@ -80,9 +80,9 @@ var PaymentCalculator = (function () {
                     isValid_Trade_DownPayment_Fn(inputs);
 
                     // finally calculate the payment here
-                    var _payment = calculateFn(inputs);
-                    var monthlyPayment = _payment.toFixed(2);
-                    var biWeeklyPayment = (_payment / 2).toFixed(2);
+                    let _payment = calculateFn(inputs);
+                    let monthlyPayment = _payment.toFixed(2);
+                    let biWeeklyPayment = (_payment / 2).toFixed(2);
 
                     outMonthlyPayment.empty();
                     outMonthlyPayment.append(monthlyPayment);
@@ -109,12 +109,12 @@ var PaymentCalculator = (function () {
              */
             calculateFn = function (options) {
                 const MONTHLY = 12;
-                var monthlyInterest = (options._interestRate / MONTHLY);
-                var monthlyInterestRate = (monthlyInterest / 100);
-                var numerator = monthlyInterestRate * Math.pow((1 + monthlyInterestRate), options._termByMonths);
-                var denominator = Math.pow((1 + monthlyInterestRate), options._termByMonths) - 1;
+                let monthlyInterest = (options._interestRate / MONTHLY);
+                let monthlyInterestRate = (monthlyInterest / 100);
+                let numerator = monthlyInterestRate * Math.pow((1 + monthlyInterestRate), options._termByMonths);
+                let denominator = Math.pow((1 + monthlyInterestRate), options._termByMonths) - 1;
 
-                var principal = options._carPrice;
+                let principal = options._carPrice;
                 if (!isValidInputFn(options._salesTax)) {
                     principal += principal * (options._salesTax / 100);
                 }
@@ -134,8 +134,8 @@ var PaymentCalculator = (function () {
              * @param fields
              */
             onlyNumberAndDigitsAllowedFn = function (fields) {
-                var pattern = /^\d*\.?\d*$/;
-                for (var i = 0; i < fields.length; i++) {
+                let pattern = /^\d*\.?\d*$/;
+                for (let i = 0; i < fields.length; i++) {
                     if (fields[4].val.length === 0 || fields[4].val === 0) { // for interest rate
                         fields[4].elem.parent().parent().find('td').last().empty();
                         fields[4].elem.parent().parent().find('td').last().append("<label>&nbsp;Please enter a number.</label>");
