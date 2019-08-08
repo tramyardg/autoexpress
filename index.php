@@ -97,6 +97,12 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                                                 <a href="<?php echo 'details.php?carId='.$row['vehicleId']; ?>" title="View more details">
                                                     <p><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;More Details</p>
                                                 </a>
+                                                <?php
+                                                $shareHref = ($_SERVER['SERVER_NAME'] == 'localhost') ?
+                                                    "http://localhost/autoexpress/details.php?carId=".$row['vehicleId'] :
+                                                    "http://autoexpress.co.nf/details.php?carId=".$row['vehicleId'];
+                                                ?>
+                                                <div class="fb-share-button" data-href="<?php echo $shareHref; ?>" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fautoexpress.co.nf%2Fdetails.php%3FcarId%3D2&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
                                             </div>
                                         </div>
                                         <div class="divTableCell">
