@@ -118,7 +118,7 @@ h1,h2,h3,h4,h5,h6,p {
 .feature_links div:hover {
     background-color: #999;
 }
-.feature_links div {
+.feature_links div:not('.fb-share-button') {
     height: 23px;
     width: 180px;
     border-color: #777777;
@@ -127,6 +127,9 @@ h1,h2,h3,h4,h5,h6,p {
     border-width: 2px;
     text-align: left;
     margin-bottom: 10px;
+}
+.feature_links .fb-share-button {
+    margin-left: 1.3em;
 }
 .feature_links div p {
     padding: 0;
