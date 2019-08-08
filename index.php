@@ -49,6 +49,8 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
     <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" >
 </head>
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0"></script>
 <div class="container_custom">
     <?php include 'template/header.php'; ?>
     <?php include 'template/advance-search.php'; ?>
