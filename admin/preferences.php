@@ -37,14 +37,13 @@ if(!isset($_SESSION['authenticated'])) {
     <![endif]-->
 
     <!-- Primary Meta Tags -->
-    <title>AutoExpress.co.nf - Raymart De Guzman</title>
-    <meta name="title" content="AutoExpress.co.nf - Raymart De Guzman">
+    <title>AutoExpress - Raymart De Guzman</title>
+    <meta name="title" content="AutoExpress - Raymart De Guzman">
     <meta name="description" content="Autoexpress.co.nf is a car dealership app built for both car dealer and car buyer. A car dealer manages the car being viewed on the website by adding, updating, deleting and uploading photos of a car. On the other hand, a car buyer can search for the vehicle he or she desired on the website. If the buyer finds the desired vehicle he or she can contact the seller to get more information of the vehicle. A car buyer can also calculate their monthly or bi-weekly payment.">
     <meta name="keywords" content="Raymart De Guzman, tramyardg.co.nf, tramyardg, PHP, car dealership, software engineer, car dealer, car buyer, AutoExpress.co.nf">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="http://autoexpress.co.nf"/>
     <meta property="og:title" content="AutoExpress.co.nf - Raymart De Guzman">
     <meta property="og:description" content="Autoexpress.co.nf is a car dealership app built for both car dealer and car buyer. A car dealer manages the car being viewed on the website by adding, updating, deleting and uploading photos of a car. On the other hand, a car buyer can search for the vehicle he or she desired on the website. If the buyer finds the desired vehicle he or she can contact the seller to get more information of the vehicle. A car buyer can also calculate their monthly or bi-weekly payment.">
     <meta property="og:image" content="https://raw.githubusercontent.com/tramyardg/autoexpress/master/image/homePage.PNG"/>

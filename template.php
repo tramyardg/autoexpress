@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>AutoExpress.co.nf</title>
-    <meta property="og:url" content="http://autoexpress.co.nf"/>
+    <title>AutoExpress</title>
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="AutoExpress.co.nf - Raymart De Guzman"/>
     <meta property="og:description"
