@@ -25,13 +25,13 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
     <!-- Primary Meta Tags -->
     <title>AutoExpress - Raymart De Guzman</title>
     <meta name="title" content="AutoExpress - Raymart De Guzman">
-    <meta name="description" content="Autoexpress.co.nf is a car dealership app built for both car dealer and car buyer. A car dealer manages the car being viewed on the website by adding, updating, deleting and uploading photos of a car. On the other hand, a car buyer can search for the vehicle he or she desired on the website. If the buyer finds the desired vehicle he or she can contact the seller to get more information of the vehicle. A car buyer can also calculate their monthly or bi-weekly payment.">
+    <meta name="description" content="AutoExpress a car dealership app built for both car dealer and car buyer. A car dealer manages the car being viewed on the website by adding, updating, deleting and uploading photos of a car. On the other hand, a car buyer can search for the vehicle he or she desired on the website. If the buyer finds the desired vehicle he or she can contact the seller to get more information of the vehicle. A car buyer can also calculate their monthly or bi-weekly payment.">
     <meta name="keywords" content="Raymart De Guzman, tramyardg.co.nf, tramyardg, PHP, car dealership, software engineer, car dealer, car buyer, AutoExpress.co.nf">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="AutoExpress.co.nf - Raymart De Guzman">
-    <meta property="og:description" content="Autoexpress.co.nf is a car dealership app built for both car dealer and car buyer. A car dealer manages the car being viewed on the website by adding, updating, deleting and uploading photos of a car. On the other hand, a car buyer can search for the vehicle he or she desired on the website. If the buyer finds the desired vehicle he or she can contact the seller to get more information of the vehicle. A car buyer can also calculate their monthly or bi-weekly payment.">
+    <meta property="og:description" content="AutoExpress a car dealership app built for both car dealer and car buyer. A car dealer manages the car being viewed on the website by adding, updating, deleting and uploading photos of a car. On the other hand, a car buyer can search for the vehicle he or she desired on the website. If the buyer finds the desired vehicle he or she can contact the seller to get more information of the vehicle. A car buyer can also calculate their monthly or bi-weekly payment.">
     <meta property="og:image" content="https://raw.githubusercontent.com/tramyardg/autoexpress/master/image/homePage.PNG"/>
 
     <link rel="apple-touch-icon" sizes="180x180" href="image/favicon_package_v0.16/apple-touch-icon.png">
@@ -99,7 +99,7 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                                                 <?php
                                                 $shareHref = ($_SERVER['SERVER_NAME'] == 'localhost') ?
                                                     "http://localhost/autoexpress/details.php?carId=".$row['vehicleId'] :
-                                                    "http://autoexpress.co.nf/details.php?carId=".$row['vehicleId'];
+                                                    "http://autoexpress.c1.biz/details.php?carId=".$row['vehicleId'];
                                                 ?>
                                                 <div class="fb-share-button" data-href="<?php echo $shareHref; ?>" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fautoexpress.co.nf%2Fdetails.php%3FcarId%3D2&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
                                             </div>

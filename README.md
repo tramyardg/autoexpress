@@ -1,5 +1,5 @@
 # AutoExpress.co.nf
-Autoexpress.co.nf is a car dealership app built for both car dealer and car buyer. 
+AutoExpress a car dealership app built for both car dealer and car buyer. 
 A car dealer manages the car being viewed on the website by adding, updating, 
 deleting and uploading photos of a car. On the other hand, a car buyer can search 
 for the vehicle he or she desired on the website. If the buyer finds the desired 
