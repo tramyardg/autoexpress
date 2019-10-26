@@ -74,7 +74,7 @@ $carObjSearchResult = $s->getSearchInputResult('search-car');
                                                 if ($d->countAllPhotosByCarId($row['vehicleId']) == "0")
                                                     $h = "https://via.placeholder.com/272x150/36383D/FFFFFF/?text=Sample image here";
                                                 else
-                                                    $h = $currSearchCarImg[0]->getDiagram();
+                                                    $h = $currSearchCarImg[0]->getFullImgSrc();
                                                 ?>
                                                 <img style="width: 240px; height: 150px" src="<?php  echo $h; ?>">
                                                 <?php if (!empty($d->countAllPhotosByCarId($row['vehicleId']))) { ?>

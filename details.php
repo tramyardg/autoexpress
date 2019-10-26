@@ -72,13 +72,13 @@ if (isset($_GET['carId']) && count($v->getCarById($_GET['carId'])) > 0) {
                         <?php if($j == 0) { ?>
                             <?php
                             $ht .= '<div class="item active">
-                                        <img src="'.$currCarImg[$j]->getDiagram().'">
+                                        <img src="'.$currCarImg[$j]->getFullImgSrc().'">
                                     </div>';
                             ?>
                         <?php } else { ?>
                             <?php
                             $ht .= '<div class="item">
-                                        <img src="'.$currCarImg[$j]->getDiagram().'">
+                                        <img src="'.$currCarImg[$j]->getFullImgSrc().'">
                                     </div>';
                             ?>
                         <?php } ?>

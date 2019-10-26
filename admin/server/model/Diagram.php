@@ -106,5 +106,9 @@ class Diagram implements JsonSerializable
         return get_object_vars($this);
     }
 
+    public function getFullImgSrc() {
+        return $this->getImageType() . ',' . $this->getDiagram();
+    }
+
 
 }
