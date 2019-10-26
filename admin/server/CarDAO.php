@@ -219,6 +219,10 @@ class CarDAO extends Utility
         }
     }
 
+    function isDiagramAdded($files, $id) {
+        return $this->addDiagram($files, $id) ? 1 : 0;
+    }
+
     function update(&$carObject) {
         // some of them needs to be a varchar (string)
         $sql =  '   UPDATE  '.

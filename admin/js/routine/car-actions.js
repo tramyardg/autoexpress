@@ -2,19 +2,20 @@ let template = new CommonTemplate();
 let CarActions = (function () {
 
   let deleteCarSel = {},
-      confirmDeleteRecordSel = {},
-      deleteConfirmBtnSel = {};
+    confirmDeleteRecordSel = {},
+    deleteConfirmBtnSel = {};
 
   let uploadCarPhotoLink = {},
-      uploadDeleteCarPhotoModal = {},
-      uploadCarPhotoBtn = {};
+    uploadDeleteCarPhotoModal = {},
+    uploadCarPhotoSubmitBtn = {},
+    uploadCarPhotoForm = {};
 
   let getPhotosByCarIdFn = {},
-      displayImagesOfThisCarSel = {},
-      updateCarLink = {},
-      updateCarModal = {},
-      updateCarInfoModalContent = {},
-      checkedField = {};
+    displayImagesOfThisCarSel = {},
+    updateCarLink = {},
+    updateCarModal = {},
+    updateCarInfoModalContent = {},
+    checkedField = {};
 
   let loader = {};
 
@@ -33,7 +34,8 @@ let CarActions = (function () {
 
       uploadCarPhotoLink = $('.dropdown a.upload-car-photos');
       uploadDeleteCarPhotoModal = $('#upload-delete-car-photos-modal');
-      uploadCarPhotoBtn = $('input[name=upload-car-photos-btn]');
+      uploadCarPhotoForm = $('#add-car-photos-form');
+      uploadCarPhotoSubmitBtn = $('input[name=upload-car-photos-btn]');
 
       updateCarLink = $('a#updateCar_link');
       updateCarModal = $('.update-car-modal');
@@ -71,7 +73,7 @@ let CarActions = (function () {
       });
 
       // load data of this car to be updated
-      updateCarLink.click(function(event) {
+      updateCarLink.click(function (event) {
         let carId = $(this).attr('data-id');
         // console.log($(this).attr('data-id'));
         updateCarModal.modal('show');
@@ -125,29 +127,45 @@ let CarActions = (function () {
         // ajax request to display list of photos of this car
         // not using DataTables
         getPhotosByCarIdFn(carId);
+        uploadCarPhotoSubmitBtn.attr('carid', carId);
 
         return false;
       });
 
-      uploadCarPhotoBtn.click(function () {
+      uploadCarPhotoForm.submit(function (e) {
         uploadDeleteCarPhotoModal.modal('hide');
+        e.preventDefault();
+
+        let fd = new FormData(this);
+        fd.append('id', uploadCarPhotoSubmitBtn.attr('carid'));
 
         let thumbImageSel = $('img[model=thumb]');
-        let filesDataArray = [];
         for (let i = 0; i < thumbImageSel.length; i++) {
-          filesDataArray.push(thumbImageSel.eq(i).attr('src'));
+          let srcImg = thumbImageSel.eq(i)[0].currentSrc;
+          let cleanBase64Img = srcImg.substring(srcImg.indexOf(',') + 1);
+          fd.append('fd[]', cleanBase64Img);
         }
-        console.log(filesDataArray);
+
+        loader.css('display', 'block');
 
         $.ajax({
-          url: 'api/uploadCarImages.php',
           type: 'POST',
-          data: {imagesData: filesDataArray},
+          url: "api/uploadCarImages.php",
+          data: fd,
           dataType: 'json',
-          success: function (data) {
-            console.log(data);
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function (r) {
+            if (r) {
+              loader.css('display', 'none');
+            } else {
+              alert('fail');
+            }
           }
         });
+
+        e.preventDefault();
         return false;
       });
 
@@ -172,7 +190,7 @@ let CarActions = (function () {
           success: function (diagramArray) {
             // console.log(diagramArray);
             let diagramData = {diagrams: diagramArray};
-            console.log(diagramData);
+            // console.log(diagramData);
             if (diagramArray.length > 0) {
               let html = Mustache.to_html(template.getPhotosByCarIdModalContent(), diagramData);
               displayImagesOfThisCarSel.empty();
