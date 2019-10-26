@@ -40,8 +40,20 @@ function CommonTemplate() {
         '          </div>  ';
   };
 
-  this.getPhotosByCarIdModalContent = function () {
-    return '{{#diagrams}}<div class="col-xs-6 col-md-3"><div class="thumbnail"><img src="{{_diagram}}" alt=""><div class="caption"><p></p><p><a class="delete-car"  href="?action=deleteCarPhoto&id={{_diagramId}}" delete-photos="{{_diagramId}}" role="button">Delete</a></p></div></div></div>{{/diagrams}}';
+  this.getPhotosByCarIdModalContent = function (d) {
+    return d.map((i) => {
+      let img = i._imageType + ',' + i._diagram;
+      let id = i._diagramId;
+      return `<div class="col-xs-6 col-md-3">
+           <div class="thumbnail">
+              <img src="${img}" alt="">
+              <div class="caption">
+                 <p></p>
+                 <p><a class="delete-car"  href="?action=deleteCarPhoto&id=${id}" delete-photos="${id}" role="button">Delete</a></p>
+              </div>
+           </div>
+        </div>`;
+    });
   };
 
 }

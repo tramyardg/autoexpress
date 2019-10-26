@@ -41,6 +41,7 @@ CREATE TABLE cardiagram
     diagramId INT      NOT NULL AUTO_INCREMENT,
     diagram   LONGBLOB NULL,
     vehicleId INT      NOT NULL,
+    imageType VARCHAR(100), NOT NULL,
     PRIMARY KEY (diagramId),
     FOREIGN KEY (vehicleId) REFERENCES vehicle (vehicleId) ON DELETE CASCADE
 );
