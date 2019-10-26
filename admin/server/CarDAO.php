@@ -201,13 +201,14 @@ class CarDAO extends Utility
     }
 
     // one car can have many photos
-    function addDiagram($files, $id) {
+    function addDiagram($files, $imgTypes, $id) {
         if(!empty($files)) {
             $sql = null;
 
             for($i = 0; $i < count($files); $i++) {
                 $imageData = $files[$i];
-                $sql .= "INSERT INTO `cardiagram`(`diagram`, `vehicleId`) VALUES ('{$imageData}',{$id});";
+                $imageType = $imgTypes[$i];
+                $sql .= "INSERT INTO `cardiagram`(`diagram`, `vehicleId`, `imageType`) VALUES ('{$imageData}',{$id}, '{$imageType}');";
             }
 
             $db = Dbh::getInstance();
@@ -219,8 +220,8 @@ class CarDAO extends Utility
         }
     }
 
-    function isDiagramAdded($files, $id) {
-        return $this->addDiagram($files, $id) ? 1 : 0;
+    function isDiagramAdded($files, $imgTypes, $id) {
+        return $this->addDiagram($files, $imgTypes, $id) ? 1 : 0;
     }
 
     function update(&$carObject) {

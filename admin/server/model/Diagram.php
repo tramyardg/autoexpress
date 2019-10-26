@@ -10,6 +10,7 @@ class Diagram implements JsonSerializable
 {
     private $_diagramId;
     private $_diagram;
+    private $_imageType;
     private $_vehicleId;
 
     /**
@@ -18,10 +19,11 @@ class Diagram implements JsonSerializable
      * @param $_diagram
      * @param $_vehicleId
      */
-    public function __construct($_diagramId, $_diagram, $_vehicleId)
+    public function __construct($_diagramId, $_diagram, $_imageType, $_vehicleId)
     {
         $this->_diagramId = $_diagramId;
         $this->_diagram = $_diagram;
+        $this->_imageType = $_imageType;
         $this->_vehicleId = $_vehicleId;
     }
 
@@ -55,6 +57,22 @@ class Diagram implements JsonSerializable
     public function setDiagram($diagram)
     {
         $this->_diagram = $diagram;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageType()
+    {
+        return $this->_imageType;
+    }
+
+    /**
+     * @param mixed $imageType
+     */
+    public function setImageType($imageType)
+    {
+        $this->_imageType = $imageType;
     }
 
     /**

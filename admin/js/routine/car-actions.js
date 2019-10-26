@@ -142,8 +142,8 @@ let CarActions = (function () {
         let thumbImageSel = $('img[model=thumb]');
         for (let i = 0; i < thumbImageSel.length; i++) {
           let srcImg = thumbImageSel.eq(i)[0].currentSrc;
-          let cleanBase64Img = srcImg.substring(srcImg.indexOf(',') + 1);
-          fd.append('fd[]', cleanBase64Img);
+          fd.append('fd[]', srcImg.substring(srcImg.indexOf(',') + 1));
+          fd.append('imgType[]', srcImg.substring(0, srcImg.indexOf(',')));
         }
 
         loader.css('display', 'block');
@@ -190,11 +190,10 @@ let CarActions = (function () {
           success: function (diagramArray) {
             // console.log(diagramArray);
             let diagramData = {diagrams: diagramArray};
-            // console.log(diagramData);
+            console.log(diagramData);
             if (diagramArray.length > 0) {
-              let html = Mustache.to_html(template.getPhotosByCarIdModalContent(), diagramData);
               displayImagesOfThisCarSel.empty();
-              displayImagesOfThisCarSel.append(html);
+              displayImagesOfThisCarSel.append(template.getPhotosByCarIdModalContent(diagramArray));
             } else {
               displayImagesOfThisCarSel.empty();
               displayImagesOfThisCarSel.append("<p>No photos so far</p>");

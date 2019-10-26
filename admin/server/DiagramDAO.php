@@ -21,6 +21,7 @@ class DiagramDAO
             $diagram[] = new Diagram(
                 $row['diagramId'],
                 $row['diagram'],
+                $row['imageType'],
                 $row['vehicleId']
             );
         }
@@ -42,7 +43,7 @@ class DiagramDAO
 
     function getPhotosBy_CarId($id)
     {
-        $sql = "SELECT `diagramId`, `diagram`, `vehicleId` FROM `cardiagram` WHERE `vehicleId` =" . $id . ";";
+        $sql = "SELECT `diagramId`, `diagram`, `imageType`, `vehicleId` FROM `cardiagram` WHERE vehicleId = " . $id . ";";
         return $this->query($sql); // returns a diagram object
     }
 
