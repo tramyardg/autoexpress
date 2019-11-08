@@ -36,12 +36,11 @@ CREATE TABLE vehicle
     PRIMARY KEY (vehicleId)
 );
 
-CREATE TABLE cardiagram
+CREATE TABLE `cardiagram`
 (
-    diagramId INT      NOT NULL AUTO_INCREMENT,
-    diagram   LONGBLOB NULL,
-    vehicleId INT      NOT NULL,
-    imageType VARCHAR(100), NOT NULL,
-    PRIMARY KEY (diagramId),
-    FOREIGN KEY (vehicleId) REFERENCES vehicle (vehicleId) ON DELETE CASCADE
-);
+    `diagramId` int(11)      NOT NULL,
+    `diagram`   longtext,
+    `vehicleId` int(11)      NOT NULL,
+    `imageType` varchar(100) NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
