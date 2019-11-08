@@ -1,9 +1,7 @@
 # tables
-# [ ] administrator
-# [ ] useraccount
-# [ ] vehicle
-# [ ] cardiagram
-# [ ] companies
+# [x] administrator
+# [x] vehicle
+# [x] cardiagram
 
 CREATE TABLE administrator
 (
@@ -38,9 +36,10 @@ CREATE TABLE vehicle
 
 CREATE TABLE `cardiagram`
 (
-    `diagramId` int(11)      NOT NULL,
+    `diagramId` int(11)      NOT NULL AUTO_INCREMENT,
     `diagram`   longtext,
     `vehicleId` int(11)      NOT NULL,
-    `imageType` varchar(100) NOT NULL
-) ENGINE = InnoDB
-  DEFAULT CHARSET = latin1;
+    `imageType` varchar(100) NOT NULL,
+    PRIMARY KEY (diagramId),
+    FOREIGN KEY (vehicleId) REFERENCES vehicle (vehicleId) ON DELETE CASCADE
+);
