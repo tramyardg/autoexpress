@@ -10,7 +10,7 @@ A car buyer can also calculate their monthly or bi-weekly payment.
 1. Clone this repo.
 2. Create the database.
 3. Configure `\autoexpress\admin\server\class\Dbh.php` file so it matches your web server database username and password.
-4. Create the tables by importing the sql file `\db\DLL.sql`.
+4. Create the tables by importing the sql file `\db\schema.sql`.
 5. Create an admin account directly by way of `INSERT` statement.
 6. Now you can add car to the inventory in `admin/inventory.php`
 
